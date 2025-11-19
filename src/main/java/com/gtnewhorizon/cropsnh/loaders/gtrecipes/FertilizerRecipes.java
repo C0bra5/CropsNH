@@ -102,7 +102,7 @@ public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
             lvRecipe(5, 0)
                 .itemInputs(
                     GTOreDictUnificator.get(OrePrefixes.dust, Materials.Calcite, 1),
-                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.DarkAsh, 1))
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.AshDark, 1))
                 .itemOutputs(CropsNHItemList.fertilizer.get(1))
                 .fluidInputs(new FluidStack(tFluid, 1000))
                 .addTo(GTRecipeConstants.UniversalChemical);
@@ -142,7 +142,7 @@ public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
             lvRecipe(10, 0)
                 .itemInputs(
                     GTOreDictUnificator.get(OrePrefixes.dust, Materials.Calcium, 1),
-                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.DarkAsh, 1))
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.AshDark, 1))
                 .itemOutputs(CropsNHItemList.fertilizer.get(2))
                 .fluidInputs(new FluidStack(tFluid, 1000))
                 .addTo(GTRecipeConstants.UniversalChemical);
@@ -182,7 +182,7 @@ public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
             lvRecipe(10, 0)
                 .itemInputs(
                     GTOreDictUnificator.get(OrePrefixes.dust, Materials.Apatite, 1),
-                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.DarkAsh, 1))
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.AshDark, 1))
                 .itemOutputs(CropsNHItemList.fertilizer.get(2))
                 .fluidInputs(new FluidStack(tFluid, 1000))
                 .addTo(GTRecipeConstants.UniversalChemical);
@@ -222,7 +222,7 @@ public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
             lvRecipe(10, 0)
                 .itemInputs(
                     GTOreDictUnificator.get(OrePrefixes.dust, Materials.Glauconite, 1),
-                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.DarkAsh, 1))
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.AshDark, 1))
                 .itemOutputs(CropsNHItemList.fertilizer.get(2))
                 .fluidInputs(new FluidStack(tFluid, 1000))
                 .addTo(GTRecipeConstants.UniversalChemical);
@@ -262,7 +262,7 @@ public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
             lvRecipe(10, 0)
                 .itemInputs(
                     GTOreDictUnificator.get(OrePrefixes.dust, Materials.GlauconiteSand, 1),
-                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.DarkAsh, 1))
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.AshDark, 1))
                 .itemOutputs(CropsNHItemList.fertilizer.get(2))
                 .fluidInputs(new FluidStack(tFluid, 1000))
                 .addTo(GTRecipeConstants.UniversalChemical);

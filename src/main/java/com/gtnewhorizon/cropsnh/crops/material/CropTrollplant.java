@@ -20,7 +20,7 @@ public class CropTrollplant extends NHCropCard {
 
     public CropTrollplant() {
         super("trollplant", new Color(0x000000), new Color(0xFFFFFF));
-        this.addDrop(GTOreDictUnificator.get(OrePrefixes.gem, Materials.FoolsRuby, 1), 62_50);
+        this.addDrop(GTOreDictUnificator.get(OrePrefixes.gem, Materials.Spinel, 1), 62_50);
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Plutonium241, 1), 12_50);
         this.addDrop(ItemList.IC2_Plantball.get(1), 12_50);
         this.addDrop(ItemList.IC2_Scrap.get(1), 12_50);

@@ -35,7 +35,7 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.objects.ItemData;
 import gregtech.api.util.GTOreDictUnificator;
-import gregtech.common.blocks.BlockOresAbstract;
+import gregtech.common.blocks.GTBlockOre;
 import gregtech.common.blocks.TileEntityOres;
 
 /**
@@ -186,7 +186,7 @@ public class BlockUnderRequirement
 
         // gt material check
         for (Materials material : this.materials) {
-            if (block instanceof BlockOresAbstract && te instanceof TileEntityOres) {
+            if (block instanceof GTBlockOre && te instanceof TileEntityOres) {
                 Materials tMaterial = GregTechAPI.sGeneratedMaterials[((TileEntityOres) te).mMetaData % 1000];
                 if (tMaterial != null && tMaterial != Materials._NULL && tMaterial == material) {
                     return true;

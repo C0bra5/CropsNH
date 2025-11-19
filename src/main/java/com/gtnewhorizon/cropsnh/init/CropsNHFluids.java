@@ -10,7 +10,6 @@ import com.gtnewhorizon.cropsnh.fluids.AlcoholImpure;
 import cpw.mods.fml.common.LoaderException;
 import gregtech.api.enums.ItemList;
 import gtPlusPlus.core.util.minecraft.FluidUtils;
-import gtPlusPlus.core.util.minecraft.ItemUtils;
 
 public class CropsNHFluids {
 
@@ -37,7 +36,7 @@ public class CropsNHFluids {
             4,
             295,
             null,
-            ItemUtils.getEmptyCell(),
+            ItemList.Cell_Empty.get(1),
             1000,
             true);
 
