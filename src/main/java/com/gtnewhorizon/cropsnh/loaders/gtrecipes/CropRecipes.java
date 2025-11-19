@@ -19,9 +19,6 @@ import static gregtech.api.util.GTRecipeBuilder.TICKS;
 import static gregtech.api.util.GTRecipeConstants.UniversalChemical;
 import static gregtech.common.items.ItemComb.Voltage;
 
-import com.gtnewhorizon.cropsnh.loaders.GTRecipeLoader;
-import gregtech.api.interfaces.IRecipeMap;
-import gregtech.common.tileentities.machines.multi.MTELargeChemicalReactor;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -44,6 +41,7 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.Mods;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
+import gregtech.api.interfaces.IRecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
@@ -54,6 +52,11 @@ import ic2.core.Ic2Items;
 import thaumcraft.common.config.ConfigItems;
 
 public abstract class CropRecipes extends BaseGTRecipeLoader {
+
+    private static final int PURIFIED_RECIPE_CIRCUIT = 1;
+    private static final int IMPURE_DUST_RECIPE_CIRCUIT = 2;
+    public static final int DEFAULT_ORE_DUPLICATION_ORE_AMOUNT = 4;
+    public static final int DEFAULT_ORE_CONVERSION_LEAF_AMOUNT = 4;
 
     public enum TierAcid {
 
@@ -677,8 +680,6 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
 
     // region ore conversion helpers
 
-    public static final int DEFAULT_ORE_CONVERSION_LEAF_AMOUNT = 4;
-
     public static void createOreConversionRecipe(IMaterialLeafVariant variant, Voltage voltage, Werkstoff ore,
         TierAcid catalyst) {
         if (ore == null) {
@@ -755,7 +756,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
         createOreConversionRecipe(
             voltage,
             duration,
-            new ItemStack[] { leaf, GTUtility.getIntegratedCircuit(0) },
+            new ItemStack[] { leaf, GTUtility.getIntegratedCircuit(PURIFIED_RECIPE_CIRCUIT) },
             acid,
             purified,
             null,
@@ -763,7 +764,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
         createOreConversionRecipe(
             voltage,
             duration,
-            new ItemStack[] { leaf, GTUtility.getIntegratedCircuit(1) },
+            new ItemStack[] { leaf, GTUtility.getIntegratedCircuit(IMPURE_DUST_RECIPE_CIRCUIT) },
             acid,
             impureDust,
             null,
@@ -854,8 +855,6 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
 
     // region ore duplication helpers
 
-    public static final int DEFAULT_ORE_DUPLICATION_ORE_AMOUNT = 4;
-
     public static void createOreDuplicationRecipe(IMaterialLeafVariant variant, Werkstoff oreType) {
         if (oreType == null) {
             throw new IllegalArgumentException("no argument can be null");
@@ -912,13 +911,13 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
             voltage,
             chemicalReactorRecipes);
         createOreDuplicationRecipe(
-            new ItemStack[] { leaf, crushed, GTUtility.getIntegratedCircuit(0) },
+            new ItemStack[] { leaf, crushed, GTUtility.getIntegratedCircuit(PURIFIED_RECIPE_CIRCUIT) },
             purified,
             byproduct,
             voltage,
             multiblockChemicalReactorRecipes);
         createOreDuplicationRecipe(
-            new ItemStack[] { leaf, crushed, GTUtility.getIntegratedCircuit(1) },
+            new ItemStack[] { leaf, crushed, GTUtility.getIntegratedCircuit(IMPURE_DUST_RECIPE_CIRCUIT) },
             impureDust,
             byproduct,
             voltage,
@@ -943,7 +942,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
     }
 
     public static void createOreDuplicationRecipe(ItemStack[] inputs, ItemStack purified, FluidStack byproduct,
-                                                  Voltage voltage, IRecipeMap recipeMap) {
+        Voltage voltage, IRecipeMap recipeMap) {
         if (inputs == null || purified == null) {
             throw new IllegalArgumentException("inputs and purified can't be null");
         }
