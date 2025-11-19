@@ -516,7 +516,7 @@ public class MutationLoader {
 
         // region material crops
         new CropMutation(Argentia, Plumbilia, Tine)
-            .addToMutationPools(aShiny, aMetal, aSilver, aReed)
+            .addToMutationPools(aShiny, aMetal, aSilver)
             .register();
         new CropMutation(Aurelia, Plumbilia, Coppon)
             .addToMutationPools(aGold, aLeaves, aMetal)
