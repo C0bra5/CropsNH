@@ -7,6 +7,7 @@ import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.autoclaveRecipes;
 import static gregtech.api.recipe.RecipeMaps.brewingRecipes;
 import static gregtech.api.recipe.RecipeMaps.chemicalBathRecipes;
+import static gregtech.api.recipe.RecipeMaps.chemicalReactorRecipes;
 import static gregtech.api.recipe.RecipeMaps.compressorRecipes;
 import static gregtech.api.recipe.RecipeMaps.extractorRecipes;
 import static gregtech.api.recipe.RecipeMaps.fluidExtractionRecipes;
@@ -18,6 +19,9 @@ import static gregtech.api.util.GTRecipeBuilder.TICKS;
 import static gregtech.api.util.GTRecipeConstants.UniversalChemical;
 import static gregtech.common.items.ItemComb.Voltage;
 
+import com.gtnewhorizon.cropsnh.loaders.GTRecipeLoader;
+import gregtech.api.interfaces.IRecipeMap;
+import gregtech.common.tileentities.machines.multi.MTELargeChemicalReactor;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -743,11 +747,27 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
             throw new IllegalArgumentException("oreAmount must be greater than zero.");
         }
 
-        ItemStack[] leaf = new ItemStack[] { variant.get(leafAmount) };
-        ItemStack[] purified = new ItemStack[] { GTOreDictUnificator.get(OrePrefixes.crushedPurified, ore, 4) };
+        ItemStack leaf = variant.get(leafAmount);
+        ItemStack[] purified = new ItemStack[] { GTOreDictUnificator.get(OrePrefixes.crushedPurified, ore, oreAmount) };
+        ItemStack[] impureDust = new ItemStack[] { GTOreDictUnificator.get(OrePrefixes.dustImpure, ore, oreAmount) };
         FluidStack[] acid = catalyst == null ? null : new FluidStack[] { catalyst.get(voltage.getFluidAmount()) };
 
-        createOreConversionRecipe(voltage, duration, leaf, acid, purified, null, null);
+        createOreConversionRecipe(
+            voltage,
+            duration,
+            new ItemStack[] { leaf, GTUtility.getIntegratedCircuit(0) },
+            acid,
+            purified,
+            null,
+            null);
+        createOreConversionRecipe(
+            voltage,
+            duration,
+            new ItemStack[] { leaf, GTUtility.getIntegratedCircuit(1) },
+            acid,
+            impureDust,
+            null,
+            null);
     }
 
     public static void createOreConversionRecipe(IMaterialLeafVariant variant, Voltage voltage, ItemStack ore,
@@ -834,6 +854,8 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
 
     // region ore duplication helpers
 
+    public static final int DEFAULT_ORE_DUPLICATION_ORE_AMOUNT = 4;
+
     public static void createOreDuplicationRecipe(IMaterialLeafVariant variant, Werkstoff oreType) {
         if (oreType == null) {
             throw new IllegalArgumentException("no argument can be null");
@@ -873,13 +895,34 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
         if (leaf == null || crushed == null || oreType == null) {
             throw new IllegalArgumentException("no argument can be null");
         }
-        ItemStack purified = GTOreDictUnificator.get(OrePrefixes.crushedPurified, oreType, 4);
+        ItemStack purified = GTOreDictUnificator
+            .get(OrePrefixes.crushedPurified, oreType, DEFAULT_ORE_DUPLICATION_ORE_AMOUNT);
+        ItemStack impureDust = GTOreDictUnificator
+            .get(OrePrefixes.dustImpure, oreType, DEFAULT_ORE_DUPLICATION_ORE_AMOUNT);
         FluidStack byproduct = null;
         if (!oreType.mOreByProducts.isEmpty()) {
             byproduct = oreType.mOreByProducts.get(0)
                 .getMolten(144);
         }
-        createOreDuplicationRecipe(leaf, crushed, purified, byproduct, voltage);
+        // TODO: ask around about the circuit thing since technically with the ghost slot this is feasible.
+        createOreDuplicationRecipe(
+            new ItemStack[] { leaf, crushed },
+            purified,
+            byproduct,
+            voltage,
+            chemicalReactorRecipes);
+        createOreDuplicationRecipe(
+            new ItemStack[] { leaf, crushed, GTUtility.getIntegratedCircuit(0) },
+            purified,
+            byproduct,
+            voltage,
+            multiblockChemicalReactorRecipes);
+        createOreDuplicationRecipe(
+            new ItemStack[] { leaf, crushed, GTUtility.getIntegratedCircuit(1) },
+            impureDust,
+            byproduct,
+            voltage,
+            multiblockChemicalReactorRecipes);
     }
 
     public static void createOreDuplicationRecipe(IMaterialLeafVariant variant, ItemStack crushed, Materials oreType,
@@ -888,27 +931,33 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
             throw new IllegalArgumentException("no argument can be null");
         }
         ItemStack leaf = variant.get(1);
-        ItemStack purified = GTOreDictUnificator.get(OrePrefixes.crushedPurified, oreType, 4);
+        ItemStack purified = GTOreDictUnificator
+            .get(OrePrefixes.crushedPurified, oreType, DEFAULT_ORE_DUPLICATION_ORE_AMOUNT);
         FluidStack byproduct = null;
         if (!oreType.mOreByProducts.isEmpty()) {
             byproduct = oreType.mOreByProducts.get(0)
                 .getMolten(144);
         }
 
-        createOreDuplicationRecipe(leaf, crushed, purified, byproduct, voltage);
+        createOreDuplicationRecipe(new ItemStack[] { leaf, crushed }, purified, byproduct, voltage, UniversalChemical);
     }
 
-    public static void createOreDuplicationRecipe(ItemStack leaf, ItemStack crushed, ItemStack purified,
-        FluidStack byproduct, Voltage voltage) {
-        if (crushed == null || purified == null) {
-            throw new IllegalArgumentException("crushed and purified can't be null");
+    public static void createOreDuplicationRecipe(ItemStack[] inputs, ItemStack purified, FluidStack byproduct,
+                                                  Voltage voltage, IRecipeMap recipeMap) {
+        if (inputs == null || purified == null) {
+            throw new IllegalArgumentException("inputs and purified can't be null");
+        }
+        for (int i = 0; i < inputs.length; i++) {
+            if (inputs[i] == null) {
+                throw new IllegalArgumentException("input #" + i + " is null!");
+            }
         }
 
         // create recipe base
         GTRecipeBuilder builder = GTValues.RA.stdBuilder()
             .eut(voltage.getChemicalEnergy())
             .duration(voltage.getComplexTime())
-            .itemInputs(leaf, crushed)
+            .itemInputs(inputs)
             .itemOutputs(purified);
 
         // add byproduct if one is available
@@ -919,12 +968,12 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
         // reg water takes longer to wash
         builder.copy()
             .fluidInputs(TierAcid.regWater.get())
-            .addTo(UniversalChemical);
+            .addTo(recipeMap);
 
         // distill water is speedy mc-gee
         builder.duration(Math.max(1, builder.getDuration() / 4))
             .fluidInputs(TierAcid.distilWater.get())
-            .addTo(UniversalChemical);
+            .addTo(recipeMap);
     }
 
     // endregion ore duplication helpers
