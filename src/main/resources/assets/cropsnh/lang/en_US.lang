@@ -96,6 +96,7 @@ cropsnh_tooltip.empty=Nothing planted
 cropsnh_tooltip.progress=Progress
 cropsnh_tooltip.none=none
 cropsnh_tooltip.NaNCertificate=Challenge Accepted!
+cropsnh_tooltip.seed_must_use_synthesizer_to_replicate=This seed can only be replicated using the synthesizer.
 # MTE tooltips
 cropsnh_tooltip.cropManager.water.0=Enable Hydration
 cropsnh_tooltip.cropManager.water.1=Disable Hydration

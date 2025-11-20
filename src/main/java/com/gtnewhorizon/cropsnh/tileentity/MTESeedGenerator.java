@@ -225,8 +225,10 @@ public class MTESeedGenerator extends MTEBasicMachine {
 
     private static SeedData isValidSeeds(ItemStack aStack) {
         if (GTUtility.isStackInvalid(aStack) || !(aStack.getItem() instanceof ItemGenericSeed)) return null;
+        // check that it's a crop card and that it can cross.
         ICropCard cc = CropRegistry.instance.get(aStack);
-        if (cc == null) return null;
+        if (cc == null || cc.getCrossingThreshold() < 0.0f) return null;
+        // fail if the crop isn't analyzed
         SeedStats stats = SeedStats.getStatsFromStack(aStack);
         if (stats == null || !stats.isAnalyzed()) return null;
         return new SeedData(cc, stats);

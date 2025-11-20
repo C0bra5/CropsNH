@@ -111,6 +111,10 @@ public class ItemGenericSeed extends ItemCropsNH {
                 toolTip.add(StatCollector.translateToLocal(crop.getFlavourText()));
             }
 
+            if (crop.getCrossingThreshold() < 0.0f) {
+                toolTip.add(StatCollector.translateToLocal("cropsnh_tooltip.seed_must_use_synthesizer_to_replicate"));
+            }
+
             toolTip.add(
                 String.format(
                     "%s- %s: %d%s",
