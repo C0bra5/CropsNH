@@ -17,6 +17,7 @@ public class CropIronOreBerry extends CropOreBerry {
         this.addAlternateSeed(new ItemStack(TinkerWorld.oreBerries, 1, 0));
         this.addBlockUnderRequirement("iron");
         this.addGrowthRequirement(new MaxLightLevelGrowthRequirement(10));
+        this.addDuplicationCatalyst("nuggetIron", 1);
     }
 
     @Override

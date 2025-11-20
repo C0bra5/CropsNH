@@ -13,6 +13,7 @@ public class CropOilBerry extends NHCropCard {
 
     public CropOilBerry() {
         super("oilBerry", new Color(0x0A0A0A), new Color(0x333333));
+
         this.addDrop(CropsNHItemList.oilBerry.get(1), 100_00);
     }
 

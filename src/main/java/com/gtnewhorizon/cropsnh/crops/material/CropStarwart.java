@@ -2,6 +2,9 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
@@ -15,8 +18,14 @@ public class CropStarwart extends NHCropCard {
 
     public CropStarwart() {
         super("starwart", new Color(0x8985BE), new Color(0xFFFFFF));
+
         this.addDrop(CropsNHItemList.starwart.get(1), 100_00);
+
         this.addBlockUnderRequirement("netherStar");
+
+        this.addDuplicationCatalyst("dustNetherStar", 1);
+        this.addDuplicationCatalyst("netherStar", 1);
+        this.addDuplicationCatalyst(new ItemStack(Items.skull, 3, 1));
     }
 
     @Override

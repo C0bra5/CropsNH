@@ -13,8 +13,12 @@ public class CropPlumbilia extends NHCropCard {
 
     public CropPlumbilia() {
         super("plumbilia", new Color(0x503950), new Color(0x6D4E6D));
+
         this.addDrop(CropsNHItemList.plumbiliaLeaf.get(1), 100_00);
+
         this.addBlockUnderRequirement("lead");
+
+        this.addDuplicationCatalyst("dustLead", 1);
     }
 
     @Override

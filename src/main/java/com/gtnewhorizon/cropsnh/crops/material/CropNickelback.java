@@ -13,8 +13,12 @@ public class CropNickelback extends NHCropCard {
 
     public CropNickelback() {
         super("nickelback", new Color(0x7E81AD), new Color(0xB7B8E9));
+
         this.addDrop(CropsNHItemList.nickelbackLeaf.get(1), 100_00);
+
         this.addBlockUnderRequirement("nickel");
+
+        this.addDuplicationCatalyst("dustNickel", 1);
     }
 
     @Override

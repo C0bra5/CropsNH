@@ -18,6 +18,7 @@ public class CropPlumbiscus extends NHCropCard {
         super("plumbiscus", new Color(0x523B52), new Color(0x6D4E6D));
         this.addDrop(Materials.Lead.getDustTiny(1), 100_00);
         this.addGrowthRequirement(BlockUnderRequirement.get("lead"));
+        this.addDuplicationCatalyst("dustLead", 1);
     }
 
     @Override

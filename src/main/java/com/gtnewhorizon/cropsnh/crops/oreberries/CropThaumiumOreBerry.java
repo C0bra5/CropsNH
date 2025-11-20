@@ -11,9 +11,14 @@ public class CropThaumiumOreBerry extends CropOreBerry {
 
     public CropThaumiumOreBerry() {
         super("thaumium", new Color(0x67458A), new Color(0x9664C8));
+
         this.addDrop(Materials.Thaumium.getNuggets(1), 100_00);
+
         this.addBlockUnderRequirement("thaumium");
+
         this.addGrowthRequirement(new MaxLightLevelGrowthRequirement(10));
+
+        this.addDuplicationCatalyst("nuggetThaumium", 1);
     }
 
     @Override

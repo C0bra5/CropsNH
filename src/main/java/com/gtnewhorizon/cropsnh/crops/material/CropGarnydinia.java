@@ -18,7 +18,6 @@ public class CropGarnydinia extends NHCropCard {
 
     public CropGarnydinia() {
         super("garnydinia", new Color(0xA24141), new Color(0xA3A341));
-        this.addBlockUnderRequirement("garnetGem");
         // 5% exquisite gem
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.gemExquisite, Materials.GarnetRed, 1L), 2_50);
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.gemExquisite, Materials.GarnetYellow, 1L), 2_50);
@@ -39,6 +38,14 @@ public class CropGarnydinia extends NHCropCard {
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.crushedPurified, Materials.GarnetYellow, 1L), 1_50);
         // 1% purified garnet sand
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.crushedPurified, Materials.GarnetSand, 1L), 8_00);
+
+        this.addBlockUnderRequirement("garnetGem");
+
+        this.addDuplicationCatalyst("dustGarnetRed", 1);
+        this.addDuplicationCatalyst("dustGarnetYellow", 1);
+        this.addDuplicationCatalyst("dustGarnetSand", 1);
+        this.addDuplicationCatalyst("gemGarnetRed", 1);
+        this.addDuplicationCatalyst("gemGarnetYellow", 1);
     }
 
     @Override

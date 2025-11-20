@@ -13,8 +13,12 @@ public class CropMicadia extends NHCropCard {
 
     public CropMicadia() {
         super("micadia", new Color(0xD5CCC3), new Color(0xF4F2EF));
+
         this.addDrop(CropsNHItemList.micadiaFlower.get(1), 100_00);
+
         this.addBlockUnderRequirement("mica");
+
+        this.addDuplicationCatalyst("dustMica", 1);
     }
 
     @Override

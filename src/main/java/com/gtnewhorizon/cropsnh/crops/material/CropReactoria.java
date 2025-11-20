@@ -15,9 +15,15 @@ public class CropReactoria extends NHCropCard {
 
     public CropReactoria() {
         super("reactoria", new Color(0x565301), new Color(0x989309));
+
         this.addDrop(CropsNHItemList.reactoriaLeaf.get(1), 75_00);
         this.addDrop(CropsNHItemList.reactoriaStem.get(1), 25_00);
+
         this.addBlockUnderRequirement("uranium");
+
+        this.addDuplicationCatalyst("dustUranium", 1);
+        this.addDuplicationCatalyst("dustUranium235", 1);
+        this.addDuplicationCatalyst("dustUraninite", 2);
     }
 
     @Override

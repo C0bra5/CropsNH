@@ -18,9 +18,14 @@ public class CropCinderpearl extends NHCropCard {
 
     public CropCinderpearl() {
         super("cinderpearl", new Color(0xFF9611), new Color(0xFFD86F));
+
         this.addDrop(new ItemStack(ConfigBlocks.blockCustomPlant, 1, 3), 100_00);
+
         this.addAlternateSeed(new ItemStack(ConfigBlocks.blockCustomPlant, 1, 3));
+
         this.addBlockUnderRequirement("blaze");
+
+        this.addDuplicationCatalyst("dustBlaze", 2);
     }
 
     @Override

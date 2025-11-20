@@ -13,6 +13,7 @@ public class CropMagicalNightshade extends NHCropCard {
         super("magicalNightshade", new Color(0x20001B), new Color(0xB4009C));
         this.addDrop(CropsNHItemList.magicEssence.get(1), 100_00);
         this.addBlockUnderRequirement("ichorium");
+        this.addDuplicationCatalyst(CropsNHItemList.magicEssence.get(1));
     }
 
     @Override

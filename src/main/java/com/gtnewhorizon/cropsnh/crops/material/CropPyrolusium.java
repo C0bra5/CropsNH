@@ -14,8 +14,12 @@ public class CropPyrolusium extends NHCropCard {
 
     public CropPyrolusium() {
         super("pyrolusium", new Color(0xB51900), new Color(0xCF1E11));
+
         this.addDrop(CropsNHItemList.pyrolusiumLeaf.get(1), 100_00);
+
         this.addBlockUnderRequirement("manganese");
+
+        this.addDuplicationCatalyst("dustManganese", 1);
     }
 
     @Override

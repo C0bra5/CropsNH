@@ -18,9 +18,14 @@ public class CropShimmerleaf extends NHCropCard {
 
     public CropShimmerleaf() {
         super("shimmerleaf", new Color(0x78A59C), new Color(0xA9C6C1));
+
         this.addDrop(new ItemStack(ConfigBlocks.blockCustomPlant, 1, 2), 100_00);
+
         this.addAlternateSeed(new ItemStack(ConfigBlocks.blockCustomPlant, 1, 2));
+
         this.addBlockUnderRequirement("quicksilver");
+
+        this.addDuplicationCatalyst("nuggetMercury", 1);
     }
 
     @Override

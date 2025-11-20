@@ -20,9 +20,14 @@ public class CropBlazereed extends NHCropCard {
 
     public CropBlazereed() {
         super("blazereed", new Color(0xB38C00), new Color(0xFFC800));
+
         this.addDrop(new ItemStack(Items.blaze_powder, 1, 0), 75_00);
         this.addDrop(new ItemStack(Items.blaze_rod, 1, 0), 25_00);
+
         this.addLikedBiomes(BiomeDictionary.Type.NETHER, BiomeDictionary.Type.HOT);
+
+        this.addDuplicationCatalyst(new ItemStack(Items.blaze_powder, 2, 0));
+        this.addDuplicationCatalyst(new ItemStack(Items.blaze_rod, 1, 0));
     }
 
     @Override

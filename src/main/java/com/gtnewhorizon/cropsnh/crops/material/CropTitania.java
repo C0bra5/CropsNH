@@ -13,8 +13,14 @@ public class CropTitania extends NHCropCard {
 
     public CropTitania() {
         super("titania", new Color(0x815E8D), new Color(0xDCA0F0));
+
         this.addDrop(CropsNHItemList.titaniaLeaf.get(1), 100_00);
+
         this.addBlockUnderRequirement("titanium");
+
+        this.addDuplicationCatalyst("dustTitanium", 1);
+        this.addDuplicationCatalyst("dustRutile", 2);
+        this.addDuplicationCatalyst("dustIlmenite", 2);
     }
 
     @Override

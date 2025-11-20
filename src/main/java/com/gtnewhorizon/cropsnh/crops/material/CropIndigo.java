@@ -15,7 +15,9 @@ public class CropIndigo extends NHCropCard {
 
     public CropIndigo() {
         super("indigo", new Color(0x6446BD), new Color(0xA285EF));
+
         this.addDrop(CropsNHItemList.indigoBlossom.get(1), 100_00);
+
         this.addAlternateSeed(CropsNHItemList.indigoBlossom.get(1));
     }
 

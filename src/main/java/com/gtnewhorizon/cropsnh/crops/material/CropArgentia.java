@@ -13,8 +13,12 @@ public class CropArgentia extends NHCropCard {
 
     public CropArgentia() {
         super("argentia", new Color(0xB2BEC9), new Color(0xFDFEFE));
+
         this.addDrop(CropsNHItemList.argentiaLeaf.get(1), 100_00);
+
         this.addBlockUnderRequirement("silver");
+
+        this.addDuplicationCatalyst("dustSilver", 1);
     }
 
     @Override

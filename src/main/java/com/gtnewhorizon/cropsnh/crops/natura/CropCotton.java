@@ -15,9 +15,12 @@ public class CropCotton extends NHCropCard {
 
     public CropCotton() {
         super("cotton", new Color(0xE366F5), new Color(0xFFC9FF));
+
         this.addDrop(new ItemStack(NContent.plantItem, 1, 3), 100_00);
+
         this.addAlternateSeed("cropCotton");
         this.addAlternateSeed("seedCotton");
+
         this.addGrowthRequirement(new MinLightLevelGrowthRequirement(9));
     }
 

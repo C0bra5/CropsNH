@@ -17,7 +17,10 @@ public class CropSlimeplant extends NHCropCard {
 
     public CropSlimeplant() {
         super("slimeplant", new Color(0x5A3F1E), new Color(0x9DF28A));
+
         this.addDrop(new ItemStack(Items.slime_ball, 1, 0), 100_00);
+
+        this.addDuplicationCatalyst("slimeball", 1);
     }
 
     @Override

@@ -18,7 +18,9 @@ public class CropStickReed extends NHCropCard {
 
     public CropStickReed() {
         super("stickReed", new Color(0x8DB560), new Color(0xD9D891));
+        // TODO: REPLACE WITH RESIN REPLACEMENT DOWN THE LINE
         this.addDrop(ItemList.IC2_Resin.get(1L), 10_000);
+        this.addDuplicationCatalyst(ItemList.IC2_Resin.get(1L));
     }
 
     @Override

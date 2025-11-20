@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.crops.thaumcraft;
 
 import java.awt.Color;
 
+import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
 
@@ -16,12 +17,16 @@ public class CropPrimordialBerry extends NHCropCard {
 
     public CropPrimordialBerry() {
         super("primordialBerry", new Color(0x652150), new Color(0xA1D3A9));
+
         ItemStack primPerl = thaumcraft.api.ItemApi.getItem("itemEldritchObject", 3)
             .copy();
         primPerl.stackSize = 1;
         this.addDrop(primPerl.copy(), 10000);
+
         this.addLikedBiomes(BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.SPOOKY);
+
         this.addAlternateSeed(primPerl.copy());
+
         this.addGrowthRequirement(BlockUnderRequirement.get("ichorium"));
     }
 

@@ -17,6 +17,7 @@ public class CropGlowingCoral extends NHCropCard {
         this.addDrop(new ItemStack(BOPCBlocks.coral1, 2, 15), 100_00);
         this.addAlternateSeed(new ItemStack(BOPCBlocks.coral1, 1, 15));
         this.addBlockUnderRequirement("glowstone");
+        this.addDuplicationCatalyst("dustGlowstone", 1);
     }
 
     @Override

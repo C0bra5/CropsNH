@@ -11,8 +11,12 @@ public class CropLiveroot extends NHCropCard {
 
     public CropLiveroot() {
         super("liveroot", new Color(0x877B00), new Color(0xB9DA49));
+
         this.addDrop(Materials.LiveRoot.getDust(1), 75_00);
         this.addDrop(ItemList.TF_LiveRoot.get(1), 75_00);
+
+        this.addDuplicationCatalyst(Materials.LiveRoot.getDust(1));
+        this.addDuplicationCatalyst(ItemList.TF_LiveRoot.get(1));
     }
 
     @Override

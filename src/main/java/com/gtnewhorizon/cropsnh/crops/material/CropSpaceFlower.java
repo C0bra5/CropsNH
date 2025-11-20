@@ -15,7 +15,9 @@ public class CropSpaceFlower extends NHCropCard {
 
     public CropSpaceFlower() {
         super("spaceFlower", new Color(0xFF0000), new Color(0xFFC200));
+
         this.addDrop(CropsNHItemList.spaceFlower.get(1), 100_00);
+
         if (Mods.GalacticraftCore.isModLoaded()) {
             this.addBlockUnderRequirement("moon");
         }

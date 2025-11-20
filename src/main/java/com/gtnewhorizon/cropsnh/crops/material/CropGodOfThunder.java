@@ -13,8 +13,12 @@ public class CropGodOfThunder extends NHCropCard {
 
     public CropGodOfThunder() {
         super("godOfThunder", new Color(0x001E00), new Color(0x0C290C));
+
         this.addDrop(CropsNHItemList.thunderLeaf.get(1), 100_00);
+
         this.addBlockUnderRequirement("thorium");
+
+        this.addDuplicationCatalyst("dustThorium", 1);
     }
 
     @Override

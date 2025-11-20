@@ -22,6 +22,7 @@ public class CropGlowshroom extends NHCropCard {
         super("glowshroom", new Color(0x45AD32), new Color(0x63FA48));
         this.addDrop(new ItemStack(BOPCBlocks.mushrooms, 1, 3), 100_00);
         this.addAlternateSeed(new ItemStack(BOPCBlocks.mushrooms, 1, 3));
+        this.addDuplicationCatalyst("dustGlowstone", 1);
     }
 
     @Override

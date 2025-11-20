@@ -16,9 +16,14 @@ public class CropSapphirum extends NHCropCard {
 
     public CropSapphirum() {
         super("sapphirum", new Color(0x47478F), new Color(0x5959B3));
+
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sapphire, 1L), 75_00);
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.gem, Materials.Sapphire, 1L), 25_00);
+
         this.addBlockUnderRequirement("sapphire");
+
+        this.addDuplicationCatalyst("dustSapphire", 1);
+        this.addDuplicationCatalyst("gemSapphire", 1);
     }
 
     @Override

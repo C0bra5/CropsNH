@@ -10,9 +10,14 @@ public class CropThauminiteOreBerry extends CropOreBerry {
 
     public CropThauminiteOreBerry() {
         super("thauminite", new Color(0x515A9C), new Color(0x7581E0));
+
         this.addDrop(OreDictHelper.getCopiedOreStack("nuggetThauminite", 1), 100_00);
+
         this.addBlockUnderRequirement("thauminite");
+
         this.addGrowthRequirement(new MaxLightLevelGrowthRequirement(10));
+
+        this.addDuplicationCatalyst("nuggetThauminite", 1);
     }
 
     @Override

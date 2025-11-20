@@ -14,8 +14,12 @@ public class CropAurelia extends NHCropCard {
 
     public CropAurelia() {
         super("aurelia", new Color(0xABA600), new Color(0xEFE913));
+
         this.addDrop(CropsNHItemList.aureliaLeaf.get(1), 10_000);
-        this.addGrowthRequirement(BlockUnderRequirement.get("gold"));
+
+        this.addBlockUnderRequirement("gold");
+
+        this.addDuplicationCatalyst("dustGold", 1);
     }
 
     @Override

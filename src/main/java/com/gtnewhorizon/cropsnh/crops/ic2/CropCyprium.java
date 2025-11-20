@@ -17,6 +17,7 @@ public class CropCyprium extends NHCropCard {
         super("cyprium", new Color(0xB26003), new Color(0xD77106));
         this.addDrop(Materials.Copper.getDustTiny(1), 100_00);
         this.addGrowthRequirement(BlockUnderRequirement.get("copper"));
+        this.addDuplicationCatalyst("dustCopper", 1);
     }
 
     @Override

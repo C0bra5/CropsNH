@@ -16,9 +16,16 @@ public class CropOlivia extends NHCropCard {
 
     public CropOlivia() {
         super("olivia", new Color(0x79CD79), new Color(0x96FF96));
+
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Olivine, 1L), 75_00);
+
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.gem, Materials.Olivine, 1L), 25_00);
+
         this.addBlockUnderRequirement("olivine");
+
+        this.addDuplicationCatalyst("gemOlivine", 1);
+
+        this.addDuplicationCatalyst("dustOlivine", 1);
     }
 
     @Override

@@ -17,10 +17,16 @@ public class CropEvilOre extends NHCropCard {
 
     public CropEvilOre() {
         super("evilOre", new Color(0x897B73), new Color(0xEFEBE7));
+
         // TODO: CHECK IF WE WANT TO KEEP THE RAW QUARTS DROPS
         this.addDrop(Materials.NetherQuartz.getDust(1), 66_66);
         this.addDrop(Materials.CertusQuartz.getDust(1), 16_67);
         this.addDrop(new ItemStack(Items.quartz, 1, 0), 16_67);
+
+        this.addDuplicationCatalyst("gemNetherQuartz", 1);
+        this.addDuplicationCatalyst("dustNetherQuartz", 1);
+        this.addDuplicationCatalyst("gemCertusQuartz", 1);
+        this.addDuplicationCatalyst("dustCertusQuartz", 1);
     }
 
     @Override

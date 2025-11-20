@@ -18,6 +18,7 @@ public class CropStagnium extends NHCropCard {
         super("stagnium", new Color(0x6C6C6C), new Color(0x7F7F7F));
         this.addDrop(Materials.Tin.getDustTiny(1), 100_00);
         this.addGrowthRequirement(BlockUnderRequirement.get("tin"));
+        this.addDuplicationCatalyst("dustTin", 1);
     }
 
     @Override

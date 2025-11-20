@@ -14,9 +14,13 @@ public class CropRedwheat extends NHCropCard {
     public CropRedwheat() {
         super("redwheat", new Color(0x6C4B17), new Color(0xD45555));
         this.addDrop(new ItemStack(Items.redstone, 1, 0), 100_00);
+
         this.addGrowthRequirement(new MinLightLevelGrowthRequirement(5));
         this.addGrowthRequirement(new MaxLightLevelGrowthRequirement(12));
+
         this.addBlockUnderRequirement("redstone");
+
+        this.addDuplicationCatalyst("dustRedstone", 1);
     }
 
     @Override

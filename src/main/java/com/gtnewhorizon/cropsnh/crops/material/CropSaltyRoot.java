@@ -11,8 +11,16 @@ public class CropSaltyRoot extends NHCropCard {
 
     public CropSaltyRoot() {
         super("saltyRoot", new Color(0x8E8E8E), new Color(0x979796));
+
         this.addDrop(CropsNHItemList.saltyRoot.get(1), 100_00);
+
         this.addLikedBiomes(BiomeDictionary.Type.DRY, BiomeDictionary.Type.SANDY);
+
+        this.addDuplicationCatalyst("dustSalt", 1);
+        this.addDuplicationCatalyst("gemSalt", 1);
+        this.addDuplicationCatalyst("dustRockSalt", 1);
+        this.addDuplicationCatalyst("gemRockSalt", 1);
+        this.addDuplicationCatalyst("dustSaltpeter", 1);
     }
 
     @Override

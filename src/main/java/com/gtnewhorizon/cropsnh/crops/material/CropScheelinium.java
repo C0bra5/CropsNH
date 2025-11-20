@@ -13,8 +13,14 @@ public class CropScheelinium extends NHCropCard {
 
     public CropScheelinium() {
         super("scheelinium", new Color(0x313CA3), new Color(0x232C9E));
+
         this.addDrop(CropsNHItemList.scheeliniumLeaf.get(1), 100_00);
+
         this.addBlockUnderRequirement("tungsten");
+
+        this.addDuplicationCatalyst("dustTungsten", 1);
+        this.addDuplicationCatalyst("dustTungstate", 1);
+        this.addDuplicationCatalyst("dustScheelite", 1);
     }
 
     @Override

@@ -17,8 +17,12 @@ public class CropIridine extends NHCropCard {
 
     public CropIridine() {
         super("iridine", new Color(0xB3B3B3), new Color(0xE8E8E8));
+
         this.addDrop(CropsNHItemList.iridineFlower.get(1), 75_00);
+
         this.addBlockUnderRequirement("iridium");
+
+        this.addDuplicationCatalyst("dustIridium", 1);
     }
 
     @Override

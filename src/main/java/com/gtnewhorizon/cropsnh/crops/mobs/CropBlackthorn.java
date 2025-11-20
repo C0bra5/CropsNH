@@ -16,7 +16,9 @@ public class CropBlackthorn extends NHCropCard {
 
     public CropBlackthorn() {
         super("blackthorn", new Color(0x000000), new Color(0x2E1F27));
+
         this.addDrop(new ItemStack(Items.dye, 1, 0), 100_00);
+
         this.addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.OCEAN);
     }
 

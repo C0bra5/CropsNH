@@ -13,7 +13,10 @@ public class CropTearstalks extends NHCropCard {
 
     public CropTearstalks() {
         super("tearstalks", new Color(0xBFBFBF), new Color(0xF7F7F7));
+
         this.addDrop(new ItemStack(Items.ghast_tear, 1, 0), 66_66);
+
+        this.addDuplicationCatalyst(new ItemStack(Items.ghast_tear, 1, 0));
     }
 
     @Override

@@ -12,9 +12,15 @@ public class CropClayLily extends CropBaseStoneLily {
 
     public CropClayLily() {
         super("clay", new Color(0x666B7F), new Color(0xA5A9B9));
+
         this.addDrop(new ItemStack(Items.clay_ball, 3, 0), 100_00);
+
         this.addBlockUnderRequirement("clay");
-        this.addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.RIVER);
+
+        this.addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.SWAMP);
+
+        this.addDuplicationCatalyst("dustClay", 1);
+        this.addDuplicationCatalyst("itemClay", 1);
     }
 
     @Override

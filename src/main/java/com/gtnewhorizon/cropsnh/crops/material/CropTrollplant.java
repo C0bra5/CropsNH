@@ -12,6 +12,8 @@ import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GTOreDictUnificator;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 
 public class CropTrollplant extends NHCropCard {
 
@@ -20,10 +22,20 @@ public class CropTrollplant extends NHCropCard {
 
     public CropTrollplant() {
         super("trollplant", new Color(0x000000), new Color(0xFFFFFF));
+
+        // TODO: WHEN IC2 GETS REMOVED, UPDATE PLANTBALL AND SCRAP DROPS
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.gem, Materials.Spinel, 1), 62_50);
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Plutonium241, 1), 12_50);
         this.addDrop(ItemList.IC2_Plantball.get(1), 12_50);
         this.addDrop(ItemList.IC2_Scrap.get(1), 12_50);
+
+        // all of these are intended to be a bit trollish in one way or another
+        // just because it requires bricks as a soil
+        this.addDuplicationCatalyst(new ItemStack(Items.brick, 2));
+        // one more than the extruder number of bolts you get for one extruder recipe
+        this.addDuplicationCatalyst("screwFoolsRuby", 5);
+        // A somewhat easier "streamed-lined" output since they make a lot o fthis stuff.
+        this.addDuplicationCatalyst(ItemList.IC2_Scrap.get(8));
     }
 
     @Override

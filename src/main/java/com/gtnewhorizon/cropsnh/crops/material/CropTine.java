@@ -13,8 +13,14 @@ public class CropTine extends NHCropCard {
 
     public CropTine() {
         super("tine", new Color(0x7D7D7D), new Color(0xACACAC));
+
         this.addDrop(CropsNHItemList.tineTwig.get(1), 100_00);
+
         this.addBlockUnderRequirement("tin");
+
+        this.addDuplicationCatalyst("dustTin", 1);
+        this.addDuplicationCatalyst("dustCassiterite", 1);
+        this.addDuplicationCatalyst("dustCassiteriteSand", 1);
     }
 
     @Override

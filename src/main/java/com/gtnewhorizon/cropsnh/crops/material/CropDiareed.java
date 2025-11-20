@@ -21,10 +21,15 @@ public class CropDiareed extends NHCropCard {
 
     public CropDiareed() {
         super("diareed", new Color(0x34BFA8), new Color(0x8CF4E2));
+
         // TODO: PONDER IF DIAREED SHOULD STILL BE ALLOWED TO DROP STRAIGHT DIAMONDS
         this.addDrop(new ItemStack(Items.diamond, 1, 0), 75_00);
         this.addDrop(Materials.Diamond.getDust(1), 25_00);
+
         this.addBlockUnderRequirement("diamond");
+
+        this.addDuplicationCatalyst("dustDiamond", 1);
+        this.addDuplicationCatalyst("gemDiamond", 1);
     }
 
     @Override

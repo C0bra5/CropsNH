@@ -11,6 +11,7 @@ public class CropMilkwart extends NHCropCard {
 
     public CropMilkwart() {
         super("milkwart", new Color(0xA8A8A8), new Color(0xECECEC));
+
         this.addDrop(CropsNHItemList.milkwart.get(1), 100_00);
     }
 

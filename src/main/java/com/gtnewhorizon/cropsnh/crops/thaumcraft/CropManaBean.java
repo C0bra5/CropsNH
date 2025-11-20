@@ -26,13 +26,22 @@ public class CropManaBean extends NHCropCard {
 
     public CropManaBean() {
         super("manaBean", new Color(0x135C43), new Color(0x2AAF83));
+
         this.addDrop(getBean(Aspect.AIR), 16_66);
         this.addDrop(getBean(Aspect.FIRE), 16_66);
         this.addDrop(getBean(Aspect.WATER), 16_66);
         this.addDrop(getBean(Aspect.EARTH), 16_66);
         this.addDrop(getBean(Aspect.ORDER), 16_66);
         this.addDrop(getBean(Aspect.ENTROPY), 16_66);
+
         this.addBlockUnderRequirement("mixedCrystalCluster");
+
+        this.addDuplicationCatalyst("shardAir", 1);
+        this.addDuplicationCatalyst("shardFire", 1);
+        this.addDuplicationCatalyst("shardWater", 1);
+        this.addDuplicationCatalyst("shardEarth", 1);
+        this.addDuplicationCatalyst("shardOrder", 1);
+        this.addDuplicationCatalyst("shardEntropy", 1);
     }
 
     private static ItemStack getBean(Aspect aspect) {

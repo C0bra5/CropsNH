@@ -13,8 +13,12 @@ public class CropCoppon extends NHCropCard {
 
     public CropCoppon() {
         super("coppon", new Color(0xBE7000), new Color(0xD88000));
+
         this.addDrop(CropsNHItemList.copponFiber.get(1), 100_00);
+
         this.addBlockUnderRequirement("copper");
+
+        this.addDuplicationCatalyst("dustCopper", 1);
     }
 
     @Override

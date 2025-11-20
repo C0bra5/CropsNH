@@ -14,8 +14,12 @@ public class CropFerru extends NHCropCard {
 
     public CropFerru() {
         super("ferru", new Color(0xA1A1A1), new Color(0xE6E6E6));
+
         this.addDrop(CropsNHItemList.ferruLeaf.get(1), 100_00);
+
         this.addGrowthRequirement(BlockUnderRequirement.get("iron"));
+
+        this.addDuplicationCatalyst("dustIron", 1);
     }
 
     @Override

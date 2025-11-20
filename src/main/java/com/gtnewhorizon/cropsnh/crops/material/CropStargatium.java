@@ -13,8 +13,15 @@ public class CropStargatium extends NHCropCard {
 
     public CropStargatium() {
         super("stargatium", new Color(0x333333), new Color(0x555555));
+
         this.addDrop(CropsNHItemList.stargatiumLeaf.get(1), 100_00);
+
         this.addBlockUnderRequirement("naquadah");
+
+        this.addDuplicationCatalyst("dustNaquadah", 1);
+        this.addDuplicationCatalyst("dustNaquadahOxideMixture", 1);
+        this.addDuplicationCatalyst("dustNaquadria", 1);
+        this.addDuplicationCatalyst("dustNaquadriaOxideMixture", 1);
     }
 
     @Override

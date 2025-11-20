@@ -13,8 +13,12 @@ public class CropPlatina extends NHCropCard {
 
     public CropPlatina() {
         super("platina", new Color(0xDADAAB), new Color(0xF7F7C7));
+
         this.addDrop(CropsNHItemList.platinaLeaf.get(1), 100_00);
+
         this.addBlockUnderRequirement("platinum");
+
+        this.addDuplicationCatalyst("dustPlatinum", 1);
     }
 
     @Override

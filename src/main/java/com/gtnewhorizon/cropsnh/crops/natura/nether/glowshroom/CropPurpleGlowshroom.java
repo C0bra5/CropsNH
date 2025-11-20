@@ -18,8 +18,12 @@ public class CropPurpleGlowshroom extends NHCropCard {
 
     public CropPurpleGlowshroom() {
         super("purpleGlowshroom", new Color(0x511FB6), new Color(0x8B2CD2));
+
         this.addDrop(new ItemStack(NContent.glowshroom, 1, 1), 100_00);
+
         this.addAlternateSeed(new ItemStack(NContent.glowshroom, 1, 1));
+
+        this.addDuplicationCatalyst("dustGlowstone", 1);
     }
 
     @Override

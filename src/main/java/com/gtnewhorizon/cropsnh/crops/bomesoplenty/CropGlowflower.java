@@ -20,6 +20,7 @@ public class CropGlowflower extends NHCropCard {
         super("glowflower", new Color(0x004D4C), new Color(0x12A4A2));
         this.addDrop(new ItemStack(BOPCBlocks.flowers, 2, 3), 100_00);
         this.addAlternateSeed(new ItemStack(BOPCBlocks.flowers, 1, 3));
+        this.addDuplicationCatalyst("dustGlowstone", 1);
     }
 
     @Override

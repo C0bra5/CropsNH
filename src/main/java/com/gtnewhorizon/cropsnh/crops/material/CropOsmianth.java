@@ -17,8 +17,12 @@ public class CropOsmianth extends NHCropCard {
 
     public CropOsmianth() {
         super("osmianth", new Color(0x2525BC), new Color(0x2E2EEC));
+
         this.addDrop(CropsNHItemList.osmianthFlower.get(1), 25_00);
+
         this.addBlockUnderRequirement("osmium");
+
+        this.addDuplicationCatalyst("dustOsmium", 1);
     }
 
     @Override

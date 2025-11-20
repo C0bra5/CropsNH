@@ -13,10 +13,16 @@ public class CropCopperOreBerry extends CropOreBerry {
 
     public CropCopperOreBerry() {
         super("copper", new Color(0xA84D11), new Color(0xF26F18));
+
         this.addDrop(new ItemStack(TinkerWorld.oreBerries, 6, 2), 100_00);
+
         this.addAlternateSeed(new ItemStack(TinkerWorld.oreBerries, 1, 2));
+
         this.addBlockUnderRequirement("copper");
+
         this.addGrowthRequirement(new MaxLightLevelGrowthRequirement(10));
+
+        this.addDuplicationCatalyst("nuggetCopper", 1);
     }
 
     @Override

@@ -14,8 +14,13 @@ public class CropLazulia extends NHCropCard {
 
     public CropLazulia() {
         super("lazulia", new Color(0x142EAF), new Color(0x7497EA));
+
         this.addDrop(Materials.Lapis.getDust(1), 100_00);
+
         this.addBlockUnderRequirement("lapis");
+
+        this.addDuplicationCatalyst("gemLapis", 1);
+        this.addDuplicationCatalyst("dustLapis", 1);
     }
 
     @Override

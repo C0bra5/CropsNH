@@ -12,9 +12,14 @@ public class CropEndStoneLily extends CropBaseStoneLily {
 
     public CropEndStoneLily() {
         super("endStone", new Color(0xABA67E), new Color(0xDFD9A5));
+
         this.addDrop(Materials.Endstone.getDust(2), 100_00);
+
         this.addBlockUnderRequirement("endStone");
+
         this.addLikedBiomes(BiomeDictionary.Type.END, BiomeDictionary.Type.DRY, BiomeDictionary.Type.COLD);
+
+        this.addDuplicationCatalyst("dustEndstone", 1);
     }
 
     @Override

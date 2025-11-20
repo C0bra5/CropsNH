@@ -15,9 +15,15 @@ public class CropBobsYerUncleRanks extends NHCropCard {
 
     public CropBobsYerUncleRanks() {
         super("bobsYerUncleRanks", new Color(0x009529), new Color(0x41F384));
+
         this.addDrop(CropsNHItemList.bobsYerUncleBerry.get(1), 100_00);
+
         this.addLikedBiomes(BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS);
+
         this.addBlockUnderRequirement("emerald");
+
+        this.addDuplicationCatalyst("gemEmerald", 1);
+        this.addDuplicationCatalyst("dustEmerald", 1);
     }
 
     @Override

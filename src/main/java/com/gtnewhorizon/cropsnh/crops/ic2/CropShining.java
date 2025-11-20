@@ -18,6 +18,7 @@ public class CropShining extends NHCropCard {
         super("shining", new Color(0xB3B3D0), new Color(0xD0D0F1));
         this.addDrop(Materials.Silver.getDustTiny(1), 100_00);
         this.addGrowthRequirement(BlockUnderRequirement.get("silver"));
+        this.addDuplicationCatalyst("dustSilver", 1);
     }
 
     @Override

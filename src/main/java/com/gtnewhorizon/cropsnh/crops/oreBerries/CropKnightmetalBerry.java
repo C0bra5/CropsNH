@@ -11,9 +11,14 @@ public class CropKnightmetalBerry extends CropOreBerry {
 
     public CropKnightmetalBerry() {
         super("knightmetal", new Color(0x90A68A), new Color(0xD2F0C8));
+
         this.addDrop(new ItemStack(twilightforest.item.TFItems.armorShard, 4), 100_00);
+
         this.addBlockUnderRequirement("knightmetal");
+
         this.addGrowthRequirement(new MaxLightLevelGrowthRequirement(10));
+
+        this.addDuplicationCatalyst("nuggetKnightmetal", 1);
     }
 
     @Override

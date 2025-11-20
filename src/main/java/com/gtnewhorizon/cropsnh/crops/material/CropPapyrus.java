@@ -14,7 +14,9 @@ public class CropPapyrus extends NHCropCard {
 
     public CropPapyrus() {
         super("papyrus", new Color(0xA3A3A3), new Color(0xEAEAEA));
+
         this.addDrop(new ItemStack(Items.paper, 1, 0), 100_00);
+
         this.addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.JUNGLE);
     }
 

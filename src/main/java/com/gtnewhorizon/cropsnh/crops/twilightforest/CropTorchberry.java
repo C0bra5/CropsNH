@@ -15,8 +15,11 @@ public class CropTorchberry extends NHCropCard {
 
     public CropTorchberry() {
         super("torchberry", new Color(0xAB934D), new Color(0xF5D36E));
+
         this.addDrop(new ItemStack(TFItems.torchberries, 1), 100_00);
+
         this.addAlternateSeed(new ItemStack(TFItems.torchberries, 1));
+
         this.addGrowthRequirement(new MaxLightLevelGrowthRequirement(10));
     }
 

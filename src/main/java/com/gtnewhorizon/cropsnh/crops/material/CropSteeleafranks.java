@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import com.gtnewhorizon.cropsnh.api.ISoilList;
@@ -19,8 +20,12 @@ public class CropSteeleafranks extends NHCropCard {
 
     public CropSteeleafranks() {
         super("steeleafranks", new Color(0x163916), new Color(0x327F32));
+
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Steeleaf, 1L), 25_00);
         this.addDrop(new ItemStack(TFItems.steeleafIngot, 1, 0), 25_00);
+
+        this.addDuplicationCatalyst("dustSteeleaf", 1);
+        this.addDuplicationCatalyst("ingotSteeleaf", 1);
     }
 
     @Override

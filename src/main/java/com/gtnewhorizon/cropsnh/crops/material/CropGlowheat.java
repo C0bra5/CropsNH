@@ -16,8 +16,12 @@ public class CropGlowheat extends NHCropCard {
     // this is meant to be an upgrade to the glowflower
     public CropGlowheat() {
         super("glowheat", new Color(0xABAB00), new Color(0xD2D200));
+
         this.addDrop(new ItemStack(Items.glowstone_dust, 1, 0), 100_00);
+
         this.addBlockUnderRequirement("glowstone");
+
+        this.addDuplicationCatalyst("dustGlowstone", 1);
     }
 
     @Override

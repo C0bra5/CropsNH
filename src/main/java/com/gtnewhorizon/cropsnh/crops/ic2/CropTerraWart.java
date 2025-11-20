@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.crops.ic2;
 
 import java.awt.Color;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
 
@@ -24,6 +25,7 @@ public class CropTerraWart extends NHCropCard {
         this.addLikedBiomes(BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.COLD);
         this.addAlternateSeed(new ItemStack(CropsNHItems.terraWart, 1));
         this.addGrowthRequirement(BlockUnderRequirement.get("snow"));
+        this.addDuplicationCatalyst(new ItemStack(Items.snowball, 1));
     }
 
     @Override

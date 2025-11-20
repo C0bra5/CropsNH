@@ -4,20 +4,23 @@ import java.awt.Color;
 
 import net.minecraftforge.common.BiomeDictionary;
 
+import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 
-import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 
 public class CropFertilia extends NHCropCard {
 
     public CropFertilia() {
         super("fertilia", new Color(0x554516), new Color(0x6E6038));
+
         this.addDrop(Materials.Calcite.getDust(1), 62_50);
         this.addDrop(Materials.Phosphate.getDust(1), 12_50);
         this.addDrop(Materials.Apatite.getDust(1), 12_50);
-        // TODO: MOVE IC2 FERTILIZER TO CROPSNH
-        this.addDrop(ItemList.IC2_Fertilizer.get(1), 12_50);
+        this.addDrop(CropsNHItemList.fertilizer.get(1), 12_50);
+
+        this.addDuplicationCatalyst(CropsNHItemList.fertilizer.get(1));
+
         this.addLikedBiomes(BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.WET, BiomeDictionary.Type.HOT);
     }
 

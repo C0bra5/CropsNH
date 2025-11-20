@@ -13,8 +13,12 @@ public class CropGalvania extends NHCropCard {
 
     public CropGalvania() {
         super("galvania", new Color(0x6FDC5C), new Color(0x9BE78D));
+
         this.addDrop(CropsNHItemList.galvaniaLeaf.get(1), 100_00);
+
         this.addBlockUnderRequirement("zinc");
+
+        this.addDuplicationCatalyst("dustZinc", 1);
     }
 
     @Override
