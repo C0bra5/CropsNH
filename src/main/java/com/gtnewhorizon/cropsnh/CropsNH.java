@@ -20,6 +20,7 @@ import com.gtnewhorizon.cropsnh.network.NetworkWrapperCropsNH;
 import com.gtnewhorizon.cropsnh.proxy.IProxy;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.tileentity.MTECropManager;
+import com.gtnewhorizon.cropsnh.tileentity.MTESeedGenerator;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -105,6 +106,7 @@ public class CropsNH {
         MutationLoader.postInit();
         AspectLoader.postInit();
         MTECropManager.postInit();
+        MTESeedGenerator.postInit();
         GTRecipeLoader.PostInit();
         ModHelper.postInit();
 

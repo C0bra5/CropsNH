@@ -30,6 +30,7 @@ import com.gtnewhorizons.angelica.api.TextureServices;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.enums.Mods;
+import gregtech.api.util.GTUtility;
 
 public abstract class CropCard implements ICropCard {
 
@@ -39,6 +40,7 @@ public abstract class CropCard implements ICropCard {
     protected final ArrayList<IGrowthRequirement> growthRequirements = new ArrayList<>();
     protected final HashSet<BiomeDictionary.Type> likedBiomes = new HashSet<>();
     protected final ArrayList<ItemStack> alternateSeeds = new ArrayList<>();
+    protected final ArrayList<ItemStack> duplicationCatalysts = new ArrayList<>();
     protected final int[] colors;
 
     public CropCard(String modId, String id, int color1, int color2) {
@@ -135,6 +137,11 @@ public abstract class CropCard implements ICropCard {
     }
 
     @Override
+    public Collection<ItemStack> getDuplicationCatalysts() {
+        return this.duplicationCatalysts;
+    }
+
+    @Override
     public float getCrossingThreshold() {
         return 1.0f;
     }
@@ -216,7 +223,7 @@ public abstract class CropCard implements ICropCard {
     }
 
     public CropCard addAlternateSeed(ItemStack alternateSeed) {
-        this.alternateSeeds.add(alternateSeed);
+        this.alternateSeeds.add(alternateSeed.copy());
         return this;
     }
 
@@ -234,6 +241,24 @@ public abstract class CropCard implements ICropCard {
 
     public CropCard addGrowthRequirement(IWorldGrowthRequirement growthRequirement) {
         this.growthRequirements.add(growthRequirement);
+        return this;
+    }
+
+    public CropCard addDuplicationCatalyst(ItemStack stack) {
+        if (GTUtility.isStackInvalid(stack)) {
+            LogHelper.warn("Attempted to add a null duplication catalyst to " + this.getId());
+        }
+        this.duplicationCatalysts.add(stack.copy());
+        return this;
+    }
+
+    public CropCard addDuplicationCatalyst(String oreDict, int count) {
+        ArrayList<ItemStack> oreDictEntries = OreDictionary.getOres(oreDict);
+        for (ItemStack stack : oreDictEntries) {
+            ItemStack copy = stack.copy();
+            copy.stackSize = count;
+            this.addDuplicationCatalyst(copy);
+        }
         return this;
     }
 

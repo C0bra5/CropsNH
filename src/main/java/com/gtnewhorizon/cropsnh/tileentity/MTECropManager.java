@@ -109,14 +109,14 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
     private boolean mInvalidCache = false;
     private final ItemStackMap<Integer> mDropOverflow = new ItemStackMap<>(true);
 
-    public MTECropManager(final int aID, final int aTier, final String aDescription) {
+    public MTECropManager(final int aID, final int aTier, final String aRegionalName) {
         super(
             aID,
-            "basicmachine.cropManager.0" + aTier,
-            "Crop Manager (" + GTValues.VN[aTier] + ")",
+            String.format("basicmachine.cropmanager.tier.%02d", aTier),
+            aRegionalName,
             aTier,
             TOTAL_SLOT_COUNT,
-            aDescription);
+            "Harvests the crop sticks in around it");
         this.mWater = 0;
         this.mWaterCap = this.mTier * 32000;
         this.mWeedEX = 0;

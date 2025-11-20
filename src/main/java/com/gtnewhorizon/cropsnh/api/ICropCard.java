@@ -124,6 +124,11 @@ public interface ICropCard {
     Collection<ItemStack> getAlternateSeeds();
 
     /**
+     * @return An item that must be used in order to duplicate the seed in the seed duplicator.
+     */
+    Collection<ItemStack> getDuplicationCatalysts();
+
+    /**
      * @return A multiplier for the number of drops at base.
      */
     float getDropChance();
