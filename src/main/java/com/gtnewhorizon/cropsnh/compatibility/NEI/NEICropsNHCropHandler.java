@@ -92,12 +92,12 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
             }
 
             // get list of soils
-            this.others.add(new PositionedStack(crop.getSoilsForNEI(true), X_seed, Y_soil, true));
+            this.ingredients.add(new PositionedStack(crop.getSoilsForNEI(true), X_seed, Y_soil, true));
 
             // get list of all block under reqs
             List<ItemStack> blockUnderList = crop.getBlocksUnderForNEI(true);
             if (!blockUnderList.isEmpty()) {
-                this.others.add(new PositionedStack(blockUnderList, X_seed, Y_base, true));
+                this.ingredients.add(new PositionedStack(blockUnderList, X_seed, Y_base, true));
             }
 
             // register lines
