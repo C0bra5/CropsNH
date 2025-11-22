@@ -27,10 +27,9 @@ public class MetaMap<K, V> {
         if (!this.map.containsKey(key)) {
             // else ensure that the meta map exists.
             this.map.put(key, new HashMap<>());
-        } else {
-            this.map.get(key)
-                .put(meta, value);
         }
+        this.map.get(key)
+            .put(meta, value);
     }
 
     public void putWildcard(K key, V value, boolean clearNonWildcards) {
@@ -142,7 +141,7 @@ public class MetaMap<K, V> {
 
     /**
      * Gets a stream of all the values in the meta map.
-     * 
+     *
      * @return A stream of all the values in the map.
      */
     public Stream<Entry<K, V>> getStream() {
