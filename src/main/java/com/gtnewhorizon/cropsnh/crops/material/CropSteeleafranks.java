@@ -2,7 +2,6 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import com.gtnewhorizon.cropsnh.api.ISoilList;

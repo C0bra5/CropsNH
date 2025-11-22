@@ -2,6 +2,9 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
@@ -12,8 +15,6 @@ import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GTOreDictUnificator;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 
 public class CropTrollplant extends NHCropCard {
 

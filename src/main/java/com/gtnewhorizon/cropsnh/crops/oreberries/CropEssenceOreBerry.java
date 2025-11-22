@@ -22,8 +22,6 @@ public class CropEssenceOreBerry extends CropOreBerry {
         this.addAlternateSeed(new ItemStack(TinkerWorld.oreBerries, 1, 5));
 
         this.addBlockUnderRequirement("skull");
-
-        this.addDuplicationCatalyst("itemSkull", 1);
     }
 
     @Override

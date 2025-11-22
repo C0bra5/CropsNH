@@ -275,7 +275,7 @@ public class CropLoader {
                     "C0bra5",
                     1,
                     new ItemStack(TinkerWorld.slimeSapling, 1, 0),
-                    new ItemStack(TinkerWorld.slimeGel, 1, 0)));
+                    new ItemStack(TinkerWorld.slimeGel, 1, 0)).addDuplicationCatalyst("slimeball", 1));
             CropRegistry.instance.register(CropsNHCrops.AluminiumOreBerry = new CropAluminiumOreBerry());
             CropRegistry.instance.register(CropsNHCrops.CopperOreBerry = new CropCopperOreBerry());
             CropRegistry.instance.register(CropsNHCrops.EssenceOreBerry = new CropEssenceOreBerry());

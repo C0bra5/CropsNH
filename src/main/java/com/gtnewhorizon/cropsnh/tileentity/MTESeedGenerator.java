@@ -30,8 +30,9 @@ import com.gtnewhorizon.cropsnh.api.ISeedStats;
 import com.gtnewhorizon.cropsnh.farming.SeedStats;
 import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
 import com.gtnewhorizon.cropsnh.init.CropsNHFluids;
-import com.gtnewhorizon.cropsnh.init.CropsNH_UITextures;
+import com.gtnewhorizon.cropsnh.init.CropsNHUITextures;
 import com.gtnewhorizon.cropsnh.items.ItemGenericSeed;
+import com.gtnewhorizon.cropsnh.loaders.CropsNHGTRecipeMaps;
 import com.gtnewhorizons.modularui.api.drawable.FallbackableUITexture;
 import com.gtnewhorizons.modularui.api.drawable.IDrawable;
 import com.gtnewhorizons.modularui.api.math.Pos2d;
@@ -45,6 +46,7 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEBasicMachine;
 import gregtech.api.recipe.BasicUIProperties;
+import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTUtility;
 
@@ -138,6 +140,11 @@ public class MTESeedGenerator extends MTEBasicMachine {
             this.crop = cc;
             this.stats = stats;
         }
+    }
+
+    @Override
+    public RecipeMap<?> getRecipeMap() {
+        return CropsNHGTRecipeMaps.fakeSeedGeneratorRecipes;
     }
 
     @Override
@@ -272,7 +279,7 @@ public class MTESeedGenerator extends MTEBasicMachine {
     protected SlotWidget createItemInputSlot(int index, IDrawable[] backgrounds, Pos2d pos) {
         if (index == 0) {
             return (SlotWidget) super.createItemInputSlot(index, backgrounds, pos)
-                .setBackground(getGUITextureSet().getItemSlot(), CropsNH_UITextures.OVERLAY_SLOT_SEED);
+                .setBackground(getGUITextureSet().getItemSlot(), CropsNHUITextures.OVERLAY_SLOT_SEED);
         } else {
             return (SlotWidget) super.createItemInputSlot(index, backgrounds, pos)
                 .setBackground(getGUITextureSet().getItemSlot());

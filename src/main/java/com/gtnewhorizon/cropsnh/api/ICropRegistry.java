@@ -25,8 +25,16 @@ public interface ICropRegistry {
     public @Nullable ICropCard get(ItemStack stack);
 
     /**
+     * Gets the crop for a given item.
+     *
+     * @param stack The item to be planted.
+     * @return The crop if found else null.
+     */
+    public @Nullable ICropCard get(ItemStack stack, boolean allowAlternatives);
+
+    /**
      * Checks if the item is an alternate seed.
-     * 
+     *
      * @param stack The item to check.
      * @return True if the stack is an alternate seed.
      */

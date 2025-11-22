@@ -2,7 +2,6 @@ package com.gtnewhorizon.cropsnh.crops.thaumcraft;
 
 import java.awt.Color;
 
-import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
 

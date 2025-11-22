@@ -129,6 +129,11 @@ public interface ICropCard {
     Collection<ItemStack> getDuplicationCatalysts();
 
     /**
+     * @return Gets The duplication catalyst displayed in NEI, values should either be a string or an itemStack.
+     */
+    Collection<Object> getDuplicationCatalystsForNEI();
+
+    /**
      * @return A multiplier for the number of drops at base.
      */
     float getDropChance();

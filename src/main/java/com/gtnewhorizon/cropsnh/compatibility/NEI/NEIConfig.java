@@ -12,12 +12,18 @@ import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.MutationPoolRegistryDu
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.SoilRegistryDumper;
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
+import com.gtnewhorizon.cropsnh.loaders.CropsNHGTRecipeMaps;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
+import codechicken.nei.recipe.GuiCraftingRecipe;
 import codechicken.nei.recipe.GuiRecipeTab;
+import codechicken.nei.recipe.GuiUsageRecipe;
+import codechicken.nei.recipe.TemplateRecipeHandler;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import gregtech.GTMod;
 import gregtech.api.enums.Mods;
 
 public class NEIConfig implements IConfigureNEI {
@@ -54,7 +60,10 @@ public class NEIConfig implements IConfigureNEI {
         registerNEIHandler(new NEICropsNHBreedingHandler());
         // mutation pool handler
         registerNEIHandler(new NEICropsNHMutationPoolHandler());
-
+        // seed generator handler
+        addHandler(
+            new CropsNHNEISeedGeneratorHandler(
+                CropsNHGTRecipeMaps.fakeSeedGeneratorRecipes.getDefaultRecipeCategory()));
     }
 
     private static void registerNEIHandler(CropsNHNEIHandler handler) {
@@ -72,6 +81,16 @@ public class NEIConfig implements IConfigureNEI {
                 CropsNH.proxy.hideItemInNEI(new ItemStack(CropsNHItems.debugItem, 1, i));
             }
         }
+    }
+
+    private static void addHandler(TemplateRecipeHandler handler) {
+        FMLInterModComms.sendRuntimeMessage(
+            GTMod.GT,
+            "NEIPlugins",
+            "register-crafting-handler",
+            "gregtech@" + handler.getRecipeName() + "@" + handler.getOverlayIdentifier());
+        GuiCraftingRecipe.craftinghandlers.add(handler);
+        GuiUsageRecipe.usagehandlers.add(handler);
     }
 
     @Override

@@ -180,6 +180,8 @@ cropsnh_nei.cropsNHCrops.dropMult=Drop Multiplier: %1$0.2f
 cropsnh_nei.cropsNHMutationPool.title=Crop Mutation Pools
 cropsnh_nei.cropsNHMutationPool.poolName=Pool: %1$s
 cropsnh_nei.cropsNHBreeding.title=Crop Breeding
+cropsnh_nei.cropsNHSeedGenerator.tooltip.fluidCost=cost = 100L * (growth + gain + resistance)
+cropsnh.recipes.seedGenerator=Seed Generator
 nei.options.tools.dump.cropsnh=Crops NH
 nei.options.tools.dump.cropsnh.alternateSeed=Alternate Seeds
 nei.options.tools.dump.cropsnh.cropRegistry=Crops

@@ -41,6 +41,7 @@ public abstract class CropCard implements ICropCard {
     protected final HashSet<BiomeDictionary.Type> likedBiomes = new HashSet<>();
     protected final ArrayList<ItemStack> alternateSeeds = new ArrayList<>();
     protected final ArrayList<ItemStack> duplicationCatalysts = new ArrayList<>();
+    protected final ArrayList<Object> duplicationCatalystsForNEI = new ArrayList<>();
     protected final int[] colors;
 
     public CropCard(String modId, String id, int color1, int color2) {
@@ -139,6 +140,11 @@ public abstract class CropCard implements ICropCard {
     @Override
     public Collection<ItemStack> getDuplicationCatalysts() {
         return this.duplicationCatalysts;
+    }
+
+    @Override
+    public Collection<Object> getDuplicationCatalystsForNEI() {
+        return this.duplicationCatalystsForNEI;
     }
 
     @Override
@@ -244,20 +250,26 @@ public abstract class CropCard implements ICropCard {
         return this;
     }
 
-    public CropCard addDuplicationCatalyst(ItemStack stack) {
+    private void addDuplicationCatalystInternal(ItemStack stack) {
         if (GTUtility.isStackInvalid(stack)) {
             LogHelper.warn("Attempted to add a null duplication catalyst to " + this.getId());
         }
         this.duplicationCatalysts.add(stack.copy());
+    }
+
+    public CropCard addDuplicationCatalyst(ItemStack stack) {
+        this.duplicationCatalystsForNEI.add(stack);
+        addDuplicationCatalystInternal(stack);
         return this;
     }
 
     public CropCard addDuplicationCatalyst(String oreDict, int count) {
+        this.duplicationCatalystsForNEI.add(new Object[] { oreDict, count });
         ArrayList<ItemStack> oreDictEntries = OreDictionary.getOres(oreDict);
         for (ItemStack stack : oreDictEntries) {
             ItemStack copy = stack.copy();
             copy.stackSize = count;
-            this.addDuplicationCatalyst(copy);
+            this.addDuplicationCatalystInternal(copy);
         }
         return this;
     }

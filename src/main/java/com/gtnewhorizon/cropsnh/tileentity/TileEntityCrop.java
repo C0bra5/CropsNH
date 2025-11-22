@@ -766,12 +766,16 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
 
     @Override
     public boolean canCross() {
-        return this.hasCrop() && !this.hasWeed() && this.crop.getCrossingThreshold() >= 0.0f && this.getGrowthPercent() >= this.crop.getCrossingThreshold();
+        return this.hasCrop() && !this.hasWeed()
+            && this.crop.getCrossingThreshold() >= 0.0f
+            && this.getGrowthPercent() >= this.crop.getCrossingThreshold();
     }
 
     @Override
     public boolean canBreed() {
-        return this.hasCrop() && !this.hasWeed() && this.crop.getBreedingThreshold() >= 0.0f && this.getGrowthPercent() >= this.crop.getBreedingThreshold();
+        return this.hasCrop() && !this.hasWeed()
+            && this.crop.getBreedingThreshold() >= 0.0f
+            && this.getGrowthPercent() >= this.crop.getBreedingThreshold();
     }
 
     public static byte variateStat(Collection<ISeedStats> parentStats, ToIntFunction<ISeedStats> collector) {

@@ -58,6 +58,11 @@ public class CropRegistry implements ICropRegistry {
 
     @Override
     public @Nullable ICropCard get(ItemStack stack) {
+        return get(stack, true);
+    }
+
+    @Override
+    public @Nullable ICropCard get(ItemStack stack, boolean allowAlternatives) {
         if (stack == null) return null;
         // check if it's a generic seed first.
         if (stack.getItem() instanceof ItemGenericSeed && stack.hasTagCompound()
@@ -69,7 +74,7 @@ public class CropRegistry implements ICropRegistry {
                 null);
         }
         // else just run a check on the seed registry
-        return fromAlternateSeed(stack);
+        return allowAlternatives ? fromAlternateSeed(stack) : null;
     }
 
     @Override

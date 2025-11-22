@@ -13,6 +13,7 @@ import com.gtnewhorizon.cropsnh.loaders.gtrecipes.BaseGTRecipeLoader;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropRecipes;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropsPlusPlusRecipes;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.FertilizerRecipes;
+import com.gtnewhorizon.cropsnh.loaders.gtrecipes.SeedGeneratorFakeRecipeLoader;
 
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
@@ -30,6 +31,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         CropRecipes.postInit();
         FertilizerRecipes.postInit();
         CropsPlusPlusRecipes.postInit();
+        SeedGeneratorFakeRecipeLoader.postInit();
 
         addPlantLensRecipe();
         AddSpadeRecipes();
