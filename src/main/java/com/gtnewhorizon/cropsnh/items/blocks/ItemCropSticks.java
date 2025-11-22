@@ -4,21 +4,14 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.gtnewhorizon.cropsnh.api.ICropRightClickHandler;
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
-import com.gtnewhorizon.cropsnh.renderers.items.RenderItemBase;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemCropSticks extends ItemBlockCropsNH implements ICropRightClickHandler {
-
-    private IIcon icon;
 
     /**
      * The default constructor.
@@ -28,12 +21,6 @@ public class ItemCropSticks extends ItemBlockCropsNH implements ICropRightClickH
      */
     public ItemCropSticks(Block block) {
         super(block);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public RenderItemBase getItemRenderer() {
-        return null;
     }
 
     // I'm overriding this just to be sure

@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.gtnewhorizon.cropsnh.items.ItemCropsNH;
-import com.gtnewhorizon.cropsnh.renderers.items.RenderItemBase;
 import com.gtnewhorizon.cropsnh.utility.DebugHelper;
 
 import cpw.mods.fml.relauncher.Side;
@@ -50,9 +49,4 @@ public class ItemDebugger extends ItemCropsNH {
                         .indexOf('.') + 1));
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public RenderItemBase getItemRenderer() {
-        return null;
-    }
 }

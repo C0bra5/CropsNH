@@ -13,9 +13,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public abstract class PlantRenderer {
 
-    public static final int RENDER_HASHTAG = 0;
-    public static final int RENDER_X = 1;
-
     public static void renderPlantLayer(IBlockAccess world, int x, int y, int z, IPlantRenderShape renderShape,
         IIcon icon, boolean isSick) {
         renderPlantLayer2(world, x, y, z, renderShape, icon, isSick);

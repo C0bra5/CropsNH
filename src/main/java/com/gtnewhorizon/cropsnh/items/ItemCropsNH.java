@@ -4,7 +4,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 
 import com.gtnewhorizon.cropsnh.creativetab.CropsNHTab;
-import com.gtnewhorizon.cropsnh.renderers.items.RenderItemBase;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 import com.gtnewhorizon.cropsnh.utility.RegisterHelper;
 
@@ -42,7 +41,4 @@ public abstract class ItemCropsNH extends Item {
                     this.getUnlocalizedName()
                         .indexOf('.') + 1));
     }
-
-    @SideOnly(Side.CLIENT)
-    public abstract RenderItemBase getItemRenderer();
 }

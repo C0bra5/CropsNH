@@ -9,15 +9,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 
 import com.gtnewhorizon.cropsnh.blocks.BlockCropsNH;
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
-import com.gtnewhorizon.cropsnh.init.CropsNHItems;
-import com.gtnewhorizon.cropsnh.items.ItemCropsNH;
 import com.gtnewhorizon.cropsnh.renderers.blocks.RenderBlockBase;
-import com.gtnewhorizon.cropsnh.renderers.player.renderhooks.RenderPlayerHooks;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 
 import codechicken.nei.api.API;
@@ -69,31 +65,12 @@ public class ClientProxy extends CommonProxy {
             }
         }
 
-        // ITEMS
-        // -----
-        for (Field field : CropsNHItems.class.getDeclaredFields()) {
-            if (field.getType()
-                .isAssignableFrom(ItemCropsNH.class)) {
-                try {
-                    Object obj = field.get(null);
-                    if (obj != null && obj instanceof ItemCropsNH) {
-                        ((ItemCropsNH) obj).getItemRenderer();
-                    }
-                } catch (IllegalAccessException e) {
-                    LogHelper.printStackTrace(e);
-                }
-            }
-        }
-
         LogHelper.debug("Renderers registered");
     }
 
     @Override
     public void registerEventHandlers() {
         super.registerEventHandlers();
-
-        RenderPlayerHooks renderPlayerHooks = new RenderPlayerHooks();
-        MinecraftForge.EVENT_BUS.register(renderPlayerHooks);
     }
 
     @Override

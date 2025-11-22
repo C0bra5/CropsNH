@@ -1,8 +1,6 @@
 package com.gtnewhorizon.cropsnh.utility;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 import com.gtnewhorizon.cropsnh.api.BlockWithMeta;
 
@@ -11,20 +9,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 // helper class to read, write and parse data to and from the config files
 public abstract class IOHelper {
 
-    public static String getModId(ItemStack stack) {
-        if (stack == null || stack.getItem() == null) {
-            return null;
-        }
-        String name = Item.itemRegistry.getNameForObject(stack.getItem());
-        int split = name.indexOf(':');
-        if (split >= 0) {
-            name = name.substring(0, split);
-        }
-        return name;
-    }
-
     /**
-     * Retrieves a a block from a string representation.
+     * Retrieves a block from a string representation.
      * The string must be formatted as "modid:name:meta".
      * The meta is not required in all cases.
      *

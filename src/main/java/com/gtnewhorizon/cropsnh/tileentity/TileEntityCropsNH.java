@@ -9,7 +9,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.gtnewhorizon.cropsnh.reference.Names;
-import com.gtnewhorizon.cropsnh.utility.multiblock.IMultiBlockComponent;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -36,12 +35,6 @@ public abstract class TileEntityCropsNH extends TileEntity {
         if (this.orientation != null) {
             tag.setByte(Names.NBT.direction, (byte) this.orientation.ordinal());
         }
-        if (this.isMultiBlock()) {
-            NBTTagCompound multiBlockTag = new NBTTagCompound();
-            ((IMultiBlockComponent<?, ?>) this).getMultiBlockData()
-                .writeToNBT(multiBlockTag);
-            tag.setTag(Names.NBT.multiBlock, multiBlockTag);
-        }
     }
 
     /**
@@ -54,13 +47,6 @@ public abstract class TileEntityCropsNH extends TileEntity {
         super.readFromNBT(tag);
         if (tag.hasKey(Names.NBT.direction)) {
             this.setOrientation(tag.getByte(Names.NBT.direction));
-        }
-        if (this.isMultiBlock()) {
-            if (tag.hasKey(Names.NBT.multiBlock)) {
-                NBTTagCompound multiBlockTag = tag.getCompoundTag(Names.NBT.multiBlock);
-                ((IMultiBlockComponent<?, ?>) this).getMultiBlockData()
-                    .readFromNBT(multiBlockTag);
-            }
         }
     }
 
@@ -136,7 +122,4 @@ public abstract class TileEntityCropsNH extends TileEntity {
 
     }
 
-    private boolean isMultiBlock() {
-        return this instanceof IMultiBlockComponent;
-    }
 }

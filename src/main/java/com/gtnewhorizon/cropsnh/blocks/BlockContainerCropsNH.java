@@ -14,7 +14,6 @@ import com.gtnewhorizon.cropsnh.reference.Names;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.tileentity.TileEntityCropsNH;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
-import com.gtnewhorizon.cropsnh.utility.multiblock.IMultiBlockComponent;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -86,24 +85,12 @@ public abstract class BlockContainerCropsNH extends BlockCropsNH implements ITil
                         break;
                 }
             }
-            if (this.isMultiBlock() && !world.isRemote) {
-                IMultiBlockComponent component = (IMultiBlockComponent) world.getTileEntity(x, y, z);
-                component.getMultiBlockManager()
-                    .onBlockPlaced(world, x, y, z, component);
-            }
         }
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public void breakBlock(World world, int x, int y, int z, Block b, int meta) {
-        if (this.isMultiBlock() && !world.isRemote) {
-            IMultiBlockComponent component = (IMultiBlockComponent) world.getTileEntity(x, y, z);
-            if (component != null) {
-                component.getMultiBlockManager()
-                    .onBlockBroken(world, x, y, z, component);
-            }
-        }
         super.breakBlock(world, x, y, z, b, meta);
         world.removeTileEntity(x, y, z);
     }

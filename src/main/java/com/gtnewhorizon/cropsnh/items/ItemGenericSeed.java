@@ -22,7 +22,6 @@ import com.gtnewhorizon.cropsnh.farming.SeedStats;
 import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
 import com.gtnewhorizon.cropsnh.reference.Names;
-import com.gtnewhorizon.cropsnh.renderers.items.RenderItemBase;
 
 public class ItemGenericSeed extends ItemCropsNH {
 
@@ -150,11 +149,6 @@ public class ItemGenericSeed extends ItemCropsNH {
     // endregion tooltip
 
     // region rendering
-
-    @Override
-    public RenderItemBase getItemRenderer() {
-        return null;
-    }
 
     @Override
     public boolean requiresMultipleRenderPasses() {

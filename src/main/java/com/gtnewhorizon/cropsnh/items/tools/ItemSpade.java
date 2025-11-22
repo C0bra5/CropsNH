@@ -14,7 +14,6 @@ import com.gtnewhorizon.cropsnh.api.ICropRightClickHandler;
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.items.ItemCropsNH;
 import com.gtnewhorizon.cropsnh.reference.Names;
-import com.gtnewhorizon.cropsnh.renderers.items.RenderItemBase;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 
 import cpw.mods.fml.relauncher.Side;
@@ -53,12 +52,6 @@ public class ItemSpade extends ItemCropsNH implements ICropLeftClickHandler, ICr
                 .substring(
                     this.getUnlocalizedName()
                         .indexOf('.') + 1));
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public RenderItemBase getItemRenderer() {
-        return null;
     }
 
     @Override

@@ -15,7 +15,6 @@ import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.api.ISeedStats;
 import com.gtnewhorizon.cropsnh.items.ItemCropsNH;
 import com.gtnewhorizon.cropsnh.reference.Names;
-import com.gtnewhorizon.cropsnh.renderers.items.RenderItemBase;
 import com.gtnewhorizon.cropsnh.tileentity.TileEntityCrop;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 
@@ -55,12 +54,6 @@ public class ItemMagnifyingGlass extends ItemCropsNH implements ICropRightClickH
                 .substring(
                     this.getUnlocalizedName()
                         .indexOf('.') + 1));
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public RenderItemBase getItemRenderer() {
-        return null;
     }
 
     @Override
