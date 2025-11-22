@@ -1,6 +1,6 @@
 package com.gtnewhorizon.cropsnh;
 
-import com.gtnewhorizon.cropsnh.compatibility.ModHelper;
+import com.gtnewhorizon.cropsnh.compatibility.waila.WailaRegistry;
 import com.gtnewhorizon.cropsnh.farming.registries.MutationRegistry;
 import com.gtnewhorizon.cropsnh.farming.requirements.BlockUnderRequirement;
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
@@ -16,7 +16,6 @@ import com.gtnewhorizon.cropsnh.loaders.MTELoader;
 import com.gtnewhorizon.cropsnh.loaders.MutationLoader;
 import com.gtnewhorizon.cropsnh.loaders.OreDictLoader;
 import com.gtnewhorizon.cropsnh.loaders.SoilLoader;
-import com.gtnewhorizon.cropsnh.network.NetworkWrapperCropsNH;
 import com.gtnewhorizon.cropsnh.proxy.IProxy;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.tileentity.MTECropManager;
@@ -68,16 +67,13 @@ public class CropsNH {
     @SuppressWarnings("unused")
     public static void preInit(FMLPreInitializationEvent event) {
         LogHelper.debug("Starting Pre-Initialization");
-        NetworkWrapperCropsNH.init();
         proxy.initConfiguration(event);
         FMLCommonHandler.instance()
             .bus()
             .register(new ConfigurationHandler());
-        ModHelper.findHelpers();
         CropsNHBlocks.preInit();
         CropsNHItems.preInit();
         CropsNHFluids.preInit();
-        ModHelper.preInit();
         LogHelper.debug("Pre-Initialization Complete");
     }
 
@@ -87,7 +83,7 @@ public class CropsNH {
         LogHelper.debug("Starting Initialization");
         proxy.registerEventHandlers();
         proxy.registerRenderers();
-        ModHelper.initHelpers();
+        WailaRegistry.onInit();
         MTELoader.init();
         LogHelper.debug("Initialization Complete");
     }
@@ -108,7 +104,6 @@ public class CropsNH {
         MTECropManager.postInit();
         MTESeedGenerator.postInit();
         GTRecipeLoader.PostInit();
-        ModHelper.postInit();
 
         LogHelper.debug("Post-Initialization Complete");
     }

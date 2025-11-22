@@ -20,13 +20,10 @@ public class ConfigurationHandler {
         public static final String CATEGORY_WEEDS = "weeds";
         public static final String CATEGORY_CROPSNH = "cropsnh";
         public static final String CATEGORY_CROPS = "crops";
-        public static final String CATEGORY_COMPATIBILITY = "compatibility";
-        public static final String CATEGORY_CLIENT = "clientside config";
         public static final String CATEGORY_RENDERING = "rendering";
     }
 
     public static Configuration config;
-    private static String directory;
 
     // COMMON
     // ------
@@ -61,7 +58,7 @@ public class ConfigurationHandler {
 
     private static void checkAndCreateConfig(FMLPreInitializationEvent event) {
         if (config == null) {
-            directory = event.getModConfigurationDirectory()
+            String directory = event.getModConfigurationDirectory()
                 .toString() + '/'
                 + Reference.MOD_ID.toLowerCase()
                 + '/';
@@ -200,18 +197,6 @@ public class ConfigurationHandler {
         if (config.hasChanged()) {
             config.save();
         }
-    }
-
-    public static boolean enableModCompatibility(String modId) {
-        boolean flag = config.getBoolean(
-            modId,
-            Categories.CATEGORY_COMPATIBILITY,
-            true,
-            "set to false to disable compatibility for " + modId);
-        if (config.hasChanged()) {
-            config.save();
-        }
-        return flag;
     }
 
     @SubscribeEvent

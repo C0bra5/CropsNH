@@ -3,7 +3,6 @@ package com.gtnewhorizon.cropsnh.compatibility.NEI;
 import net.minecraft.item.ItemStack;
 
 import com.gtnewhorizon.cropsnh.CropsNH;
-import com.gtnewhorizon.cropsnh.compatibility.ModHelper;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.AlternateSeedDumper;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.CropRegistryDumper;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.DeterministicMutationRegistryDumper;
@@ -30,7 +29,7 @@ public class NEIConfig implements IConfigureNEI {
 
     @Override
     public void loadConfig() {
-        if (!ModHelper.allowIntegration(Mods.NotEnoughItems.ID)) return;
+        if (!Mods.NotEnoughItems.isModLoaded()) return;
         // register dumpers
         registerDumpers();
         // register NEI recipe handler
@@ -40,7 +39,7 @@ public class NEIConfig implements IConfigureNEI {
     }
 
     private static void registerDumpers() {
-        if (!ModHelper.allowIntegration(Mods.NotEnoughItems.ID)) return;
+        if (!Mods.NotEnoughItems.isModLoaded()) return;
         LogHelper.debug("Registering NEI dumpers");
         API.addOption(new AlternateSeedDumper());
         API.addOption(new CropRegistryDumper());
@@ -51,7 +50,7 @@ public class NEIConfig implements IConfigureNEI {
     }
 
     private static void registerNEITabs() {
-        if (!ModHelper.allowIntegration(Mods.NotEnoughItems.ID)) return;
+        if (!Mods.NotEnoughItems.isModLoaded()) return;
         LogHelper.debug("Registering NEI recipe tabs");
 
         // crop product handler
