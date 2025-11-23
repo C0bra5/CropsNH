@@ -46,6 +46,17 @@ public class CropMutation implements ICropMutation {
         if (parent2 == null) throw new IllegalArgumentException("parent 2 cannot be null");
         if (parent3 == null && parent4 != null)
             throw new IllegalArgumentException("parent 3 is null but parent 4 isn't something has gone wrong.");
+        HashSet<ICropCard> duplicateParentChecker = new HashSet<>();
+        duplicateParentChecker.add(parent1);
+        if (!duplicateParentChecker.add(parent2)) {
+            throw new IllegalArgumentException("duplicate mutation parent detected for mutation of " + output.getUnlocalizedName() + " @ parent2: " + parent2.getUnlocalizedName());
+        }
+        if (parent3 != null && !duplicateParentChecker.add(parent3)) {
+            throw new IllegalArgumentException("duplicate mutation parent detected for mutation of " + output.getUnlocalizedName() + " @ parent3: " + parent2.getUnlocalizedName());
+        }
+        if (parent4 != null && !duplicateParentChecker.add(parent4)) {
+            throw new IllegalArgumentException("duplicate mutation parent detected for mutation of " + output.getUnlocalizedName() + " @ parent4: " + parent2.getUnlocalizedName());
+        }
         this.output = output;
         this.parent1 = parent1;
         this.parent2 = parent2;

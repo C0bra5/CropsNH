@@ -496,7 +496,7 @@ public class MutationLoader {
         new CropMutation(Shining, Stagnium, Cyprium, MarbleLily)
             .addToMutationPools(aSilver, aLeaves, aMetal)
             .register();
-        new CropMutation(Stagnium, Cyprium, StoneLily, StoneLily)
+        new CropMutation(Stagnium, Cyprium, StoneLily, MarbleLily)
             .addToMutationPools(aShiny, aLeaves, aMetal)
             .register();
         new CropMutation(StickReed, BonsaiJungle, SugarCane)
