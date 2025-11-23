@@ -61,7 +61,7 @@ public class SeedStats implements ISeedStats {
     public static SeedStats readFromNBT(NBTTagCompound tag) {
         if (tag == null) return new SeedStats();
         byte gr = tag.hasKey(Names.NBT.growth, Data.NBTType._byte) ? tag.getByte(Names.NBT.growth) : 1;
-        byte ga = tag.hasKey(Names.NBT.gain, Data.NBTType._byte) ? tag.getByte(Names.NBT.growth) : 1;
+        byte ga = tag.hasKey(Names.NBT.gain, Data.NBTType._byte) ? tag.getByte(Names.NBT.gain) : 1;
         byte re = tag.hasKey(Names.NBT.resistance, Data.NBTType._byte) ? tag.getByte(Names.NBT.resistance) : 1;
         boolean analyzed = tag.hasKey(Names.NBT.analyzed, Data.NBTType._boolean) && tag.getBoolean(Names.NBT.analyzed);
         return new SeedStats(gr, ga, re, analyzed);
