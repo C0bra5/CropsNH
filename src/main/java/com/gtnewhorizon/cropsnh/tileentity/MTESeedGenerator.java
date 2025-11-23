@@ -21,6 +21,7 @@ import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.gtnewhorizon.cropsnh.farming.SeedData;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -57,7 +58,7 @@ public class MTESeedGenerator extends MTEBasicMachine {
     private static final int OUTPUT_SLOT_COUNT = 1;
     public static final ConcurrentHashMap<Fluid, Integer> ALLOWED_LIQUID_FERTILIZER = new ConcurrentHashMap<>();
 
-    public static void postInit() {
+    public static void init() {
         // allowed liquid fertilizer
         ALLOWED_LIQUID_FERTILIZER.putIfAbsent(CropsNHFluids.enrichedFertilizer, 100);
     }
@@ -131,17 +132,6 @@ public class MTESeedGenerator extends MTEBasicMachine {
         return new MTESeedGenerator(this.mName, this.mTier, this.mDescriptionArray, this.mTextures);
     }
 
-    static class SeedData {
-
-        public ISeedStats stats;
-        public ICropCard crop;
-
-        public SeedData(ICropCard cc, ISeedStats stats) {
-            this.crop = cc;
-            this.stats = stats;
-        }
-    }
-
     @Override
     public RecipeMap<?> getRecipeMap() {
         return CropsNHGTRecipeMaps.fakeSeedGeneratorRecipes;
@@ -153,11 +143,13 @@ public class MTESeedGenerator extends MTEBasicMachine {
         if (this.mFluid == null || this.mFluid.getFluid() == null) {
             return DID_NOT_FIND_RECIPE;
         }
+
         // allow zero drain for future proofing.
         int drainedPerStat = ALLOWED_LIQUID_FERTILIZER.getOrDefault(this.mFluid.getFluid(), -1);
         if (drainedPerStat < 0) {
             return DID_NOT_FIND_RECIPE;
         }
+
         // try to identify a usable seed
         ItemStack tSeedStack = null;
         SeedData tSeedData = null;

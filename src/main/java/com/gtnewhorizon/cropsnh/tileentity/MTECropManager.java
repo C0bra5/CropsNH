@@ -78,7 +78,7 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
     public static final ConcurrentHashMap<Fluid, Integer> ALLOWED_WEED_EX = new ConcurrentHashMap<>();
     public static final ConcurrentHashMap<Fluid, Integer> ALLOWED_LIQUID_FERTILIZER = new ConcurrentHashMap<>();
 
-    public static void postInit() {
+    public static void init() {
         // allowed waters
         ALLOWED_WATER.putIfAbsent(FluidRegistry.WATER, 1);
         ALLOWED_WATER.putIfAbsent(

@@ -16,16 +16,12 @@ public abstract class CropsNHUtils {
         // yank out null items for good measure
         stacks.removeIf(Objects::isNull);
         final HashSet<String> deduplicator = new HashSet<>();
-        stacks.removeIf(x -> {
-            // set the stack size to 1 since this is for soils and block under and they shouldn't show a count.
-            x.stackSize = 1;
-            return !deduplicator.add(x.toString());
-        });
+        stacks.removeIf(x -> !deduplicator.add(x.toString()));
     }
 
     /**
      * Does its best to turn an item into a block.
-     * 
+     *
      * @param block the block to convert
      * @return The item or null if none is found.
      */
@@ -44,7 +40,7 @@ public abstract class CropsNHUtils {
 
     /**
      * Does its best to turn a block into an item.
-     * 
+     *
      * @param stack The stack containing the item to convert.
      * @return The block or null if none is found.
      */
@@ -55,7 +51,7 @@ public abstract class CropsNHUtils {
 
     /**
      * Does its best to turn a block into an item.
-     * 
+     *
      * @param item the block to convert
      * @return The block or null if none is found.
      */

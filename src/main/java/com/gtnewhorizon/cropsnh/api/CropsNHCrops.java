@@ -31,14 +31,21 @@ public class CropsNHCrops {
     public static ICropCard BonsaiAcacia;
     public static ICropCard BonsaiDarkOak;
     public static ICropCard BonsaiRubber;
+    /** Gold Crop */
     public static ICropCard Aurelia;
     public static ICropCard Coffee;
+    /** Low Quality Copper Crop */
     public static ICropCard Cyprium;
+    /** Iron Crop */
     public static ICropCard Ferru;
     public static ICropCard Hops;
+    /** Low Quality Lead Crop */
     public static ICropCard Plumbiscus;
+    /** Redstone Crop */
     public static ICropCard Redwheat;
+    /** Low Quality Silver Crop */
     public static ICropCard Shining;
+    /** Low Quality Tin Crop */
     public static ICropCard Stagnium;
     public static ICropCard StickReed;
     public static ICropCard Venomilia;
@@ -71,6 +78,7 @@ public class CropsNHCrops {
     public static ICropCard Cinderpearl;
     public static ICropCard Shimmerleaf;
     public static ICropCard ManaBean;
+    /** Primordial Perl Crop */
     public static ICropCard PrimordialBerry;
     public static ICropCard KnightmetalBerry;
     public static ICropCard Torchberry;
@@ -109,73 +117,124 @@ public class CropsNHCrops {
     public static ICropCard Raspberry;
     public static ICropCard Maloberry;
     public static ICropCard SaguaroCactus;
+    /** <strike>Loud</strike> Fish Oil Crop */
     public static ICropCard Cucumber;
     public static ICropCard Goldfish;
     public static ICropCard Huckleberry;
+    /** Magic Modifier Crop */
     public static ICropCard MagicalNightshade;
+    /** Paper Crop */
     public static ICropCard Papyrus;
     public static ICropCard SpaceFlower;
     public static ICropCard Strawberry;
+    /** Sugar Crop */
     public static ICropCard SugarBeet;
     public static ICropCard Vine;
+    /** Lilipad Crop */
     public static ICropCard Waterlily;
     public static ICropCard Hemp;
+    /** Salt Crop */
     public static ICropCard SaltyRoot;
+    /** Silver Crop */
     public static ICropCard Argentia;
+    /** Bauxite and Aluminum Crop */
     public static ICropCard Bauxia;
+    /** Squid Ink Crop */
     public static ICropCard Blackthorn;
+    /** Blaze Crop */
     public static ICropCard Blazereed;
+    /** Emerald Crop */
     public static ICropCard BobsYerUncleRanks;
     public static ICropCard Canola;
     public static ICropCard Chilly;
+    /** Copper Crop */
     public static ICropCard Coppon;
+    /** Leather Crop */
     public static ICropCard Corium;
+    /** Rotten Flesh and Bones Crop */
     public static ICropCard Corpseplant;
+    /** Gunpowder Crop */
     public static ICropCard Creeperweed;
+    /** Cyan Dye Crop */
     public static ICropCard Cyazint;
+    /** Diamond Crop */
     public static ICropCard Diareed;
+    /** Chicken Crop */
     public static ICropCard EggPlant;
+    /** Enderpearl crop */
     public static ICropCard Enderbloom;
+    /** Quartz crop */
     public static ICropCard EvilOre;
+    /** Fertilizer Crop */
     public static ICropCard Fertilia;
     public static ICropCard Flax;
+    /** Zinc Crop */
     public static ICropCard Galvania;
+    /** Garnet Crop */
     public static ICropCard Garnydinia;
+    /** Medium Quality Glowstone Crop */
     public static ICropCard Glowheat;
+    /** Thorium Crop */
     public static ICropCard GodOfThunder;
     public static ICropCard Grape;
+    /** Indigo Dye Crop */
     public static ICropCard Indigo;
+    /** Iridium Crop */
     public static ICropCard Iridine;
+    /** Lapis Crop */
     public static ICropCard Lazulia;
     public static ICropCard Lemon;
+    /** Living Root Crop */
     public static ICropCard Liveroot;
+    /** General Meat Crop */
     public static ICropCard Meatrose;
+    /** Mica Crop */
     public static ICropCard Micadia;
+    /** Milk Crop */
     public static ICropCard Milkwart;
+    /** Nickel Crop */
     public static ICropCard Nickelback;
     public static ICropCard OilBerry;
+    /** Olivine Crop */
     public static ICropCard Olivia;
     public static ICropCard Onion;
+    /** Osmium Crop */
     public static ICropCard Osmianth;
+    /** Platinum Crop */
     public static ICropCard Platina;
+    /** Lead Crop */
     public static ICropCard Plumbilia;
+    /** Manganese Crop */
     public static ICropCard Pyrolusium;
     public static ICropCard PurpleTulip;
+    /** Uranium Crop */
     public static ICropCard Reactoria;
+    /** Sapphire Crop */
     public static ICropCard Sapphirum;
+    /** Tungsten Crop */
     public static ICropCard Scheelinium;
     public static ICropCard Slimeplant;
     public static ICropCard Spidernip;
+    /** Naquadah Crop */
     public static ICropCard Stargatium;
+    /** Nether Star and Wither Crop */
     public static ICropCard Starwart;
+    /** Steeleaf Crop */
     public static ICropCard Steeleafranks;
     public static ICropCard Tea;
+    /** Ghast Crop */
     public static ICropCard Tearstalks;
+    /** Tin Crop */
     public static ICropCard Tine;
+    /** Titanium Crop */
     public static ICropCard Titania;
     public static ICropCard Tomato;
+    /** UUM and UUA Crop */
     public static ICropCard Transformium;
+    /** Plutonium 241 and Spinel Crop */
     public static ICropCard Trollplant;
+    /** Coal and Wither Skeleton Crop */
     public static ICropCard Withereed;
+    /** Zombie Crop */
     public static ICropCard Zomplant;
 }

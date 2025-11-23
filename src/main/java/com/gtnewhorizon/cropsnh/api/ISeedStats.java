@@ -31,6 +31,13 @@ public interface ISeedStats {
      */
     void setAnalyzed(boolean value);
 
+    /**
+     * Checks if the seed stats are identical.
+     * @param o The other stats to compare to.
+     * @return True if the stats are equal.
+     */
+    boolean equals(ISeedStats o);
+
     ISeedStats copy();
 
     NBTTagCompound writeToNBT(NBTTagCompound tag);

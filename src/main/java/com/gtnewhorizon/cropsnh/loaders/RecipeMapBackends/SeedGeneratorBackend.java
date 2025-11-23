@@ -16,6 +16,7 @@ import gregtech.nei.GTNEIDefaultHandler;
 public class SeedGeneratorBackend extends RecipeMapBackend {
 
     public final SetMultimap<ICropCard, GTRecipe> cropIndex = LinkedHashMultimap.create();
+    public boolean cached = false;
     public final SetMultimap<ICropCard, GTNEIDefaultHandler.CachedDefaultRecipe> cropCacheIndex = LinkedHashMultimap
         .create();
 

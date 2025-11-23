@@ -22,6 +22,8 @@ import com.gtnewhorizon.cropsnh.farming.mutation.MutationPool;
 import com.gtnewhorizon.cropsnh.utility.DebugHelper;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 
+import javax.annotation.Nullable;
+
 public class MutationRegistry implements IMutationRegistry {
 
     public final static MutationRegistry instance = new MutationRegistry();
@@ -104,7 +106,7 @@ public class MutationRegistry implements IMutationRegistry {
      * @return The list of mutations that can occur.
      */
     @Override
-    public List<ICropMutation> getPossibleDeterministicMutations(Collection<ICropCard> parents) {
+    public @Nullable List<ICropMutation> getPossibleDeterministicMutations(Collection<ICropCard> parents) {
         if (parents == null || parents.size() < 2) return null;
         List<ICropCard> sortedParents = createLookupQueue(parents);
 

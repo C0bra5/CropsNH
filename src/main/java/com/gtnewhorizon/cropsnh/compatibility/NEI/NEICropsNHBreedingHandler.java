@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.gtnewhorizon.cropsnh.farming.requirements.breeding.MachineOnlyBreedingRequirement;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -165,6 +166,7 @@ public class NEICropsNHBreedingHandler extends CropsNHNEIHandler {
         // find mutations that create this seed.
         for (ICropMutation mutation : MutationRegistry.instance.getDeterministicMutations()) {
             if (mutation.getOutput() != cc) continue;
+            if (mutation.getRequirements().stream().anyMatch(x -> x instanceof MachineOnlyBreedingRequirement)) continue;
             this.arecipes.add(new CachedBreedingRecipe(mutation));
         }
     }
@@ -178,6 +180,7 @@ public class NEICropsNHBreedingHandler extends CropsNHNEIHandler {
         ICropCard cc = CropRegistry.instance.get(item);
         if (cc != null) {
             for (ICropMutation mutation : MutationRegistry.instance.getDeterministicMutations()) {
+                if (mutation.getRequirements().stream().anyMatch(x -> x instanceof MachineOnlyBreedingRequirement)) continue;
                 if (!mutation.getParents()
                     .contains(cc)) continue;
                 this.arecipes.add(new CachedBreedingRecipe(mutation));

@@ -10,8 +10,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.util.GTUtility;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -37,6 +40,8 @@ import gregtech.api.objects.ItemData;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.common.blocks.GTBlockOre;
 import gregtech.common.blocks.TileEntityOres;
+
+import javax.annotation.Nullable;
 
 /**
  * Used to prevent a crop from growing unless there is a specific block under it.
@@ -159,23 +164,35 @@ public class BlockUnderRequirement
     }
 
     @Override
-    public boolean canBreed(ArrayList<ICropCard> parents, TileEntity te, ItemStack[] catalysts) {
-        for (ItemStack stack : catalysts) {
-            if (stack == null || stack.getItem() == null) continue;
+    public boolean canBreed(ArrayList<ICropCard> parents, IGregTechTileEntity te, ItemStack[] catalysts, int[] consumptionTracker) {
+        for (int i = 0; i < catalysts.length; i++) {
+            ItemStack stack = catalysts[i];
+
+            // if stack is bad or if we can't consume it, abort early
+            if (GTUtility.isStackInvalid(stack) || stack.stackSize - consumptionTracker[i] <= 0) continue;
 
             // GT Material check
             for (Materials material : this.materials) {
-                if (checkGTBlockOrOreMaterial(stack, material)) return true;
+                if (checkGTBlockOrOreMaterial(stack, material)) {
+                    consumptionTracker[i] += 1;
+                    return true;
+                }
             }
 
             // Ore dict check
             for (String oreDict : this.oreDictionaries) {
-                if (checkOreDict(stack, oreDict)) return true;
+                if (checkOreDict(stack, oreDict)) {
+                    consumptionTracker[i] += 1;
+                    return true;
+                }
             }
 
             // Block conversion
             Block block = Block.getBlockFromItem(stack.getItem());
-            if (block.getMaterial() != Material.air && blocks.contains(block, stack.getItemDamage())) return true;
+            if (block.getMaterial() != Material.air && blocks.contains(block, Items.feather.getDamage(stack))) {
+                consumptionTracker[i] += 1;
+                return true;
+            }
         }
         return false;
     }
@@ -221,14 +238,19 @@ public class BlockUnderRequirement
             ItemStack oreDictStack = OreDictionary.getOres(oreDict)
                 .get(aux);
             if (oreDictStack.getItem() != stack.getItem()) continue;
-            int dmg = oreDictStack.getItemDamage();
+            int dmg = Items.feather.getDamage(oreDictStack);
             // check for both the old and the new wildcard value, this helps with a couple things
-            if (stack.getItemDamage() == dmg || OreDictionary.WILDCARD_VALUE == dmg || -1 == dmg) return true;
+            if (Items.feather.getDamage(stack) == dmg || OreDictionary.WILDCARD_VALUE == dmg || -1 == dmg) return true;
         }
         return false;
     }
 
-    public Collection<ItemStack> getItemsForNEI() {
+    @Override
+    public @Nullable List<ItemStack> getMachineOnlyCatalystsForNEI() {
+        return getItemsForNEI();
+    }
+
+    public List<ItemStack> getItemsForNEI() {
         List<ItemStack> ret = new LinkedList<>();
         // load up direct block mentions
         for (MetaSet.Entry<Block> e : this.blocks.getStream()
@@ -261,5 +283,6 @@ public class BlockUnderRequirement
         // the nei step will deduplicate stuff later, so we don't have to care about that.
         return ret;
     }
+
 
 }

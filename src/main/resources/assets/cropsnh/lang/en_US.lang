@@ -181,7 +181,9 @@ cropsnh_nei.cropsNHMutationPool.title=Crop Mutation Pools
 cropsnh_nei.cropsNHMutationPool.poolName=Pool: %1$s
 cropsnh_nei.cropsNHBreeding.title=Crop Breeding
 cropsnh_nei.cropsNHSeedGenerator.tooltip.fluidCost=cost = 100L * (growth + gain + resistance)
+cropsnh_nei.cropsNHCropBreeder.tooltip.outputStats=The resulting stats will be an average of the parents.
 cropsnh.recipes.seedGenerator=Seed Generator
+cropsnh.recipes.cropBreeder=Crop Breeder
 nei.options.tools.dump.cropsnh=Crops NH
 nei.options.tools.dump.cropsnh.alternateSeed=Alternate Seeds
 nei.options.tools.dump.cropsnh.cropRegistry=Crops

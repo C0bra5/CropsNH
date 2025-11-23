@@ -731,7 +731,7 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
 
         // then attempt to breed deterministically.
         ArrayList<ICropCard> breedingParents = neighbours.stream()
-            .filter(ICropStickTile::canCross)
+            .filter(ICropStickTile::canBreed)
             .map(ICropStickTile::getCrop)
             .collect(Collectors.toCollection(ArrayList::new));
         // find all matching mutations

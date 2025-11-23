@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.loaders;
 
 import static gregtech.api.recipe.RecipeMaps.extruderRecipes;
 
+import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropBreederRecipeLoader;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -32,6 +33,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         FertilizerRecipes.postInit();
         CropsPlusPlusRecipes.postInit();
         SeedGeneratorFakeRecipeLoader.postInit();
+        CropBreederRecipeLoader.postInit();
 
         addPlantLensRecipe();
         AddSpadeRecipes();

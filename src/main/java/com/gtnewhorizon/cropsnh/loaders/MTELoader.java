@@ -1,6 +1,7 @@
 package com.gtnewhorizon.cropsnh.loaders;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
+import com.gtnewhorizon.cropsnh.tileentity.MTECropBreeder;
 import com.gtnewhorizon.cropsnh.tileentity.MTECropManager;
 import com.gtnewhorizon.cropsnh.tileentity.MTESeedGenerator;
 
@@ -58,6 +59,31 @@ public class MTELoader {
             .set(new MTESeedGenerator(28023, VoltageIndex.UIV, "Epic Seed Replicator III").getStackForm(1L));
         CropsNHItemList.SeedGenerator_UMV
             .set(new MTESeedGenerator(28024, VoltageIndex.UMV, "Epic Seed Replicator IV").getStackForm(1L));
+
+        CropsNHItemList.CropBreeder_LV
+            .set(new MTECropBreeder(28025, VoltageIndex.LV, "Basic Crop Breeder").getStackForm(1L));
+        CropsNHItemList.CropBreeder_MV
+            .set(new MTECropBreeder(28026, VoltageIndex.MV, "Advanced Crop Breeder").getStackForm(1L));
+        CropsNHItemList.CropBreeder_HV
+            .set(new MTECropBreeder(28027, VoltageIndex.HV, "Advanced Crop Breeder II").getStackForm(1L));
+        CropsNHItemList.CropBreeder_EV
+            .set(new MTECropBreeder(28028, VoltageIndex.EV, "Advanced Crop Breeder III").getStackForm(1L));
+        CropsNHItemList.CropBreeder_IV
+            .set(new MTECropBreeder(28029, VoltageIndex.IV, "Advanced Crop Breeder IV").getStackForm(1L));
+        CropsNHItemList.CropBreeder_LuV
+            .set(new MTECropBreeder(28030, VoltageIndex.LuV, "Elite Crop Breeder").getStackForm(1L));
+        CropsNHItemList.CropBreeder_ZPM
+            .set(new MTECropBreeder(28031, VoltageIndex.ZPM, "Elite Crop Breeder II").getStackForm(1L));
+        CropsNHItemList.CropBreeder_UV
+            .set(new MTECropBreeder(28032, VoltageIndex.UV, "Ultimate Crop Breeder").getStackForm(1L));
+        CropsNHItemList.CropBreeder_UHV
+            .set(new MTECropBreeder(28033, VoltageIndex.UHV, "Epic Crop Breeder").getStackForm(1L));
+        CropsNHItemList.CropBreeder_UEV
+            .set(new MTECropBreeder(28034, VoltageIndex.UEV, "Epic Crop Breeder II").getStackForm(1L));
+        CropsNHItemList.CropBreeder_UIV
+            .set(new MTECropBreeder(28035, VoltageIndex.UIV, "Epic Crop Breeder III").getStackForm(1L));
+        CropsNHItemList.CropBreeder_UMV
+            .set(new MTECropBreeder(28036, VoltageIndex.UMV, "Epic Crop Breeder IV").getStackForm(1L));
     }
 
 }

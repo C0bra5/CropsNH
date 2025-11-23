@@ -45,14 +45,17 @@ public class CropsNHNEISeedGeneratorHandler extends GTNEIDefaultHandler {
         if (seedStats == null || !seedStats.isAnalyzed()) {
             return;
         }
+
         // create the rapid lookup table if needed
         SeedGeneratorBackend backend = (SeedGeneratorBackend) recipeMap.getBackend();
-        if (backend.cropCacheIndex.isEmpty()) {
+        if (!backend.cached) {
             for (CachedDefaultRecipe recipe : getCache()) {
                 backend.cropCacheIndex
                     .put(recipe.mRecipe.getMetadata(CropsNHGTRecipeMaps.CROPSNH_CROP_METADATAKEY), recipe);
             }
+            backend.cached = true;
         }
+
         // identify the source recipes
         if (backend.cropCacheIndex.containsKey(cc)) {
             arecipes.addAll(backend.cropCacheIndex.get(cc));

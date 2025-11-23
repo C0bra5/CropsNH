@@ -7,8 +7,12 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
+import gregtech.api.enums.GTValues;
+import gregtech.api.enums.TierEU;
+import gregtech.api.enums.VoltageIndex;
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.util.GTRecipeBuilder;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.gtnewhorizon.cropsnh.api.IBreedingRequirement;
@@ -23,6 +27,8 @@ import com.gtnewhorizon.cropsnh.farming.requirements.BlockUnderRequirement;
 import com.gtnewhorizon.cropsnh.farming.requirements.breeding.MachineOnlyBreedingRequirement;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 
+import javax.annotation.Nullable;
+
 public class CropMutation implements ICropMutation {
 
     public final ICropCard output;
@@ -31,6 +37,8 @@ public class CropMutation implements ICropMutation {
     public final ICropCard parent2;
     public final ICropCard parent3;
     public final ICropCard parent4;
+    public int breedingMachineEUt = (int) TierEU.RECIPE_LV;
+    public int breedingMachineDuration = 400;
     private final HashSet<String> mutationPools = new HashSet<>();
 
     public CropMutation(ICropCard output, ICropCard parent1, ICropCard parent2) {
@@ -68,11 +76,20 @@ public class CropMutation implements ICropMutation {
                 this.requirements.add((IBreedingRequirement) req);
             }
         }
+
+        this.setBreedingMachineRecipeTier(this.output.getTier());
     }
 
     @Override
     public ICropCard getOutput() {
         return this.output;
+    }
+
+    @Override
+    public int getParentCount() {
+        if (parent4 == null) return 4;
+        if (parent3 == null) return 3;
+        return 2;
     }
 
     @Override
@@ -86,24 +103,86 @@ public class CropMutation implements ICropMutation {
         return Arrays.asList(this.parent1, this.parent2);
     }
 
+    /**
+     * Makes the mutation only possible with the breeding machine.
+     */
     public CropMutation machineOnly() {
         this.requirements.add(new MachineOnlyBreedingRequirement());
         return this;
     }
 
+    /**
+     * Adds a breeding requirement to this mutation.
+     * @param req The requirement to add.
+     */
     public CropMutation addRequirement(IBreedingRequirement req) {
         this.requirements.add(req);
         return this;
     }
 
+    /**
+     * Registers the output crop for the given mutation pools.
+     * @param mutationPools The mutation pools to add to the output crop.
+     */
     public CropMutation addToMutationPools(String... mutationPools) {
         // do not add them directly since we may add the machine only req later.
         this.mutationPools.addAll(Arrays.asList(mutationPools));
         return this;
     }
 
-    public void addBlockUnderRequirement(String name) {
+    /**
+     * Registers an underblock requirement via it's category id
+     * @param name the name of the underblock category
+     */
+    public CropMutation addBlockUnderRequirement(String name) {
         this.requirements.add(BlockUnderRequirement.get(name));
+        return this;
+    }
+
+    /**
+     * Removes the existing blockunder requirements
+     */
+    public CropMutation removeExistingBlockUnderRequirements() {
+        this.requirements.removeIf(x -> x instanceof BlockUnderRequirement);
+        return this;
+    }
+
+    /**
+     * Sets the breeding machine recipe eu/t and duration based on a tier value.
+     * See code for actual math.
+     * @param tier The tier value to use for the calculations.
+     */
+    public CropMutation setBreedingMachineRecipeTier(int tier) {
+        this.breedingMachineEUt = (int) GTValues.VP[Math.max(VoltageIndex.LV, Math.min(VoltageIndex.UMV, tier))];
+        this.breedingMachineDuration = (int) (20 * GTRecipeBuilder.SECONDS * Math.pow(1.3, Math.max(0, tier - 1)));
+        return this;
+    }
+
+    /**
+     * Sets the crop breeder eu/t cost to an arbitrary value.
+     * @param eut The eu/t of the recipe in the crop breeder.
+     */
+    public CropMutation setBreedingMachineRecipeEUt(int eut) {
+        this.breedingMachineEUt = eut;
+        return this;
+    }
+
+    /**
+     * Sets the crop breeder eu/t cost to an arbitrary value.
+     * @param eut The eu/t of the recipe in the crop breeder.
+     */
+    public CropMutation setBreedingMachineRecipeEUt(long eut) {
+        this.breedingMachineEUt = (int) eut;
+        return this;
+    }
+
+    /**
+     * Sets the crop breeder recipe duration to an arbitrary value.
+     * @param ticks The eu/t of the recipe in the crop breeder.
+     */
+    public CropMutation setBreedingMachineRecipeDuration(int ticks) {
+        this.breedingMachineDuration = ticks;
+        return this;
     }
 
     public void register() {
@@ -128,13 +207,14 @@ public class CropMutation implements ICropMutation {
     }
 
     @Override
-    public boolean canBreed(ArrayList<ICropCard> parents, TileEntity te, ItemStack[] catalysts) {
-        if (!checkParents(parents)) return false;
+    public @Nullable int[] canBreed(ArrayList<ICropCard> parents, IGregTechTileEntity te, ItemStack[] catalysts) {
+        if (!checkParents(parents)) return null;
+        int[] consumptionTracker = new int[catalysts.length];
         for (IBreedingRequirement req : this.requirements) {
             if (!(req instanceof IMachineBreedingRequirement)) continue;
-            if (!((IMachineBreedingRequirement) req).canBreed(parents, te, catalysts)) return false;
+            if (!((IMachineBreedingRequirement) req).canBreed(parents, te, catalysts, consumptionTracker)) return null;
         }
-        return true;
+        return consumptionTracker;
     }
 
     private boolean checkParents(ArrayList<ICropCard> parents) {
@@ -150,21 +230,54 @@ public class CropMutation implements ICropMutation {
         return this.requirements;
     }
 
-    private List<ItemStack> cachedBlockUnder = null;
+    private List<ItemStack> cachedBlockUnderForNEI = null;
 
     @Override
     public List<ItemStack> getBlocksUnderForNEI(boolean useCache) {
         // check cache
-        if (useCache && this.cachedBlockUnder != null) return this.cachedBlockUnder;
+        if (useCache && this.cachedBlockUnderForNEI != null) return this.cachedBlockUnderForNEI;
         // generate list
         LinkedList<ItemStack> stacks = new LinkedList<>();
         for (IBreedingRequirement req : this.requirements) {
-            if (!(req instanceof BlockUnderRequirement)) continue;
-            stacks.addAll(((BlockUnderRequirement) req).getItemsForNEI());
+            if (!(req instanceof BlockUnderRequirement blockUnderRequirement)) continue;
+            stacks.addAll(blockUnderRequirement.getItemsForNEI());
         }
         CropsNHUtils.deduplicateItemList(stacks);
         // update cache if we didn't hit it
-        return this.cachedBlockUnder = stacks;
+        return this.cachedBlockUnderForNEI = stacks;
     }
 
+    private List<List<ItemStack>> cachedBreedingMachineCatalystsForNEI = null;
+
+    @Override
+    public List<List<ItemStack>> getBreedingMachineCatalystsForNEI(boolean useCache) {
+        // check cache
+        if (useCache && this.cachedBreedingMachineCatalystsForNEI != null) return this.cachedBreedingMachineCatalystsForNEI;
+        // generate list
+        List<List<ItemStack>> ret = new LinkedList<>();
+        // add artificial catalyst
+        for (IBreedingRequirement req : this.requirements) {
+            if (!(req instanceof IMachineBreedingRequirement machineReq)) continue;
+            // abort if no catalysts
+            List<ItemStack> catalysts = machineReq.getMachineOnlyCatalystsForNEI();
+            // abort if no catalyst needed
+            if (catalysts == null || catalysts.isEmpty()) continue;
+            CropsNHUtils.deduplicateItemList(catalysts);
+            // else add the catalysts to the list
+            ret.add(catalysts);
+        }
+        return this.cachedBreedingMachineCatalystsForNEI = ret;
+    }
+
+
+
+    @Override
+    public int getBreedingMachineRecipeEUt() {
+        return this.breedingMachineEUt;
+    }
+
+    @Override
+    public int getBreedingMachineRecipeDuration() {
+        return this.breedingMachineDuration;
+    }
 }
