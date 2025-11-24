@@ -8,6 +8,7 @@ import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropOreBerry;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 
+import gregtech.api.enums.VoltageIndex;
 import tconstruct.world.TinkerWorld;
 
 public class CropEssenceOreBerry extends CropOreBerry {
@@ -27,6 +28,11 @@ public class CropEssenceOreBerry extends CropOreBerry {
     @Override
     public String getCreator() {
         return "bartimaeusnek";
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.MV;
     }
 
     @Override

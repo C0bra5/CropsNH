@@ -8,6 +8,7 @@ import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.VoltageIndex;
 
 public class CropFertilia extends NHCropCard {
 
@@ -27,6 +28,11 @@ public class CropFertilia extends NHCropCard {
     @Override
     public int getTier() {
         return 3;
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.MV;
     }
 
     @Override

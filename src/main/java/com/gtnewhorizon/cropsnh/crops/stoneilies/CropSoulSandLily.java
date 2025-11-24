@@ -8,6 +8,8 @@ import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropBaseStoneLily;
 
+import gregtech.api.enums.VoltageIndex;
+
 public class CropSoulSandLily extends CropBaseStoneLily {
 
     public CropSoulSandLily() {
@@ -23,8 +25,18 @@ public class CropSoulSandLily extends CropBaseStoneLily {
     }
 
     @Override
+    public String getCreator() {
+        return "C0bra5";
+    }
+
+    @Override
     public int getTier() {
         return 2;
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.HV;
     }
 
     @Override

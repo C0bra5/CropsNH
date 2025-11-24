@@ -24,6 +24,7 @@ import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.enums.VoltageIndex;
 
 public abstract class NHCropCard extends CropCard {
 
@@ -45,6 +46,11 @@ public abstract class NHCropCard extends CropCard {
     @Override
     public String getUnlocalizedName() {
         return "cropsnh_crops." + internalId;
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.LV;
     }
 
     @Override

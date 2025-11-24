@@ -10,6 +10,7 @@ import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.VoltageIndex;
 
 public class CropEvilOre extends NHCropCard {
 
@@ -32,6 +33,11 @@ public class CropEvilOre extends NHCropCard {
     @Override
     public int getTier() {
         return 8;
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.MV;
     }
 
     @Override

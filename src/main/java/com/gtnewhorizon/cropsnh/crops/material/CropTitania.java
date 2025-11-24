@@ -7,6 +7,8 @@ import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 
+import gregtech.api.enums.VoltageIndex;
+
 public class CropTitania extends NHCropCard {
 
     private final static ISoilList soilTypes = SoilRegistry.instance.get("stone");
@@ -31,6 +33,11 @@ public class CropTitania extends NHCropCard {
     @Override
     public int getTier() {
         return 9;
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.EV;
     }
 
     @Override

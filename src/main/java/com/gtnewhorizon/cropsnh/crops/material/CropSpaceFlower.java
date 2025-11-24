@@ -10,6 +10,7 @@ import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 
 import gregtech.api.enums.Mods;
+import gregtech.api.enums.VoltageIndex;
 
 public class CropSpaceFlower extends NHCropCard {
 
@@ -31,6 +32,11 @@ public class CropSpaceFlower extends NHCropCard {
     @Override
     public int getTier() {
         return 13;
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.IV;
     }
 
     @Override

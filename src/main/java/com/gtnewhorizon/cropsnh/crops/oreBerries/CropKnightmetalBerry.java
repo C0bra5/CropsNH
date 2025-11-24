@@ -7,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropOreBerry;
 import com.gtnewhorizon.cropsnh.farming.requirements.growth.MaxLightLevelGrowthRequirement;
 
+import gregtech.api.enums.VoltageIndex;
+
 public class CropKnightmetalBerry extends CropOreBerry {
 
     public CropKnightmetalBerry() {
@@ -22,18 +24,23 @@ public class CropKnightmetalBerry extends CropOreBerry {
     }
 
     @Override
+    public String getCreator() {
+        return "bartimaeusnek";
+    }
+
+    @Override
     public int getTier() {
         return 8;
     }
 
     @Override
-    public int getGrowthDuration() {
-        return 5500;
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.MV;
     }
 
     @Override
-    public String getCreator() {
-        return "bartimaeusnek";
+    public int getGrowthDuration() {
+        return 5500;
     }
 
 }

@@ -8,6 +8,8 @@ import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropBaseStoneLily;
 
+import gregtech.api.enums.VoltageIndex;
+
 public class CropClayLily extends CropBaseStoneLily {
 
     public CropClayLily() {
@@ -21,6 +23,16 @@ public class CropClayLily extends CropBaseStoneLily {
 
         this.addDuplicationCatalyst("dustClay", 1);
         this.addDuplicationCatalyst("itemClay", 1);
+    }
+
+    @Override
+    public String getCreator() {
+        return "C0bra5";
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.MV;
     }
 
     @Override

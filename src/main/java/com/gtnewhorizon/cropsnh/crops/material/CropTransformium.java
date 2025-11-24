@@ -7,6 +7,8 @@ import net.minecraftforge.common.BiomeDictionary;
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 
+import gregtech.api.enums.VoltageIndex;
+
 public class CropTransformium extends NHCropCard {
 
     public CropTransformium() {
@@ -21,6 +23,11 @@ public class CropTransformium extends NHCropCard {
     @Override
     public int getTier() {
         return 12;
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.EV;
     }
 
     @Override

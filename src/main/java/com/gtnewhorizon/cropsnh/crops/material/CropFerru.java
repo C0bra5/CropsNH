@@ -8,6 +8,8 @@ import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 import com.gtnewhorizon.cropsnh.farming.requirements.BlockUnderRequirement;
 
+import gregtech.api.enums.VoltageIndex;
+
 public class CropFerru extends NHCropCard {
 
     private final static ISoilList soilTypes = SoilRegistry.instance.get("stone");
@@ -30,6 +32,11 @@ public class CropFerru extends NHCropCard {
     @Override
     public int getTier() {
         return 6;
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.MV;
     }
 
     @Override

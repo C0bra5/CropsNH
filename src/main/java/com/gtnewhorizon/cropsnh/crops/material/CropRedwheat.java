@@ -9,6 +9,8 @@ import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.requirements.growth.MaxLightLevelGrowthRequirement;
 import com.gtnewhorizon.cropsnh.farming.requirements.growth.MinLightLevelGrowthRequirement;
 
+import gregtech.api.enums.VoltageIndex;
+
 public class CropRedwheat extends NHCropCard {
 
     public CropRedwheat() {
@@ -24,13 +26,18 @@ public class CropRedwheat extends NHCropCard {
     }
 
     @Override
-    public String getCreator() {
-        return "raa1337";
+    public float getDropChance() {
+        return 0.85f;
     }
 
     @Override
-    public float getDropChance() {
-        return 0.85f;
+    public int getTier() {
+        return 6;
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.MV;
     }
 
     @Override
@@ -39,8 +46,8 @@ public class CropRedwheat extends NHCropCard {
     }
 
     @Override
-    public int getTier() {
-        return 6;
+    public String getCreator() {
+        return "raa1337";
     }
 
     @Override

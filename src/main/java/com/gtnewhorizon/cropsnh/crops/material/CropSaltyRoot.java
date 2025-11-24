@@ -7,6 +7,8 @@ import net.minecraftforge.common.BiomeDictionary;
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 
+import gregtech.api.enums.VoltageIndex;
+
 public class CropSaltyRoot extends NHCropCard {
 
     public CropSaltyRoot() {
@@ -36,6 +38,11 @@ public class CropSaltyRoot extends NHCropCard {
     @Override
     public int getTier() {
         return 4;
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.MV;
     }
 
     @Override

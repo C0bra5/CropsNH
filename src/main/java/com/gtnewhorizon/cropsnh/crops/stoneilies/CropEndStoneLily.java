@@ -7,6 +7,7 @@ import net.minecraftforge.common.BiomeDictionary;
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropBaseStoneLily;
 
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.VoltageIndex;
 
 public class CropEndStoneLily extends CropBaseStoneLily {
 
@@ -20,6 +21,11 @@ public class CropEndStoneLily extends CropBaseStoneLily {
         this.addLikedBiomes(BiomeDictionary.Type.END, BiomeDictionary.Type.DRY, BiomeDictionary.Type.COLD);
 
         this.addDuplicationCatalyst("dustEndstone", 1);
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.MV;
     }
 
     @Override

@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.VoltageIndex;
 
 public class CropEnderbloom extends NHCropCard {
 
@@ -29,6 +30,11 @@ public class CropEnderbloom extends NHCropCard {
     @Override
     public int getTier() {
         return 10;
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.HV;
     }
 
     @Override

@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropOreBerry;
 import com.gtnewhorizon.cropsnh.farming.requirements.growth.MaxLightLevelGrowthRequirement;
 
+import gregtech.api.enums.VoltageIndex;
 import tconstruct.world.TinkerWorld;
 
 public class CropTinOreBerry extends CropOreBerry {
@@ -26,13 +27,18 @@ public class CropTinOreBerry extends CropOreBerry {
     }
 
     @Override
+    public String getCreator() {
+        return "bartimaeusnek";
+    }
+
+    @Override
     public int getTier() {
         return 4;
     }
 
     @Override
-    public String getCreator() {
-        return "bartimaeusnek";
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.MV;
     }
 
 }

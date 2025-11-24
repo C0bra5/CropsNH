@@ -10,6 +10,7 @@ import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.VoltageIndex;
 import gregtech.api.util.GTOreDictUnificator;
 import twilightforest.item.TFItems;
 
@@ -35,6 +36,11 @@ public class CropSteeleafranks extends NHCropCard {
     @Override
     public int getTier() {
         return 10;
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.MV;
     }
 
     @Override

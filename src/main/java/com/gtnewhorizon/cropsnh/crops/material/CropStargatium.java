@@ -7,6 +7,8 @@ import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 
+import gregtech.api.enums.VoltageIndex;
+
 public class CropStargatium extends NHCropCard {
 
     private final static ISoilList soilTypes = SoilRegistry.instance.get("stone");
@@ -22,6 +24,11 @@ public class CropStargatium extends NHCropCard {
         this.addDuplicationCatalyst("dustNaquadahOxideMixture", 1);
         this.addDuplicationCatalyst("dustNaquadria", 1);
         this.addDuplicationCatalyst("dustNaquadriaOxideMixture", 1);
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.IV;
     }
 
     @Override

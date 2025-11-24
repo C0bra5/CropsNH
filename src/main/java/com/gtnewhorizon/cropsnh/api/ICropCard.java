@@ -79,6 +79,14 @@ public interface ICropCard {
     int getTier();
 
     /**
+     * This also applies for the synthesizer's minimum voltage tier.
+     * 
+     * @return The {@link gregtech.api.enums.VoltageIndex} that should be used as the minimum voltage for breeding
+     *         recipes.
+     */
+    int getMachineBreedingRecipeTier();
+
+    /**
      * @return The amount of growth points needed to reach maturity.
      */
     int getGrowthDuration();

@@ -11,6 +11,8 @@ import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 
+import gregtech.api.enums.VoltageIndex;
+
 public class CropOsmianth extends NHCropCard {
 
     private final static ISoilList soilTypes = SoilRegistry.instance.get("stone");
@@ -28,6 +30,11 @@ public class CropOsmianth extends NHCropCard {
     @Override
     public int getTier() {
         return 12;
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.IV;
     }
 
     @Override

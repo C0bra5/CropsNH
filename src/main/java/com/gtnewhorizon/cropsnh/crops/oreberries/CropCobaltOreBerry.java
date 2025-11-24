@@ -6,6 +6,7 @@ import com.gtnewhorizon.cropsnh.crops.abstracts.CropOreBerry;
 import com.gtnewhorizon.cropsnh.farming.requirements.growth.MaxLightLevelGrowthRequirement;
 
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.VoltageIndex;
 
 public class CropCobaltOreBerry extends CropOreBerry {
 
@@ -24,5 +25,10 @@ public class CropCobaltOreBerry extends CropOreBerry {
     @Override
     public String getCreator() {
         return "bartimaeusnek";
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.MV;
     }
 }

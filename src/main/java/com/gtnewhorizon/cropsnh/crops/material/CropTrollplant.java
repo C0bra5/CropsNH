@@ -14,6 +14,7 @@ import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.VoltageIndex;
 import gregtech.api.util.GTOreDictUnificator;
 
 public class CropTrollplant extends NHCropCard {
@@ -47,6 +48,11 @@ public class CropTrollplant extends NHCropCard {
     @Override
     public int getTier() {
         return 6;
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.EV;
     }
 
     @Override

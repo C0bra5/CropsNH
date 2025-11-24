@@ -87,7 +87,7 @@ public class CropMutation implements ICropMutation {
             }
         }
 
-        this.setBreedingMachineRecipeTier(this.output.getTier());
+        this.setBreedingMachineRecipeTier(this.output.getMachineBreedingRecipeTier());
     }
 
     @Override
@@ -123,7 +123,7 @@ public class CropMutation implements ICropMutation {
 
     /**
      * Adds a breeding requirement to this mutation.
-     * 
+     *
      * @param req The requirement to add.
      */
     public CropMutation addRequirement(IBreedingRequirement req) {
@@ -133,7 +133,7 @@ public class CropMutation implements ICropMutation {
 
     /**
      * Registers the output crop for the given mutation pools.
-     * 
+     *
      * @param mutationPools The mutation pools to add to the output crop.
      */
     public CropMutation addToMutationPools(String... mutationPools) {
@@ -144,7 +144,7 @@ public class CropMutation implements ICropMutation {
 
     /**
      * Registers an underblock requirement via it's category id
-     * 
+     *
      * @param name the name of the underblock category
      */
     public CropMutation addBlockUnderRequirement(String name) {
@@ -163,7 +163,7 @@ public class CropMutation implements ICropMutation {
     /**
      * Sets the breeding machine recipe eu/t and duration based on a tier value.
      * See code for actual math.
-     * 
+     *
      * @param tier The tier value to use for the calculations.
      */
     public CropMutation setBreedingMachineRecipeTier(int tier) {
@@ -174,7 +174,7 @@ public class CropMutation implements ICropMutation {
 
     /**
      * Sets the crop breeder eu/t cost to an arbitrary value.
-     * 
+     *
      * @param eut The eu/t of the recipe in the crop breeder.
      */
     public CropMutation setBreedingMachineRecipeEUt(int eut) {
@@ -184,7 +184,7 @@ public class CropMutation implements ICropMutation {
 
     /**
      * Sets the crop breeder eu/t cost to an arbitrary value.
-     * 
+     *
      * @param eut The eu/t of the recipe in the crop breeder.
      */
     public CropMutation setBreedingMachineRecipeEUt(long eut) {
@@ -194,7 +194,7 @@ public class CropMutation implements ICropMutation {
 
     /**
      * Sets the crop breeder recipe duration to an arbitrary value.
-     * 
+     *
      * @param ticks The eu/t of the recipe in the crop breeder.
      */
     public CropMutation setBreedingMachineRecipeDuration(int ticks) {

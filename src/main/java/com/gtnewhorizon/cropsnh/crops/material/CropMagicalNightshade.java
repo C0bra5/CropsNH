@@ -7,6 +7,8 @@ import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 
+import gregtech.api.enums.VoltageIndex;
+
 public class CropMagicalNightshade extends NHCropCard {
 
     public CropMagicalNightshade() {
@@ -24,6 +26,11 @@ public class CropMagicalNightshade extends NHCropCard {
     @Override
     public int getTier() {
         return 13;
+    }
+
+    @Override
+    public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.HV;
     }
 
     @Override
