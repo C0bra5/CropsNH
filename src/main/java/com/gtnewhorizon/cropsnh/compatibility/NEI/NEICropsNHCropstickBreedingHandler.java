@@ -27,7 +27,7 @@ import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.HandlerInfo;
 
-public class NEICropsNHBreedingHandler extends CropsNHNEIHandler {
+public class NEICropsNHCropstickBreedingHandler extends CropsNHNEIHandler {
 
     // this is a class which handles the recipe for crop products (has to contain a CachedRecipe for the products)
     private static final String id = "cropsNHBreeding";
@@ -115,12 +115,12 @@ public class NEICropsNHBreedingHandler extends CropsNHNEIHandler {
         // return ingredients
         @Override
         public List<PositionedStack> getIngredients() {
-            return getCycledIngredients(NEICropsNHBreedingHandler.this.cycleticks / 10, this.ingredients);
+            return getCycledIngredients(NEICropsNHCropstickBreedingHandler.this.cycleticks / 10, this.ingredients);
         }
 
         @Override
         public List<PositionedStack> getOtherStacks() {
-            return getCycledIngredients(NEICropsNHBreedingHandler.this.cycleticks / 10, this.others);
+            return getCycledIngredients(NEICropsNHCropstickBreedingHandler.this.cycleticks / 10, this.others);
         }
 
         // return result
@@ -143,6 +143,7 @@ public class NEICropsNHBreedingHandler extends CropsNHNEIHandler {
     protected void loadCraftingRecipesDo(String pId, Object... results) {
         if (pId.equalsIgnoreCase(id)) {
             for (ICropMutation mutation : MutationRegistry.instance.getDeterministicMutations()) {
+                if (mutation.getRequirements().stream().anyMatch(x -> x instanceof MachineOnlyBreedingRequirement)) continue;
                 this.arecipes.add(new CachedBreedingRecipe(mutation));
             }
         } else if (pId.equalsIgnoreCase("item")) {

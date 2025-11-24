@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.loaders;
 
 import static gregtech.api.recipe.RecipeMaps.extruderRecipes;
 
+import com.gtnewhorizon.cropsnh.api.CropsNHCrops;
+import com.gtnewhorizon.cropsnh.init.CropsNHItems;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropBreederRecipeLoader;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -40,6 +42,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         AddCropStickRecipes();
         AddCropManagerRecipes();
         AddSeedGeneratorRecipes();
+        AddCropBreederRecipes();
         AddNanCertificateRecipe();
     }
 
@@ -113,7 +116,30 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                     'C', MTEBasicMachineWithRecipe.X.CIRCUIT,
                     'H', MTEBasicMachineWithRecipe.X.HULL,
                     'B', MTEBasicMachineWithRecipe.X.WIRE,
-                    // maybe consider replacing this with a seedbed later on.
+                    // maybe consider replacing this with a tired seedbed later on.
+                    'D', new ItemStack(Mods.RandomThings.isModLoaded() ? Block.getBlockFromName("RandomThings:fertilizedDirt") : Blocks.dirt, 1)
+                    // spotless:on
+                },
+                tier + 1);
+        }
+    }
+
+    private static void AddCropBreederRecipes() {
+        for (int tier = 0; tier < SEED_GENERATOR.length; tier++) {
+            GTModHandler.addMachineCraftingRecipe(
+                SEED_GENERATOR[tier].get(1),
+                GTModHandler.RecipeBits.BITSD,
+                new Object[] {
+                    // spotless:off
+                    "SAS",
+                    "CHC",
+                    "WDW",
+                    'S', CropsNHItemList.cropSticks.get(1),
+                    'A', MTEBasicMachineWithRecipe.X.ROBOT_ARM,
+                    'C', MTEBasicMachineWithRecipe.X.CIRCUIT,
+                    'H', MTEBasicMachineWithRecipe.X.HULL,
+                    'W', MTEBasicMachineWithRecipe.X.WIRE,
+                    // maybe consider replacing this with a tired seedbed later on.
                     'D', new ItemStack(Mods.RandomThings.isModLoaded() ? Block.getBlockFromName("RandomThings:fertilizedDirt") : Blocks.dirt, 1)
                     // spotless:on
                 },
