@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.util.StatCollector;
 
 import com.gtnewhorizon.cropsnh.api.IBreedingRequirement;
@@ -21,8 +23,6 @@ import com.gtnewhorizon.cropsnh.farming.mutation.MutationMap;
 import com.gtnewhorizon.cropsnh.farming.mutation.MutationPool;
 import com.gtnewhorizon.cropsnh.utility.DebugHelper;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
-
-import javax.annotation.Nullable;
 
 public class MutationRegistry implements IMutationRegistry {
 

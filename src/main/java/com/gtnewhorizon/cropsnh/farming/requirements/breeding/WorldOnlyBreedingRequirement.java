@@ -3,19 +3,21 @@ package com.gtnewhorizon.cropsnh.farming.requirements.breeding;
 import java.util.ArrayList;
 import java.util.List;
 
-import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import javax.annotation.Nullable;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.IMachineBreedingRequirement;
 
-import javax.annotation.Nullable;
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 
 public class WorldOnlyBreedingRequirement implements IMachineBreedingRequirement {
 
     @Override
-    public boolean canBreed(ArrayList<ICropCard> parents, IGregTechTileEntity te, ItemStack[] catalysts, int[] consumationTracker) {
+    public boolean canBreed(ArrayList<ICropCard> parents, IGregTechTileEntity te, ItemStack[] catalysts,
+        int[] consumationTracker) {
         return true;
     }
 

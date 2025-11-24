@@ -321,15 +321,15 @@ import static com.gtnewhorizon.cropsnh.api.CropsNHMutationPools.aWood;
 import static com.gtnewhorizon.cropsnh.api.CropsNHMutationPools.aYellow;
 import static com.gtnewhorizon.cropsnh.api.CropsNHMutationPools.aZombie;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+
 import com.gtnewhorizon.cropsnh.farming.mutation.CropMutation;
 import com.gtnewhorizon.cropsnh.farming.registries.MutationRegistry;
-
 import com.gtnewhorizon.cropsnh.farming.requirements.breeding.MachineBreedingCatalystRequirement;
+
 import gregtech.api.enums.Mods;
 import gregtech.api.enums.VoltageIndex;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public class MutationLoader {
 

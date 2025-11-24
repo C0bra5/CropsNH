@@ -21,13 +21,12 @@ import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.gtnewhorizon.cropsnh.farming.SeedData;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.gtnewhorizon.cropsnh.api.ICropCard;
-import com.gtnewhorizon.cropsnh.api.ISeedStats;
+import com.gtnewhorizon.cropsnh.farming.SeedData;
 import com.gtnewhorizon.cropsnh.farming.SeedStats;
 import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
 import com.gtnewhorizon.cropsnh.init.CropsNHFluids;

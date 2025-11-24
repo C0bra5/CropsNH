@@ -8,8 +8,6 @@ import com.gtnewhorizon.cropsnh.reference.Constants;
 import com.gtnewhorizon.cropsnh.reference.Data;
 import com.gtnewhorizon.cropsnh.reference.Names;
 
-import java.util.Objects;
-
 public class SeedStats implements ISeedStats {
 
     public final static SeedStats DEFAULT_ANALYZED = new SeedStats((byte) 1, (byte) 1, (byte) 1, true);
@@ -89,6 +87,8 @@ public class SeedStats implements ISeedStats {
 
     @Override
     public boolean equals(ISeedStats o) {
-        return growth == o.getGrowth() && gain == o.getGain() && resistance == o.getResistance() && analyzed == o.isAnalyzed();
+        return growth == o.getGrowth() && gain == o.getGain()
+            && resistance == o.getResistance()
+            && analyzed == o.isAnalyzed();
     }
 }

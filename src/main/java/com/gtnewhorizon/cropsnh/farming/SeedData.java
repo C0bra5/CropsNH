@@ -1,9 +1,10 @@
 package com.gtnewhorizon.cropsnh.farming;
 
+import net.minecraft.item.ItemStack;
+
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ISeedData;
 import com.gtnewhorizon.cropsnh.api.ISeedStats;
-import net.minecraft.item.ItemStack;
 
 public class SeedData implements ISeedData {
 
@@ -12,7 +13,7 @@ public class SeedData implements ISeedData {
     public ItemStack stack;
 
     public SeedData(ICropCard crop, ISeedStats stats) {
-        this(crop,stats,null);
+        this(crop, stats, null);
     }
 
     public SeedData(ICropCard crop, ISeedStats stats, ItemStack stack) {

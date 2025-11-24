@@ -12,7 +12,6 @@ import com.gtnewhorizon.cropsnh.loaders.RecipeMapFrontends.SeedGeneratorFrontend
 import com.gtnewhorizon.cropsnh.reference.Reference;
 
 import gregtech.api.recipe.RecipeMap;
-import gregtech.api.recipe.RecipeMapBackend;
 import gregtech.api.recipe.RecipeMapBuilder;
 import gregtech.api.recipe.RecipeMetadataKey;
 import gregtech.api.recipe.metadata.SimpleRecipeMetadataKey;

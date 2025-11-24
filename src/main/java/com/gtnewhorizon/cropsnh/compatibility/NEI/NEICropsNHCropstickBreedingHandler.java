@@ -4,7 +4,6 @@ import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.gtnewhorizon.cropsnh.farming.requirements.breeding.MachineOnlyBreedingRequirement;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -20,6 +19,7 @@ import com.gtnewhorizon.cropsnh.farming.SeedStats;
 import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
 import com.gtnewhorizon.cropsnh.farming.registries.MutationRegistry;
 import com.gtnewhorizon.cropsnh.farming.requirements.BlockUnderRequirement;
+import com.gtnewhorizon.cropsnh.farming.requirements.breeding.MachineOnlyBreedingRequirement;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 
@@ -143,7 +143,9 @@ public class NEICropsNHCropstickBreedingHandler extends CropsNHNEIHandler {
     protected void loadCraftingRecipesDo(String pId, Object... results) {
         if (pId.equalsIgnoreCase(id)) {
             for (ICropMutation mutation : MutationRegistry.instance.getDeterministicMutations()) {
-                if (mutation.getRequirements().stream().anyMatch(x -> x instanceof MachineOnlyBreedingRequirement)) continue;
+                if (mutation.getRequirements()
+                    .stream()
+                    .anyMatch(x -> x instanceof MachineOnlyBreedingRequirement)) continue;
                 this.arecipes.add(new CachedBreedingRecipe(mutation));
             }
         } else if (pId.equalsIgnoreCase("item")) {
@@ -167,7 +169,9 @@ public class NEICropsNHCropstickBreedingHandler extends CropsNHNEIHandler {
         // find mutations that create this seed.
         for (ICropMutation mutation : MutationRegistry.instance.getDeterministicMutations()) {
             if (mutation.getOutput() != cc) continue;
-            if (mutation.getRequirements().stream().anyMatch(x -> x instanceof MachineOnlyBreedingRequirement)) continue;
+            if (mutation.getRequirements()
+                .stream()
+                .anyMatch(x -> x instanceof MachineOnlyBreedingRequirement)) continue;
             this.arecipes.add(new CachedBreedingRecipe(mutation));
         }
     }
@@ -181,7 +185,9 @@ public class NEICropsNHCropstickBreedingHandler extends CropsNHNEIHandler {
         ICropCard cc = CropRegistry.instance.get(item);
         if (cc != null) {
             for (ICropMutation mutation : MutationRegistry.instance.getDeterministicMutations()) {
-                if (mutation.getRequirements().stream().anyMatch(x -> x instanceof MachineOnlyBreedingRequirement)) continue;
+                if (mutation.getRequirements()
+                    .stream()
+                    .anyMatch(x -> x instanceof MachineOnlyBreedingRequirement)) continue;
                 if (!mutation.getParents()
                     .contains(cc)) continue;
                 this.arecipes.add(new CachedBreedingRecipe(mutation));

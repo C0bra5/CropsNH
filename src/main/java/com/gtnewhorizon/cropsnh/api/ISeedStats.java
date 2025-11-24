@@ -33,6 +33,7 @@ public interface ISeedStats {
 
     /**
      * Checks if the seed stats are identical.
+     * 
      * @param o The other stats to compare to.
      * @return True if the stats are equal.
      */

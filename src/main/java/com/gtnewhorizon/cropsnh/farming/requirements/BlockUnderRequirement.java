@@ -2,7 +2,6 @@ package com.gtnewhorizon.cropsnh.farming.requirements;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -10,8 +9,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.util.GTUtility;
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;
@@ -36,12 +35,12 @@ import com.gtnewhorizon.cropsnh.utility.Tuple2;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.objects.ItemData;
 import gregtech.api.util.GTOreDictUnificator;
+import gregtech.api.util.GTUtility;
 import gregtech.common.blocks.GTBlockOre;
 import gregtech.common.blocks.TileEntityOres;
-
-import javax.annotation.Nullable;
 
 /**
  * Used to prevent a crop from growing unless there is a specific block under it.
@@ -164,7 +163,8 @@ public class BlockUnderRequirement
     }
 
     @Override
-    public boolean canBreed(ArrayList<ICropCard> parents, IGregTechTileEntity te, ItemStack[] catalysts, int[] consumptionTracker) {
+    public boolean canBreed(ArrayList<ICropCard> parents, IGregTechTileEntity te, ItemStack[] catalysts,
+        int[] consumptionTracker) {
         for (int i = 0; i < catalysts.length; i++) {
             ItemStack stack = catalysts[i];
 
@@ -283,6 +283,5 @@ public class BlockUnderRequirement
         // the nei step will deduplicate stuff later, so we don't have to care about that.
         return ret;
     }
-
 
 }

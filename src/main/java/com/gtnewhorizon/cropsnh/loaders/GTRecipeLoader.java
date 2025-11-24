@@ -2,9 +2,6 @@ package com.gtnewhorizon.cropsnh.loaders;
 
 import static gregtech.api.recipe.RecipeMaps.extruderRecipes;
 
-import com.gtnewhorizon.cropsnh.api.CropsNHCrops;
-import com.gtnewhorizon.cropsnh.init.CropsNHItems;
-import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropBreederRecipeLoader;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -13,6 +10,7 @@ import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.BaseGTRecipeLoader;
+import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropBreederRecipeLoader;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropRecipes;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropsPlusPlusRecipes;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.FertilizerRecipes;

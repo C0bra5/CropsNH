@@ -1,17 +1,19 @@
 package com.gtnewhorizon.cropsnh.loaders.RecipeMapBackends;
 
+import net.minecraft.item.ItemStack;
+
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.SetMultimap;
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ICropMutation;
 import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
 import com.gtnewhorizon.cropsnh.loaders.CropsNHGTRecipeMaps;
+
 import cpw.mods.fml.common.LoaderException;
 import gregtech.api.recipe.RecipeMapBackend;
 import gregtech.api.recipe.RecipeMapBackendPropertiesBuilder;
 import gregtech.api.util.GTRecipe;
 import gregtech.nei.GTNEIDefaultHandler;
-import net.minecraft.item.ItemStack;
 
 public class CropBreederBackend extends RecipeMapBackend {
 
@@ -30,7 +32,8 @@ public class CropBreederBackend extends RecipeMapBackend {
     protected GTRecipe addToItemMap(GTRecipe recipe) {
         ICropMutation mutation = recipe.getMetadata(CropsNHGTRecipeMaps.CROPSNH_CROP_MUTATION_METADATAKEY);
         if (mutation == null) {
-            throw new LoaderException("Attempted to add a recipe to a crop breeder recipe map that doesn't have the mutation metadata!");
+            throw new LoaderException(
+                "Attempted to add a recipe to a crop breeder recipe map that doesn't have the mutation metadata!");
         }
         for (ICropCard cc : mutation.getParents()) {
             cropIndex.put(cc, recipe);

@@ -7,11 +7,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
-import gregtech.api.enums.GTValues;
-import gregtech.api.enums.TierEU;
-import gregtech.api.enums.VoltageIndex;
-import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.util.GTRecipeBuilder;
+import javax.annotation.Nullable;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -27,7 +24,11 @@ import com.gtnewhorizon.cropsnh.farming.requirements.BlockUnderRequirement;
 import com.gtnewhorizon.cropsnh.farming.requirements.breeding.MachineOnlyBreedingRequirement;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 
-import javax.annotation.Nullable;
+import gregtech.api.enums.GTValues;
+import gregtech.api.enums.TierEU;
+import gregtech.api.enums.VoltageIndex;
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.util.GTRecipeBuilder;
 
 public class CropMutation implements ICropMutation {
 
@@ -57,13 +58,22 @@ public class CropMutation implements ICropMutation {
         HashSet<ICropCard> duplicateParentChecker = new HashSet<>();
         duplicateParentChecker.add(parent1);
         if (!duplicateParentChecker.add(parent2)) {
-            throw new IllegalArgumentException("duplicate mutation parent detected for mutation of " + output.getUnlocalizedName() + " @ parent2: " + parent2.getUnlocalizedName());
+            throw new IllegalArgumentException(
+                "duplicate mutation parent detected for mutation of " + output.getUnlocalizedName()
+                    + " @ parent2: "
+                    + parent2.getUnlocalizedName());
         }
         if (parent3 != null && !duplicateParentChecker.add(parent3)) {
-            throw new IllegalArgumentException("duplicate mutation parent detected for mutation of " + output.getUnlocalizedName() + " @ parent3: " + parent2.getUnlocalizedName());
+            throw new IllegalArgumentException(
+                "duplicate mutation parent detected for mutation of " + output.getUnlocalizedName()
+                    + " @ parent3: "
+                    + parent2.getUnlocalizedName());
         }
         if (parent4 != null && !duplicateParentChecker.add(parent4)) {
-            throw new IllegalArgumentException("duplicate mutation parent detected for mutation of " + output.getUnlocalizedName() + " @ parent4: " + parent2.getUnlocalizedName());
+            throw new IllegalArgumentException(
+                "duplicate mutation parent detected for mutation of " + output.getUnlocalizedName()
+                    + " @ parent4: "
+                    + parent2.getUnlocalizedName());
         }
         this.output = output;
         this.parent1 = parent1;
@@ -113,6 +123,7 @@ public class CropMutation implements ICropMutation {
 
     /**
      * Adds a breeding requirement to this mutation.
+     * 
      * @param req The requirement to add.
      */
     public CropMutation addRequirement(IBreedingRequirement req) {
@@ -122,6 +133,7 @@ public class CropMutation implements ICropMutation {
 
     /**
      * Registers the output crop for the given mutation pools.
+     * 
      * @param mutationPools The mutation pools to add to the output crop.
      */
     public CropMutation addToMutationPools(String... mutationPools) {
@@ -132,6 +144,7 @@ public class CropMutation implements ICropMutation {
 
     /**
      * Registers an underblock requirement via it's category id
+     * 
      * @param name the name of the underblock category
      */
     public CropMutation addBlockUnderRequirement(String name) {
@@ -150,6 +163,7 @@ public class CropMutation implements ICropMutation {
     /**
      * Sets the breeding machine recipe eu/t and duration based on a tier value.
      * See code for actual math.
+     * 
      * @param tier The tier value to use for the calculations.
      */
     public CropMutation setBreedingMachineRecipeTier(int tier) {
@@ -160,6 +174,7 @@ public class CropMutation implements ICropMutation {
 
     /**
      * Sets the crop breeder eu/t cost to an arbitrary value.
+     * 
      * @param eut The eu/t of the recipe in the crop breeder.
      */
     public CropMutation setBreedingMachineRecipeEUt(int eut) {
@@ -169,6 +184,7 @@ public class CropMutation implements ICropMutation {
 
     /**
      * Sets the crop breeder eu/t cost to an arbitrary value.
+     * 
      * @param eut The eu/t of the recipe in the crop breeder.
      */
     public CropMutation setBreedingMachineRecipeEUt(long eut) {
@@ -178,6 +194,7 @@ public class CropMutation implements ICropMutation {
 
     /**
      * Sets the crop breeder recipe duration to an arbitrary value.
+     * 
      * @param ticks The eu/t of the recipe in the crop breeder.
      */
     public CropMutation setBreedingMachineRecipeDuration(int ticks) {
@@ -252,7 +269,8 @@ public class CropMutation implements ICropMutation {
     @Override
     public List<List<ItemStack>> getBreedingMachineCatalystsForNEI(boolean useCache) {
         // check cache
-        if (useCache && this.cachedBreedingMachineCatalystsForNEI != null) return this.cachedBreedingMachineCatalystsForNEI;
+        if (useCache && this.cachedBreedingMachineCatalystsForNEI != null)
+            return this.cachedBreedingMachineCatalystsForNEI;
         // generate list
         List<List<ItemStack>> ret = new LinkedList<>();
         // add artificial catalyst
@@ -268,8 +286,6 @@ public class CropMutation implements ICropMutation {
         }
         return this.cachedBreedingMachineCatalystsForNEI = ret;
     }
-
-
 
     @Override
     public int getBreedingMachineRecipeEUt() {

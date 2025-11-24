@@ -1,24 +1,27 @@
 package com.gtnewhorizon.cropsnh.loaders.RecipeMapFrontends;
 
+import java.util.List;
+
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
+
 import com.gtnewhorizons.modularui.api.math.Alignment;
+
 import gregtech.api.recipe.BasicUIPropertiesBuilder;
 import gregtech.api.recipe.NEIRecipePropertiesBuilder;
 import gregtech.api.recipe.RecipeMapFrontend;
 import gregtech.nei.GTNEIDefaultHandler;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
-
-import java.util.List;
 
 public class CropBreederFrontend extends RecipeMapFrontend {
 
     public CropBreederFrontend(BasicUIPropertiesBuilder uiPropertiesBuilder,
-                               NEIRecipePropertiesBuilder neiPropertiesBuilder) {
+        NEIRecipePropertiesBuilder neiPropertiesBuilder) {
         super(uiPropertiesBuilder, neiPropertiesBuilder);
     }
 
     @Override
-    protected List<String> handleNEIItemOutputTooltip(List<String> currentTip, GTNEIDefaultHandler.FixedPositionedStack pStack) {
+    protected List<String> handleNEIItemOutputTooltip(List<String> currentTip,
+        GTNEIDefaultHandler.FixedPositionedStack pStack) {
         currentTip = super.handleNEIItemOutputTooltip(currentTip, pStack);
         currentTip.add(
             EnumChatFormatting.RESET
