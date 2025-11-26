@@ -31,9 +31,7 @@ import codechicken.nei.recipe.HandlerInfo;
 public class NEICropsNHMutationPoolHandler extends CropsNHNEIHandler {
 
     // this is a class which handles the recipe for crop products (has to contain a CachedRecipe for the products)
-    private static final String id = "cropsNHMutationPool";
-    // not static because language can be changed on the fly
-    private final String name = StatCollector.translateToLocal("cropsnh_nei." + id + ".title");
+    private static final String id = "mutationPool";;
 
     public static final int X_SeedStart = 3;
     public static final int Y_SeedStart = 1;
@@ -64,7 +62,7 @@ public class NEICropsNHMutationPoolHandler extends CropsNHNEIHandler {
         public CachedMutationPoolRecipe(IMutationPool pool, ItemStack firstStack, ICropCard firstCrop) {
 
             this.poolNameLine = StatCollector.translateToLocalFormatted(
-                "cropsnh_nei.cropsNHMutationPool.poolName",
+                "cropsnh_nei.mutationPool.poolName",
                 StatCollector.translateToLocal(pool.getUnlocalisedName()));
 
             int i = 0;
@@ -175,7 +173,7 @@ public class NEICropsNHMutationPoolHandler extends CropsNHNEIHandler {
     // returns the name for this recipe
     @Override
     public String getRecipeName() {
-        return name;
+        return StatCollector.translateToLocal("cropsnh_nei.mutationPool.poolName");
     }
 
     // returns the id for this recipe

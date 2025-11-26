@@ -31,8 +31,6 @@ public class NEICropsNHCropstickBreedingHandler extends CropsNHNEIHandler {
 
     // this is a class which handles the recipe for crop products (has to contain a CachedRecipe for the products)
     private static final String id = "cropsNHBreeding";
-    // not static because language can be changed on the fly
-    private final String name = StatCollector.translateToLocal("cropsnh_nei." + id + ".title");
 
     public static final int X_seed = 75;
     public static final int Y_seed = 22;
@@ -227,7 +225,7 @@ public class NEICropsNHCropstickBreedingHandler extends CropsNHNEIHandler {
     // returns the name for this recipe
     @Override
     public String getRecipeName() {
-        return name;
+        return StatCollector.translateToLocal("cropsnh_nei.breeding.title");
     }
 
     // returns the id for this recipe

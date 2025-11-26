@@ -36,8 +36,6 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
 
     // this is a class which handles the recipe for crop products (has to contain a CachedRecipe for the products)
     private static final String id = "cropsNHCrops";
-    // not static because language can be changed on the fly
-    private final String name = StatCollector.translateToLocal("cropsnh_nei." + id + ".title");
 
     public static final int X_seed = 33;
     public static final int Y_seed = 20;
@@ -102,9 +100,9 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
 
             // register lines
             // spotless:off
-            this.textLines.add(StatCollector.translateToLocalFormatted("cropsnh_nei.cropsNHCrops.tier", crop.getTier()));
-            this.textLines.add(StatCollector.translateToLocalFormatted( "cropsnh_nei.cropsNHCrops.growthDuration", GTUtility.formatNumbers(crop.getGrowthDuration())));
-            this.textLines.add(StatCollector.translateToLocalFormatted( "cropsnh_nei.cropsNHCrops.dropMult", GTUtility.formatNumbers(crop.getDropChance())));
+            this.textLines.add(StatCollector.translateToLocalFormatted("cropsnh_nei.crops.tier", crop.getTier()));
+            this.textLines.add(StatCollector.translateToLocalFormatted( "cropsnh_nei.rops.growthDuration", GTUtility.formatNumbers(crop.getGrowthDuration())));
+            this.textLines.add(StatCollector.translateToLocalFormatted( "cropsnh_nei.rops.dropMult", GTUtility.formatNumbers(crop.getDropChance())));
             //spotless:on
 
             for (IGrowthRequirement req : crop.getGrowthRequirements()) {
@@ -239,7 +237,7 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
     // returns the name for this recipe
     @Override
     public String getRecipeName() {
-        return name;
+        return StatCollector.translateToLocal("cropsnh_nei.crops.title");
     }
 
     // returns the id for this recipe

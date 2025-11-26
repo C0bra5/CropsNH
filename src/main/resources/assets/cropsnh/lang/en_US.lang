@@ -171,17 +171,17 @@ cropsnh_tooltip.leaf.uum=UUM in Berry Form.
 
 
 # NEI Compat
-cropsnh_nei.cropsNHDeterministicBreeding.title=Crop Breeding
-cropsnh_nei.cropsNHCropGroups.title=Crop Groups
-cropsnh_nei.cropsNHCrops.title=Crops
-cropsnh_nei.cropsNHCrops.tier=Tier: %d
-cropsnh_nei.cropsNHCrops.growthDuration=Growth Points: %1$s
-cropsnh_nei.cropsNHCrops.dropMult=Drop Multiplier: %1$0.2f
-cropsnh_nei.cropsNHMutationPool.title=Crop Mutation Pools
-cropsnh_nei.cropsNHMutationPool.poolName=Pool: %1$s
-cropsnh_nei.cropsNHBreeding.title=Crop Breeding
-cropsnh_nei.cropsNHSeedGenerator.tooltip.fluidCost=cost = 100L * (growth + gain + resistance)
-cropsnh_nei.cropsNHCropBreeder.tooltip.outputStats=The resulting stats will be an average of the parents.
+cropsnh_nei.deterministicBreeding.title=Crop Breeding
+cropsnh_nei.cropGroups.title=Crop Groups
+cropsnh_nei.crops.title=Crops
+cropsnh_nei.crops.tier=Tier: %d
+cropsnh_nei.crops.growthDuration=Growth Points: %1$s
+cropsnh_nei.crops.dropMult=Drop Multiplier: %1$0.2f
+cropsnh_nei.mutationPool.title=Crop Mutation Pools
+cropsnh_nei.mutationPool.poolName=Pool: %1$s
+cropsnh_nei.breeding.title=Crop Breeding
+cropsnh_nei.seedGenerator.tooltip.fluidCost=cost = 100L * (growth + gain + resistance)
+cropsnh_nei.cropBreeder.tooltip.outputStats=The resulting stats will be an average of the parents.
 cropsnh.recipes.seedGenerator=Seed Generator
 cropsnh.recipes.cropBreeder=Crop Breeder
 cropsnh.recipes.cropGeneExtractor=Crop Gene Extractor

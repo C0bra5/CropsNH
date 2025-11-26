@@ -1,21 +1,19 @@
 package com.gtnewhorizon.cropsnh.recipes.frontends;
 
-import java.util.List;
-
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
-
 import com.gtnewhorizons.modularui.api.math.Alignment;
-
 import gregtech.api.recipe.BasicUIPropertiesBuilder;
 import gregtech.api.recipe.NEIRecipePropertiesBuilder;
 import gregtech.api.recipe.RecipeMapFrontend;
 import gregtech.nei.GTNEIDefaultHandler;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 
-public class SeedGeneratorFrontend extends RecipeMapFrontend {
+import java.util.List;
 
-    public SeedGeneratorFrontend(BasicUIPropertiesBuilder uiPropertiesBuilder,
-        NEIRecipePropertiesBuilder neiPropertiesBuilder) {
+public class CropSynthesizerFrontend extends RecipeMapFrontend {
+
+    public CropSynthesizerFrontend(BasicUIPropertiesBuilder uiPropertiesBuilder,
+                                   NEIRecipePropertiesBuilder neiPropertiesBuilder) {
         super(uiPropertiesBuilder, neiPropertiesBuilder);
     }
 
@@ -25,7 +23,7 @@ public class SeedGeneratorFrontend extends RecipeMapFrontend {
         if (pStack.isFluid()) {
             currentTip.add(
                 EnumChatFormatting.RESET
-                    + StatCollector.translateToLocal("cropsnh_nei.seedGenerator.tooltip.fluidCost"));
+                    + StatCollector.translateToLocal("cropsnh_nei.cropSynthesizer.tooltip.outputStats"));
             return currentTip;
         }
         return super.handleNEIItemInputTooltip(currentTip, pStack);
