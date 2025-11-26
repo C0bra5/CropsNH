@@ -1,4 +1,4 @@
-package com.gtnewhorizon.cropsnh.loaders.RecipeMapBackends;
+package com.gtnewhorizon.cropsnh.recipes.backends;
 
 import net.minecraft.item.ItemStack;
 

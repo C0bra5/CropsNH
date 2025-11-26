@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 import com.gtnewhorizon.cropsnh.api.ISeedData;
 import com.gtnewhorizon.cropsnh.loaders.CropsNHGTRecipeMaps;
-import com.gtnewhorizon.cropsnh.loaders.RecipeMapBackends.CropGeneExtractorBackend;
+import com.gtnewhorizon.cropsnh.recipes.backends.CropGeneExtractorBackend;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 
 import codechicken.nei.recipe.TemplateRecipeHandler;

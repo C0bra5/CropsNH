@@ -1,4 +1,4 @@
-package com.gtnewhorizon.cropsnh.loaders.RecipeMapFrontends;
+package com.gtnewhorizon.cropsnh.recipes.frontends;
 
 import java.util.List;
 

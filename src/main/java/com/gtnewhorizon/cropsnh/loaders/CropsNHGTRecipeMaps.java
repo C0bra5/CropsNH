@@ -5,12 +5,12 @@ import java.util.Locale;
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ICropMutation;
 import com.gtnewhorizon.cropsnh.init.CropsNHUITextures;
-import com.gtnewhorizon.cropsnh.loaders.RecipeMapBackends.CropBreederBackend;
-import com.gtnewhorizon.cropsnh.loaders.RecipeMapBackends.CropGeneExtractorBackend;
-import com.gtnewhorizon.cropsnh.loaders.RecipeMapBackends.SeedGeneratorBackend;
-import com.gtnewhorizon.cropsnh.loaders.RecipeMapFrontends.CropBreederFrontend;
-import com.gtnewhorizon.cropsnh.loaders.RecipeMapFrontends.CropGeneExtractorFrontend;
-import com.gtnewhorizon.cropsnh.loaders.RecipeMapFrontends.SeedGeneratorFrontend;
+import com.gtnewhorizon.cropsnh.recipes.backends.CropBreederBackend;
+import com.gtnewhorizon.cropsnh.recipes.backends.CropGeneExtractorBackend;
+import com.gtnewhorizon.cropsnh.recipes.backends.SeedGeneratorBackend;
+import com.gtnewhorizon.cropsnh.recipes.frontends.CropBreederFrontend;
+import com.gtnewhorizon.cropsnh.recipes.frontends.CropGeneExtractorFrontend;
+import com.gtnewhorizon.cropsnh.recipes.frontends.SeedGeneratorFrontend;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 
 import gregtech.api.gui.modularui.GTUITextures;
