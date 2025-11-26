@@ -7,7 +7,7 @@ import com.google.common.collect.SetMultimap;
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ICropMutation;
 import com.gtnewhorizon.cropsnh.api.ISeedData;
-import com.gtnewhorizon.cropsnh.loaders.CropsNHGTRecipeMaps;
+import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 
 import cpw.mods.fml.common.LoaderException;

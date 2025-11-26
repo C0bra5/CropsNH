@@ -10,9 +10,10 @@ import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.BaseGTRecipeLoader;
-import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropBreederRecipeLoader;
+import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropBreederFakeRecipeLoader;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropGeneExtractorFakeRecipeLoader;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropRecipes;
+import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropSynthesizerFakeRecipeLoader;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropsPlusPlusRecipes;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.FertilizerRecipes;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.SeedGeneratorFakeRecipeLoader;
@@ -35,8 +36,9 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         FertilizerRecipes.postInit();
         CropsPlusPlusRecipes.postInit();
         SeedGeneratorFakeRecipeLoader.postInit();
-        CropBreederRecipeLoader.postInit();
+        CropBreederFakeRecipeLoader.postInit();
         CropGeneExtractorFakeRecipeLoader.postInit();
+        CropSynthesizerFakeRecipeLoader.postInit();
 
         addPlantLensRecipe();
         AddSpadeRecipes();
@@ -45,6 +47,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         AddSeedGeneratorRecipes();
         AddCropBreederRecipes();
         addCropGeneExtractorRecipes();
+        addCropSynthesizerRecipes();
         AddNanCertificateRecipe();
     }
 
@@ -151,21 +154,48 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
 
     private static void addCropGeneExtractorRecipes() {
         int tier = VoltageIndex.EV;
+        String topLine = "SES";
+        String bottomLine = "CSC";
         for (CropsNHItemList geneExtractor : CROP_GENE_EXTRACTORS) {
             GTModHandler.addMachineCraftingRecipe(
                 geneExtractor.get(1),
                 GTModHandler.RecipeBits.BITSD,
                 new Object[] {
                     // spotless:off
-                    // TODO: flip the top and bottom rows for when crops++ gets yeeted
-                    "CSC",
+                    // TODO: remove this anti-collision stuff when crops++ gets the boot
+                    Mods.CropsPlusPlus.isModLoaded() ? bottomLine : topLine,
                     "WHW",
-                    "SES",
+                    Mods.CropsPlusPlus.isModLoaded() ? topLine : bottomLine,
                     'S', MTEBasicMachineWithRecipe.X.SENSOR,
                     'E', MTEBasicMachineWithRecipe.X.EMITTER,
                     'W', MTEBasicMachineWithRecipe.X.WIRE,
                     'H', MTEBasicMachineWithRecipe.X.HULL,
                     'C', MTEBasicMachineWithRecipe.X.BETTER_CIRCUIT,
+                    // spotless:on
+                },
+                tier);
+            tier++;
+        }
+    }
+
+    private static void addCropSynthesizerRecipes() {
+        int tier = VoltageIndex.EV;
+        String topLine = "FCF";
+        String bottomLine = "EEE";
+        for (CropsNHItemList cropSynthesizer : CROP_SYNTHESIZERS) {
+            GTModHandler.addMachineCraftingRecipe(
+                cropSynthesizer.get(1),
+                GTModHandler.RecipeBits.BITSD,
+                new Object[] {
+                    // spotless:off
+                    // TODO: remove this anti-collision stuff when crops++ gets the boot
+                    Mods.CropsPlusPlus.isModLoaded() ? bottomLine : topLine,
+                    "CHC",
+                    Mods.CropsPlusPlus.isModLoaded() ? topLine : bottomLine,
+                    'E', MTEBasicMachineWithRecipe.X.EMITTER,
+                    'C', MTEBasicMachineWithRecipe.X.BETTER_CIRCUIT,
+                    'H', MTEBasicMachineWithRecipe.X.HULL,
+                    'F', MTEBasicMachineWithRecipe.X.FIELD_GENERATOR,
                     // spotless:on
                 },
                 tier);
@@ -203,6 +233,11 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         CropsNHItemList.CropGeneExtractor_UV, CropsNHItemList.CropGeneExtractor_UHV,
         CropsNHItemList.CropGeneExtractor_UEV, CropsNHItemList.CropGeneExtractor_UIV,
         CropsNHItemList.CropGeneExtractor_UMV };
+
+    private static final CropsNHItemList[] CROP_SYNTHESIZERS = new CropsNHItemList[] {
+        CropsNHItemList.CropSynthesizer_EV, CropsNHItemList.CropSynthesizer_IV, CropsNHItemList.CropSynthesizer_LuV,
+        CropsNHItemList.CropSynthesizer_ZPM, CropsNHItemList.CropSynthesizer_UV, CropsNHItemList.CropSynthesizer_UHV,
+        CropsNHItemList.CropSynthesizer_UEV, CropsNHItemList.CropSynthesizer_UIV, CropsNHItemList.CropSynthesizer_UMV };
 
     // I should probably PR that capability into the MTEBasicMachineWithRecipe thing
     private static final ItemList[] INPUT_HATCHES = new ItemList[] { ItemList.Hatch_Input_LV, ItemList.Hatch_Input_MV,

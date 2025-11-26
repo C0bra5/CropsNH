@@ -11,7 +11,7 @@ import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.MutationPoolRegistryDu
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.SoilRegistryDumper;
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
-import com.gtnewhorizon.cropsnh.loaders.CropsNHGTRecipeMaps;
+import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 
@@ -70,6 +70,10 @@ public class NEIConfig implements IConfigureNEI {
         addHandler(
             new CropsNHNEICropGeneExtractorHandler(
                 CropsNHGTRecipeMaps.fakeCropGeneExtractorRecipeMap.getDefaultRecipeCategory()));
+        // crop synthesizer
+        addHandler(
+            new CropsNHNEICropSynthesizerHandler(
+                CropsNHGTRecipeMaps.fakeCropSynthesizerRecipeMap.getDefaultRecipeCategory()));
     }
 
     private static void registerNEIHandler(CropsNHNEIHandler handler) {

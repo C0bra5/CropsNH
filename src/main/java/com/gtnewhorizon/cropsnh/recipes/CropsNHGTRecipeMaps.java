@@ -1,4 +1,4 @@
-package com.gtnewhorizon.cropsnh.loaders;
+package com.gtnewhorizon.cropsnh.recipes;
 
 import java.util.Locale;
 
@@ -7,11 +7,14 @@ import com.gtnewhorizon.cropsnh.api.ICropMutation;
 import com.gtnewhorizon.cropsnh.init.CropsNHUITextures;
 import com.gtnewhorizon.cropsnh.recipes.backends.CropBreederBackend;
 import com.gtnewhorizon.cropsnh.recipes.backends.CropGeneExtractorBackend;
+import com.gtnewhorizon.cropsnh.recipes.backends.CropSynthesizerBackend;
 import com.gtnewhorizon.cropsnh.recipes.backends.SeedGeneratorBackend;
 import com.gtnewhorizon.cropsnh.recipes.frontends.CropBreederFrontend;
 import com.gtnewhorizon.cropsnh.recipes.frontends.CropGeneExtractorFrontend;
+import com.gtnewhorizon.cropsnh.recipes.frontends.CropSynthesizerFrontend;
 import com.gtnewhorizon.cropsnh.recipes.frontends.SeedGeneratorFrontend;
 import com.gtnewhorizon.cropsnh.reference.Reference;
+import com.gtnewhorizon.cropsnh.tileentity.MTECropSynthesizer;
 
 import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.recipe.RecipeMap;
@@ -67,6 +70,21 @@ public class CropsNHGTRecipeMaps {
             }
             if (isOutput && !isFluid && index == 0) {
                 return GTUITextures.OVERLAY_SLOT_DATA_ORB;
+            }
+            return null;
+        })
+        .build();
+
+    public static final RecipeMap<CropSynthesizerBackend> fakeCropSynthesizerRecipeMap = RecipeMapBuilder
+        .of(Reference.MOD_ID.toLowerCase(Locale.ROOT) + ".recipes.cropSynthesizer", CropSynthesizerBackend::new)
+        .maxIO(4, 1, 1, 0)
+        .minInputs(4, 1)
+        .frontend(CropSynthesizerFrontend::new)
+        .amperage(MTECropSynthesizer.AMPERAGE)
+        .disableRegisterNEI()
+        .slotOverlays((index, isFluid, isOutput, isSpecial) -> {
+            if (!isFluid && !isSpecial) {
+                return isOutput ? CropsNHUITextures.OVERLAY_SLOT_SEED : GTUITextures.OVERLAY_SLOT_DATA_ORB;
             }
             return null;
         })

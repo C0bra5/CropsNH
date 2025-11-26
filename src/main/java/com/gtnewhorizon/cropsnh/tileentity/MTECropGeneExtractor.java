@@ -23,10 +23,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ISeedData;
 import com.gtnewhorizon.cropsnh.init.CropsNHUITextures;
-import com.gtnewhorizon.cropsnh.loaders.CropsNHGTRecipeMaps;
+import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
 import com.gtnewhorizon.cropsnh.reference.Names;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
-import com.gtnewhorizons.modularui.api.drawable.FallbackableUITexture;
 import com.gtnewhorizons.modularui.api.drawable.IDrawable;
 import com.gtnewhorizons.modularui.api.math.Pos2d;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
@@ -204,6 +203,10 @@ public class MTECropGeneExtractor extends MTEBasicMachine {
         return circuit == 1 ? DURATION_SPECIMEN : DURATION_STAT;
     }
 
+    public static int getRecipeEUt(ICropCard cc) {
+        return (int) (GTValues.VP[MTECropGeneExtractor.getVoltageTierForCrop(cc)]);
+    }
+
     public static int getVoltageTierForCrop(ICropCard cc) {
         return Math.min(VoltageIndex.UMV, Math.max(VoltageIndex.EV, cc.getMachineBreedingRecipeTier()));
     }
@@ -243,16 +246,6 @@ public class MTECropGeneExtractor extends MTEBasicMachine {
     @Override
     public boolean allowSelectCircuit() {
         return true;
-    }
-
-    private static final FallbackableUITexture progressBarTexture = GTUITextures
-        .fallbackableProgressbar("crop_gene_extractor", GTUITextures.PROGRESSBAR_ARROW);
-
-    @Override
-    protected BasicUIProperties getUIProperties() {
-        return super.getUIProperties().toBuilder()
-            .progressBarTexture(progressBarTexture)
-            .build();
     }
 
     @Override

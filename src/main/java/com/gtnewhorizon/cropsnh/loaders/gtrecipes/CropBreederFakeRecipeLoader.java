@@ -12,7 +12,7 @@ import net.minecraftforge.fluids.FluidStack;
 import com.gtnewhorizon.cropsnh.api.ICropMutation;
 import com.gtnewhorizon.cropsnh.farming.SeedStats;
 import com.gtnewhorizon.cropsnh.farming.registries.MutationRegistry;
-import com.gtnewhorizon.cropsnh.loaders.CropsNHGTRecipeMaps;
+import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
 import com.gtnewhorizon.cropsnh.reference.Names;
 import com.gtnewhorizon.cropsnh.tileentity.MTECropBreeder;
 
@@ -21,7 +21,7 @@ import gregtech.api.enums.GTValues;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeBuilder;
 
-public class CropBreederRecipeLoader extends BaseGTRecipeLoader {
+public class CropBreederFakeRecipeLoader extends BaseGTRecipeLoader {
 
     public static void postInit() {
         for (ICropMutation mutation : MutationRegistry.instance.getDeterministicMutations()) {

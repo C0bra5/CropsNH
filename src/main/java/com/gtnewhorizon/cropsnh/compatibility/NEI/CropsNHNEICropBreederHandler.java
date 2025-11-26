@@ -8,7 +8,7 @@ import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ICropMutation;
 import com.gtnewhorizon.cropsnh.farming.SeedStats;
 import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
-import com.gtnewhorizon.cropsnh.loaders.CropsNHGTRecipeMaps;
+import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
 import com.gtnewhorizon.cropsnh.recipes.backends.CropBreederBackend;
 
 import codechicken.nei.recipe.TemplateRecipeHandler;

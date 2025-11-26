@@ -24,8 +24,7 @@ public class CropBreederFrontend extends RecipeMapFrontend {
         GTNEIDefaultHandler.FixedPositionedStack pStack) {
         currentTip = super.handleNEIItemOutputTooltip(currentTip, pStack);
         currentTip.add(
-            EnumChatFormatting.RESET
-                + StatCollector.translateToLocal("cropsnh_nei.cropBreeder.tooltip.outputStats"));
+            EnumChatFormatting.RESET + StatCollector.translateToLocal("cropsnh_nei.cropBreeder.tooltip.outputStats"));
         return currentTip;
     }
 

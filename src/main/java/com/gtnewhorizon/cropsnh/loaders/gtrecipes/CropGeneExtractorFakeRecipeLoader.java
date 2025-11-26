@@ -6,7 +6,7 @@ import net.minecraft.util.StatCollector;
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.farming.SeedStats;
 import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
-import com.gtnewhorizon.cropsnh.loaders.CropsNHGTRecipeMaps;
+import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
 import com.gtnewhorizon.cropsnh.tileentity.MTECropGeneExtractor;
 
 import gregtech.api.enums.GTValues;
@@ -57,7 +57,7 @@ public abstract class CropGeneExtractorFakeRecipeLoader extends BaseGTRecipeLoad
             ItemStack seedStack = cc.getSeedItem(SeedStats.DEFAULT_ANALYZED);
 
             GTRecipeBuilder template = GTValues.RA.stdBuilder()
-                .eut(GTValues.VP[MTECropGeneExtractor.getVoltageTierForCrop(cc)])
+                .eut(MTECropGeneExtractor.getRecipeEUt(cc))
                 .metadata(CropsNHGTRecipeMaps.CROPSNH_CROP_METADATAKEY, cc)
                 .special(ItemList.Tool_DataOrb.get(1L))
                 .ignoreCollision()

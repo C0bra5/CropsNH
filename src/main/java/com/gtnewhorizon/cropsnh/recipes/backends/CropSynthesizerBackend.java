@@ -1,5 +1,8 @@
 package com.gtnewhorizon.cropsnh.recipes.backends;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.item.ItemStack;
 
 import com.google.common.collect.LinkedHashMultimap;
@@ -14,14 +17,14 @@ import gregtech.api.recipe.RecipeMapBackendPropertiesBuilder;
 import gregtech.api.util.GTRecipe;
 import gregtech.nei.GTNEIDefaultHandler;
 
-public class SeedGeneratorBackend extends RecipeMapBackend {
+public class CropSynthesizerBackend extends RecipeMapBackend {
 
-    public final SetMultimap<ICropCard, GTRecipe> cropIndex = LinkedHashMultimap.create();
+    public final Map<ICropCard, GTRecipe> cropIndex = new HashMap<>();
     public boolean cached = false;
     public final SetMultimap<ICropCard, GTNEIDefaultHandler.CachedDefaultRecipe> cropCacheIndex = LinkedHashMultimap
         .create();
 
-    public SeedGeneratorBackend(RecipeMapBackendPropertiesBuilder propertiesBuilder) {
+    public CropSynthesizerBackend(RecipeMapBackendPropertiesBuilder propertiesBuilder) {
         super(propertiesBuilder);
     }
 

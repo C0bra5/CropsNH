@@ -180,15 +180,18 @@ cropsnh_nei.crops.dropMult=Drop Multiplier: %1$0.2f
 cropsnh_nei.mutationPool.title=Crop Mutation Pools
 cropsnh_nei.mutationPool.poolName=Pool: %1$s
 cropsnh_nei.breeding.title=Crop Breeding
-cropsnh_nei.seedGenerator.tooltip.fluidCost=cost = 100L * (growth + gain + resistance)
-cropsnh_nei.cropBreeder.tooltip.outputStats=The resulting stats will be an average of the parents.
 cropsnh.recipes.seedGenerator=Seed Generator
+cropsnh_nei.seedGenerator.tooltip.fluidCost=cost = 100L * (growth + gain + resistance)
 cropsnh.recipes.cropBreeder=Crop Breeder
+cropsnh_nei.cropBreeder.tooltip.outputStats=The resulting stats will be an average of the parents.
 cropsnh.recipes.cropGeneExtractor=Crop Gene Extractor
 cropsnh_nei.cropGeneExtractor.tooltip.scanSpecimen=Scanned Specimen Data
 cropsnh_nei.cropGeneExtractor.tooltip.scanGrowth=Scanned Growth Data
 cropsnh_nei.cropGeneExtractor.tooltip.scanGain=Scanned Gain Data
 cropsnh_nei.cropGeneExtractor.tooltip.scanResistance=Scanned Resistance Data
+cropsnh.recipes.cropSynthesizer=Crop Synthesizer
+cropsnh_nei.cropSynthesizer.tooltip.fluidCost=cost = CropTier * 750L * (growth + gain + resistance) * 100L
+cropsnh_nei.cropSynthesizer.tooltip.output=Stat depends on the values from the data orbs.
 nei.options.tools.dump.cropsnh=Crops NH
 nei.options.tools.dump.cropsnh.alternateSeed=Alternate Seeds
 nei.options.tools.dump.cropsnh.cropRegistry=Crops

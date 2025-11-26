@@ -37,20 +37,17 @@ import com.gtnewhorizon.cropsnh.farming.registries.MutationRegistry;
 import com.gtnewhorizon.cropsnh.init.CropsNHFluids;
 import com.gtnewhorizon.cropsnh.init.CropsNHUITextures;
 import com.gtnewhorizon.cropsnh.items.ItemGenericSeed;
-import com.gtnewhorizon.cropsnh.loaders.CropsNHGTRecipeMaps;
-import com.gtnewhorizons.modularui.api.drawable.FallbackableUITexture;
+import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
 import com.gtnewhorizons.modularui.api.drawable.IDrawable;
 import com.gtnewhorizons.modularui.api.math.Pos2d;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 
 import gregtech.api.enums.SoundResource;
 import gregtech.api.enums.VoltageIndex;
-import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEBasicMachine;
-import gregtech.api.recipe.BasicUIProperties;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTUtility;
@@ -286,16 +283,6 @@ public class MTECropBreeder extends MTEBasicMachine {
     @Override
     public int getCapacity() {
         return getCapacityForTier(mTier);
-    }
-
-    private static final FallbackableUITexture progressBarTexture = GTUITextures
-        .fallbackableProgressbar("crop_replicator", GTUITextures.PROGRESSBAR_ARROW);
-
-    @Override
-    protected BasicUIProperties getUIProperties() {
-        return super.getUIProperties().toBuilder()
-            .progressBarTexture(progressBarTexture)
-            .build();
     }
 
     @Override

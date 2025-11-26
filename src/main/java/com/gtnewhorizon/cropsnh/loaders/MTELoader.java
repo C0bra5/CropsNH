@@ -4,6 +4,7 @@ import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.tileentity.MTECropBreeder;
 import com.gtnewhorizon.cropsnh.tileentity.MTECropGeneExtractor;
 import com.gtnewhorizon.cropsnh.tileentity.MTECropManager;
+import com.gtnewhorizon.cropsnh.tileentity.MTECropSynthesizer;
 import com.gtnewhorizon.cropsnh.tileentity.MTESeedGenerator;
 
 import gregtech.api.enums.VoltageIndex;
@@ -104,6 +105,25 @@ public class MTELoader {
             .set(new MTECropGeneExtractor(28044, VoltageIndex.UIV, "Epic Crop Gene Extractor III").getStackForm(1L));
         CropsNHItemList.CropGeneExtractor_UMV
             .set(new MTECropGeneExtractor(28045, VoltageIndex.UMV, "Epic Crop Gene Extractor IV").getStackForm(1L));
+
+        CropsNHItemList.CropSynthesizer_EV
+            .set(new MTECropSynthesizer(28046, VoltageIndex.EV, "Crop Synthesizer").getStackForm(1L));
+        CropsNHItemList.CropSynthesizer_IV
+            .set(new MTECropSynthesizer(28047, VoltageIndex.IV, "Advanced Crop Synthesizer").getStackForm(1L));
+        CropsNHItemList.CropSynthesizer_LuV
+            .set(new MTECropSynthesizer(28048, VoltageIndex.LuV, "Elite Crop Synthesizer").getStackForm(1L));
+        CropsNHItemList.CropSynthesizer_ZPM
+            .set(new MTECropSynthesizer(28049, VoltageIndex.ZPM, "Elite Crop Synthesizer II").getStackForm(1L));
+        CropsNHItemList.CropSynthesizer_UV
+            .set(new MTECropSynthesizer(28050, VoltageIndex.UV, "Ultimate Crop Synthesizer").getStackForm(1L));
+        CropsNHItemList.CropSynthesizer_UHV
+            .set(new MTECropSynthesizer(28051, VoltageIndex.UHV, "Epic Crop Synthesizer").getStackForm(1L));
+        CropsNHItemList.CropSynthesizer_UEV
+            .set(new MTECropSynthesizer(28052, VoltageIndex.UEV, "Epic Crop Synthesizer II").getStackForm(1L));
+        CropsNHItemList.CropSynthesizer_UIV
+            .set(new MTECropSynthesizer(28053, VoltageIndex.UIV, "Epic Crop Synthesizer III").getStackForm(1L));
+        CropsNHItemList.CropSynthesizer_UMV
+            .set(new MTECropSynthesizer(28054, VoltageIndex.UMV, "Epic Crop Synthesizer IV").getStackForm(1L));
     }
 
 }
