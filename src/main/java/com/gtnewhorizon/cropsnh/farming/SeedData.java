@@ -29,6 +29,11 @@ public class SeedData implements ISeedData {
 
     @Override
     public ISeedStats getStats() {
-        return stats;
+        return this.stats;
+    }
+
+    @Override
+    public ItemStack getStack() {
+        return this.stack;
     }
 }

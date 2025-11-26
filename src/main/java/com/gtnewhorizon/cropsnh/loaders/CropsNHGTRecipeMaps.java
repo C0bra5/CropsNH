@@ -6,11 +6,14 @@ import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ICropMutation;
 import com.gtnewhorizon.cropsnh.init.CropsNHUITextures;
 import com.gtnewhorizon.cropsnh.loaders.RecipeMapBackends.CropBreederBackend;
+import com.gtnewhorizon.cropsnh.loaders.RecipeMapBackends.CropGeneExtractorBackend;
 import com.gtnewhorizon.cropsnh.loaders.RecipeMapBackends.SeedGeneratorBackend;
 import com.gtnewhorizon.cropsnh.loaders.RecipeMapFrontends.CropBreederFrontend;
+import com.gtnewhorizon.cropsnh.loaders.RecipeMapFrontends.CropGeneExtractorFrontend;
 import com.gtnewhorizon.cropsnh.loaders.RecipeMapFrontends.SeedGeneratorFrontend;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 
+import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMapBuilder;
 import gregtech.api.recipe.RecipeMetadataKey;
@@ -46,6 +49,24 @@ public class CropsNHGTRecipeMaps {
         .slotOverlays((index, isFluid, isOutput, isSpecial) -> {
             if (isOutput && !isFluid && index == 0) {
                 return CropsNHUITextures.OVERLAY_SLOT_SEED;
+            }
+            return null;
+        })
+        .build();
+
+    public static final RecipeMap<CropGeneExtractorBackend> fakeCropGeneExtractorRecipeMap = RecipeMapBuilder
+        .of(Reference.MOD_ID.toLowerCase(Locale.ROOT) + ".recipes.cropGeneExtractor", CropGeneExtractorBackend::new)
+        .maxIO(2, 1, 0, 0)
+        .minInputs(2, 0)
+        .useSpecialSlot()
+        .frontend(CropGeneExtractorFrontend::new)
+        .disableRegisterNEI()
+        .slotOverlays((index, isFluid, isOutput, isSpecial) -> {
+            if (!isOutput && !isFluid && index == 0) {
+                return CropsNHUITextures.OVERLAY_SLOT_SEED;
+            }
+            if (isOutput && !isFluid && index == 0) {
+                return GTUITextures.OVERLAY_SLOT_DATA_ORB;
             }
             return null;
         })

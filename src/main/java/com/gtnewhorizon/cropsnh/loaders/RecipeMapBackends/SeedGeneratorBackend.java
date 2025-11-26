@@ -5,8 +5,9 @@ import net.minecraft.item.ItemStack;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.SetMultimap;
 import com.gtnewhorizon.cropsnh.api.ICropCard;
-import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
+import com.gtnewhorizon.cropsnh.api.ISeedData;
 import com.gtnewhorizon.cropsnh.loaders.CropsNHGTRecipeMaps;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 
 import gregtech.api.recipe.RecipeMapBackend;
 import gregtech.api.recipe.RecipeMapBackendPropertiesBuilder;
@@ -33,7 +34,7 @@ public class SeedGeneratorBackend extends RecipeMapBackend {
 
     @Override
     public boolean containsInput(ItemStack item) {
-        ICropCard cc = CropRegistry.instance.get(item, false);
-        return (cc != null && cropIndex.containsKey(cc)) || super.containsInput(item);
+        ISeedData seedData = CropsNHUtils.getAnalyzedSeedData(item);
+        return (seedData != null && cropIndex.containsKey(seedData.getCrop())) || super.containsInput(item);
     }
 }

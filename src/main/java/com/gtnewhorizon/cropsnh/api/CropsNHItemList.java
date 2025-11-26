@@ -54,6 +54,16 @@ public enum CropsNHItemList {
     CropBreeder_UIV,
     CropBreeder_UMV,
 
+    CropGeneExtractor_EV,
+    CropGeneExtractor_IV,
+    CropGeneExtractor_LuV,
+    CropGeneExtractor_ZPM,
+    CropGeneExtractor_UV,
+    CropGeneExtractor_UHV,
+    CropGeneExtractor_UEV,
+    CropGeneExtractor_UIV,
+    CropGeneExtractor_UMV,
+
     // food crops
     huckleBerry,
     sugarBeet,

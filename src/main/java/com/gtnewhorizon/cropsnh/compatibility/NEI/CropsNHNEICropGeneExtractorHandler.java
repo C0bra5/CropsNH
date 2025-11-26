@@ -6,22 +6,22 @@ import net.minecraft.item.ItemStack;
 
 import com.gtnewhorizon.cropsnh.api.ISeedData;
 import com.gtnewhorizon.cropsnh.loaders.CropsNHGTRecipeMaps;
-import com.gtnewhorizon.cropsnh.loaders.RecipeMapBackends.SeedGeneratorBackend;
+import com.gtnewhorizon.cropsnh.loaders.RecipeMapBackends.CropGeneExtractorBackend;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import gregtech.api.recipe.RecipeCategory;
 import gregtech.nei.GTNEIDefaultHandler;
 
-public class CropsNHNEISeedGeneratorHandler extends GTNEIDefaultHandler {
+public class CropsNHNEICropGeneExtractorHandler extends GTNEIDefaultHandler {
 
-    public CropsNHNEISeedGeneratorHandler(RecipeCategory recipeCategory) {
+    public CropsNHNEICropGeneExtractorHandler(RecipeCategory recipeCategory) {
         super(recipeCategory);
     }
 
     @Override
     public TemplateRecipeHandler newInstance() {
-        return new CropsNHNEISeedGeneratorHandler(recipeCategory);
+        return new CropsNHNEICropGeneExtractorHandler(recipeCategory);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class CropsNHNEISeedGeneratorHandler extends GTNEIDefaultHandler {
         }
 
         // create the rapid lookup table if needed
-        SeedGeneratorBackend backend = (SeedGeneratorBackend) recipeMap.getBackend();
+        CropGeneExtractorBackend backend = (CropGeneExtractorBackend) recipeMap.getBackend();
         if (!backend.cached) {
             for (CachedDefaultRecipe recipe : getCache()) {
                 backend.cropCacheIndex

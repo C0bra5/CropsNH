@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.loaders;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.tileentity.MTECropBreeder;
+import com.gtnewhorizon.cropsnh.tileentity.MTECropGeneExtractor;
 import com.gtnewhorizon.cropsnh.tileentity.MTECropManager;
 import com.gtnewhorizon.cropsnh.tileentity.MTESeedGenerator;
 
@@ -84,6 +85,25 @@ public class MTELoader {
             .set(new MTECropBreeder(28035, VoltageIndex.UIV, "Epic Crop Breeder III").getStackForm(1L));
         CropsNHItemList.CropBreeder_UMV
             .set(new MTECropBreeder(28036, VoltageIndex.UMV, "Epic Crop Breeder IV").getStackForm(1L));
+
+        CropsNHItemList.CropGeneExtractor_EV
+            .set(new MTECropGeneExtractor(28037, VoltageIndex.EV, "Crop Gene Extractor").getStackForm(1L));
+        CropsNHItemList.CropGeneExtractor_IV
+            .set(new MTECropGeneExtractor(28038, VoltageIndex.IV, "Advanced Crop Gene Extractor").getStackForm(1L));
+        CropsNHItemList.CropGeneExtractor_LuV
+            .set(new MTECropGeneExtractor(28039, VoltageIndex.LuV, "Elite Crop Gene Extractor").getStackForm(1L));
+        CropsNHItemList.CropGeneExtractor_ZPM
+            .set(new MTECropGeneExtractor(28040, VoltageIndex.ZPM, "Elite Crop Gene Extractor II").getStackForm(1L));
+        CropsNHItemList.CropGeneExtractor_UV
+            .set(new MTECropGeneExtractor(28041, VoltageIndex.UV, "Ultimate Crop Gene Extractor").getStackForm(1L));
+        CropsNHItemList.CropGeneExtractor_UHV
+            .set(new MTECropGeneExtractor(28042, VoltageIndex.UHV, "Epic Crop Gene Extractor").getStackForm(1L));
+        CropsNHItemList.CropGeneExtractor_UEV
+            .set(new MTECropGeneExtractor(28043, VoltageIndex.UEV, "Epic Crop Gene Extractor II").getStackForm(1L));
+        CropsNHItemList.CropGeneExtractor_UIV
+            .set(new MTECropGeneExtractor(28044, VoltageIndex.UIV, "Epic Crop Gene Extractor III").getStackForm(1L));
+        CropsNHItemList.CropGeneExtractor_UMV
+            .set(new MTECropGeneExtractor(28045, VoltageIndex.UMV, "Epic Crop Gene Extractor IV").getStackForm(1L));
     }
 
 }

@@ -11,6 +11,7 @@ import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.BaseGTRecipeLoader;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropBreederRecipeLoader;
+import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropGeneExtractorFakeRecipeLoader;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropRecipes;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropsPlusPlusRecipes;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.FertilizerRecipes;
@@ -20,6 +21,7 @@ import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Mods;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.VoltageIndex;
 import gregtech.api.metatileentity.implementations.MTEBasicMachineWithRecipe;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTModHandler;
@@ -34,6 +36,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         CropsPlusPlusRecipes.postInit();
         SeedGeneratorFakeRecipeLoader.postInit();
         CropBreederRecipeLoader.postInit();
+        CropGeneExtractorFakeRecipeLoader.postInit();
 
         addPlantLensRecipe();
         AddSpadeRecipes();
@@ -41,6 +44,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         AddCropManagerRecipes();
         AddSeedGeneratorRecipes();
         AddCropBreederRecipes();
+        addCropGeneExtractorRecipes();
         AddNanCertificateRecipe();
     }
 
@@ -145,6 +149,30 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         }
     }
 
+    private static void addCropGeneExtractorRecipes() {
+        int tier = VoltageIndex.EV;
+        for (CropsNHItemList geneExtractor : CROP_GENE_EXTRACTORS) {
+            GTModHandler.addMachineCraftingRecipe(
+                geneExtractor.get(1),
+                GTModHandler.RecipeBits.BITSD,
+                new Object[] {
+                    // spotless:off
+                    // TODO: flip the top and bottom rows for when crops++ gets yeeted
+                    "CSC",
+                    "WHW",
+                    "SES",
+                    'S', MTEBasicMachineWithRecipe.X.SENSOR,
+                    'E', MTEBasicMachineWithRecipe.X.EMITTER,
+                    'W', MTEBasicMachineWithRecipe.X.WIRE,
+                    'H', MTEBasicMachineWithRecipe.X.HULL,
+                    'C', MTEBasicMachineWithRecipe.X.BETTER_CIRCUIT,
+                    // spotless:on
+                },
+                tier);
+            tier++;
+        }
+    }
+
     private static void AddNanCertificateRecipe() {
         // NAN Certificate recipe
         recipe(8, 29826 * 3600 + 9 * 60 + 7, 35)
@@ -168,6 +196,13 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         CropsNHItemList.SeedGenerator_IV, CropsNHItemList.SeedGenerator_LuV, CropsNHItemList.SeedGenerator_ZPM,
         CropsNHItemList.SeedGenerator_UV, CropsNHItemList.SeedGenerator_UHV, CropsNHItemList.SeedGenerator_UEV,
         CropsNHItemList.SeedGenerator_UIV, CropsNHItemList.SeedGenerator_UMV };
+
+    private static final CropsNHItemList[] CROP_GENE_EXTRACTORS = new CropsNHItemList[] {
+        CropsNHItemList.CropGeneExtractor_EV, CropsNHItemList.CropGeneExtractor_IV,
+        CropsNHItemList.CropGeneExtractor_LuV, CropsNHItemList.CropGeneExtractor_ZPM,
+        CropsNHItemList.CropGeneExtractor_UV, CropsNHItemList.CropGeneExtractor_UHV,
+        CropsNHItemList.CropGeneExtractor_UEV, CropsNHItemList.CropGeneExtractor_UIV,
+        CropsNHItemList.CropGeneExtractor_UMV };
 
     // I should probably PR that capability into the MTEBasicMachineWithRecipe thing
     private static final ItemList[] INPUT_HATCHES = new ItemList[] { ItemList.Hatch_Input_LV, ItemList.Hatch_Input_MV,

@@ -25,7 +25,6 @@ public final class Names {
         // #endregio seed stuff
 
         // #region crop stick stuff
-        public static final String failedChecks = "issues";
         public static final String crossCrop = "crossCrop";
         public static final String sick = "sick";
         public static final String progress = "progress";
@@ -36,15 +35,18 @@ public final class Names {
         // #endregion crop stick stuff
 
         public static final String material = "material";
-        public static final String materialMeta = "matMeta";
         public static final String x = "cropsnhX";
         public static final String y = "cropsnhY";
         public static final String z = "cropsnhZ";
-        public static final String x2 = "cropsnhX2";
-        public static final String y2 = "cropsnhY2";
-        public static final String z2 = "cropsnhZ2";
         public static final String direction = "direction";
-        public static final String multiBlock = "cropsnh_MultiBlock";
+    }
+
+    public static class DataOrb {
+
+        public static final String specimen = "Crop-Specimen-Scan";
+        public static final String growth = "Crop-Growth-Scan";
+        public static final String gain = "Crop-Gain-Scan";
+        public static final String resistance = "Crop-Resistance-Scan";
     }
 
     // mod objects
@@ -66,13 +68,5 @@ public final class Names {
     public static class TileEntity {
 
         public static final String tileEntity = "TileEntity";
-    }
-
-    // ore dictionary entries
-    public static class OreDict {
-
-        public static final String listAllseed = "listAllseed";
-        public static final String plankWood = "plankWood";
-        public static final String slabWood = "slabWood";
     }
 }

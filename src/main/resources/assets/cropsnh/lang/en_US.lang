@@ -184,6 +184,11 @@ cropsnh_nei.cropsNHSeedGenerator.tooltip.fluidCost=cost = 100L * (growth + gain 
 cropsnh_nei.cropsNHCropBreeder.tooltip.outputStats=The resulting stats will be an average of the parents.
 cropsnh.recipes.seedGenerator=Seed Generator
 cropsnh.recipes.cropBreeder=Crop Breeder
+cropsnh.recipes.cropGeneExtractor=Crop Gene Extractor
+cropsnh_nei.cropGeneExtractor.tooltip.scanSpecimen=Scanned Specimen Data
+cropsnh_nei.cropGeneExtractor.tooltip.scanGrowth=Scanned Growth Data
+cropsnh_nei.cropGeneExtractor.tooltip.scanGain=Scanned Gain Data
+cropsnh_nei.cropGeneExtractor.tooltip.scanResistance=Scanned Resistance Data
 nei.options.tools.dump.cropsnh=Crops NH
 nei.options.tools.dump.cropsnh.alternateSeed=Alternate Seeds
 nei.options.tools.dump.cropsnh.cropRegistry=Crops

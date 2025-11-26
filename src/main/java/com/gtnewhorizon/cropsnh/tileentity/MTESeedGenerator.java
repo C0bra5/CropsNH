@@ -25,14 +25,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.gtnewhorizon.cropsnh.api.ICropCard;
-import com.gtnewhorizon.cropsnh.farming.SeedData;
-import com.gtnewhorizon.cropsnh.farming.SeedStats;
-import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
+import com.gtnewhorizon.cropsnh.api.ISeedData;
 import com.gtnewhorizon.cropsnh.init.CropsNHFluids;
 import com.gtnewhorizon.cropsnh.init.CropsNHUITextures;
-import com.gtnewhorizon.cropsnh.items.ItemGenericSeed;
 import com.gtnewhorizon.cropsnh.loaders.CropsNHGTRecipeMaps;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizons.modularui.api.drawable.FallbackableUITexture;
 import com.gtnewhorizons.modularui.api.drawable.IDrawable;
 import com.gtnewhorizons.modularui.api.math.Pos2d;
@@ -151,24 +148,30 @@ public class MTESeedGenerator extends MTEBasicMachine {
 
         // try to identify a usable seed
         ItemStack tSeedStack = null;
-        SeedData tSeedData = null;
+        ISeedData tSeedData = null;
         int[] tItemsToConsume = new int[this.mInputSlotCount];
         Arrays.fill(tItemsToConsume, 0);
         int tFluidToConsume = 0;
         outer: for (int i = 0; i < this.mInputSlotCount; i++) {
             ItemStack tStack = this.getInputAt(i);
-            tSeedData = isValidSeeds(tStack);
+            tSeedData = CropsNHUtils.getAnalyzedSeedData(tStack);
             if (tSeedData != null) {
                 // check if we have enough fluid to duplicate the seed.
-                tFluidToConsume = drainedPerStat
-                    * (tSeedData.stats.getGrowth() + tSeedData.stats.getGain() + tSeedData.stats.getResistance());
+                tFluidToConsume = drainedPerStat * (tSeedData.getStats()
+                    .getGrowth()
+                    + tSeedData.getStats()
+                        .getGain()
+                    + tSeedData.getStats()
+                        .getResistance());
                 if (tFluidToConsume > this.mFluid.amount) {
                     continue;
                 }
                 // if a catalyst is required try to find a slot we can consume it from
-                if (tSeedData.crop.getDuplicationCatalysts()
+                if (tSeedData.getCrop()
+                    .getDuplicationCatalysts()
                     .size() > 0) {
-                    for (ItemStack catalyst : tSeedData.crop.getDuplicationCatalysts()) {
+                    for (ItemStack catalyst : tSeedData.getCrop()
+                        .getDuplicationCatalysts()) {
                         int remaining = catalyst.stackSize;
                         for (int j = 0; remaining > 0 && j < this.mInputSlotCount; j++) {
                             ItemStack input = getInputAt(j);
@@ -219,18 +222,6 @@ public class MTESeedGenerator extends MTEBasicMachine {
         this.mOutputItems[0] = tSeedStack;
 
         return FOUND_AND_SUCCESSFULLY_USED_RECIPE;
-    }
-
-    private static SeedData isValidSeeds(ItemStack aStack) {
-        if (GTUtility.isStackInvalid(aStack) || !(aStack.getItem() instanceof ItemGenericSeed)) return null;
-        // check that it's a crop card and that it can cross.
-        ICropCard cc = CropRegistry.instance.get(aStack);
-        if (cc == null || cc.getCrossingThreshold() < 0.0f) return null;
-        // fail if the crop isn't analyzed
-        SeedStats stats = SeedStats.getStatsFromStack(aStack);
-        if (stats == null || !stats.isAnalyzed()) return null;
-        return new SeedData(cc, stats);
-
     }
 
     @Override

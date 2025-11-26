@@ -66,6 +66,10 @@ public class NEIConfig implements IConfigureNEI {
         // crop breeder handler
         addHandler(
             new CropsNHNEICropBreederHandler(CropsNHGTRecipeMaps.fakeCropBreederRecipeMap.getDefaultRecipeCategory()));
+        // crop gene extractor handler
+        addHandler(
+            new CropsNHNEICropGeneExtractorHandler(
+                CropsNHGTRecipeMaps.fakeCropGeneExtractorRecipeMap.getDefaultRecipeCategory()));
     }
 
     private static void registerNEIHandler(CropsNHNEIHandler handler) {
