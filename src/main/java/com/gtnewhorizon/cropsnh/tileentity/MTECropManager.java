@@ -698,11 +698,6 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
     }
 
     @Override
-    public int fill_default(ForgeDirection side, FluidStack resource, boolean doFill) {
-        return this.fill(resource, doFill);
-    }
-
-    @Override
     public int fill(ForgeDirection side, FluidStack resource, boolean doFill) {
         return this.fill(resource, doFill);
     }
