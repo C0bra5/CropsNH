@@ -1,6 +1,7 @@
 package com.gtnewhorizon.cropsnh.loaders;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
+import com.gtnewhorizon.cropsnh.tileentity.multi.MTEIndustrialFarm;
 import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTECropBreeder;
 import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTECropGeneExtractor;
 import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTECropManager;
@@ -124,6 +125,10 @@ public class MTELoader {
             .set(new MTECropSynthesizer(28053, VoltageIndex.UIV, "Epic Crop Synthesizer III").getStackForm(1L));
         CropsNHItemList.CropSynthesizer_UMV
             .set(new MTECropSynthesizer(28054, VoltageIndex.UMV, "Epic Crop Synthesizer IV").getStackForm(1L));
+
+
+        CropsNHItemList.IndustrialFarmController
+            .set(new MTEIndustrialFarm(28055, "multimachine.industrialfarm", "Industrial Farm").getStackForm(1L));
     }
 
 }

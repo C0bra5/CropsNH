@@ -90,6 +90,22 @@ public enum CropsNHItemList implements IItemContainer {
     CropSynthesizer_UIV,
     CropSynthesizer_UMV,
 
+    BrickedAgriculturalCasing,
+    SeedBed_MV,
+    SeedBed_HV,
+    SeedBed_EV,
+    SeedBed_IV,
+    SeedBed_LuV,
+    SeedBed_ZpM,
+    SeedBed_UV,
+    SeedBed_UHV,
+    SeedBed_UEV,
+    SeedBed_UIV,
+    SeedBed_UMV,
+    SeedBed_UXV,
+
+    IndustrialFarmController,
+
     // food crops
     huckleBerry,
     sugarBeet,

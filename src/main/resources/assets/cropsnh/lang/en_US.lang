@@ -106,11 +106,11 @@ cropsnh_tooltip.cropManager.fertilizer.0=Enable Fertilization
 cropsnh_tooltip.cropManager.fertilizer.1=Disable Fertilization
 cropsnh_tooltip.cropManager.harvest.0=Enable Harvest
 cropsnh_tooltip.cropManager.harvest.1=Disable Harvest
-
 cropsnh_tooltip.cropManager.water=Water: %1$dL / %2$dL
 cropsnh_tooltip.cropManager.weedEX=Weed-EX: %1$dL / %2$dL
 cropsnh_tooltip.cropManager.liquidFertilizer=Liquid Fertilizer: %1$dL / %2$dL
-
+# multi tooltips
+cropsnh_tooltip.MBTT.multiAmpsWithUpgrade=Supports TecTech Multi-Amp Hatches when using an Overclocked Growth Accelerator Upgrade!
 # Crop Produce Flavour Text
 cropsnh_tooltip.berry.huckle.1=Huckle-dae-Duckle-dae-Doo
 cropsnh_tooltip.berry.huckle.2=A sweet treat!
