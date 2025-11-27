@@ -126,7 +126,6 @@ public class MTELoader {
         CropsNHItemList.CropSynthesizer_UMV
             .set(new MTECropSynthesizer(28054, VoltageIndex.UMV, "Epic Crop Synthesizer IV").getStackForm(1L));
 
-
         CropsNHItemList.IndustrialFarmController
             .set(new MTEIndustrialFarm(28055, "multimachine.industrialfarm", "Industrial Farm").getStackForm(1L));
     }

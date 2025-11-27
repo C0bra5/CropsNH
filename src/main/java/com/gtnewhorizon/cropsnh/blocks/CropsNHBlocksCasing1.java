@@ -1,6 +1,7 @@
 package com.gtnewhorizon.cropsnh.blocks;
 
-import gregtech.api.enums.VoltageIndex;
+import javax.annotation.Nullable;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 
@@ -11,11 +12,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Textures;
+import gregtech.api.enums.VoltageIndex;
 import gregtech.common.blocks.BlockCasingsAbstract;
 import gregtech.common.blocks.ItemCasings;
 import gregtech.common.blocks.MaterialCasings;
-
-import javax.annotation.Nullable;
 
 public class CropsNHBlocksCasing1 extends BlockCasingsAbstract {
 
