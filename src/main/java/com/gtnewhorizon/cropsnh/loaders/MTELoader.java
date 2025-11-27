@@ -1,11 +1,11 @@
 package com.gtnewhorizon.cropsnh.loaders;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
-import com.gtnewhorizon.cropsnh.tileentity.MTECropBreeder;
-import com.gtnewhorizon.cropsnh.tileentity.MTECropGeneExtractor;
-import com.gtnewhorizon.cropsnh.tileentity.MTECropManager;
-import com.gtnewhorizon.cropsnh.tileentity.MTECropSynthesizer;
-import com.gtnewhorizon.cropsnh.tileentity.MTESeedGenerator;
+import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTECropBreeder;
+import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTECropGeneExtractor;
+import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTECropManager;
+import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTECropSynthesizer;
+import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTESeedGenerator;
 
 import gregtech.api.enums.VoltageIndex;
 

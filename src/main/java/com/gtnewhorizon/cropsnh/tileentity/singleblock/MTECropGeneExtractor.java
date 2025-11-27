@@ -1,4 +1,4 @@
-package com.gtnewhorizon.cropsnh.tileentity;
+package com.gtnewhorizon.cropsnh.tileentity.singleblock;
 
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_BOTTOM_SCANNER;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_BOTTOM_SCANNER_ACTIVE;

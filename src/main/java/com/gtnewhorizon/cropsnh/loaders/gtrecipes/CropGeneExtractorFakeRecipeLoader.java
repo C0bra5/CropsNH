@@ -7,7 +7,7 @@ import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.farming.SeedStats;
 import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
 import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
-import com.gtnewhorizon.cropsnh.tileentity.MTECropGeneExtractor;
+import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTECropGeneExtractor;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;

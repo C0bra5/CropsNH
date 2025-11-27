@@ -1,4 +1,4 @@
-package com.gtnewhorizon.cropsnh.tileentity;
+package com.gtnewhorizon.cropsnh.tileentity.singleblock;
 
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_BOTTOM_SCANNER;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_BOTTOM_SCANNER_ACTIVE;
@@ -16,34 +16,26 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_TOP_SCANNER;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_TOP_SCANNER_ACTIVE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_TOP_SCANNER_ACTIVE_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_TOP_SCANNER_GLOW;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.gtnewhorizon.cropsnh.api.ICropCard;
-import com.gtnewhorizon.cropsnh.api.ICropMutation;
-import com.gtnewhorizon.cropsnh.api.ISeedStats;
-import com.gtnewhorizon.cropsnh.farming.SeedData;
-import com.gtnewhorizon.cropsnh.farming.SeedStats;
-import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
-import com.gtnewhorizon.cropsnh.farming.registries.MutationRegistry;
+import com.gtnewhorizon.cropsnh.api.ISeedData;
 import com.gtnewhorizon.cropsnh.init.CropsNHFluids;
 import com.gtnewhorizon.cropsnh.init.CropsNHUITextures;
-import com.gtnewhorizon.cropsnh.items.ItemGenericSeed;
 import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizons.modularui.api.drawable.IDrawable;
 import com.gtnewhorizons.modularui.api.math.Pos2d;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 
 import gregtech.api.enums.SoundResource;
-import gregtech.api.enums.VoltageIndex;
+import gregtech.api.enums.TierEU;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -52,33 +44,27 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTUtility;
 
-public class MTECropBreeder extends MTEBasicMachine {
+public class MTESeedGenerator extends MTEBasicMachine {
 
     private static final int AMPERAGE = 1;
-    private static final int MIN_INPUT_SLOT_COUNT = 3;
-    private static final int MAX_INPUT_SLOT_COUNT = 6;
+    private static final int INPUT_SLOT_COUNT = 2;
     private static final int OUTPUT_SLOT_COUNT = 1;
-
-    private static int getInputSlotCount(int tier) {
-        return tier < VoltageIndex.HV ? MIN_INPUT_SLOT_COUNT : MAX_INPUT_SLOT_COUNT;
-    }
-
     public static final ConcurrentHashMap<Fluid, Integer> ALLOWED_LIQUID_FERTILIZER = new ConcurrentHashMap<>();
 
     public static void init() {
         // allowed liquid fertilizer
-        ALLOWED_LIQUID_FERTILIZER.putIfAbsent(CropsNHFluids.enrichedFertilizer, 10000);
+        ALLOWED_LIQUID_FERTILIZER.putIfAbsent(CropsNHFluids.enrichedFertilizer, 100);
     }
 
-    public MTECropBreeder(int aID, int aTier, String aNameRegional) {
+    public MTESeedGenerator(int aID, int aTier, String aNameRegional) {
         super(
             aID,
-            String.format("basicmachine.cropbreeder.tier.%02d", aTier),
+            String.format("basicmachine.seedgenerator.tier.%02d", aTier),
             aNameRegional,
             aTier,
             AMPERAGE,
             new String[] { "It can duplicate seeds!", "Uses 100L of Enriched Fertiliser per stat point on the seed." },
-            getInputSlotCount(aTier),
+            INPUT_SLOT_COUNT,
             OUTPUT_SLOT_COUNT,
             TextureFactory.of(
                 TextureFactory.of(OVERLAY_SIDE_SCANNER_ACTIVE),
@@ -130,18 +116,18 @@ public class MTECropBreeder extends MTEBasicMachine {
                     .build()));
     }
 
-    public MTECropBreeder(String mName, byte mTier, String[] mDescriptionArray, ITexture[][][] mTextures) {
-        super(mName, mTier, AMPERAGE, mDescriptionArray, mTextures, getInputSlotCount(mTier), OUTPUT_SLOT_COUNT);
+    public MTESeedGenerator(String mName, byte mTier, String[] mDescriptionArray, ITexture[][][] mTextures) {
+        super(mName, mTier, AMPERAGE, mDescriptionArray, mTextures, INPUT_SLOT_COUNT, OUTPUT_SLOT_COUNT);
     }
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity arg0) {
-        return new MTECropBreeder(this.mName, this.mTier, this.mDescriptionArray, this.mTextures);
+        return new MTESeedGenerator(this.mName, this.mTier, this.mDescriptionArray, this.mTextures);
     }
 
     @Override
     public RecipeMap<?> getRecipeMap() {
-        return CropsNHGTRecipeMaps.fakeCropBreederRecipeMap;
+        return CropsNHGTRecipeMaps.fakeSeedGeneratorRecipes;
     }
 
     @Override
@@ -152,114 +138,87 @@ public class MTECropBreeder extends MTEBasicMachine {
         }
 
         // allow zero drain for future proofing.
-        int drainPerTier = ALLOWED_LIQUID_FERTILIZER.getOrDefault(this.mFluid.getFluid(), -1);
-        if (drainPerTier < 0) {
+        int drainedPerStat = ALLOWED_LIQUID_FERTILIZER.getOrDefault(this.mFluid.getFluid(), -1);
+        if (drainedPerStat < 0) {
             return DID_NOT_FIND_RECIPE;
         }
 
-        // try to identify a usable seed and catalyst
-        HashMap<ICropCard, SeedData> breedingParents = new HashMap<>(4);
-        ItemStack[] catalystSlots = new ItemStack[this.mInputSlotCount];
-        for (int i = 0; i < this.mInputSlotCount; i++) {
+        // try to identify a usable seed
+        ItemStack tSeedStack = null;
+        ISeedData tSeedData = null;
+        int[] tItemsToConsume = new int[this.mInputSlotCount];
+        Arrays.fill(tItemsToConsume, 0);
+        int tFluidToConsume = 0;
+        outer: for (int i = 0; i < this.mInputSlotCount; i++) {
             ItemStack tStack = this.getInputAt(i);
-            var seedData = isValidSeeds(tStack);
-            if (seedData != null) {
-                if (!breedingParents.containsKey(seedData.crop)) {
-                    breedingParents.put(seedData.crop, seedData);
+            tSeedData = CropsNHUtils.getAnalyzedSeedData(tStack);
+            if (tSeedData != null) {
+                // check if we have enough fluid to duplicate the seed.
+                tFluidToConsume = drainedPerStat * (tSeedData.getStats()
+                    .getGrowth()
+                    + tSeedData.getStats()
+                        .getGain()
+                    + tSeedData.getStats()
+                        .getResistance());
+                if (tFluidToConsume > this.mFluid.amount) {
+                    continue;
                 }
-                catalystSlots[i] = null;
-            } else {
-                catalystSlots[i] = tStack;
+                // if a catalyst is required try to find a slot we can consume it from
+                if (tSeedData.getCrop()
+                    .getDuplicationCatalysts()
+                    .size() > 0) {
+                    for (ItemStack catalyst : tSeedData.getCrop()
+                        .getDuplicationCatalysts()) {
+                        int remaining = catalyst.stackSize;
+                        for (int j = 0; remaining > 0 && j < this.mInputSlotCount; j++) {
+                            ItemStack input = getInputAt(j);
+                            if (GTUtility.areStacksEqual(catalyst, input)) {
+                                tItemsToConsume[j] = Math.min(input.stackSize, remaining);
+                                remaining -= tItemsToConsume[j];
+                            }
+                        }
+                        if (remaining <= 0) {
+                            // update the source stack if we find enough stuff
+                            tSeedStack = tStack.copy();
+                            tSeedStack.stackSize = 1;
+                            break outer;
+                        } else {
+                            // reset the consumption tracker if we don't find what we want.
+                            Arrays.fill(tItemsToConsume, 0);
+                        }
+                    }
+                } else {
+                    // if no catalyst is required we are good to proceed to start consuming
+                    tSeedStack = tStack.copy();
+                    tSeedStack.stackSize = 1;
+                }
+                break;
             }
         }
 
-        // mutations should never have less than 2 parents
-        if (breedingParents.size() < 2) {
+        // both should be set if we did everything right
+        if (tSeedData == null || tSeedStack == null || !canOutput(tSeedStack)) {
             return DID_NOT_FIND_RECIPE;
         }
 
-        // find potential mutations
-        ArrayList<ICropCard> parentList = new ArrayList<>(breedingParents.keySet());
-        List<ICropMutation> deterministicMutations = MutationRegistry.instance
-            .getPossibleDeterministicMutations(parentList);
-        if (deterministicMutations == null || deterministicMutations.isEmpty()) {
-            return DID_NOT_FIND_RECIPE;
+        // calculate power usage
+        if (!skipOC) {
+            this.calculateOverclockedNess((int) TierEU.RECIPE_LV, 20 * SECONDS);
+            // In case recipe is too OP for that machine
+            if (mMaxProgresstime == Integer.MAX_VALUE - 1 && mEUt == Integer.MAX_VALUE - 1)
+                return FOUND_RECIPE_BUT_DID_NOT_MEET_REQUIREMENTS;
         }
 
-        // prioritize mutations with more parents ... may the largest harem win.
-        deterministicMutations.sort(
-            Comparator.comparing(ICropMutation::getParentCount)
-                .reversed());
-
-        // try to find the first matching recipe
-        for (ICropMutation mutation : deterministicMutations) {
-            // abort early if the amount of fluid in the tank can't create this crop.
-            int amountOfFluidToConsume = drainPerTier * mutation.getOutput()
-                .getTier();
-            if (amountOfFluidToConsume > this.mFluid.amount) continue;
-
-            // abort early if the output doesn't fit.
-            ItemStack newSeed = mutation.getOutput()
-                .getSeedItem(getNewSeedStats(mutation, breedingParents));
-            newSeed.stackSize = 1;
-            if (!this.canOutput(newSeed)) continue;
-
-            // check if we can breed
-            int[] itemsToConsume = mutation.canBreed(parentList, this.getBaseMetaTileEntity(), catalystSlots);
-            if (itemsToConsume == null) continue;
-
-            // check if we can run the recipe
-            if (!skipOC) {
-                this.calculateOverclockedNess(
-                    mutation.getBreedingMachineRecipeEUt(),
-                    mutation.getBreedingMachineRecipeDuration());
-                // In case recipe is too OP for that machine
-                if (mMaxProgresstime == Integer.MAX_VALUE - 1 && mEUt == Integer.MAX_VALUE - 1)
-                    return FOUND_RECIPE_BUT_DID_NOT_MEET_REQUIREMENTS;
+        // consume inputs
+        this.mFluid.amount -= tFluidToConsume;
+        for (int i = 0; i < tItemsToConsume.length; i++) {
+            if (tItemsToConsume[i] > 0) {
+                this.getInputAt(i).stackSize -= tItemsToConsume[i];
             }
-
-            // everything seems good consume and return success
-            this.mFluid.amount -= amountOfFluidToConsume;
-            for (int i = 0; i < itemsToConsume.length; i++) {
-                if (itemsToConsume[i] <= 0) continue;
-                this.getInputAt(i).stackSize -= itemsToConsume[i];
-            }
-            for (ICropCard cc : mutation.getParents()) {
-                breedingParents.get(cc).stack.stackSize -= 1;
-            }
-            this.mOutputItems[0] = newSeed;
-
-            return FOUND_AND_SUCCESSFULLY_USED_RECIPE;
         }
-        return DID_NOT_FIND_RECIPE;
-    }
+        this.mOutputItems[0] = tSeedStack;
 
-    private static ISeedStats getNewSeedStats(ICropMutation mutation, HashMap<ICropCard, SeedData> breedingParents) {
-        int[] newStats = new int[] { 0, 0, 0 };
-        for (ICropCard parent : mutation.getParents()) {
-            ISeedStats parentStats = breedingParents.get(parent)
-                .getStats();
-            newStats[0] += parentStats.getGrowth();
-            newStats[1] += parentStats.getGain();
-            newStats[2] += parentStats.getResistance();
-        }
-        int parentCount = mutation.getParentCount();
-        return new SeedStats(
-            (byte) (newStats[0] / parentCount),
-            (byte) (newStats[1] / parentCount),
-            (byte) (newStats[2] / parentCount),
-            true);
-    }
-
-    private static SeedData isValidSeeds(ItemStack aStack) {
-        if (GTUtility.isStackInvalid(aStack) || !(aStack.getItem() instanceof ItemGenericSeed)) return null;
-        // check that it's a crop card and that it can cross.
-        ICropCard cc = CropRegistry.instance.get(aStack);
-        if (cc == null || cc.getCrossingThreshold() < 0.0f) return null;
-        // fail if the crop isn't analyzed
-        SeedStats stats = SeedStats.getStatsFromStack(aStack);
-        if (stats == null || !stats.isAnalyzed()) return null;
-        return new SeedData(cc, stats, aStack);
+        return FOUND_AND_SUCCESSFULLY_USED_RECIPE;
     }
 
     @Override
@@ -286,12 +245,24 @@ public class MTECropBreeder extends MTEBasicMachine {
     }
 
     @Override
+    protected SlotWidget createItemInputSlot(int index, IDrawable[] backgrounds, Pos2d pos) {
+        if (index == 0) {
+            return (SlotWidget) super.createItemInputSlot(index, backgrounds, pos)
+                .setBackground(getGUITextureSet().getItemSlot(), CropsNHUITextures.OVERLAY_SLOT_SEED);
+        } else {
+            return (SlotWidget) super.createItemInputSlot(index, backgrounds, pos)
+                .setBackground(getGUITextureSet().getItemSlot());
+        }
+    }
+
+    @Override
     protected SlotWidget createItemOutputSlot(int index, IDrawable[] backgrounds, Pos2d pos) {
         if (index == 0) {
             return (SlotWidget) super.createItemOutputSlot(index, backgrounds, pos)
                 .setBackground(getGUITextureSet().getItemSlot(), CropsNHUITextures.OVERLAY_SLOT_SEED);
+        } else {
+            return (SlotWidget) super.createItemOutputSlot(index, backgrounds, pos)
+                .setBackground(getGUITextureSet().getItemSlot());
         }
-        return (SlotWidget) super.createItemOutputSlot(index, backgrounds, pos)
-            .setBackground(getGUITextureSet().getItemSlot());
     }
 }

@@ -14,7 +14,7 @@ import com.gtnewhorizon.cropsnh.recipes.frontends.CropGeneExtractorFrontend;
 import com.gtnewhorizon.cropsnh.recipes.frontends.CropSynthesizerFrontend;
 import com.gtnewhorizon.cropsnh.recipes.frontends.SeedGeneratorFrontend;
 import com.gtnewhorizon.cropsnh.reference.Reference;
-import com.gtnewhorizon.cropsnh.tileentity.MTECropSynthesizer;
+import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTECropSynthesizer;
 
 import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.recipe.RecipeMap;

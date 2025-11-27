@@ -1,4 +1,4 @@
-package com.gtnewhorizon.cropsnh.tileentity;
+package com.gtnewhorizon.cropsnh.tileentity.singleblock;
 
 import java.util.ArrayList;
 import java.util.Collections;

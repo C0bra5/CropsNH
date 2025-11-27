@@ -14,7 +14,7 @@ import com.gtnewhorizon.cropsnh.farming.SeedStats;
 import com.gtnewhorizon.cropsnh.farming.registries.MutationRegistry;
 import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
 import com.gtnewhorizon.cropsnh.reference.Names;
-import com.gtnewhorizon.cropsnh.tileentity.MTECropBreeder;
+import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTECropBreeder;
 
 import cpw.mods.fml.common.LoaderException;
 import gregtech.api.enums.GTValues;

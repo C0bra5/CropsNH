@@ -8,7 +8,7 @@ import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
 import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
 import com.gtnewhorizon.cropsnh.reference.Constants;
 import com.gtnewhorizon.cropsnh.reference.Names;
-import com.gtnewhorizon.cropsnh.tileentity.MTECropSynthesizer;
+import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTECropSynthesizer;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
