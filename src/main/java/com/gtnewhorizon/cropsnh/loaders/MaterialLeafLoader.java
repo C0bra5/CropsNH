@@ -13,7 +13,7 @@ public class MaterialLeafLoader {
 
     // spotless:off
     public final static MaterialLeafVariant bauxiaLeaf        = new MaterialLeafVariant(   0, "bauxiaLeaf",        "aluminium");
-    public final static MaterialLeafVariant canolaFLower      = new MaterialLeafVariant(   1, "canolaFLower",      "seedOil");
+    public final static MaterialLeafVariant canolaFLower      = new MaterialLeafVariant(   1, "canolaFlower",      "seedOil");
     public final static MaterialLeafVariant copponFiber       = new CopponFiberVariant(    2, "copponFiber",       "copper");
     public final static MaterialLeafVariant galvaniaLeaf      = new MaterialLeafVariant(   3, "galvaniaLeaf",      "zinc");
     public final static MaterialLeafVariant indigoBlossom     = new MaterialLeafVariant(   4, "indigoBlossom",     "blueDye");
