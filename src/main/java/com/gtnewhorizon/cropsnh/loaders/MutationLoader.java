@@ -574,6 +574,7 @@ public class MutationLoader {
             .addToMutationPools(aShiny, aBad, aCrystal, aLapis)
             .register();
         // using dark oak because it's a tree that used to have roots that were used to break the nether ceiling
+        // just like how the twilight tree does the same.
         if (Mods.TwilightForest.isModLoaded()) {
             new CropMutation(Liveroot, Torchberry, BonsaiDarkOak)
                 .addToMutationPools(aWood, aTendrilly)
@@ -643,7 +644,7 @@ public class MutationLoader {
             .addToMutationPools(aAlien, aSpace, aRadiation, aTransform)
             .machineOnly()
             .register();
-        // TODO: ADD PLUTONIUM CROP AND REPLACE TROLL PLANT WITH NEW CROP IN STARGATIUM MUTATION
+        // TODO: ADD PROPPER PLUTONIUM CROP AND REPLACE TROLL PLANT WITH NEW CROP IN STARGATIUM MUTATION
         new CropMutation(Stargatium, Iridine, Trollplant)
             .addToMutationPools(aMetal, aHeavy, aAlien, aNaquadah)
             .machineOnly()

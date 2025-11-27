@@ -56,8 +56,8 @@ public class ClientProxy extends CommonProxy {
                 .isAssignableFrom(BlockCropsNH.class)) {
                 try {
                     Object obj = field.get(null);
-                    if (obj != null) {
-                        ((BlockCropsNH) obj).getRenderer();
+                    if (obj instanceof BlockCropsNH cropBlockNH) {
+                        cropBlockNH.getRenderer();
                     }
                 } catch (IllegalAccessException e) {
                     LogHelper.printStackTrace(e);
