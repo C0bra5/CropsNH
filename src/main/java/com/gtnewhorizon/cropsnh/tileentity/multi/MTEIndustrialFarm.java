@@ -23,9 +23,6 @@ import static gregtech.api.util.GTStructureUtility.ofFrame;
 
 import javax.annotation.Nonnull;
 
-import com.gtnewhorizon.cropsnh.blocks.BlockSeedBed;
-import com.gtnewhorizon.gtnhlib.util.map.ItemStackMap;
-import kubatech.api.eig.EIGDropTable;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
@@ -36,6 +33,7 @@ import com.gtnewhorizon.cropsnh.blocks.BlockEnvironmentalEnhancementUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockFertilizerUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockGrowthAccelerationUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockOverclockedGrowthAccelerationUnit;
+import com.gtnewhorizon.cropsnh.blocks.BlockSeedBed;
 import com.gtnewhorizon.cropsnh.blocks.abstracts.CropsNHBlockIndustrialFarmTiredComponent;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
@@ -60,6 +58,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.common.misc.GTStructureChannels;
+import kubatech.api.eig.EIGDropTable;
 
 public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustrialFarm>
     implements ISurvivalConstructable {

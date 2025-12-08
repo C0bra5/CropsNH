@@ -2,8 +2,6 @@ package com.gtnewhorizon.cropsnh.blocks;
 
 import java.util.List;
 
-import com.gtnewhorizon.cropsnh.loaders.FertilizerLoader;
-import com.gtnewhorizon.cropsnh.tileentity.TileEntityCrop;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -12,7 +10,9 @@ import net.minecraft.util.StatCollector;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.blocks.abstracts.CropsNHBlockIndustrialFarmTiredComponent;
+import com.gtnewhorizon.cropsnh.loaders.FertilizerLoader;
 import com.gtnewhorizon.cropsnh.reference.Names;
+import com.gtnewhorizon.cropsnh.tileentity.TileEntityCrop;
 import com.gtnewhorizon.cropsnh.tileentity.multi.MTEIndustrialFarm;
 
 import cpw.mods.fml.common.LoaderException;
@@ -60,7 +60,10 @@ public class BlockFertilizerUnit extends CropsNHBlockIndustrialFarmTiredComponen
         // calculate the consumption rate scalar
         for (int i = 0; i < CONSUMPTION_LOOKUP.length; i++) {
             // scalar amount is computed from max seed capacity.
-            CONSUMPTION_LOOKUP[i] = (int) Math.ceil(BlockSeedBed.getCapacity(i + MIN_TIER) * (double)FERTILIZER_ITEM_LIQUID_OUTPUT / (TileEntityCrop.TICK_RATE * FertilizerLoader.FERTILIZER_ITEM_POTENCY) * MTEIndustrialFarm.CYCLE_DURATION);
+            CONSUMPTION_LOOKUP[i] = (int) Math.ceil(
+                BlockSeedBed.getCapacity(i + MIN_TIER) * (double) FERTILIZER_ITEM_LIQUID_OUTPUT
+                    / (TileEntityCrop.TICK_RATE * FertilizerLoader.FERTILIZER_ITEM_POTENCY)
+                    * MTEIndustrialFarm.CYCLE_DURATION);
         }
     }
 
@@ -85,16 +88,16 @@ public class BlockFertilizerUnit extends CropsNHBlockIndustrialFarmTiredComponen
                 StatCollector
                     .translateToLocalFormatted("cropsnh_tooltip.fertilizerUnit.2.adv", GROWTH_SPEED_MULTIPLIER * 100));
             tooltip.add(
-                StatCollector
-                    .translateToLocalFormatted("cropsnh_tooltip.fertilizerUnit.3.adv", HARVEST_ROUND_BONUS));
+                StatCollector.translateToLocalFormatted("cropsnh_tooltip.fertilizerUnit.3.adv", HARVEST_ROUND_BONUS));
             tooltip.add(
                 StatCollector
                     .translateToLocalFormatted("cropsnh_tooltip.fertilizerUnit.4.adv", BASE_POWER_INCREASE * 100));
         } else {
             tooltip.add(
-                StatCollector.translateToLocalFormatted("cropsnh_tooltip.fertilizerUnit.2", GROWTH_SPEED_MULTIPLIER * 100));
-            tooltip.add(
-                StatCollector.translateToLocalFormatted("cropsnh_tooltip.fertilizerUnit.3", HARVEST_ROUND_BONUS));
+                StatCollector
+                    .translateToLocalFormatted("cropsnh_tooltip.fertilizerUnit.2", GROWTH_SPEED_MULTIPLIER * 100));
+            tooltip
+                .add(StatCollector.translateToLocalFormatted("cropsnh_tooltip.fertilizerUnit.3", HARVEST_ROUND_BONUS));
             tooltip.add(
                 StatCollector.translateToLocalFormatted("cropsnh_tooltip.fertilizerUnit.4", BASE_POWER_INCREASE * 100));
         }

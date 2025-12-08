@@ -18,7 +18,8 @@ public class FertilizerLoader {
         FertilizerRegistry.instance.register(Items.dye, 15, 5);
 
         // cropsNH
-        FertilizerRegistry.instance.register(CropsNHItems.fertilizer, OreDictionary.WILDCARD_VALUE, FERTILIZER_ITEM_POTENCY);
+        FertilizerRegistry.instance
+            .register(CropsNHItems.fertilizer, OreDictionary.WILDCARD_VALUE, FERTILIZER_ITEM_POTENCY);
 
         // forestry fertilizer
         if (Mods.Forestry.isModLoaded()) {
