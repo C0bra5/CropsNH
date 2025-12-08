@@ -704,13 +704,16 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
             return;
         }
 
-        // variate the stats
+        // if all parents have fertilizer in them, stats cannot go down.
+        boolean canReduce = !neighbours.stream()
+            .allMatch(x -> x.getFertilizerStorage() > 0);
+        // find all the parent's stats.
         Collection<ISeedStats> parentStats = neighbours.stream()
             .map(ICropStickTile::getStats)
             .collect(Collectors.toList());
-        byte gr = variateStat(parentStats, ISeedStats::getGrowth);
-        byte ga = variateStat(parentStats, ISeedStats::getGain);
-        byte re = variateStat(parentStats, ISeedStats::getResistance);
+        byte ga = variateStat(canReduce, parentStats, ISeedStats::getGain);
+        byte re = variateStat(canReduce, parentStats, ISeedStats::getResistance);
+        byte gr = variateStat(canReduce, parentStats, ISeedStats::getGrowth);
 
         // try planting it
         this.tryPlantSeed(result, new SeedStats(gr, ga, re, false));
@@ -778,16 +781,17 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
             && this.getGrowthPercent() >= this.crop.getBreedingThreshold();
     }
 
-    public static byte variateStat(Collection<ISeedStats> parentStats, ToIntFunction<ISeedStats> collector) {
+    public static byte variateStat(boolean canReduce, Collection<ISeedStats> parentStats,
+        ToIntFunction<ISeedStats> collector) {
         // average parents
         int newValue = parentStats.stream()
-            .mapToInt(ISeedStats::getGrowth)
+            .mapToInt(collector)
             .reduce(0, Integer::sum) / parentStats.size();
         // variate
         newValue += XSTR.XSTR_INSTANCE.nextInt(ConfigurationHandler.breedingHigh + 1 - ConfigurationHandler.breedingLow)
             + ConfigurationHandler.breedingLow;
         // clamp
-        return (byte) Math.min(Constants.MAX_SEED_STAT, Math.max(Constants.MIN_SEED_STAT, newValue));
+        return (byte) Math.max(canReduce ? Constants.MIN_SEED_STAT : 0, Math.min(Constants.MAX_SEED_STAT, newValue));
     }
 
     // endregion breeding and crossing

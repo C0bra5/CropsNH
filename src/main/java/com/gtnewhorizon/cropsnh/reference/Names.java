@@ -58,6 +58,13 @@ public final class Names {
         public static final String magnifyingGlass = "magnifyingGlass";
         public static final String spade = "spade";
         public static final String genericSeed = "genericSeed";
+        public static final String casings1 = "casings1";
+        public static final String seedBed = "seedBed";
+        public static final String environmentalEnhancementUnit = "environmentalEnhancementUnit";
+        public static final String growthAccelerationUnit = "growthAccelerationUnit";
+        public static final String fertilizerUnit = "fertilizerUnit";
+        public static final String advancedHarvestingUnit = "advancedHarvestingUnit";
+        public static final String OverclockGrowthAccelerationUnit = "OverclockGrowthAccelerationUnit";
 
         // produce
         public static final String terraWart = "terraWart";

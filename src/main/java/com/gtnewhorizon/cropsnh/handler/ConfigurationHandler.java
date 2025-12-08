@@ -124,6 +124,22 @@ public class ConfigurationHandler {
             true,
             "If you are fine with the random screams but not with the EXTREME HOWL that comes with walking on them, turn this off.");
 
+        breedingLow = config.getInt(
+            "Breeding Range Low",
+            Categories.CATEGORY_CROPS,
+            -1,
+            -31,
+            31,
+            "The lowest bound of the stat variation while breeding.");
+
+        breedingHigh = config.getInt(
+            "Breeding Range High",
+            Categories.CATEGORY_CROPS,
+            4,
+            -31,
+            31,
+            "The highest bound of the stat variation while breeding.");
+
         breedingChance = config.getInt(
             "Weed Spread Chance",
             Categories.CATEGORY_WEEDS,
@@ -131,22 +147,6 @@ public class ConfigurationHandler {
             1,
             Integer.MAX_VALUE,
             "Lower values increase the speed at which crops attempt to breed themselves. actual chance is measured as 1 / value every growth tick.");
-
-        breedingLow = config.getInt(
-            "Weed Spread Chance",
-            Categories.CATEGORY_WEEDS,
-            -1,
-            -31,
-            0,
-            "The lowest bound of the stat variation while breeding.");
-
-        breedingHigh = config.getInt(
-            "Weed Spread Chance",
-            Categories.CATEGORY_WEEDS,
-            2,
-            0,
-            31,
-            "The highest bound of the stat variation while breeding.");
 
         // endregion CATEGORY_CROPS
 

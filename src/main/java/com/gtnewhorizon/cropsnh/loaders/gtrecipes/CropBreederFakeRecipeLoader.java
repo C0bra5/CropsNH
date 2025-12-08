@@ -67,8 +67,9 @@ public class CropBreederFakeRecipeLoader extends BaseGTRecipeLoader {
                     .fluidInputs(
                         new FluidStack(
                             allowedFluid.getKey(),
-                            mutation.getOutput()
-                                .getTier() * allowedFluid.getValue()));
+                            allowedFluid.getValue() / 2
+                                * (mutation.getOutput()
+                                    .getTier() * 2 + 3)));
 
                 if (catalysts == null || catalysts.isEmpty()) {
                     builder.addTo(CropsNHGTRecipeMaps.fakeCropBreederRecipeMap);

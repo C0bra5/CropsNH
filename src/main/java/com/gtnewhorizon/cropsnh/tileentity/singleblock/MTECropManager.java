@@ -222,7 +222,11 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
     }
 
     private int getHorizontalRadius() {
-        return 3 + Math.max(0, 2 * this.mTier);
+        return this.getHorizontalRadius(this.mTier);
+    }
+
+    public static int getHorizontalRadius(int aTier) {
+        return 3 + Math.max(0, 2 * aTier);
     }
 
     private int getHorizontalDiameter() {

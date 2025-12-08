@@ -90,13 +90,17 @@ public enum CropsNHItemList implements IItemContainer {
     CropSynthesizer_UIV,
     CropSynthesizer_UMV,
 
+    // industrial farm
+    IndustrialFarmController,
+
+    // industrial farm components
     BrickedAgriculturalCasing,
     SeedBed_MV,
     SeedBed_HV,
     SeedBed_EV,
     SeedBed_IV,
     SeedBed_LuV,
-    SeedBed_ZpM,
+    SeedBed_ZPM,
     SeedBed_UV,
     SeedBed_UHV,
     SeedBed_UEV,
@@ -104,7 +108,70 @@ public enum CropsNHItemList implements IItemContainer {
     SeedBed_UMV,
     SeedBed_UXV,
 
-    IndustrialFarmController,
+    // industrial farm upgrades
+    EnvironmentalEnhancementUnit_MV,
+    EnvironmentalEnhancementUnit_HV,
+    EnvironmentalEnhancementUnit_EV,
+    EnvironmentalEnhancementUnit_IV,
+    EnvironmentalEnhancementUnit_LuV,
+    EnvironmentalEnhancementUnit_ZPM,
+    EnvironmentalEnhancementUnit_UV,
+    EnvironmentalEnhancementUnit_UHV,
+    EnvironmentalEnhancementUnit_UEV,
+    EnvironmentalEnhancementUnit_UIV,
+    EnvironmentalEnhancementUnit_UMV,
+    EnvironmentalEnhancementUnit_UXV,
+
+    // industrial farm upgrades
+    GrowthAccelerationUnit_MV,
+    GrowthAccelerationUnit_HV,
+    GrowthAccelerationUnit_EV,
+    GrowthAccelerationUnit_IV,
+    GrowthAccelerationUnit_LuV,
+    GrowthAccelerationUnit_ZPM,
+    GrowthAccelerationUnit_UV,
+    GrowthAccelerationUnit_UHV,
+    GrowthAccelerationUnit_UEV,
+    GrowthAccelerationUnit_UIV,
+    GrowthAccelerationUnit_UMV,
+    GrowthAccelerationUnit_UXV,
+
+    // industrial farm upgrades
+    FertilizerUnit_MV,
+    FertilizerUnit_HV,
+    FertilizerUnit_EV,
+    FertilizerUnit_IV,
+    FertilizerUnit_LuV,
+    FertilizerUnit_ZPM,
+    FertilizerUnit_UV,
+    FertilizerUnit_UHV,
+    FertilizerUnit_UEV,
+    FertilizerUnit_UIV,
+    FertilizerUnit_UMV,
+    FertilizerUnit_UXV,
+
+    // industrial farm upgrades
+    AdvancedHarvestingUnit_MV,
+    AdvancedHarvestingUnit_HV,
+    AdvancedHarvestingUnit_EV,
+    AdvancedHarvestingUnit_IV,
+    AdvancedHarvestingUnit_LuV,
+    AdvancedHarvestingUnit_ZPM,
+    AdvancedHarvestingUnit_UV,
+    AdvancedHarvestingUnit_UHV,
+    AdvancedHarvestingUnit_UEV,
+    AdvancedHarvestingUnit_UIV,
+    AdvancedHarvestingUnit_UMV,
+    AdvancedHarvestingUnit_UXV,
+
+    // industrial farm upgrades
+    OverclockedGrowthAccelerationUnit_ZPM,
+    OverclockedGrowthAccelerationUnit_UV,
+    OverclockedGrowthAccelerationUnit_UHV,
+    OverclockedGrowthAccelerationUnit_UEV,
+    OverclockedGrowthAccelerationUnit_UIV,
+    OverclockedGrowthAccelerationUnit_UMV,
+    OverclockedGrowthAccelerationUnit_UXV,
 
     // food crops
     huckleBerry,

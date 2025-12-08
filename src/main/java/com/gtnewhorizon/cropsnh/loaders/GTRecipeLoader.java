@@ -84,9 +84,10 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
     }
 
     private static void AddCropManagerRecipes() {
-        for (int tier = 0; tier < CROP_MANAGERS.length; tier++) {
+        int tier = VoltageIndex.LV;
+        for (int i = 0; i < CROP_MANAGERS.length; i++) {
             GTModHandler.addMachineCraftingRecipe(
-                CROP_MANAGERS[tier].get(1),
+                CROP_MANAGERS[i].get(1),
                 GTModHandler.RecipeBits.BITSD,
                 new Object[] {
                     // spotless:off
@@ -98,17 +99,19 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                     'P', MTEBasicMachineWithRecipe.X.PLATE,
                     'H', MTEBasicMachineWithRecipe.X.HULL,
                     'C', MTEBasicMachineWithRecipe.X.CIRCUIT,
-                    'I', INPUT_HATCHES[tier]
+                    'I', INPUT_HATCHES[i]
                     // spotless:on
                 },
-                tier + 1);
+                tier);
+            tier++;
         }
     }
 
     private static void AddSeedGeneratorRecipes() {
-        for (int tier = 0; tier < SEED_GENERATOR.length; tier++) {
+        int tier = VoltageIndex.LV;
+        for (CropsNHItemList cropsNHItemList : SEED_GENERATOR) {
             GTModHandler.addMachineCraftingRecipe(
-                SEED_GENERATOR[tier].get(1),
+                cropsNHItemList.get(1),
                 GTModHandler.RecipeBits.BITSD,
                 new Object[] {
                     // spotless:off
@@ -125,14 +128,16 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                     'D', new ItemStack(Mods.RandomThings.isModLoaded() ? Block.getBlockFromName("RandomThings:fertilizedDirt") : Blocks.dirt, 1)
                     // spotless:on
                 },
-                tier + 1);
+                tier);
+            tier++;
         }
     }
 
     private static void AddCropBreederRecipes() {
-        for (int tier = 0; tier < SEED_GENERATOR.length; tier++) {
+        int tier = VoltageIndex.LV;
+        for (CropsNHItemList cropsNHItemList : CROP_BREEDER) {
             GTModHandler.addMachineCraftingRecipe(
-                SEED_GENERATOR[tier].get(1),
+                cropsNHItemList.get(1),
                 GTModHandler.RecipeBits.BITSD,
                 new Object[] {
                     // spotless:off
@@ -148,7 +153,8 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                     'D', new ItemStack(Mods.RandomThings.isModLoaded() ? Block.getBlockFromName("RandomThings:fertilizedDirt") : Blocks.dirt, 1)
                     // spotless:on
                 },
-                tier + 1);
+                tier);
+            tier++;
         }
     }
 
@@ -226,6 +232,12 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         CropsNHItemList.SeedGenerator_IV, CropsNHItemList.SeedGenerator_LuV, CropsNHItemList.SeedGenerator_ZPM,
         CropsNHItemList.SeedGenerator_UV, CropsNHItemList.SeedGenerator_UHV, CropsNHItemList.SeedGenerator_UEV,
         CropsNHItemList.SeedGenerator_UIV, CropsNHItemList.SeedGenerator_UMV };
+
+    private static final CropsNHItemList[] CROP_BREEDER = new CropsNHItemList[] { CropsNHItemList.CropBreeder_LV,
+        CropsNHItemList.CropBreeder_MV, CropsNHItemList.CropBreeder_HV, CropsNHItemList.CropBreeder_EV,
+        CropsNHItemList.CropBreeder_IV, CropsNHItemList.CropBreeder_LuV, CropsNHItemList.CropBreeder_ZPM,
+        CropsNHItemList.CropBreeder_UV, CropsNHItemList.CropBreeder_UHV, CropsNHItemList.CropBreeder_UEV,
+        CropsNHItemList.CropBreeder_UIV, CropsNHItemList.CropBreeder_UMV };
 
     private static final CropsNHItemList[] CROP_GENE_EXTRACTORS = new CropsNHItemList[] {
         CropsNHItemList.CropGeneExtractor_EV, CropsNHItemList.CropGeneExtractor_IV,

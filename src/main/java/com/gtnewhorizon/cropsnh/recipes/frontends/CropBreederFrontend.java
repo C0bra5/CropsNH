@@ -20,11 +20,38 @@ public class CropBreederFrontend extends RecipeMapFrontend {
     }
 
     @Override
+    protected void drawNEIOverlayForInput(GTNEIDefaultHandler.FixedPositionedStack stack) {
+        super.drawNEIOverlayForInput(stack);
+        if (stack.isFluid()) {
+            drawNEIOverlayText(
+                "+",
+                stack,
+                colorOverride.getTextColorOrDefault("nei_overlay_yellow", 0xFDD835),
+                0.5f,
+                true,
+                Alignment.TopRight);
+        }
+    }
+
+    @Override
+    protected List<String> handleNEIItemInputTooltip(List<String> currentTip,
+        GTNEIDefaultHandler.FixedPositionedStack pStack) {
+        currentTip = super.handleNEIItemInputTooltip(currentTip, pStack);
+        if (pStack.isFluid()) {
+            currentTip.add(
+                EnumChatFormatting.RESET + StatCollector.translateToLocal("cropsnh_nei.cropBreeder.tooltip.fluidCost"));
+        }
+        return currentTip;
+    }
+
+    @Override
     protected List<String> handleNEIItemOutputTooltip(List<String> currentTip,
         GTNEIDefaultHandler.FixedPositionedStack pStack) {
         currentTip = super.handleNEIItemOutputTooltip(currentTip, pStack);
         currentTip.add(
             EnumChatFormatting.RESET + StatCollector.translateToLocal("cropsnh_nei.cropBreeder.tooltip.outputStats"));
+        currentTip.add(
+            EnumChatFormatting.RESET + StatCollector.translateToLocal("cropsnh_nei.cropBreeder.tooltip.successChance"));
         return currentTip;
     }
 
@@ -39,4 +66,5 @@ public class CropBreederFrontend extends RecipeMapFrontend {
             true,
             Alignment.TopRight);
     }
+
 }

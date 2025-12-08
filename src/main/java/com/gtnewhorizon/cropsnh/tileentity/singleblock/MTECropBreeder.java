@@ -54,6 +54,11 @@ import gregtech.api.util.GTUtility;
 
 public class MTECropBreeder extends MTEBasicMachine {
 
+    private static final int MIN_TIER = VoltageIndex.LV;
+    private static final int MIN_CHANCE = 40;
+    private static final int MAX_CHANCE = 100;
+    private static final int CHANCE_INCREASE_PER_TIER = 10;
+
     private static final int AMPERAGE = 1;
     private static final int MIN_INPUT_SLOT_COUNT = 3;
     private static final int MAX_INPUT_SLOT_COUNT = 6;
@@ -67,7 +72,7 @@ public class MTECropBreeder extends MTEBasicMachine {
 
     public static void init() {
         // allowed liquid fertilizer
-        ALLOWED_LIQUID_FERTILIZER.putIfAbsent(CropsNHFluids.enrichedFertilizer, 10000);
+        ALLOWED_LIQUID_FERTILIZER.putIfAbsent(CropsNHFluids.enrichedFertilizer, 1000);
     }
 
     public MTECropBreeder(int aID, int aTier, String aNameRegional) {
@@ -77,7 +82,10 @@ public class MTECropBreeder extends MTEBasicMachine {
             aNameRegional,
             aTier,
             AMPERAGE,
-            new String[] { "It can duplicate seeds!", "Uses 100L of Enriched Fertiliser per stat point on the seed." },
+            new String[] { "It can duplicate seeds!", "Needs 1000L of Enriched Fertilizer per tier of the output seed.",
+                "Needs 500L of Enriched Fertilizer per stat point of the output seed.",
+                "The stats of the output seed will be the average of the parents.",
+                String.format("%d%% success chance.", getOutputChance(aTier)) },
             getInputSlotCount(aTier),
             OUTPUT_SLOT_COUNT,
             TextureFactory.of(
@@ -194,13 +202,15 @@ public class MTECropBreeder extends MTEBasicMachine {
         // try to find the first matching recipe
         for (ICropMutation mutation : deterministicMutations) {
             // abort early if the amount of fluid in the tank can't create this crop.
-            int amountOfFluidToConsume = drainPerTier * mutation.getOutput()
-                .getTier();
+            ISeedStats newStats = getNewSeedStats(mutation, breedingParents);
+            int amountOfFluidToConsume = (drainPerTier * mutation.getOutput()
+                .getTier())
+                + (drainPerTier / 2) * (newStats.getGrowth() + newStats.getGain() + newStats.getResistance());
             if (amountOfFluidToConsume > this.mFluid.amount) continue;
 
             // abort early if the output doesn't fit.
             ItemStack newSeed = mutation.getOutput()
-                .getSeedItem(getNewSeedStats(mutation, breedingParents));
+                .getSeedItem(newStats);
             newSeed.stackSize = 1;
             if (!this.canOutput(newSeed)) continue;
 
@@ -227,11 +237,21 @@ public class MTECropBreeder extends MTEBasicMachine {
             for (ICropCard cc : mutation.getParents()) {
                 breedingParents.get(cc).stack.stackSize -= 1;
             }
-            this.mOutputItems[0] = newSeed;
+
+            // enforce the success chance
+            if (this.getBaseMetaTileEntity()
+                .getRandomNumber(MAX_CHANCE) < getOutputChance(this.mTier)) {
+                this.mOutputItems[0] = newSeed;
+            }
 
             return FOUND_AND_SUCCESSFULLY_USED_RECIPE;
         }
         return DID_NOT_FIND_RECIPE;
+    }
+
+    private static int getOutputChance(int aTier) {
+        // lv is 40%, every tier after is 10% more chance.
+        return Math.min(MAX_CHANCE, MIN_CHANCE + (aTier - MIN_TIER) * CHANCE_INCREASE_PER_TIER);
     }
 
     private static ISeedStats getNewSeedStats(ICropMutation mutation, HashMap<ICropCard, SeedData> breedingParents) {

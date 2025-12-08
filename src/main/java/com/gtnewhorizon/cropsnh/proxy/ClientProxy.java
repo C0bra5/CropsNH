@@ -10,7 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.gtnewhorizon.cropsnh.blocks.BlockCropsNH;
+import com.gtnewhorizon.cropsnh.blocks.abstracts.BlockCropsNH;
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
 import com.gtnewhorizon.cropsnh.renderers.blocks.RenderBlockBase;

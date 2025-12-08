@@ -8,10 +8,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -23,6 +21,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.gtnewhorizon.cropsnh.reference.Constants;
 import com.gtnewhorizon.cropsnh.renderers.PlantRenderer;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 import com.gtnewhorizon.cropsnh.utility.ModUtils;
 import com.gtnewhorizons.angelica.api.TextureServices;
@@ -178,23 +177,11 @@ public abstract class CropCard implements ICropCard {
         return Constants.SPREAD_WEED_WHEN_GROWTH_AT_DEFAULT;
     }
 
-    private static IIcon MISSING_TEXTURE = null;
-
-    @SideOnly(Side.CLIENT)
-    private static IIcon getMissingTexture() {
-        if (MISSING_TEXTURE == null) {
-            MISSING_TEXTURE = ((TextureMap) Minecraft.getMinecraft()
-                .getTextureManager()
-                .getTexture(TextureMap.locationBlocksTexture)).getAtlasSprite("missingno");
-        }
-        return MISSING_TEXTURE;
-    }
-
     @Override
     @SideOnly(Side.CLIENT)
     public void render(IBlockAccess world, int x, int y, int z, ICropStickTile te, RenderBlocks renderer) {
         IIcon icon = this.getSprite(te);
-        if (icon == null) icon = getMissingTexture();
+        if (icon == null) icon = CropsNHUtils.getMissingTexture();
         // only angelica and hodgepodge to do the thing right if the icon is actually animated
         if (icon instanceof TextureAtlasSprite && (((TextureAtlasSprite) icon).hasAnimationMetadata())
             && ((TextureAtlasSprite) icon).getFrameCount() > 1) {

@@ -1,4 +1,4 @@
-package com.gtnewhorizon.cropsnh.blocks;
+package com.gtnewhorizon.cropsnh.blocks.abstracts;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

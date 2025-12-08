@@ -7,9 +7,12 @@ import java.util.Objects;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ISeedData;
@@ -18,6 +21,8 @@ import com.gtnewhorizon.cropsnh.farming.SeedStats;
 import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
 import com.gtnewhorizon.cropsnh.items.ItemGenericSeed;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.util.GTUtility;
 
 public abstract class CropsNHUtils {
@@ -92,5 +97,17 @@ public abstract class CropsNHUtils {
         SeedStats stats = SeedStats.getStatsFromStack(aStack);
         if (stats == null || !stats.isAnalyzed()) return null;
         return new SeedData(cc, stats, aStack);
+    }
+
+    private static IIcon MISSING_TEXTURE = null;
+
+    @SideOnly(Side.CLIENT)
+    public static IIcon getMissingTexture() {
+        if (MISSING_TEXTURE == null) {
+            MISSING_TEXTURE = ((TextureMap) Minecraft.getMinecraft()
+                .getTextureManager()
+                .getTexture(TextureMap.locationBlocksTexture)).getAtlasSprite("missingno");
+        }
+        return MISSING_TEXTURE;
     }
 }

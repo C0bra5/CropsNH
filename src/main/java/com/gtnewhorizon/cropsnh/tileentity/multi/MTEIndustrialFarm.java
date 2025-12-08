@@ -16,30 +16,27 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ASSEMBLY_LINE
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ASSEMBLY_LINE_ACTIVE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ASSEMBLY_LINE_ACTIVE_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ASSEMBLY_LINE_GLOW;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.chainAllGlasses;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import org.apache.commons.lang3.tuple.Pair;
-
-import com.gtnewhorizon.cropsnh.blocks.CropsNHBlocksCasing1;
+import com.gtnewhorizon.cropsnh.blocks.abstracts.CropsNHBlockIndustrialFarmTiredComponent;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
+import com.gtnewhorizon.structurelib.structure.IStructureElement;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 
+import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
 import gregtech.api.enums.VoltageIndex;
@@ -48,24 +45,37 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.metatileentity.implementations.MTEHatch;
-import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.OverclockCalculator;
 import gregtech.common.misc.GTStructureChannels;
 
 public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustrialFarm>
     implements ISurvivalConstructable {
 
+    /** The duration of the production cycle in seconds. */
+    public static final int CYCLE_DURATION = 5 * SECONDS;
+
     private static final String STRUCTURE_PIECE_FIRST = "first";
     private static final String STRUCTURE_PIECE_LATER = "later";
     private static final String STRUCTURE_PIECE_LAST = "last";
 
-    private int mCasing = 0;
-    private int mSeedBedTier = -1;
+    /** Doubles the power instead of halving recipe time. */
+    private int mExpectedOCs = 0;
+    /** How much power each recipe is expected to use */
+    private long mExpectedEUt = 0;
     private int mGlassTier = -1;
+    private int mUpgradeTier = -1;
+    private int mEnvironmentalEnhancementUnitCount = 0;
+    private int mGrowthAccelerationUnitCount = 0;
+    private int mFertilizerUnitCount = 0;
+    private int mAdvancedHarvestingUnitCount = 0;
+    private int mOverclockedGrowthAccelerationUnitCount = 0;
+
+    // region structure
     private static final int CASING_INDEX = 63;
     private static final int MIN_CASING_TIER = VoltageIndex.MV;
     private static final int MAX_CASING_TIER = VoltageIndex.UXV;
@@ -112,100 +122,51 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
                 .anyOf(InputBus, InputHatch, OutputBus, Maintenance, MultiAmpEnergy.or(Energy))
                 .casingIndex(CASING_INDEX)
                 .dot(1)
-                .buildAndChain(onElementPass(te -> te.mCasing++, ofBlock(CropsNHBlocks.blockCasings1, 0))))
-        .addElement('c', onElementPass(t -> t.mCasing++, ofBlock(CropsNHBlocks.blockCasings1, 0)))
+                .buildAndChain(ofBlock(CropsNHBlocks.blockCasings1, 0)))
+        .addElement('c', ofBlock(CropsNHBlocks.blockCasings1, 0))
         .addElement('g', chainAllGlasses(-1, (te, t) -> te.mGlassTier = t, te -> te.mGlassTier))
-        .addElement('U', ofChain(ofFrame(Materials.Wood)))
         .addElement(
-            's',
-            lazy(
-                a -> ofBlocksTiered(
-                    MTEIndustrialFarm::getSeedBlockTier,
-                    getSeedBedBlocks(),
-                    -1,
-                    (te, t) -> te.mSeedBedTier = t,
-                    te -> te.mSeedBedTier)))
+            'U',
+            ofChain(
+                ofFrame(Materials.Wood),
+                onElementPass(
+                    te -> te.mEnvironmentalEnhancementUnitCount++,
+                    chainAllTiredComponents(CropsNHBlocks.blockEnvironmentalEnhancementUnit)),
+                onElementPass(
+                    te -> te.mGrowthAccelerationUnitCount++,
+                    chainAllTiredComponents(CropsNHBlocks.blockGrowthAccelerationUnit)),
+                onElementPass(
+                    te -> te.mFertilizerUnitCount++,
+                    chainAllTiredComponents(CropsNHBlocks.blockFertilizerUnit)),
+                onElementPass(
+                    te -> te.mAdvancedHarvestingUnitCount++,
+                    chainAllTiredComponents(CropsNHBlocks.blockAdvancedHarvestingUnit)),
+                onElementPass(
+                    te -> te.mOverclockedGrowthAccelerationUnitCount++,
+                    chainAllTiredComponents(CropsNHBlocks.blockOverclockedGrowthAccelerationUnit))))
+        .addElement('s', chainAllTiredComponents(CropsNHBlocks.blockSeedBed))
         .build();
 
-    @Nullable
-    public static Integer getSeedBlockTier(Block block, int meta) {
-        if (block instanceof CropsNHBlocksCasing1 seedBed) {
-            return seedBed.getSeedBedTier(meta);
-        }
-        return null;
+    private static IStructureElement<MTEIndustrialFarm> chainAllTiredComponents(Block block) {
+        Class c = block.getClass();
+        return lazy(() -> ofBlocksTiered((aBlock, aMeta) -> {
+            if (c.isInstance(aBlock) && aBlock instanceof CropsNHBlockIndustrialFarmTiredComponent tComponent) {
+                return tComponent.getTier(aMeta);
+            }
+            return null;
+        },
+            ((CropsNHBlockIndustrialFarmTiredComponent) block).getStructureBlocks(),
+            -1,
+            MTEIndustrialFarm::setUpgradeTier,
+            MTEIndustrialFarm::getUpgradeTier));
     }
 
-    public static List<Pair<Block, Integer>> getSeedBedBlocks() {
-        List<Pair<Block, Integer>> ret = new ArrayList<>();
-        for (int tMeta = 1; tMeta <= 12; tMeta++) {
-            ret.add(Pair.of(CropsNHBlocks.blockCasings1, tMeta));
-        }
-        return ret;
+    private static void setUpgradeTier(MTEIndustrialFarm te, Integer tier) {
+        te.mUpgradeTier = tier;
     }
 
-    public MTEIndustrialFarm(int aID, String aName, String aNameRegional) {
-        super(aID, aName, aNameRegional);
-    }
-
-    public MTEIndustrialFarm(String aName) {
-        super(aName);
-    }
-
-    @Override
-    public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new MTEIndustrialFarm(this.mName);
-    }
-
-    @Override
-    protected MultiblockTooltipBuilder createTooltip() {
-        final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Industrial Garden")
-            .addInfo("Used to grow a crops at an industrial scale.")
-            .addInfo("The length of the machine depends on the tier of the seed bed.");
-
-        tt.beginVariableStructureBlock(5, 5, 4, 4, 2 + MIN_SLICES, 2 + MAX_SLICES, false)
-            .addGlassEnergyLimitInfo()
-            .addInfo(StatCollector.translateToLocal("cropsnh_tooltip.MBTT.multiAmpsWithUpgrade"))
-            .addCasingInfoRange("Agricultural Casing", 8 * 2 + MIN_SLICES * 2, 8 * 2 + MAX_SLICES * 2, false)
-            .addEnergyHatch("Any Casing", 1)
-            .addInputBus("Any Casing", 1)
-            .addInputHatch("Any Casing", 1)
-            .addMaintenanceHatch("Any Casing", 1)
-            .addSubChannelUsage(GTStructureChannels.BOROGLASS)
-            .toolTipFinisher();
-        return tt;
-    }
-
-    @Override
-    public ITexture[] getTexture(IGregTechTileEntity baseMetaTileEntity, ForgeDirection sideDirection,
-        ForgeDirection facingDirection, int colorIndex, boolean active, boolean redstoneLevel) {
-        ITexture casingTexture = Textures.BlockIcons.casingTexturePages[0][CASING_INDEX];
-        if (sideDirection == facingDirection) {
-            if (active) return new ITexture[] { casingTexture, TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_ASSEMBLY_LINE_ACTIVE)
-                .extFacing()
-                .build(),
-                TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_ASSEMBLY_LINE_ACTIVE_GLOW)
-                    .extFacing()
-                    .glow()
-                    .build() };
-            return new ITexture[] { casingTexture, TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_ASSEMBLY_LINE)
-                .extFacing()
-                .build(),
-                TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_ASSEMBLY_LINE_GLOW)
-                    .extFacing()
-                    .glow()
-                    .build() };
-        }
-        return new ITexture[] { casingTexture };
-    }
-
-    @Override
-    public @Nonnull CheckRecipeResult checkProcessing() {
-        return CheckRecipeResultRegistry.NO_RECIPE;
+    private static Integer getUpgradeTier(MTEIndustrialFarm te) {
+        return te.mUpgradeTier;
     }
 
     @Override
@@ -294,7 +255,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
             false);
         if (tBuilt != -1) return tBuilt;
         int tSlices = GTUtility.clamp(stackSize.stackSize, MIN_SLICES, MAX_SLICES);
-        for (int tSliceIndex = 1; tSliceIndex < tSlices; tSliceIndex++) {
+        for (int tSliceIndex = 0; tSliceIndex < tSlices; tSliceIndex++) {
             tBuilt = STRUCTURE_DEFINITION.survivalBuild(
                 this,
                 stackSize,
@@ -339,8 +300,13 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        this.mSeedBedTier = -1;
+        this.mUpgradeTier = -1;
         this.mGlassTier = -1;
+        this.mEnvironmentalEnhancementUnitCount = 0;
+        this.mGrowthAccelerationUnitCount = 0;
+        this.mFertilizerUnitCount = 0;
+        this.mAdvancedHarvestingUnitCount = 0;
+        this.mOverclockedGrowthAccelerationUnitCount = 0;
         boolean tSuccess = STRUCTURE_DEFINITION.check(
             this,
             STRUCTURE_PIECE_FIRST,
@@ -372,9 +338,9 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
             2,
             -1,
             !mMachine);
-        if (!tSuccess || this.mSeedBedTier < MIN_CASING_TIER || this.mGlassTier < MIN_CASING_TIER) return false;
-        int tOriginalSeedBedTier = this.mSeedBedTier;
-        int tSlices = GTUtility.clamp(this.mSeedBedTier - MIN_CASING_TIER + MIN_SLICES, MIN_SLICES, MAX_SLICES);
+        if (!tSuccess || this.mGlassTier < MIN_CASING_TIER) return false;
+
+        int tSlices = GTUtility.clamp(this.mUpgradeTier - MIN_CASING_TIER + MIN_SLICES, MIN_SLICES, MAX_SLICES);
         for (int tSliceIndex = 1; tSliceIndex < tSlices; tSliceIndex++) {
             tSuccess = STRUCTURE_DEFINITION.check(
                 this,
@@ -392,8 +358,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
                 2,
                 -tSliceIndex - 1,
                 !mMachine);
-            if (!tSuccess || this.mSeedBedTier != tOriginalSeedBedTier || this.mGlassTier < MIN_CASING_TIER)
-                return false;
+            if (!tSuccess || this.mGlassTier < MIN_CASING_TIER) return false;
         }
 
         tSuccess = STRUCTURE_DEFINITION.check(
@@ -412,29 +377,148 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
             2,
             -tSlices - 1,
             !mMachine);
-        if (!tSuccess || this.mSeedBedTier != tOriginalSeedBedTier || this.mGlassTier < MIN_CASING_TIER) return false;
+        if (!tSuccess || this.mGlassTier < MIN_CASING_TIER) return false;
 
         if (this.mOutputBusses.size() < 1) return false;
         if (this.mInputHatches.size() < 1) return false;
         if (this.mMaintenanceHatches.size() != 1) return false;
-        if (this.mEnergyHatches.size() < 1) return false;
+        if (this.mEnergyHatches.size() + this.mExoticEnergyHatches.size() < 1) return false;
 
-        // check if exotic hatches are present
-        if (this.mSeedBedTier < VoltageIndex.ZPM) {
-            for (MTEHatch hatch : this.mExoticEnergyHatches) {
-                if (hatch.getConnectionType() != MTEHatch.ConnectionType.LASER) {
-                    return false;
+        // validate upgrade counts
+        if (this.mEnvironmentalEnhancementUnitCount > 2) {
+            return false;
+        }
+        // there can only be one (type)
+        if (this.mGrowthAccelerationUnitCount > 0 && this.mOverclockedGrowthAccelerationUnitCount > 0) return false;
+        if (this.mFertilizerUnitCount > 1) {
+            return false;
+        }
+        if (this.mAdvancedHarvestingUnitCount > 2) {
+            return false;
+        }
+
+        switch (this.mOverclockedGrowthAccelerationUnitCount) {
+            case 0:
+                if (this.mExoticEnergyHatches.size() != 0) return false;
+                break;
+            case 1:
+                for (MTEHatch hatch : this.mExoticEnergyHatches) {
+                    if (hatch.getConnectionType() == MTEHatch.ConnectionType.LASER) {
+                        return false;
+                    }
+                    // validate the tier while we're at it
+                    if (this.mGlassTier < VoltageIndex.UMV && hatch.mTier > this.mGlassTier) {
+                        return false;
+                    }
                 }
-                if (hatch.mTier > this.mGlassTier) {
-                    return false;
-                }
+                break;
+            default:
+                return false;
+        }
+
+        // validate normal energy hatch tiers
+        for (MTEHatch hatch : this.mEnergyHatches) {
+            // probably superfluous but eh. it's not like this will be the perf bottleneck of this machine
+            if (hatch.getConnectionType() == MTEHatch.ConnectionType.LASER) {
+                return false;
             }
-            for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
-                if (mEnergyHatch.mTier > this.mGlassTier) {
-                    return false;
-                }
+            if (this.mGlassTier < VoltageIndex.UMV && hatch.mTier > this.mGlassTier) {
+                return false;
             }
         }
+
+        // calculate power usage
+        // base eu/t should be based on the seedbed/upgrade tier.
+        long powerUsage, basePower;
+        powerUsage = basePower = GTValues.VP[this.mUpgradeTier];
+        powerUsage += this.mGrowthAccelerationUnitCount * (basePower + (basePower / 4));
+        powerUsage += (this.mEnvironmentalEnhancementUnitCount + this.mFertilizerUnitCount
+            + this.mAdvancedHarvestingUnitCount) * (basePower / 2);
+
+        if (this.mOverclockedGrowthAccelerationUnitCount > 0) {
+            OverclockCalculator calculator = new OverclockCalculator().setRecipeEUt(powerUsage)
+                .setEUt(this.getMaxInputEu())
+                .setDuration(Integer.MAX_VALUE)
+                .calculate();
+            this.mExpectedOCs = calculator.getPerformedOverclocks();
+            this.mExpectedEUt = calculator.getConsumption();
+        } else {
+            this.mExpectedOCs = 0;
+            this.mExpectedEUt = powerUsage;
+        }
+
         return true;
     }
+
+    // endregion structure
+
+    public MTEIndustrialFarm(int aID, String aName, String aNameRegional) {
+        super(aID, aName, aNameRegional);
+    }
+
+    public MTEIndustrialFarm(String aName) {
+        super(aName);
+    }
+
+    @Override
+    public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
+        return new MTEIndustrialFarm(this.mName);
+    }
+
+    @Override
+    protected MultiblockTooltipBuilder createTooltip() {
+        final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
+        tt.addMachineType("Industrial Garden")
+            .addInfo("Used to grow a crops at an industrial scale.")
+            .addInfo("The length of the machine depends on the tier of the seed bed.");
+
+        tt.beginVariableStructureBlock(5, 5, 4, 4, 2 + MIN_SLICES, 2 + MAX_SLICES, false)
+            .addGlassEnergyLimitInfo()
+            .addInfo(StatCollector.translateToLocal("cropsnh_tooltip.MBTT.multiAmpsWithUpgrade"))
+            .addCasingInfoRange("Agricultural Casing", 8 * 2 + MIN_SLICES * 2, 8 * 2 + MAX_SLICES * 2, false)
+            .addEnergyHatch("Any Casing", 1)
+            .addInputBus("Any Casing", 1)
+            .addInputHatch("Any Casing", 1)
+            .addMaintenanceHatch("Any Casing", 1)
+            .addSubChannelUsage(GTStructureChannels.BOROGLASS)
+            .toolTipFinisher();
+        return tt;
+    }
+
+    @Override
+    public ITexture[] getTexture(IGregTechTileEntity baseMetaTileEntity, ForgeDirection sideDirection,
+        ForgeDirection facingDirection, int colorIndex, boolean active, boolean redstoneLevel) {
+        ITexture casingTexture = Textures.BlockIcons.casingTexturePages[0][CASING_INDEX];
+        if (sideDirection == facingDirection) {
+            if (active) return new ITexture[] { casingTexture, TextureFactory.builder()
+                .addIcon(OVERLAY_FRONT_ASSEMBLY_LINE_ACTIVE)
+                .extFacing()
+                .build(),
+                TextureFactory.builder()
+                    .addIcon(OVERLAY_FRONT_ASSEMBLY_LINE_ACTIVE_GLOW)
+                    .extFacing()
+                    .glow()
+                    .build() };
+            return new ITexture[] { casingTexture, TextureFactory.builder()
+                .addIcon(OVERLAY_FRONT_ASSEMBLY_LINE)
+                .extFacing()
+                .build(),
+                TextureFactory.builder()
+                    .addIcon(OVERLAY_FRONT_ASSEMBLY_LINE_GLOW)
+                    .extFacing()
+                    .glow()
+                    .build() };
+        }
+        return new ITexture[] { casingTexture };
+    }
+
+    @Override
+    public @Nonnull CheckRecipeResult checkProcessing() {
+        this.lEUt = -this.mExpectedEUt;
+        this.mEfficiency = (10000 - (getIdealStatus() - getRepairStatus()) * 1000);
+        this.mEfficiencyIncrease = 10000;
+        this.mMaxProgresstime = 100;
+        return CheckRecipeResultRegistry.SUCCESSFUL;
+    }
+
 }

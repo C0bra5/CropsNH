@@ -31,7 +31,7 @@ public class CropBauxia extends NHCropCard {
 
     @Override
     public int getMachineBreedingRecipeTier() {
-        return VoltageIndex.HV;
+        return VoltageIndex.MV;
     }
 
     @Override
