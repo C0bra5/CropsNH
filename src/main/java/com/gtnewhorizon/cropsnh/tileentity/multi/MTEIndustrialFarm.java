@@ -23,11 +23,19 @@ import static gregtech.api.util.GTStructureUtility.ofFrame;
 
 import javax.annotation.Nonnull;
 
+import com.gtnewhorizon.cropsnh.blocks.BlockSeedBed;
+import com.gtnewhorizon.gtnhlib.util.map.ItemStackMap;
+import kubatech.api.eig.EIGDropTable;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.gtnewhorizon.cropsnh.blocks.BlockAdvancedHarvestingUnit;
+import com.gtnewhorizon.cropsnh.blocks.BlockEnvironmentalEnhancementUnit;
+import com.gtnewhorizon.cropsnh.blocks.BlockFertilizerUnit;
+import com.gtnewhorizon.cropsnh.blocks.BlockGrowthAccelerationUnit;
+import com.gtnewhorizon.cropsnh.blocks.BlockOverclockedGrowthAccelerationUnit;
 import com.gtnewhorizon.cropsnh.blocks.abstracts.CropsNHBlockIndustrialFarmTiredComponent;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
@@ -59,23 +67,37 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
     /** The duration of the production cycle in seconds. */
     public static final int CYCLE_DURATION = 5 * SECONDS;
 
-    private static final String STRUCTURE_PIECE_FIRST = "first";
-    private static final String STRUCTURE_PIECE_LATER = "later";
-    private static final String STRUCTURE_PIECE_LAST = "last";
-
-    /** Doubles the power instead of halving recipe time. */
+    /** How many times the output and water/fertilizer consumption of the multi should be doubled. */
     private int mExpectedOCs = 0;
     /** How much power each recipe is expected to use */
     private long mExpectedEUt = 0;
+    /** The tier of glass used to build the multi, used to limit the power hatch tiers. */
     private int mGlassTier = -1;
+    /** The tier of the upgrades applied to the multi. */
     private int mUpgradeTier = -1;
+    /** The number of environmental enhancement units installed on the multi. */
     private int mEnvironmentalEnhancementUnitCount = 0;
+    /** The number of growth acceleration units installed on the multi. */
     private int mGrowthAccelerationUnitCount = 0;
+    /** The number of fertilizer units installed on the multi. */
     private int mFertilizerUnitCount = 0;
+    /** The number of advanced harvesting units installed on the multi. */
     private int mAdvancedHarvestingUnitCount = 0;
+    /** The number of overclocked growth acceleration units installed on the multi. */
     private int mOverclockedGrowthAccelerationUnitCount = 0;
+    /** The number of seeds and under-blocks that can be stored in the controller. */
+    private int mSeedCapacity = 0;
+    /** The stack of seeds stored in the multi */
+    private ItemStack mSeedStack = null;
+    /** The stack of under-blocks stored in the multi */
+    private ItemStack mBlockUnderStack = null;
+    /** The tracker for the drop progress */
+    private EIGDropTable mOutputTracker = new EIGDropTable();
 
     // region structure
+    private static final String STRUCTURE_PIECE_FIRST = "first";
+    private static final String STRUCTURE_PIECE_LATER = "later";
+    private static final String STRUCTURE_PIECE_LAST = "last";
     private static final int CASING_INDEX = 63;
     private static final int MIN_CASING_TIER = VoltageIndex.MV;
     private static final int MAX_CASING_TIER = VoltageIndex.UXV;
@@ -307,6 +329,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
         this.mFertilizerUnitCount = 0;
         this.mAdvancedHarvestingUnitCount = 0;
         this.mOverclockedGrowthAccelerationUnitCount = 0;
+        this.mSeedCapacity = 0;
         boolean tSuccess = STRUCTURE_DEFINITION.check(
             this,
             STRUCTURE_PIECE_FIRST,
@@ -385,35 +408,27 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
         if (this.mEnergyHatches.size() + this.mExoticEnergyHatches.size() < 1) return false;
 
         // validate upgrade counts
-        if (this.mEnvironmentalEnhancementUnitCount > 2) {
-            return false;
-        }
-        // there can only be one (type)
-        if (this.mGrowthAccelerationUnitCount > 0 && this.mOverclockedGrowthAccelerationUnitCount > 0) return false;
-        if (this.mFertilizerUnitCount > 1) {
-            return false;
-        }
-        if (this.mAdvancedHarvestingUnitCount > 2) {
+        if (this.mEnvironmentalEnhancementUnitCount > BlockEnvironmentalEnhancementUnit.MAX_UPGRADE_COUNT
+            || this.mFertilizerUnitCount > BlockFertilizerUnit.MAX_UPGRADE_COUNT
+            || this.mAdvancedHarvestingUnitCount > BlockAdvancedHarvestingUnit.MAX_UPGRADE_COUNT
+            || this.mOverclockedGrowthAccelerationUnitCount > BlockOverclockedGrowthAccelerationUnit.MAX_UPGRADE_COUNT
+            || (this.mGrowthAccelerationUnitCount > 0 && this.mOverclockedGrowthAccelerationUnitCount > 0)) {
             return false;
         }
 
-        switch (this.mOverclockedGrowthAccelerationUnitCount) {
-            case 0:
-                if (this.mExoticEnergyHatches.size() != 0) return false;
-                break;
-            case 1:
-                for (MTEHatch hatch : this.mExoticEnergyHatches) {
-                    if (hatch.getConnectionType() == MTEHatch.ConnectionType.LASER) {
-                        return false;
-                    }
-                    // validate the tier while we're at it
-                    if (this.mGlassTier < VoltageIndex.UMV && hatch.mTier > this.mGlassTier) {
-                        return false;
-                    }
+        // validate hatches depending on the presence of the oc upgrade.
+        if (this.mOverclockedGrowthAccelerationUnitCount > 0) {
+            for (MTEHatch hatch : this.mExoticEnergyHatches) {
+                if (hatch.getConnectionType() == MTEHatch.ConnectionType.LASER) {
+                    return false;
                 }
-                break;
-            default:
-                return false;
+                // validate the tier while we're at it
+                if (this.mGlassTier < VoltageIndex.UMV && hatch.mTier > this.mGlassTier) {
+                    return false;
+                }
+            }
+        } else if (this.mExoticEnergyHatches.size() != 0) {
+            return false;
         }
 
         // validate normal energy hatch tiers
@@ -429,11 +444,22 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
 
         // calculate power usage
         // base eu/t should be based on the seedbed/upgrade tier.
-        long powerUsage, basePower;
-        powerUsage = basePower = GTValues.VP[this.mUpgradeTier];
-        powerUsage += this.mGrowthAccelerationUnitCount * (basePower + (basePower / 4));
-        powerUsage += (this.mEnvironmentalEnhancementUnitCount + this.mFertilizerUnitCount
-            + this.mAdvancedHarvestingUnitCount) * (basePower / 2);
+        long basePower = GTValues.VP[this.mUpgradeTier], powerUsage = basePower;
+        if (this.mEnvironmentalEnhancementUnitCount > 0) {
+            powerUsage += basePower * BlockEnvironmentalEnhancementUnit.BASE_POWER_INCREASE
+                * this.mEnvironmentalEnhancementUnitCount;
+        }
+        if (this.mGrowthAccelerationUnitCount > 0) {
+            powerUsage += basePower * BlockGrowthAccelerationUnit.BASE_POWER_INCREASE
+                * this.mGrowthAccelerationUnitCount;
+        }
+        if (this.mFertilizerUnitCount > 0) {
+            powerUsage += basePower * BlockFertilizerUnit.BASE_POWER_INCREASE * this.mFertilizerUnitCount;
+        }
+        if (this.mAdvancedHarvestingUnitCount > 0) {
+            powerUsage += basePower * BlockAdvancedHarvestingUnit.BASE_POWER_INCREASE
+                * this.mAdvancedHarvestingUnitCount;
+        }
 
         if (this.mOverclockedGrowthAccelerationUnitCount > 0) {
             OverclockCalculator calculator = new OverclockCalculator().setRecipeEUt(powerUsage)
@@ -446,6 +472,8 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
             this.mExpectedOCs = 0;
             this.mExpectedEUt = powerUsage;
         }
+
+        this.mSeedCapacity = BlockSeedBed.getCapacity(this.mUpgradeTier);
 
         return true;
     }
@@ -468,7 +496,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Industrial Garden")
+        tt.addMachineType("Industrial Farm")
             .addInfo("Used to grow a crops at an industrial scale.")
             .addInfo("The length of the machine depends on the tier of the seed bed.");
 

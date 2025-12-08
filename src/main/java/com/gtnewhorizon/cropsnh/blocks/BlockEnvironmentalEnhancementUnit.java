@@ -14,6 +14,7 @@ import com.gtnewhorizon.cropsnh.reference.Names;
 public class BlockEnvironmentalEnhancementUnit extends CropsNHBlockIndustrialFarmTiredComponent {
 
     public final static int MAX_UPGRADE_COUNT = 2;
+    public final static double BASE_POWER_INCREASE = 0.5d;
 
     public BlockEnvironmentalEnhancementUnit() {
         super(
@@ -39,14 +40,19 @@ public class BlockEnvironmentalEnhancementUnit extends CropsNHBlockIndustrialFar
         tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.environmentalEnhancementUnit.0"));
         tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.environmentalEnhancementUnit.1"));
         if (advancedTooltips) {
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.environmentalEnhancementUnit.2.adv"));
+            tooltip.add(
+                StatCollector.translateToLocalFormatted(
+                    "cropsnh_tooltip.environmentalEnhancementUnit.2.adv",
+                    BASE_POWER_INCREASE * 100));
         } else {
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.environmentalEnhancementUnit.2"));
+            tooltip.add(
+                StatCollector.translateToLocalFormatted(
+                    "cropsnh_tooltip.environmentalEnhancementUnit.2",
+                    BASE_POWER_INCREASE * 100));
         }
         // generic
-        tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.upgrade_must_match_seed_bed"));
-        tooltip
-            .add(StatCollector.translateToLocalFormatted("cropsnh_tooltip.upgrade_count_limited", MAX_UPGRADE_COUNT));
+        tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.upgradeTierMustMatchSeedBed"));
+        tooltip.add(StatCollector.translateToLocalFormatted("cropsnh_tooltip.upgradeCountLimited", MAX_UPGRADE_COUNT));
     }
 
     @Override

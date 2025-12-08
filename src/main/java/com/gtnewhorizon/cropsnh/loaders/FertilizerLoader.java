@@ -11,12 +11,14 @@ import gregtech.api.enums.Mods;
 
 public class FertilizerLoader {
 
+    public static final int FERTILIZER_ITEM_POTENCY = 100;
+
     public static void postInit() {
         // vanilla bonemeal
         FertilizerRegistry.instance.register(Items.dye, 15, 5);
 
         // cropsNH
-        FertilizerRegistry.instance.register(CropsNHItems.fertilizer, OreDictionary.WILDCARD_VALUE, 100);
+        FertilizerRegistry.instance.register(CropsNHItems.fertilizer, OreDictionary.WILDCARD_VALUE, FERTILIZER_ITEM_POTENCY);
 
         // forestry fertilizer
         if (Mods.Forestry.isModLoaded()) {

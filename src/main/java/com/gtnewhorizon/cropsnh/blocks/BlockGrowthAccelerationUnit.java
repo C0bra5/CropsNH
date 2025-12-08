@@ -13,6 +13,9 @@ import com.gtnewhorizon.cropsnh.reference.Names;
 
 public class BlockGrowthAccelerationUnit extends CropsNHBlockIndustrialFarmTiredComponent {
 
+    public final static double GROWTH_SPEED_BONUS = 1.0d;
+    public final static double BASE_POWER_INCREASE = 1.25d;
+
     public BlockGrowthAccelerationUnit() {
         super(
             Names.Objects.growthAccelerationUnit,
@@ -34,12 +37,23 @@ public class BlockGrowthAccelerationUnit extends CropsNHBlockIndustrialFarmTired
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advancedTooltips) {
         super.addInformation(stack, player, tooltip, advancedTooltips);
         // specific
+        tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.growthAccelerationUnit.0"));
         if (advancedTooltips) {
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.growthAccelerationUnit.0.adv"));
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.growthAccelerationUnit.1.adv"));
+            tooltip.add(
+                StatCollector.translateToLocalFormatted(
+                    "cropsnh_tooltip.growthAccelerationUnit.1.adv",
+                    GROWTH_SPEED_BONUS * 100));
+            tooltip.add(
+                StatCollector.translateToLocalFormatted(
+                    "cropsnh_tooltip.growthAccelerationUnit.2.adv",
+                    BASE_POWER_INCREASE * 100));
         } else {
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.growthAccelerationUnit.0"));
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.growthAccelerationUnit.1"));
+            tooltip.add(
+                StatCollector
+                    .translateToLocalFormatted("cropsnh_tooltip.growthAccelerationUnit.1", GROWTH_SPEED_BONUS * 100));
+            tooltip.add(
+                StatCollector
+                    .translateToLocalFormatted("cropsnh_tooltip.growthAccelerationUnit.2", BASE_POWER_INCREASE * 100));
         }
         // generic
         tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.upgradeTierMustMatchSeedBed"));

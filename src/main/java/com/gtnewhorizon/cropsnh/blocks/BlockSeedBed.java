@@ -44,7 +44,8 @@ public class BlockSeedBed extends CropsNHBlockIndustrialFarmTiredComponent {
     }
 
     public static int getCapacity(int aTier) {
-        return MTECropManager.getHorizontalRadius(aTier) * 2 + 1;
+        int ret = MTECropManager.getHorizontalRadius(aTier) * 2 + 1;
+        return ret * ret;
     }
 
     @Override

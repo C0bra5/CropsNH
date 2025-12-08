@@ -14,6 +14,8 @@ import com.gtnewhorizon.cropsnh.reference.Names;
 public class BlockAdvancedHarvestingUnit extends CropsNHBlockIndustrialFarmTiredComponent {
 
     public final static int MAX_UPGRADE_COUNT = 2;
+    public final static double HARVEST_ROUND_MULTIPLIER = 0.2d;
+    public final static double BASE_POWER_INCREASE = 0.5d;
 
     public BlockAdvancedHarvestingUnit() {
         super(
@@ -36,12 +38,24 @@ public class BlockAdvancedHarvestingUnit extends CropsNHBlockIndustrialFarmTired
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advancedTooltips) {
         super.addInformation(stack, player, tooltip, advancedTooltips);
         // specific
+        tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.advancedHarvestingUnit.0"));
         if (advancedTooltips) {
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.advancedHarvestingUnit.0.adv"));
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.advancedHarvestingUnit.1.adv"));
+            tooltip.add(
+                StatCollector.translateToLocalFormatted(
+                    "cropsnh_tooltip.advancedHarvestingUnit.1.adv",
+                    HARVEST_ROUND_MULTIPLIER * 100));
+            tooltip.add(
+                StatCollector.translateToLocalFormatted(
+                    "cropsnh_tooltip.advancedHarvestingUnit.2.adv",
+                    BASE_POWER_INCREASE * 100));
         } else {
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.advancedHarvestingUnit.0"));
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.advancedHarvestingUnit.1"));
+            tooltip.add(
+                StatCollector.translateToLocalFormatted(
+                    "cropsnh_tooltip.advancedHarvestingUnit.1",
+                    HARVEST_ROUND_MULTIPLIER * 100));
+            tooltip.add(
+                StatCollector
+                    .translateToLocalFormatted("cropsnh_tooltip.advancedHarvestingUnit.2", BASE_POWER_INCREASE * 100));
         }
         // generic
         tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.upgrade_must_match_seed_bed"));

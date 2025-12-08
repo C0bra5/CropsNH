@@ -2,8 +2,11 @@ package com.gtnewhorizon.cropsnh.blocks;
 
 import java.util.List;
 
+import com.gtnewhorizon.cropsnh.loaders.FertilizerLoader;
+import com.gtnewhorizon.cropsnh.tileentity.TileEntityCrop;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
@@ -18,6 +21,9 @@ import gregtech.api.enums.VoltageIndex;
 public class BlockFertilizerUnit extends CropsNHBlockIndustrialFarmTiredComponent {
 
     public final static int MAX_UPGRADE_COUNT = 1;
+    public final static double BASE_POWER_INCREASE = 0.5d;
+    public final static double GROWTH_SPEED_MULTIPLIER = 0.5d;
+    public final static double HARVEST_ROUND_BONUS = 0.5d;
 
     public BlockFertilizerUnit() {
         super(
@@ -39,8 +45,8 @@ public class BlockFertilizerUnit extends CropsNHBlockIndustrialFarmTiredComponen
 
     private final static int MIN_TIER = VoltageIndex.MV;
     private final static int MAX_TIER = VoltageIndex.UXV;
-    /** The amount of ticks needed to consume all the fertilizer given to a crop, main scalar for consumption speed */
-    private final static int CONSUMPTION_TIME = 2560;
+    /** The amount of liquid fertilizer a single fertilizer item should create */
+    private final static int FERTILIZER_ITEM_LIQUID_OUTPUT = 144;
 
     private final static int[] CONSUMPTION_LOOKUP;
 
@@ -50,12 +56,11 @@ public class BlockFertilizerUnit extends CropsNHBlockIndustrialFarmTiredComponen
             throw new LoaderException(
                 String.format("MIN_TIER (%d) should be lower than MAX_TIER (%s)", MIN_TIER, MAX_TIER));
         }
-        CONSUMPTION_LOOKUP = new int[MAX_TIER - MIN_TIER];
+        CONSUMPTION_LOOKUP = new int[MAX_TIER - MIN_TIER + 1];
         // calculate the consumption rate scalar
-        double consumptionScalar = (1.0d / ((double) CONSUMPTION_TIME / (double) MTEIndustrialFarm.CYCLE_DURATION));
         for (int i = 0; i < CONSUMPTION_LOOKUP.length; i++) {
             // scalar amount is computed from max seed capacity.
-            CONSUMPTION_LOOKUP[i] = (int) Math.ceil(BlockSeedBed.getCapacity(i + MIN_TIER) * consumptionScalar);
+            CONSUMPTION_LOOKUP[i] = (int) Math.ceil(BlockSeedBed.getCapacity(i + MIN_TIER) * (double)FERTILIZER_ITEM_LIQUID_OUTPUT / (TileEntityCrop.TICK_RATE * FertilizerLoader.FERTILIZER_ITEM_POTENCY) * MTEIndustrialFarm.CYCLE_DURATION);
         }
     }
 
@@ -70,21 +75,32 @@ public class BlockFertilizerUnit extends CropsNHBlockIndustrialFarmTiredComponen
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advancedTooltips) {
         super.addInformation(stack, player, tooltip, advancedTooltips);
         // specific
-        tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.growthAccelerationUnit.0"));
-        tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.growthAccelerationUnit.1"));
+        tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.fertilizerUnit.0"));
+        tooltip.add(
+            StatCollector.translateToLocalFormatted(
+                "cropsnh_tooltip.fertilizerUnit.1",
+                getFertilizerConsumptionPerCycle(Items.feather.getDamage(stack))));
         if (advancedTooltips) {
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.growthAccelerationUnit.2.adv"));
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.growthAccelerationUnit.3.adv"));
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.growthAccelerationUnit.4.adv"));
+            tooltip.add(
+                StatCollector
+                    .translateToLocalFormatted("cropsnh_tooltip.fertilizerUnit.2.adv", GROWTH_SPEED_MULTIPLIER * 100));
+            tooltip.add(
+                StatCollector
+                    .translateToLocalFormatted("cropsnh_tooltip.fertilizerUnit.3.adv", HARVEST_ROUND_BONUS));
+            tooltip.add(
+                StatCollector
+                    .translateToLocalFormatted("cropsnh_tooltip.fertilizerUnit.4.adv", BASE_POWER_INCREASE * 100));
         } else {
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.growthAccelerationUnit.2"));
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.growthAccelerationUnit.3"));
-            tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.growthAccelerationUnit.4"));
+            tooltip.add(
+                StatCollector.translateToLocalFormatted("cropsnh_tooltip.fertilizerUnit.2", GROWTH_SPEED_MULTIPLIER * 100));
+            tooltip.add(
+                StatCollector.translateToLocalFormatted("cropsnh_tooltip.fertilizerUnit.3", HARVEST_ROUND_BONUS));
+            tooltip.add(
+                StatCollector.translateToLocalFormatted("cropsnh_tooltip.fertilizerUnit.4", BASE_POWER_INCREASE * 100));
         }
         // generic
-        tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.upgrade_must_match_seed_bed"));
-        tooltip
-            .add(StatCollector.translateToLocalFormatted("cropsnh_tooltip.upgrade_count_limited", MAX_UPGRADE_COUNT));
+        tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.upgradeTierMustMatchSeedBed"));
+        tooltip.add(StatCollector.translateToLocalFormatted("cropsnh_tooltip.upgradeCountLimited", MAX_UPGRADE_COUNT));
     }
 
     @Override
