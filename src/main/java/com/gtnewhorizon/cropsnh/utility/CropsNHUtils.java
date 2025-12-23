@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
@@ -109,5 +110,27 @@ public abstract class CropsNHUtils {
                 .getTexture(TextureMap.locationBlocksTexture)).getAtlasSprite("missingno");
         }
         return MISSING_TEXTURE;
+    }
+
+    public static boolean isStackValid(ItemStack aStack) {
+        return (aStack != null) && aStack.getItem() != null && aStack.stackSize > 0;
+    }
+
+    public static boolean isStackInvalid(ItemStack aStack) {
+        return aStack == null || aStack.getItem() == null || aStack.stackSize <= 0;
+    }
+
+    /**
+     * Copies the stack and returns a new stack with the given stack size.
+     * 
+     * @param aStack The stack to copy.
+     * @param aSize  The size of the new stack.
+     * @return The copied stack with the requested size.
+     */
+    public static ItemStack copyStackWithSize(@Nonnull ItemStack aStack, int aSize) {
+        if (isStackInvalid(aStack)) return null;
+        ItemStack ret = aStack.copy();
+        ret.stackSize = aSize;
+        return ret;
     }
 }

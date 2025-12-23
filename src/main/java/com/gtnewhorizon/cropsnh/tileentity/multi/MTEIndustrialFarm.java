@@ -21,13 +21,23 @@ import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.chainAllGlasses;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import org.jetbrains.annotations.NotNull;
+
+import com.cleanroommc.modularui.utils.item.CombinedInvWrapper;
+import com.cleanroommc.modularui.utils.item.IItemHandlerModifiable;
+import com.gtnewhorizon.cropsnh.api.IGrowthRequirement;
+import com.gtnewhorizon.cropsnh.api.ISeedData;
 import com.gtnewhorizon.cropsnh.blocks.BlockAdvancedHarvestingUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockEnvironmentalEnhancementUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockFertilizerUnit;
@@ -35,7 +45,10 @@ import com.gtnewhorizon.cropsnh.blocks.BlockGrowthAccelerationUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockOverclockedGrowthAccelerationUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockSeedBed;
 import com.gtnewhorizon.cropsnh.blocks.abstracts.CropsNHBlockIndustrialFarmTiredComponent;
+import com.gtnewhorizon.cropsnh.farming.requirements.BlockUnderRequirement;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
+import com.gtnewhorizon.cropsnh.reference.Data;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.IStructureElement;
@@ -51,12 +64,16 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.metatileentity.implementations.MTEHatch;
+import gregtech.api.modularui2.GTGuiTextures;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
+import gregtech.api.recipe.check.SimpleCheckRecipeResult;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.ItemEjectionHelper;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
+import gregtech.common.gui.modularui.multiblock.base.MTEMultiBlockBaseGui;
 import gregtech.common.misc.GTStructureChannels;
 import kubatech.api.eig.EIGDropTable;
 
@@ -66,32 +83,42 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
     /** The duration of the production cycle in seconds. */
     public static final int CYCLE_DURATION = 5 * SECONDS;
 
+    private final static String NBT_INVENTORY_TAG = "mIFInventory";
+
+    /** The default mode, used to insert seed and under-block */
+    public static final int MODE_INPUT = 0;
+    /** The mode that generates resources. */
+    public static final int MODE_FARM = 1;
+    /** Used to safely eject the seeds and under-blocks to the output bus. */
+    public static final int MODE_OUTPUT = 2;
+
     /** How many times the output and water/fertilizer consumption of the multi should be doubled. */
-    private int mExpectedOCs = 0;
+    public int mExpectedOCs = 0;
     /** How much power each recipe is expected to use */
-    private long mExpectedEUt = 0;
+    public long mExpectedEUt = 0;
     /** The tier of glass used to build the multi, used to limit the power hatch tiers. */
-    private int mGlassTier = -1;
+    public int mGlassTier = -1;
     /** The tier of the upgrades applied to the multi. */
-    private int mUpgradeTier = -1;
-    /** The number of environmental enhancement units installed on the multi. */
-    private int mEnvironmentalEnhancementUnitCount = 0;
-    /** The number of growth acceleration units installed on the multi. */
-    private int mGrowthAccelerationUnitCount = 0;
-    /** The number of fertilizer units installed on the multi. */
-    private int mFertilizerUnitCount = 0;
-    /** The number of advanced harvesting units installed on the multi. */
-    private int mAdvancedHarvestingUnitCount = 0;
-    /** The number of overclocked growth acceleration units installed on the multi. */
-    private int mOverclockedGrowthAccelerationUnitCount = 0;
+    public int mUpgradeTier = -1;
     /** The number of seeds and under-blocks that can be stored in the controller. */
-    private int mSeedCapacity = 0;
-    /** The stack of seeds stored in the multi */
-    private ItemStack mSeedStack = null;
-    /** The stack of under-blocks stored in the multi */
-    private ItemStack mBlockUnderStack = null;
+    public int mSeedCapacity = 0;
+    /** The number of environmental enhancement units installed on the multi. */
+    public int mEnvironmentalEnhancementUnitCount = 0;
+    /** The number of growth acceleration units installed on the multi. */
+    public int mGrowthAccelerationUnitCount = 0;
+    /** The number of fertilizer units installed on the multi. */
+    public int mFertilizerUnitCount = 0;
+    /** The number of advanced harvesting units installed on the multi. */
+    public int mAdvancedHarvestingUnitCount = 0;
+    /** The number of overclocked growth acceleration units installed on the multi. */
+    public int mOverclockedGrowthAccelerationUnitCount = 0;
+
     /** The tracker for the drop progress */
-    private EIGDropTable mOutputTracker = new EIGDropTable();
+    public EIGDropTable mOutputTracker = new EIGDropTable();
+    /** ItemStack handler for the custom slots. */
+    public MTEIndustrialFarmItemStackHandler mIFStackHandler = new MTEIndustrialFarmItemStackHandler(this);
+    /** Multi-Inv wrapper since it needs to respond to both the controller slot and the custom slots. */
+    private final IItemHandlerModifiable mInvWrapper;
 
     // region structure
     private static final String STRUCTURE_PIECE_FIRST = "first";
@@ -180,6 +207,11 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
             -1,
             MTEIndustrialFarm::setUpgradeTier,
             MTEIndustrialFarm::getUpgradeTier));
+    }
+
+    @Override
+    public void onContentsChanged(int slot) {
+        super.onContentsChanged(slot);
     }
 
     private static void setUpgradeTier(MTEIndustrialFarm te, Integer tier) {
@@ -481,15 +513,22 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
 
     public MTEIndustrialFarm(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
+        this.mInvWrapper = new CombinedInvWrapper(this.mIFStackHandler, this.inventoryHandler);
     }
 
     public MTEIndustrialFarm(String aName) {
         super(aName);
+        this.mInvWrapper = new CombinedInvWrapper(this.mIFStackHandler, this.inventoryHandler);
     }
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
         return new MTEIndustrialFarm(this.mName);
+    }
+
+    @Override
+    public IItemHandlerModifiable getInventoryHandler() {
+        return this.mInvWrapper;
     }
 
     @Override
@@ -539,8 +578,382 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
         return new ITexture[] { casingTexture };
     }
 
+    private final static int SLOT_SEED = 0;
+    private final static int SLOT_BLOCK_UNDER = 1;
+    private final static int SLOT_ENV_CARD_START = 2;
+
+    public ItemStack getSeedStack() {
+        return this.mIFStackHandler.getStackInSlot(SLOT_SEED);
+    }
+
+    public void setSeedStack(ItemStack aStack) {
+        this.mIFStackHandler.setStackInSlot(SLOT_SEED, aStack);
+    }
+
+    public boolean canInsertIntoSeedSlot(ItemStack aStack) {
+        return this.mIFStackHandler.isItemValid(SLOT_SEED, aStack);
+    }
+
+    public ItemStack getBlockUnderStack() {
+        return this.mIFStackHandler.getStackInSlot(SLOT_BLOCK_UNDER);
+    }
+
+    public void setBlockUnderStack(ItemStack aStack) {
+        this.mIFStackHandler.setStackInSlot(SLOT_BLOCK_UNDER, aStack);
+    }
+
+    public ItemStack getEnvironmentalModuleStack(int aSlot) {
+        return this.mIFStackHandler.getStackInSlot(aSlot - SLOT_ENV_CARD_START);
+    }
+
+    @Override
+    public void loadNBTData(NBTTagCompound aNBT) {
+        super.loadNBTData(aNBT);
+        if (aNBT.hasKey(NBT_INVENTORY_TAG, Data.NBTType._object)) {
+            this.mIFStackHandler.deserializeNBT(aNBT.getCompoundTag(NBT_INVENTORY_TAG));
+        }
+    }
+
+    @Override
+    public void saveNBTData(NBTTagCompound aNBT) {
+        super.saveNBTData(aNBT);
+        aNBT.setTag(NBT_INVENTORY_TAG, this.mIFStackHandler.serializeNBT());
+    }
+
+    @Override
+    public boolean supportsMachineModeSwitch() {
+        return true;
+    }
+
+    @Override
+    public int nextMachineMode() {
+        return switch (this.machineMode) {
+            case MODE_INPUT -> MODE_FARM;
+            case MODE_FARM -> MODE_OUTPUT;
+            default -> MODE_INPUT;
+        };
+    }
+
+    @Override
+    public void setMachineMode(int aIndex) {
+        switch (aIndex) {
+            case MODE_INPUT, MODE_FARM, MODE_OUTPUT -> this.machineMode = aIndex;
+            default -> this.machineMode = MODE_INPUT;
+        }
+    }
+
+    @Override
+    public String getMachineModeName() {
+        return switch (this.machineMode) {
+            case MODE_FARM -> StatCollector.translateToLocal("cropsnh_tooltip.industrialFarm.mode.farm");
+            case MODE_OUTPUT -> StatCollector.translateToLocal("cropsnh_tooltip.industrialFarm.mode.output");
+            default -> StatCollector.translateToLocal("cropsnh_tooltip.industrialFarm.mode.input");
+        };
+    }
+
+    protected @NotNull MTEMultiBlockBaseGui<?> getGui() {
+        return new MTEIndustrialFarmGui(this).withMachineModeIcons(
+            GTGuiTextures.OVERLAY_BUTTON_ALLOW_INPUT,
+            GTGuiTextures.OVERLAY_BUTTON_CYCLIC,
+            GTGuiTextures.OVERLAY_BUTTON_ALLOW_OUTPUT);
+    }
+
     @Override
     public @Nonnull CheckRecipeResult checkProcessing() {
+        return switch (this.machineMode) {
+            case MODE_INPUT -> this.checkProcessingInputMode();
+            case MODE_FARM -> this.checkProcessingFarmMode();
+            case MODE_OUTPUT -> this.checkProcessingOutputMode();
+            default -> CheckRecipeResultRegistry.NO_RECIPE;
+        };
+    }
+
+    /** Can't insert a seed because the existing block under didn't match the new seed. */
+    @Nonnull
+    public static final CheckRecipeResult CHECK_RECIPE_RESULT_BLOCK_UNDER_MISMATCH = SimpleCheckRecipeResult
+        .ofFailure("cropsnh.industrialFarm.blockUnderMismatch");
+    /** Can't insert a seed because the required under-block wasn't found */
+    @Nonnull
+    public static final CheckRecipeResult CHECK_RECIPE_RESULT_BLOCK_UNDER_NOT_FOUND = SimpleCheckRecipeResult
+        .ofFailure("cropsnh.industrialFarm.blockUnderNotFound");
+    /** Can't insert any more seeds because the IF is full. */
+    @Nonnull
+    public static final CheckRecipeResult CHECK_RECIPE_RESULT_SEEDS_FULL = SimpleCheckRecipeResult
+        .ofFailure("cropsnh.industrialFarm.seedsFull");
+    /** Can't generate resources because the growth requires aren't met */
+    @Nonnull
+    public static final CheckRecipeResult CHECK_RECIPE_RESULT_CANNOT_GROW = SimpleCheckRecipeResult
+        .ofFailure("cropsnh.industrialFarm.cannotGrow");
+
+    private CheckRecipeResult checkProcessingInputMode() {
+        if (this.mSeedCapacity <= 0) return CheckRecipeResultRegistry.NONE;
+        ItemStack tExisting = this.getSeedStack();
+        List<ItemStack> tInputs = this.getStoredInputs();
+
+        // the path is going to differ if the multi already contains seeds.
+        CheckRecipeResult tResult = isItemStackValid(tExisting) ? tryAddSeedsToExisting(tInputs, tExisting)
+            : tryAddNewSeeds(tInputs);
+
+        if (tResult.wasSuccessful()) {
+            this.mMaxProgresstime = 5;
+            this.lEUt = 0;
+            this.mEfficiency = (10000 - (getIdealStatus() - getRepairStatus()) * 1000);
+            this.mEfficiencyIncrease = 10000;
+            return tResult;
+        }
+        return tResult;
+    }
+
+    /**
+     * It should not be possible to insert a seed with a block under requirement.
+     * 
+     * @param aInputs
+     * @param aExisting
+     * @return
+     */
+    private CheckRecipeResult tryAddSeedsToExisting(List<ItemStack> aInputs, ItemStack aExisting) {
+        if (aInputs.isEmpty()) return CheckRecipeResultRegistry.NO_RECIPE;
+        // if it's full abort early
+        if (aExisting.stackSize >= this.mSeedCapacity) return CHECK_RECIPE_RESULT_SEEDS_FULL;
+        // Find how many matching seeds are in the inputs.
+        int tAvailableSeeds = consumeMatchingStacks(aExisting, aInputs, 0, this.mSeedCapacity, true);
+        if (tAvailableSeeds == 0) return CheckRecipeResultRegistry.NO_RECIPE;
+        int tInsertionMax = aExisting.stackSize + tAvailableSeeds;
+        // if we have an under-block check how many to consume
+        ItemStack tBlockUnder = this.getBlockUnderStack();
+        tBlockUnder = isItemStackValid(tBlockUnder) ? tBlockUnder : null;
+        if (tBlockUnder != null && tInsertionMax - tBlockUnder.stackSize > 0) {
+            int tBlockUndersToConsume = consumeMatchingStacks(tBlockUnder, aInputs, 0, tInsertionMax, true);
+            if (tBlockUndersToConsume <= 0) {
+                return CHECK_RECIPE_RESULT_BLOCK_UNDER_NOT_FOUND;
+            }
+            tInsertionMax = Math.min(tInsertionMax, tBlockUnder.stackSize + tBlockUndersToConsume);
+        }
+
+        // consume the items, and the relevant stacks should all get updated automatically.
+        consumeMatchingStacks(aExisting, aInputs, 0, tInsertionMax, false);
+        if (tBlockUnder != null) {
+            consumeMatchingStacks(tBlockUnder, aInputs, 0, tInsertionMax, false);
+        }
+        return CheckRecipeResultRegistry.SUCCESSFUL;
+    }
+
+    /**
+     * Consumes the blocks under from the list of inputs.
+     * 
+     * @param aInputs           The inputs to consume from
+     * @param aBlockUnderSource A stack representing what should be consumed.
+     * @param aMaxConsume       The amount of items to consume from the input.
+     * @return The amount of items that weren't found.
+     */
+    private static int consumeBlockUnder(List<ItemStack> aInputs, ItemStack aBlockUnderSource, int aMaxConsume) {
+        for (ItemStack tBlockUnderCandidate : aInputs) {
+            // abort early if candidate is bad
+            if (!isItemStackValidAndCanItStackWithExisting(tBlockUnderCandidate, aBlockUnderSource)) continue;
+            int tBlockUnderConsumption = Math.min(tBlockUnderCandidate.stackSize, aMaxConsume);
+            tBlockUnderCandidate.stackSize -= tBlockUnderConsumption;
+            aMaxConsume -= tBlockUnderConsumption;
+        }
+        return aMaxConsume;
+    }
+
+    private CheckRecipeResult tryAddNewSeeds(List<ItemStack> aInputs) {
+        int tSeedIndex = 0;
+        int tBlockUnderIndex = 0;
+        ItemStack tNewSeedStack = null;
+        ItemStack tNewBlockUnderStack = null;
+        for (; tSeedIndex < aInputs.size(); tSeedIndex++) {
+            // the seed must be a valid item and an analyzed seed.
+            final ItemStack tSeedCandidate = aInputs.get(tSeedIndex);
+            final ISeedData tSeedData = CropsNHUtils.getAnalyzedSeedData(tSeedCandidate);
+            if (tSeedData == null) continue;
+            // if it has a block under try to consume it
+            reqs: for (IGrowthRequirement tRequirement : tSeedData.getCrop()
+                .getGrowthRequirements()) {
+                if (tRequirement instanceof BlockUnderRequirement tBlockUnderReq) {
+                    ItemStack tExistingBlockUnderStack = this.getBlockUnderStack();
+                    if (isItemStackValid(tExistingBlockUnderStack)) {
+                        // check if the existing block under matches the new crop.
+                        if (!tBlockUnderReq.isValidBlockUnder(tExistingBlockUnderStack)) {
+                            return CHECK_RECIPE_RESULT_BLOCK_UNDER_MISMATCH;
+                        }
+                        tNewBlockUnderStack = tExistingBlockUnderStack;
+                    } else {
+                        for (tBlockUnderIndex = 0; tBlockUnderIndex < aInputs.size(); tBlockUnderIndex++) {
+                            ItemStack tBlockUnderCandidate = aInputs.get(tBlockUnderIndex);
+                            // abort early if it's the seed candidate or the not a valid under-block.
+                            if (tBlockUnderIndex == tSeedIndex || !isItemStackValid(tBlockUnderCandidate)
+                                || !tBlockUnderReq.isValidBlockUnder(tBlockUnderCandidate)) continue;
+                            // else save the stack for later.
+                            tNewBlockUnderStack = tBlockUnderCandidate.copy();
+                            tNewBlockUnderStack.stackSize = 0;
+                            break reqs;
+                        }
+                    }
+
+                    // under block not found, assume incorrect input instead of checking for other seeds.
+                    return CHECK_RECIPE_RESULT_BLOCK_UNDER_NOT_FOUND;
+                }
+            }
+            // put the seed searcher back by 1 slot and save the new search targets.
+            tNewSeedStack = tSeedCandidate.copy();
+            tNewSeedStack.stackSize = 0;
+            break;
+        }
+        // if nothing is in the list, nothing was found
+        if (tNewSeedStack == null) return CheckRecipeResultRegistry.NO_RECIPE;
+
+        // find the maximum amount of items we can consume.
+        if (tNewBlockUnderStack == null) {
+            // just consume up to the capacity, no need for any other complex checks.
+            consumeMatchingStacks(tNewSeedStack, aInputs, tSeedIndex, this.mSeedCapacity, false);
+        } else {
+            // check how many under-blocks will be in the machine if we try to consume everything.
+            int tAdditionalBlockUnderAvailable = consumeMatchingStacks(
+                tNewBlockUnderStack,
+                aInputs,
+                tBlockUnderIndex,
+                this.mSeedCapacity,
+                true);
+            int tBlockUnderInMachineIfAllConsumed = tNewBlockUnderStack.stackSize + tAdditionalBlockUnderAvailable;
+            // Check how many seeds are available
+            int tAvailableSeeds = consumeMatchingStacks(
+                tNewSeedStack,
+                aInputs,
+                tSeedIndex,
+                tBlockUnderInMachineIfAllConsumed,
+                true);
+            // Update the max under-block consumption based on how many seeds we're inserting in case there were some
+            // blocks already in the machine.
+            int tMaxAmountAfterIngest = Math.min(tAvailableSeeds, tBlockUnderInMachineIfAllConsumed);
+            // consume
+            consumeMatchingStacks(tNewSeedStack, aInputs, tSeedIndex, tMaxAmountAfterIngest, false);
+            consumeMatchingStacks(tNewBlockUnderStack, aInputs, tBlockUnderIndex, tMaxAmountAfterIngest, false);
+        }
+
+        // update the inventory
+        this.setSeedStack(tNewSeedStack);
+        if (tNewBlockUnderStack != null) {
+            this.setBlockUnderStack(tNewBlockUnderStack);
+        }
+
+        return CheckRecipeResultRegistry.SUCCESSFUL;
+    }
+
+    /**
+     * Attempts to transfer all matching items form the list until the existing stack reaches a given item limit.
+     * 
+     * @param aExisting    The item to look for and to add the amount to.
+     * @param aProvider    A list of items to consume from.
+     * @param startAt      Where to start reading the tracker from (optimisation)
+     * @param aMaxCapacity The maximum of number of items that can be stored.
+     * @param simulate     Set to true to prevent the transfer and validate the consumption.
+     * @return The amount of items that were consumed.
+     */
+    private static int consumeMatchingStacks(@Nonnull ItemStack aExisting, @Nonnull List<ItemStack> aProvider,
+        int startAt, int aMaxCapacity, boolean simulate) {
+        // if the existing stack is already reached max, abort early.
+        if (aExisting.stackSize >= aMaxCapacity) return 0;
+        // else search for the matching stacks
+        int tNewStackSize = aExisting.stackSize;
+        for (int i = startAt; i < aProvider.size() && tNewStackSize < aMaxCapacity; i++) {
+            ItemStack tStack = aProvider.get(i);
+            // check if item is valid
+            if (!isItemStackValidAndCanItStackWithExisting(tStack, aExisting)) continue;
+            int toConsume = Math.min(aMaxCapacity - tNewStackSize, tStack.stackSize);
+            tNewStackSize += toConsume;
+            if (!simulate) {
+                // IIRC setting the stack to null is bad, if it's zero the multi will deal with it correctly.
+                tStack.stackSize -= toConsume;
+            }
+        }
+        int consumed = tNewStackSize - aExisting.stackSize;
+        if (!simulate) {
+            aExisting.stackSize = tNewStackSize;
+        }
+        return consumed;
+    }
+
+    /**
+     * Checks if an item is valid, has a stack size greater than 0, and if it can stack with another existing stack
+     * 
+     * @param aItemStack The item stack to validate
+     * @param aExisting  The existing item stack
+     * @return True if all checks pass
+     */
+    private static boolean isItemStackValidAndCanItStackWithExisting(ItemStack aItemStack,
+        @Nonnull ItemStack aExisting) {
+        return isItemStackValid(aItemStack) && GTUtility.areStacksEqual(aItemStack, aExisting, false);
+    }
+
+    /**
+     * Checks if an item is valid, has a stack size greater than 0
+     * 
+     * @param aItemStack The item stack to validate
+     * @return True if all checks pass
+     */
+    private static boolean isItemStackValid(ItemStack aItemStack) {
+        return GTUtility.isStackValid(aItemStack) && aItemStack.stackSize > 0;
+    }
+
+    /**
+     * @implNote The output mode should never void anything,
+     *           this is mainly due to the fact that you can't
+     *           extract seeds with under-blocks without output mode
+     *           due to limitations in MUI2.
+     */
+    private CheckRecipeResult checkProcessingOutputMode() {
+        ItemStack seedStack = this.getSeedStack();
+        ItemStack blockUnderStack = this.getBlockUnderStack();
+        List<ItemStack> simulated = new ArrayList<>(2);
+        // add seed if present
+        if (CropsNHUtils.isStackValid(seedStack)) {
+            simulated.add(CropsNHUtils.copyStackWithSize(seedStack, 1));
+        } else {
+            seedStack = null;
+        }
+        // add block under if present
+        if (CropsNHUtils.isStackValid(blockUnderStack)) {
+            simulated.add(CropsNHUtils.copyStackWithSize(blockUnderStack, 1));
+        } else {
+            blockUnderStack = null;
+        }
+        // check if anything remains
+        if (simulated.isEmpty()) {
+            return CheckRecipeResultRegistry.NO_RECIPE;
+        }
+        // calc max parallel based on min stack size.
+        int maxParallels = (seedStack != null && blockUnderStack != null)
+            ? Math.min(seedStack.stackSize, blockUnderStack.stackSize)
+            : (seedStack != null ? seedStack.stackSize : blockUnderStack.stackSize);
+        // do the output voiding checks
+        ItemEjectionHelper ejectionHelper = new ItemEjectionHelper(getOutputBusses(), true);
+        maxParallels = ejectionHelper.ejectItems(simulated, maxParallels);
+        if (maxParallels <= 0) {
+            return CheckRecipeResultRegistry.ITEM_OUTPUT_FULL;
+        }
+        // consume from machine
+        if (seedStack != null) {
+            seedStack.stackSize -= maxParallels;
+            this.setSeedStack(seedStack.stackSize <= 0 ? null : seedStack);
+        }
+        if (blockUnderStack != null) {
+            blockUnderStack.stackSize -= maxParallels;
+            this.setBlockUnderStack(blockUnderStack.stackSize <= 0 ? null : blockUnderStack);
+        }
+        // eject seeds and blocks
+        ejectionHelper.commit();
+
+        // notify success
+        this.mMaxProgresstime = 5;
+        this.lEUt = 0;
+        this.mEfficiency = (10000 - (getIdealStatus() - getRepairStatus()) * 1000);
+        this.mEfficiencyIncrease = 10000;
+        return CheckRecipeResultRegistry.SUCCESSFUL;
+    }
+
+    private CheckRecipeResult checkProcessingFarmMode() {
+        if (this.getSeedStack() == null) return CheckRecipeResultRegistry.NO_RECIPE;
         this.lEUt = -this.mExpectedEUt;
         this.mEfficiency = (10000 - (getIdealStatus() - getRepairStatus()) * 1000);
         this.mEfficiencyIncrease = 10000;

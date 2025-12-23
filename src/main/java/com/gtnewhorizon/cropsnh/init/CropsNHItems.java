@@ -2,9 +2,11 @@ package com.gtnewhorizon.cropsnh.init;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.items.CropsNHAlcoholBottle;
+import com.gtnewhorizon.cropsnh.items.ItemEnvironmentalModule;
 import com.gtnewhorizon.cropsnh.items.ItemFertilizer;
 import com.gtnewhorizon.cropsnh.items.ItemGenericSeed;
 import com.gtnewhorizon.cropsnh.items.ItemNaNCertificate;
@@ -33,6 +35,7 @@ public class CropsNHItems {
     public static Item bottledAlcohol;
     public static Item fertilizer;
     public static Item materialLeaf;
+    public static Item environmentalModule;
 
     public static void preInit() {
         magnifyingGlass = new ItemMagnifyingGlass();
@@ -110,6 +113,40 @@ public class CropsNHItems {
         CropsNHItemList.starwart.set(MaterialLeafLoader.starwart.get());
         // brand spankin new so no need to override anything
         CropsNHItemList.hops.set(MaterialLeafLoader.hops.get());
+        //spotless:on
+
+        environmentalModule = new ItemEnvironmentalModule();
+        // spotless:off
+        CropsNHItemList.environmentalModule_base.set(new ItemStack(environmentalModule, 1, 0));
+        CropsNHItemList.environmentalModule_HOT.set(ItemEnvironmentalModule.registerVariant(1, BiomeDictionary.Type.HOT));
+        CropsNHItemList.environmentalModule_COLD.set(ItemEnvironmentalModule.registerVariant(2, BiomeDictionary.Type.COLD));
+        CropsNHItemList.environmentalModule_SPARSE.set(ItemEnvironmentalModule.registerVariant(3, BiomeDictionary.Type.SPARSE));
+        CropsNHItemList.environmentalModule_DENSE.set(ItemEnvironmentalModule.registerVariant(4, BiomeDictionary.Type.DENSE));
+        CropsNHItemList.environmentalModule_WET.set(ItemEnvironmentalModule.registerVariant(5, BiomeDictionary.Type.WET));
+        CropsNHItemList.environmentalModule_DRY.set(ItemEnvironmentalModule.registerVariant(6, BiomeDictionary.Type.DRY));
+        CropsNHItemList.environmentalModule_SAVANNA.set(ItemEnvironmentalModule.registerVariant(7, BiomeDictionary.Type.SAVANNA));
+        CropsNHItemList.environmentalModule_CONIFEROUS.set(ItemEnvironmentalModule.registerVariant(8, BiomeDictionary.Type.CONIFEROUS));
+        CropsNHItemList.environmentalModule_JUNGLE.set(ItemEnvironmentalModule.registerVariant(9, BiomeDictionary.Type.JUNGLE));
+        CropsNHItemList.environmentalModule_SPOOKY.set(ItemEnvironmentalModule.registerVariant(10, BiomeDictionary.Type.SPOOKY));
+        CropsNHItemList.environmentalModule_DEAD.set(ItemEnvironmentalModule.registerVariant(11, BiomeDictionary.Type.DEAD));
+        CropsNHItemList.environmentalModule_LUSH.set(ItemEnvironmentalModule.registerVariant(12, BiomeDictionary.Type.LUSH));
+        CropsNHItemList.environmentalModule_NETHER.set(ItemEnvironmentalModule.registerVariant(13, BiomeDictionary.Type.NETHER));
+        CropsNHItemList.environmentalModule_END.set(ItemEnvironmentalModule.registerVariant(14, BiomeDictionary.Type.END));
+        CropsNHItemList.environmentalModule_MUSHROOM.set(ItemEnvironmentalModule.registerVariant(15, BiomeDictionary.Type.MUSHROOM));
+        CropsNHItemList.environmentalModule_MAGICAL.set(ItemEnvironmentalModule.registerVariant(16, BiomeDictionary.Type.MAGICAL));
+        CropsNHItemList.environmentalModule_OCEAN.set(ItemEnvironmentalModule.registerVariant(17, BiomeDictionary.Type.OCEAN));
+        CropsNHItemList.environmentalModule_RIVER.set(ItemEnvironmentalModule.registerVariant(18, BiomeDictionary.Type.RIVER));
+        CropsNHItemList.environmentalModule_WATER.set(ItemEnvironmentalModule.registerVariant(19, BiomeDictionary.Type.WATER));
+        CropsNHItemList.environmentalModule_MESA.set(ItemEnvironmentalModule.registerVariant(20, BiomeDictionary.Type.MESA));
+        CropsNHItemList.environmentalModule_FOREST.set(ItemEnvironmentalModule.registerVariant(21, BiomeDictionary.Type.FOREST));
+        CropsNHItemList.environmentalModule_PLAINS.set(ItemEnvironmentalModule.registerVariant(22, BiomeDictionary.Type.PLAINS));
+        CropsNHItemList.environmentalModule_MOUNTAIN.set(ItemEnvironmentalModule.registerVariant(23, BiomeDictionary.Type.MOUNTAIN));
+        CropsNHItemList.environmentalModule_HILLS.set(ItemEnvironmentalModule.registerVariant(24, BiomeDictionary.Type.HILLS));
+        CropsNHItemList.environmentalModule_SWAMP.set(ItemEnvironmentalModule.registerVariant(25, BiomeDictionary.Type.SWAMP));
+        CropsNHItemList.environmentalModule_SANDY.set(ItemEnvironmentalModule.registerVariant(26, BiomeDictionary.Type.SANDY));
+        CropsNHItemList.environmentalModule_SNOWY.set(ItemEnvironmentalModule.registerVariant(27, BiomeDictionary.Type.SNOWY));
+        CropsNHItemList.environmentalModule_WASTELAND.set(ItemEnvironmentalModule.registerVariant(28, BiomeDictionary.Type.WASTELAND));
+        CropsNHItemList.environmentalModule_BEACH.set(ItemEnvironmentalModule.registerVariant(29, BiomeDictionary.Type.BEACH));
         //spotless:on
         LogHelper.debug("Items Registered");
     }

@@ -58,6 +58,38 @@ item.cropsnh:materialLeaf.aureliaLeaf.name=Aurelia Leaf
 item.cropsnh:materialLeaf.teaLeaf.name=Tea Leaf
 item.cropsnh:materialLeaf.bobsYerUncleBerry.name=Bobs-Yer-Uncle-Berry
 item.cropsnh:materialLeaf.hops.name=Hops
+# Environmental Module Items
+item.cropsnh:environmentalModule.blank=Environmental Module (%1$s)
+item.cropsnh:environmentalModule.template=Environmental Module (%1$s)
+item.cropsnh:environmentalModule.HOT=Hot
+item.cropsnh:environmentalModule.COLD=Cold
+item.cropsnh:environmentalModule.SPARSE=Sparse
+item.cropsnh:environmentalModule.DENSE=Dense
+item.cropsnh:environmentalModule.WET=Wet
+item.cropsnh:environmentalModule.DRY=Dry
+item.cropsnh:environmentalModule.SAVANNA=Savanna
+item.cropsnh:environmentalModule.CONIFEROUS=Coniferous
+item.cropsnh:environmentalModule.JUNGLE=Jungle
+item.cropsnh:environmentalModule.SPOOKY=Spooky
+item.cropsnh:environmentalModule.DEAD=Dead
+item.cropsnh:environmentalModule.LUSH=Lush
+item.cropsnh:environmentalModule.NETHER=Nether
+item.cropsnh:environmentalModule.END=End
+item.cropsnh:environmentalModule.MUSHROOM=Mushroom
+item.cropsnh:environmentalModule.MAGICAL=Magical
+item.cropsnh:environmentalModule.OCEAN=Ocean
+item.cropsnh:environmentalModule.RIVER=River
+item.cropsnh:environmentalModule.WATER=Water
+item.cropsnh:environmentalModule.MESA=Mesa
+item.cropsnh:environmentalModule.FOREST=Forest
+item.cropsnh:environmentalModule.PLAINS=Plains
+item.cropsnh:environmentalModule.MOUNTAIN=Mountain
+item.cropsnh:environmentalModule.HILLS=Hills
+item.cropsnh:environmentalModule.SWAMP=Swamp
+item.cropsnh:environmentalModule.SANDY=Sandy
+item.cropsnh:environmentalModule.SNOWY=Snowy
+item.cropsnh:environmentalModule.WASTELAND=Wasteland
+item.cropsnh:environmentalModule.BEACH=Beach
 
 # Blocks
 tile.cropsnh:cropSticks.name=Crop Sticks
@@ -100,6 +132,24 @@ cropsnh_tooltip.seed_must_use_synthesizer_to_replicate=This seed can only be rep
 # Industrial Farm block tooltips
 cropsnh_tooltip.upgradeTierMustMatchSeedBed=The tier of this upgrade must match that of the seedbed.
 cropsnh_tooltip.upgradeCountLimited=You can only use a maximum of %1$d of these upgrades.
+# Industrial Farm UI
+cropsnh_tooltip.industrialFarm.capacity=Max capacity: %1$d
+cropsnh_tooltip.industrialFarm.seedSlot=Seed Slot
+cropsnh_tooltip.industrialFarm.seedWithBlockExtractionWarning=Seeds can only be extracted using the output mode when blocks are present.
+cropsnh_tooltip.industrialFarm.blockInsertion=Blocks can only be inserted when using input mode.
+cropsnh_tooltip.industrialFarm.blockExtraction=Blocks can only be extracted with the output mode.
+cropsnh_tooltip.industrialFarm.blockUnderSlot=Slot for the block that goes below the soil
+cropsnh_tooltip.industrialFarm.environmentalModule=Environmental Module Slot
+cropsnh_tooltip.industrialFarm.environmentalModule.enabled=Enabled
+cropsnh_tooltip.industrialFarm.environmentalModule.disabled=Disabled
+cropsnh_tooltip.industrialFarm.mode.input=Input
+cropsnh_tooltip.industrialFarm.mode.farm=Farm
+cropsnh_tooltip.industrialFarm.mode.output=Output
+GT5U.gui.text.cropsnh.industrialFarm.blockUnderNotFound=Failed to insert new seeds as the block that goes below the soil is missing
+GT5U.gui.text.cropsnh.industrialFarm.blockUnderMismatch=Failed to insert new seeds as the blocks stored in this machine aren't compatible
+GT5U.gui.text.cropsnh.industrialFarm.seedsFull=Seed capacity reached
+GT5U.gui.text.cropsnh.industrialFarm.cannotGrow=This seed cannot grow in the current environment
+
 # Seed Bed
 cropsnh_tooltip.seedBed.0=Determines the tier of the industrial farm.
 cropsnh_tooltip.seedBed.1=Seed Capacity: %1$d.

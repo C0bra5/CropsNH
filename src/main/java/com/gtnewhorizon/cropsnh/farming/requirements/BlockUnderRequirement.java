@@ -166,35 +166,54 @@ public class BlockUnderRequirement
     public boolean canBreed(ArrayList<ICropCard> parents, IGregTechTileEntity te, ItemStack[] catalysts,
         int[] consumptionTracker) {
         for (int i = 0; i < catalysts.length; i++) {
-            ItemStack stack = catalysts[i];
-
             // if stack is bad or if we can't consume it, abort early
+            ItemStack stack = catalysts[i];
             if (GTUtility.isStackInvalid(stack) || stack.stackSize - consumptionTracker[i] <= 0) continue;
-
-            // GT Material check
-            for (Materials material : this.materials) {
-                if (checkGTBlockOrOreMaterial(stack, material)) {
-                    consumptionTracker[i] += 1;
-                    return true;
-                }
-            }
-
-            // Ore dict check
-            for (String oreDict : this.oreDictionaries) {
-                if (checkOreDict(stack, oreDict)) {
-                    consumptionTracker[i] += 1;
-                    return true;
-                }
-            }
-
-            // Block conversion
-            Block block = Block.getBlockFromItem(stack.getItem());
-            if (block.getMaterial() != Material.air && blocks.contains(block, Items.feather.getDamage(stack))) {
+            // consume if valid
+            if (isValidBlockUnder(stack)) {
                 consumptionTracker[i] += 1;
                 return true;
             }
         }
         return false;
+    }
+
+    public @Nullable ItemStack findIndustrialFarmInsertionCatalyst(List<ItemStack> catalysts) {
+        for (ItemStack stack : catalysts) {
+            // if stack is bad or if we can't consume it, abort early
+            if (GTUtility.isStackInvalid(stack) || stack.stackSize <= 0) continue;
+            // else check if it's a valid block under
+            if (isValidBlockUnder(stack)) {
+                return stack;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if an item stack contains a valid under block for this requirement.
+     * 
+     * @param stack The stack to validate
+     * @return True if the stack contains a valid under block.
+     */
+    public boolean isValidBlockUnder(ItemStack stack) {
+        // GT Material check
+        for (Materials material : this.materials) {
+            if (checkGTBlockOrOreMaterial(stack, material)) {
+                return true;
+            }
+        }
+
+        // Ore dict check
+        for (String oreDict : this.oreDictionaries) {
+            if (checkOreDict(stack, oreDict)) {
+                return true;
+            }
+        }
+
+        // Block conversion
+        Block block = Block.getBlockFromItem(stack.getItem());
+        return block.getMaterial() != Material.air && blocks.contains(block, Items.feather.getDamage(stack));
     }
 
     public boolean canGrow(Block block, int meta, TileEntity te) {
