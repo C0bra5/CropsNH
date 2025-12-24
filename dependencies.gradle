@@ -45,6 +45,8 @@ dependencies {
     runtimeOnly("com.github.GTNewHorizons:WAILAPlugins:0.7.2:dev")
     runtimeOnly("com.github.GTNewHorizons:BeeBetterAtBees-GTNH:0.4.3-GTNH:dev")
     runtimeOnly("com.github.GTNewHorizons:neiaddons:1.17.0:dev")
+    runtimeOnly("com.github.GTNewHorizons:StructureLib:1.4.25:dev")
+    runtimeOnly("com.github.GTNewHorizons:BlockRenderer6343:1.4.4:dev")
 }
 
 project.getConfigurations()
