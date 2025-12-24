@@ -37,14 +37,23 @@ public class MTEIndustrialFarmGui extends MTEMultiBlockBaseGui<MTEIndustrialFarm
     }
 
     @Override
-    public ModularPanel build(PosGuiData guiData, PanelSyncManager syncManager, UISettings uiSettings) {
-        uiSettings.customContainer(() -> new ModularContainer() {
+    protected boolean shouldDisplayInputSeparation() {
+        return false;
+    }
 
-            @Override
-            public @Nullable ItemStack transferStackInSlot(@NotNull EntityPlayer playerIn, int index) {
-                return super.transferStackInSlot(playerIn, index);
-            }
-        });
+    @Override
+    protected boolean shouldDisplayRecipeLock() {
+        return false;
+    }
+
+    @Override
+    protected boolean shouldDisplayBatchMode() {
+        return false;
+    }
+
+    @Override
+    public ModularPanel build(PosGuiData guiData, PanelSyncManager syncManager, UISettings uiSettings) {
+        uiSettings.customContainer(MTEIndustrialFarmModularContainer::new);
         return super.build(guiData, syncManager, uiSettings);
     }
 
