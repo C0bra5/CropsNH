@@ -169,7 +169,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
             buildHatchAdder(MTEIndustrialFarm.class)
                 .anyOf(InputBus, InputHatch, OutputBus, Maintenance, MultiAmpEnergy.or(Energy))
                 .casingIndex(CASING_INDEX)
-                .dot(1)
+                .hint(1)
                 .buildAndChain(ofBlock(CropsNHBlocks.blockCasings1, 0)))
         .addElement('c', ofBlock(CropsNHBlocks.blockCasings1, 0))
         .addElement('g', chainAllGlasses(-1, (te, t) -> te.mGlassTier = t, te -> te.mGlassTier))
@@ -706,7 +706,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
 
     /**
      * It should not be possible to insert a seed with a block under requirement.
-     * 
+     *
      * @param aInputs
      * @param aExisting
      * @return
@@ -740,7 +740,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
 
     /**
      * Consumes the blocks under from the list of inputs.
-     * 
+     *
      * @param aInputs           The inputs to consume from
      * @param aBlockUnderSource A stack representing what should be consumed.
      * @param aMaxConsume       The amount of items to consume from the input.
@@ -842,7 +842,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
 
     /**
      * Attempts to transfer all matching items form the list until the existing stack reaches a given item limit.
-     * 
+     *
      * @param aExisting    The item to look for and to add the amount to.
      * @param aProvider    A list of items to consume from.
      * @param startAt      Where to start reading the tracker from (optimisation)
@@ -876,7 +876,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
 
     /**
      * Checks if an item is valid, has a stack size greater than 0, and if it can stack with another existing stack
-     * 
+     *
      * @param aItemStack The item stack to validate
      * @param aExisting  The existing item stack
      * @return True if all checks pass
@@ -888,7 +888,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
 
     /**
      * Checks if an item is valid, has a stack size greater than 0
-     * 
+     *
      * @param aItemStack The item stack to validate
      * @return True if all checks pass
      */
