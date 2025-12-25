@@ -1,6 +1,7 @@
 package com.gtnewhorizon.cropsnh.tileentity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,6 +21,8 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHCrops;
@@ -52,6 +55,39 @@ import gregtech.api.util.GTUtility;
 public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile {
 
     public final static int TICK_RATE = 256;
+
+    // growth formula balancing
+    // current settings quirks:
+    // tier 5+ need something to give them extra nutrient points they will get sick.
+    /** The minimum scalar value for the growth speed. */
+    public final static int BASE_GROWTH_SPEED = 6;
+    /** The minimum number of nutrient points a crop may have. */
+    public final static int BASE_NUTRIENT_VALUE = 5;
+    /** The number after which water storage stops awarding nutrient points. */
+    public final static int MAX_WATER_BONUS_AT = 100;
+    /** The number after which fertilizer storage stops awarding nutrient points. */
+    public final static int MAX_FERTILIZER_BONUS_AT = 100;
+    /** The number of nutrient points awarded if a crop can see the sky. */
+    public final static int SKY_ACCESS_BONUS = 2;
+    /** The minimum humidity threshold in order to gain liked biome bonuses. */
+    public final static float LOW_HUMIDITY_THRESHOLD = 0.5f;
+    /** The maximum humidity threshold in order to gain liked biome bonuses. */
+    public final static float HIGH_HUMIDITY_THRESHOLD = 0.8f;
+    /**
+     * The number of liked biome tags that high humidity can "simulate".
+     * If the number of liked biomes tags is below this value and the biome has a high humidity
+     * this value will replace the liked biome count.
+     */
+    public final static int HIGH_HUMIDITY_LIKED_BIOME_EQUIVALENCE = 1;
+    /** The maximum amount of times the liked biome bonus can be awarded. */
+    public final static int MAX_LIKED_BIOME_TAG_COUNT = 2;
+    /** The number of nutrient points awarded per linked biome tags in the current crop's biome (awarded a max of 2 times). */
+    public final static int LIKED_BIOME_BONUS = 14;
+    /** A value by which nutrient points are multiplied. */
+    public final static int NUTRIENT_POINT_SCALE = 5;
+    /** The minimum number of nutrient points that are needed per tier (applies to the scaled nutrient value). */
+    public final static int NUTRIENTS_NEEDED_PER_TIER = 10;
+
     private int ticker = 0;
     private boolean isDirty = true;
     private int spriteIndex = 0;
@@ -384,6 +420,15 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
 
     // region harvesting
 
+    public static double getAvgDropRounds(ICropCard cc, int gain) {
+        // should be a fairly accurate representation of the old curve
+        return cc.getDropChance() * Math.pow(1.03D, gain);
+    }
+
+    public static double getAvgDropCountIncrease(int gain) {
+        return (gain + 1) / 100.0d;
+    }
+
     @Override
     public ArrayList<ItemStack> harvest() {
         // TODO: IMPLEMENT NEW DROP COUNT CALCULATION
@@ -395,12 +440,12 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
         this.spriteIndex = 0;
         this.isDirty = true;
 
-        double chance = this.crop.getDropChance();
-        int dropCount = (int) Math.max(
-            0L,
-            Math.round(
-                XSTR.XSTR_INSTANCE.nextGaussian() * (chance *= Math.pow(1.03, this.stats.getGain())) * 0.6827
-                    + chance));
+        // avg number of drop rounds
+        double avgDropRounds = getAvgDropRounds(crop, this.stats.getGain());
+        int dropCount = (int) avgDropRounds;
+        if (XSTR.XSTR_INSTANCE.nextDouble() <= (dropCount % 1.0d)) {
+            dropCount++;
+        }
 
         if (dropCount <= 0) return null;
         // check if we got a drop
@@ -596,29 +641,65 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
     // region growth rate calc
 
     public int calcGrowthRate() {
-        // TODO: CREATE CUSTOM GROWTH FORMULA
-        return 100;
+        BiomeGenBase biome = this.worldObj.getBiomeGenForCoordsBody(this.xCoord, this.zCoord);
+        BiomeDictionary.Type[] biomeTags = BiomeDictionary.getTypesForBiome(biome);
+        // check number of liked biomes.
+        int likedBiomes = (int)this.crop.getLikedBiomeTags().stream().filter(liked -> Arrays.stream(biomeTags).anyMatch(tag -> liked == tag)).count();
+        // check if block can see the sky.
+        boolean canSeeSky = this.worldObj.canBlockSeeTheSky(this.xCoord, this.yCoord + 1, this.zCoord);
+        // calc available nutrients
+        int nutrients = getNutrientsPerCycle(likedBiomes, biome.rainfall, canSeeSky, this.waterStorage, this.fertilizerStorage);
+        // compute growth rate
+        return getGrowthRate(nutrients, this.crop.getTier(), this.stats.getGrowth());
     }
 
-    public static int getGrowthRate(boolean inLikedBiome, boolean onLikedSoil, boolean canSeeSky, int waterStorage,
-        int fertilizerStorage, int tier, int growth) {
-        // calculate growth modifier for environment values
-        double mult = 1.0D;
-        // max of 2
-        mult += inLikedBiome ? 2.0D : 0.0D;
-        // max of 2
-        mult += (double) ((waterStorage + 24) / 25) * 0.25D;
-        // max of 1
-        mult += canSeeSky ? 1.0D : 0.0D;
-        // max of 1
-        mult += onLikedSoil ? 1.0D : 0.0D;
-        // max of 4
-        mult += (double) ((fertilizerStorage + 24) / 25) * 0.5D;
-        // apply tier debuff
-        mult *= Math.pow(0.95D, tier);
 
-        double base = 10 * mult + growth;
-        return (int) base;
+    /**
+     * Calculates the nutrient points for a crop stick given a set of environmental factors.
+     * @param likedBiomeTagsCount The number of liked biome tags in the current biome.
+     * @param biomeHumidity The humidity of the current biome.
+     * @param canSeeSky True if the crop can see the sky.
+     * @param waterStorage How much water is stored in the crop stick.
+     * @param fertilizerStorage How much water is stored in the crop stick.
+     * @return The number of nutrients available to the crop in the crop stick.
+     */
+    public static int getNutrientsPerCycle(int likedBiomeTagsCount, float biomeHumidity, boolean canSeeSky, int waterStorage,
+                                           int fertilizerStorage) {
+        likedBiomeTagsCount = Math.min(MAX_LIKED_BIOME_TAG_COUNT, likedBiomeTagsCount);
+        waterStorage = Math.min(MAX_WATER_BONUS_AT, waterStorage);
+        fertilizerStorage = Math.min(MAX_FERTILIZER_BONUS_AT, fertilizerStorage);
+
+        int nutrients = 5;
+        nutrients += ((waterStorage + 9) / 10);
+        nutrients += ((fertilizerStorage + 9) / 10);
+        nutrients += (canSeeSky ? 0 : SKY_ACCESS_BONUS);
+        float humidityBonus = (biomeHumidity - LOW_HUMIDITY_THRESHOLD) / (HIGH_HUMIDITY_THRESHOLD - LOW_HUMIDITY_THRESHOLD);
+        humidityBonus = Math.min(1.0f, humidityBonus * LIKED_BIOME_BONUS);
+        nutrients += Math.max((int)humidityBonus, (likedBiomeTagsCount * LIKED_BIOME_BONUS));
+        nutrients *= NUTRIENT_POINT_SCALE;
+        return nutrients;
+    }
+
+    /**
+     * Calculates the growth speed of a crop in a crop stick.
+     * @param nutrientPoints The number of nutrient points available to the crop.
+     * @param tier The tier of the crop.
+     * @param growth The growth stat of the crop.
+     * @return The speed at which the crop should grow, if the value is <= 0 the crop should get sick.
+     */
+    public static int getGrowthRate(int nutrientPoints, int tier, int growth) {
+        // this should mean that crops of tier 5 and up will require some sort of bonus in order to grow
+        int need = tier * NUTRIENTS_NEEDED_PER_TIER;
+        // failsafe
+        if (need < 0) return 0;
+
+        int baseSpeed = BASE_GROWTH_SPEED + growth;
+        if (nutrientPoints >= need) {
+            return baseSpeed * (100 + (nutrientPoints-need)) / 100;
+        }
+        else {
+            return Math.max(baseSpeed * (100 - (need - nutrientPoints) * 4) / 100, 0);
+        }
     }
 
     // endregion growth rate calc

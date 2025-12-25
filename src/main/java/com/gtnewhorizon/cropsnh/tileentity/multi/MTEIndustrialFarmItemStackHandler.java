@@ -36,7 +36,7 @@ public class MTEIndustrialFarmItemStackHandler extends ItemStackHandler {
         }
 
         switch (slot) {
-            case 0 -> {
+            case MTEIndustrialFarm.SLOT_SEED -> {
                 ISeedData tSeedData = CropsNHUtils.getAnalyzedSeedData(stack);
                 if (tSeedData == null) return false;
                 // prevent manual insertion of seeds that have underblock requirements.
@@ -46,9 +46,10 @@ public class MTEIndustrialFarmItemStackHandler extends ItemStackHandler {
                         return false;
                     }
                 }
-                return true;
+                // check if the seed can grow in the multi.
+                return multiblock.getGrowthSpeedUnscaled(tSeedData) > 0;
             }
-            case 1 -> {
+            case MTEIndustrialFarm.SLOT_BLOCK_UNDER -> {
                 // block insertions of blocks manually for now
                 // we'll need a much more complex solution to enable
                 // adding blocks and seeds at the same time, and the current
@@ -57,7 +58,7 @@ public class MTEIndustrialFarmItemStackHandler extends ItemStackHandler {
                 return false;
             }
             default -> {
-                slot -= 2;
+                slot -= MTEIndustrialFarm.SLOT_ENV_CARD_START;
                 // check if the slot is unlocked
                 if (slot < 0 || multiblock.mEnvironmentalEnhancementUnitCount <= slot) return false;
                 // must be an environmental module
@@ -71,7 +72,7 @@ public class MTEIndustrialFarmItemStackHandler extends ItemStackHandler {
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
         if (multiblock.mMaxProgresstime != 0 || multiblock.isAllowedToWork()) return null;
-        if (slot < 2) {
+        if (slot < MTEIndustrialFarm.SLOT_ENV_CARD_START) {
             // force to only allow output by output mode if a block under is present.
             ItemStack blockUnderStack = multiblock.getBlockUnderStack();
             if (GTUtility.isStackValid(blockUnderStack) && blockUnderStack.stackSize > 0) return null;
@@ -82,7 +83,7 @@ public class MTEIndustrialFarmItemStackHandler extends ItemStackHandler {
     @Override
     public int getSlotLimit(int slot) {
         return switch (slot) {
-            case 0, 1 -> this.multiblock.mSeedCapacity;
+            case MTEIndustrialFarm.SLOT_SEED, MTEIndustrialFarm.SLOT_BLOCK_UNDER -> this.multiblock.mSeedCapacity;
             default -> 1;
         };
     }
@@ -93,7 +94,7 @@ public class MTEIndustrialFarmItemStackHandler extends ItemStackHandler {
             return 0;
         }
         return switch (slot) {
-            case 0, 1 -> this.multiblock.mSeedCapacity;
+            case MTEIndustrialFarm.SLOT_SEED, MTEIndustrialFarm.SLOT_BLOCK_UNDER -> this.multiblock.mSeedCapacity;
             default -> 1;
         };
     }
