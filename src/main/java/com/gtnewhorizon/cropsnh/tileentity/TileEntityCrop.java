@@ -690,13 +690,13 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
         waterStorage = Math.min(MAX_WATER_BONUS_AT, waterStorage);
         fertilizerStorage = Math.min(MAX_FERTILIZER_BONUS_AT, fertilizerStorage);
 
-        int nutrients = 5;
+        int nutrients = BASE_NUTRIENT_VALUE;
         nutrients += ((waterStorage + 9) / 10);
         nutrients += ((fertilizerStorage + 9) / 10);
-        nutrients += (canSeeSky ? 0 : SKY_ACCESS_BONUS);
+        nutrients += (canSeeSky ? SKY_ACCESS_BONUS : 0);
         float humidityBonus = (biomeHumidity - LOW_HUMIDITY_THRESHOLD)
             / (HIGH_HUMIDITY_THRESHOLD - LOW_HUMIDITY_THRESHOLD);
-        humidityBonus = Math.min(1.0f, humidityBonus) * LIKED_BIOME_BONUS;
+        humidityBonus = Math.max(0.0f, Math.min(1.0f, humidityBonus)) * LIKED_BIOME_BONUS;
         nutrients += Math.max((int) humidityBonus, (likedBiomeTagsCount * LIKED_BIOME_BONUS));
         return nutrients;
     }
