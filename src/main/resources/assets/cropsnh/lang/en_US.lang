@@ -100,8 +100,8 @@ cropsnh_tooltip.progress=Progress
 cropsnh_tooltip.none=none
 cropsnh_tooltip.NaNCertificate=Challenge Accepted!
 cropsnh_tooltip.seed_must_use_synthesizer_to_replicate=This seed can only be replicated using the synthesizer.
-# Biome Tags
 
+# Biome Tags
 cropsnh_tooltip.biomeTag.HOT=Hot
 cropsnh_tooltip.biomeTag.COLD=Cold
 cropsnh_tooltip.biomeTag.SPARSE=Sparse
@@ -131,9 +131,11 @@ cropsnh_tooltip.biomeTag.SANDY=Sandy
 cropsnh_tooltip.biomeTag.SNOWY=Snowy
 cropsnh_tooltip.biomeTag.WASTELAND=Wasteland
 cropsnh_tooltip.biomeTag.BEACH=Beach
+
 # Industrial Farm block tooltips
 cropsnh_tooltip.upgradeTierMustMatchSeedBed=The tier of this upgrade must match that of the seedbed.
 cropsnh_tooltip.upgradeCountLimited=You can only use a maximum of %1$d of these upgrades.
+
 # Industrial Farm UI
 cropsnh_tooltip.industrialFarm.capacity=Max capacity: %1$d
 cropsnh_tooltip.industrialFarm.seedSlot=Seed Slot
@@ -154,6 +156,15 @@ GT5U.gui.text.cropsnh.industrialFarm.seedBedTierTooLow=The current tier of seed 
 GT5U.gui.text.cropsnh.industrialFarm.seedsFull=Seed capacity reached.
 GT5U.gui.text.cropsnh.industrialFarm.seedOverflow=Seed Storage exceeds current capacity!
 GT5U.gui.text.cropsnh.industrialFarm.cannotGrow=This seed cannot grow in the current environment.
+
+# Industrial Farm Scanner Tooltips
+cropsnh_tooltip.industrialFarm.scanner.0=Tier: §e%1$d§r
+cropsnh_tooltip.industrialFarm.scanner.1=Capacity: §e%1$d§r
+cropsnh_tooltip.industrialFarm.scanner.2=Harvest Bonus: §e%1$.3f§r%%
+cropsnh_tooltip.industrialFarm.scanner.3=Growth Speed Bonus: §e%1$.3f§r%%
+cropsnh_tooltip.industrialFarm.scanner.4=Water Usage: §e%1$d§rL/§e%2$d§rt
+cropsnh_tooltip.industrialFarm.scanner.5=Fertilizer Usage: §e%1$d§rL/§e%2$d§rt
+cropsnh_tooltip.industrialFarm.scanner.6=Nutrient Score: §e%1$d§r out of §e%2$d§r
 
 # Seed Bed
 cropsnh_tooltip.seedBed.0=Determines the tier of the industrial farm.
