@@ -91,6 +91,13 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
     public final static int NUTRIENT_POINT_SCALE = 5;
     /** The minimum number of nutrient points that are needed per tier (applies to the scaled nutrient value). */
     public final static int NUTRIENTS_NEEDED_PER_TIER = 10;
+    /** The maximum nutrient score */
+    public final static int MAX_NUTRIENT_SCORE = getNutrientsPerCycle(
+        MAX_LIKED_BIOME_TAG_COUNT,
+        0.5f,
+        true,
+        MAX_WATER_BONUS_AT,
+        MAX_FERTILIZER_BONUS_AT);
 
     private int ticker = 0;
     private boolean isDirty = true;
@@ -691,7 +698,6 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
             / (HIGH_HUMIDITY_THRESHOLD - LOW_HUMIDITY_THRESHOLD);
         humidityBonus = Math.min(1.0f, humidityBonus) * LIKED_BIOME_BONUS;
         nutrients += Math.max((int) humidityBonus, (likedBiomeTagsCount * LIKED_BIOME_BONUS));
-        nutrients *= NUTRIENT_POINT_SCALE;
         return nutrients;
     }
 
@@ -704,6 +710,7 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
      * @return The speed at which the crop should grow, if the value is <= 0 the crop should get sick.
      */
     public static int getGrowthRate(int nutrientPoints, int tier, int growth) {
+        nutrientPoints *= NUTRIENT_POINT_SCALE;
         // this should mean that crops of tier 5 and up will require some sort of bonus in order to grow
         int need = tier * NUTRIENTS_NEEDED_PER_TIER;
         // failsafe

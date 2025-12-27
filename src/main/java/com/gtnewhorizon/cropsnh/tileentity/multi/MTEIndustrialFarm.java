@@ -1023,6 +1023,12 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
 
     // region farm mode
 
+    private int getConsumablePotencyNeededPerCycle() {
+        return (int) Math.ceil(
+            this.mSeedCapacity * CYCLE_TICK_RATE_SCALAR
+                * (this.mExpectedOCs <= 63 ? 1L << this.mExpectedOCs : GTUtility.powInt(2.0d, this.mExpectedOCs)));
+    }
+
     private int getAmountToConsumeBasedOnPotency(int aMissingPotency, int aInputPotency, int aInputAmount) {
         if (aMissingPotency <= 0 || aInputPotency <= 0 || aInputAmount <= 0) return 0;
         // Prefer over-consuming in case something with a stupid high potency gets introduced.
@@ -1072,9 +1078,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
         // this.mExpectedOCs)) / potencyPer1LOfLiquid)
         // Desmos visualizer: https://www.desmos.com/calculator/gmul5gq6cv
         List<Pair<FluidStack, Integer>> tFluidsToConsume = new ArrayList<>();
-        int tWaterPotencyMissing = (int) Math.ceil(
-            this.mSeedCapacity * CYCLE_TICK_RATE_SCALAR
-                * (this.mExpectedOCs <= 63 ? 1L << this.mExpectedOCs : GTUtility.powInt(2.0d, this.mExpectedOCs)));
+        int tWaterPotencyMissing = this.getConsumablePotencyNeededPerCycle();
         int tFertilizerPotencyMissing = this.mFertilizerUnitCount > 0 ? tWaterPotencyMissing : 0;
         for (FluidStack tFluidStack : this.getStoredFluids()) {
             if (CropsNHUtils.isStackInvalid(tFluidStack)) continue;
@@ -1141,13 +1145,14 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
 
     // region simulations
     /**
-     * Calculates the number of growth points a crop will gain each growth tick if it was on a crop stick.
+     * Calculates the nutrient score for the crops inside the machine.
      *
      * @param aCrop The crop to calculate the growth speed of.
      * @return The number of growth points per crop stick growth cycle, if the value is <= 0 the crop would get sick or
      *         cannot grow.
      */
-    public int getGrowthSpeedUnscaled(ISeedData aCrop) {
+    public int getNutrientScore(ISeedData aCrop) {
+        if (aCrop == null) return 0;
         // that thing really shouldn't be null when we are calculating this.
         IGregTechTileEntity tBaseTE = this.getBaseMetaTileEntity();
         if (tBaseTE == null) return 0;
@@ -1171,15 +1176,25 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
             ? SIMULATED_FERTILIZER_STORAGE_WHEN_FERTILIZER_UNIT_MISSING
             : SIMULATED_FERTILIZER_STORAGE_WHEN_FERTILIZER_UNIT_INSTALLED;
         // calc available nutrient points for growth speed calculation
-        int tNutrients = TileEntityCrop.getNutrientsPerCycle(
+        return TileEntityCrop.getNutrientsPerCycle(
             tLikedBiomes,
             tBiome.rainfall,
             SIMULATED_CAN_SEE_SKY,
             SIMULATED_WATER_STORAGE,
             tFertilizerStorage);
+    }
+
+    /**
+     * Calculates the number of growth points a crop will gain each growth tick if it was on a crop stick.
+     *
+     * @param aCrop The crop to calculate the growth speed of.
+     * @return The number of growth points per crop stick growth cycle, if the value is <= 0 the crop would get sick or
+     *         cannot grow.
+     */
+    public int getGrowthSpeedUnscaled(ISeedData aCrop) {
         // calculate the base growth speed
         return TileEntityCrop.getGrowthRate(
-            tNutrients,
+            this.getNutrientScore(aCrop),
             aCrop.getCrop()
                 .getTier(),
             aCrop.getStats()
