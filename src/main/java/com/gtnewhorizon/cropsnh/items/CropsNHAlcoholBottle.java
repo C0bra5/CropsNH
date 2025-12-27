@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +17,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.gtnewhorizon.cropsnh.creativetab.CropsNHTab;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 
 import cpw.mods.fml.relauncher.Side;
@@ -137,8 +137,10 @@ public class CropsNHAlcoholBottle extends ItemPotion {
                 break;
             case 8:
             case 9:
-                Collections
-                    .addAll(list, GTUtility.breakLines(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.alcohol.5")));
+                Collections.addAll(
+                    list,
+                    GTUtility
+                        .breakLines(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.alcohol.5")));
                 list.add("");
                 if (CropsNHUtils.getItemMeta(stack) == 8) {
                     list.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.alcohol.6"));

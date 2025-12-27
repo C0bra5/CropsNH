@@ -2,10 +2,10 @@ package com.gtnewhorizon.cropsnh.recipes.frontends;
 
 import java.util.List;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizons.modularui.api.math.Alignment;
 
 import gregtech.api.recipe.BasicUIPropertiesBuilder;
@@ -40,7 +40,8 @@ public class CropBreederFrontend extends RecipeMapFrontend {
         currentTip = super.handleNEIItemInputTooltip(currentTip, pStack);
         if (pStack.isFluid()) {
             currentTip.add(
-                EnumChatFormatting.RESET + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_nei.cropBreeder.tooltip.fluidCost"));
+                EnumChatFormatting.RESET
+                    + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_nei.cropBreeder.tooltip.fluidCost"));
         }
         return currentTip;
     }
@@ -50,9 +51,11 @@ public class CropBreederFrontend extends RecipeMapFrontend {
         GTNEIDefaultHandler.FixedPositionedStack pStack) {
         currentTip = super.handleNEIItemOutputTooltip(currentTip, pStack);
         currentTip.add(
-            EnumChatFormatting.RESET + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_nei.cropBreeder.tooltip.outputStats"));
+            EnumChatFormatting.RESET
+                + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_nei.cropBreeder.tooltip.outputStats"));
         currentTip.add(
-            EnumChatFormatting.RESET + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_nei.cropBreeder.tooltip.successChance"));
+            EnumChatFormatting.RESET
+                + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_nei.cropBreeder.tooltip.successChance"));
         return currentTip;
     }
 

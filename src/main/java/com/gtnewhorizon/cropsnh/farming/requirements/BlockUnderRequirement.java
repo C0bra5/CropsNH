@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
@@ -30,6 +29,7 @@ import com.gtnewhorizon.cropsnh.api.IMachineGrowthRequirement;
 import com.gtnewhorizon.cropsnh.api.ISeedData;
 import com.gtnewhorizon.cropsnh.api.IWorldBreedingRequirement;
 import com.gtnewhorizon.cropsnh.api.IWorldGrowthRequirement;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizon.cropsnh.utility.MetaSet;
 import com.gtnewhorizon.cropsnh.utility.Tuple2;

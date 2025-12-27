@@ -718,8 +718,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
                 .translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.mode.farm");
             case MODE_OUTPUT -> StatCollector
                 .translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.mode.output");
-            default -> StatCollector
-                .translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.mode.input");
+            default -> StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.mode.input");
         };
     }
 

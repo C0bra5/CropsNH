@@ -2,7 +2,6 @@ package com.gtnewhorizon.cropsnh.blocks;
 
 import java.util.List;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,6 +10,7 @@ import net.minecraft.util.StatCollector;
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.blocks.abstracts.CropsNHBlockIndustrialFarmTiredComponent;
 import com.gtnewhorizon.cropsnh.reference.Names;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 public class BlockAdvancedHarvestingUnit extends CropsNHBlockIndustrialFarmTiredComponent {
 
@@ -55,18 +55,22 @@ public class BlockAdvancedHarvestingUnit extends CropsNHBlockIndustrialFarmTired
                     Reference.MOD_ID_LOWER + "_tooltip.advancedHarvestingUnit.1",
                     HARVEST_ROUND_MULTIPLIER * 100));
             tooltip.add(
-                StatCollector
-                    .translateToLocalFormatted(Reference.MOD_ID_LOWER + "_tooltip.advancedHarvestingUnit.2", BASE_POWER_INCREASE * 100));
+                StatCollector.translateToLocalFormatted(
+                    Reference.MOD_ID_LOWER + "_tooltip.advancedHarvestingUnit.2",
+                    BASE_POWER_INCREASE * 100));
         }
         // generic
         tooltip.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.upgrade_must_match_seed_bed"));
-        tooltip
-            .add(StatCollector.translateToLocalFormatted(Reference.MOD_ID_LOWER + "_tooltip.upgrade_count_limited", MAX_UPGRADE_COUNT));
+        tooltip.add(
+            StatCollector.translateToLocalFormatted(
+                Reference.MOD_ID_LOWER + "_tooltip.upgrade_count_limited",
+                MAX_UPGRADE_COUNT));
     }
 
     @Override
     public void registerBlockIcons(IIconRegister aIconRegister) {
         super.registerBlockIcons(aIconRegister);
-        this.mBottomIcon = this.mTopIcon = aIconRegister.registerIcon(Reference.MOD_ID_LOWER + ":industrialFarm/advancedHarvestingUnit");
+        this.mBottomIcon = this.mTopIcon = aIconRegister
+            .registerIcon(Reference.MOD_ID_LOWER + ":industrialFarm/advancedHarvestingUnit");
     }
 }

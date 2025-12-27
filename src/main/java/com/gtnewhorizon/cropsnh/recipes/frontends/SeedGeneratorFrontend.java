@@ -2,10 +2,10 @@ package com.gtnewhorizon.cropsnh.recipes.frontends;
 
 import java.util.List;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizons.modularui.api.math.Alignment;
 
 import gregtech.api.recipe.BasicUIPropertiesBuilder;

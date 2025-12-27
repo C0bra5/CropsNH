@@ -1,6 +1,5 @@
 package com.gtnewhorizon.cropsnh.blocks;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
@@ -25,6 +24,7 @@ import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
 import com.gtnewhorizon.cropsnh.items.blocks.ItemCropSticks;
 import com.gtnewhorizon.cropsnh.reference.Names;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.renderers.blocks.RenderBlockBase;
 import com.gtnewhorizon.cropsnh.renderers.blocks.RenderCrop;
 import com.gtnewhorizon.cropsnh.tileentity.TileEntityCrop;

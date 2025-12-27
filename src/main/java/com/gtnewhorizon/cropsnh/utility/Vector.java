@@ -1,10 +1,5 @@
 package com.gtnewhorizon.cropsnh.utility;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.Vec3;
-
-import com.gtnewhorizon.cropsnh.reference.Names;
-
 public class Vector {
 
     private double x;

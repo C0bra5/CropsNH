@@ -6,8 +6,8 @@ import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
-
 import com.gtnewhorizon.cropsnh.reference.Reference;
+
 import gregtech.api.enums.VoltageIndex;
 
 public class CropNickelback extends NHCropCard {

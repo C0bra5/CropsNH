@@ -1,6 +1,5 @@
 package com.gtnewhorizon.cropsnh.items.produce;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +10,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 
 import com.gtnewhorizon.cropsnh.reference.Names;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.RegisterHelper;
 
 import cpw.mods.fml.relauncher.Side;

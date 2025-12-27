@@ -2,7 +2,6 @@ package com.gtnewhorizon.cropsnh.blocks;
 
 import java.util.List;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,6 +10,7 @@ import net.minecraft.util.StatCollector;
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.blocks.abstracts.CropsNHBlockIndustrialFarmTiredComponent;
 import com.gtnewhorizon.cropsnh.reference.Names;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 import gregtech.api.enums.VoltageIndex;
 
@@ -36,10 +36,13 @@ public class BlockOverclockedGrowthAccelerationUnit extends CropsNHBlockIndustri
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advancedTooltips) {
         super.addInformation(stack, player, tooltip, advancedTooltips);
         // specific
-        tooltip.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.overclockedGrowthAccelerationUnit"));
+        tooltip
+            .add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.overclockedGrowthAccelerationUnit"));
         // generic
         tooltip.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.upgradeTierMustMatchSeedBed"));
-        tooltip.add(StatCollector.translateToLocalFormatted(Reference.MOD_ID_LOWER + "_tooltip.upgradeCountLimited", MAX_UPGRADE_COUNT));
+        tooltip.add(
+            StatCollector
+                .translateToLocalFormatted(Reference.MOD_ID_LOWER + "_tooltip.upgradeCountLimited", MAX_UPGRADE_COUNT));
     }
 
     @Override

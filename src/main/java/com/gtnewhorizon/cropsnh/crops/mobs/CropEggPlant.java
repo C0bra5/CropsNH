@@ -2,11 +2,11 @@ package com.gtnewhorizon.cropsnh.crops.mobs;
 
 import java.awt.Color;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 public class CropEggPlant extends CropFood {
 

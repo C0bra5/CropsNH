@@ -2,11 +2,11 @@ package com.gtnewhorizon.cropsnh.crops.cropnh;
 
 import java.awt.Color;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 public class CropHemp extends NHCropCard {
 

@@ -2,7 +2,6 @@ package com.gtnewhorizon.cropsnh.items;
 
 import java.util.List;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,6 +22,7 @@ import com.gtnewhorizon.cropsnh.farming.SeedStats;
 import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
 import com.gtnewhorizon.cropsnh.reference.Names;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 public class ItemGenericSeed extends ItemCropsNH {
 
@@ -112,7 +112,9 @@ public class ItemGenericSeed extends ItemCropsNH {
             }
 
             if (crop.getCrossingThreshold() < 0.0f) {
-                toolTip.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.seed_must_use_synthesizer_to_replicate"));
+                toolTip.add(
+                    StatCollector
+                        .translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.seed_must_use_synthesizer_to_replicate"));
             }
 
             toolTip.add(

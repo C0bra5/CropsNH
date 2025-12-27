@@ -2,13 +2,13 @@ package com.gtnewhorizon.cropsnh.farming.requirements.breeding;
 
 import java.util.ArrayList;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.api.IWorldBreedingRequirement;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 public class MachineOnlyBreedingRequirement implements IWorldBreedingRequirement {
 

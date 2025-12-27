@@ -2,7 +2,6 @@ package com.gtnewhorizon.cropsnh.blocks;
 
 import java.util.List;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -13,6 +12,7 @@ import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.blocks.abstracts.CropsNHBlockIndustrialFarmTiredComponent;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
 import com.gtnewhorizon.cropsnh.reference.Names;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.tileentity.TileEntityCrop;
 import com.gtnewhorizon.cropsnh.tileentity.multi.MTEIndustrialFarm;
 import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTECropManager;
@@ -80,8 +80,11 @@ public class BlockSeedBed extends CropsNHBlockIndustrialFarmTiredComponent {
         super.addInformation(aStack, aPlayer, aTooltip, aAdvancedTooltips);
         aTooltip.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.seedBed.0"));
         int tMeta = CropsNHUtils.getItemMeta(aStack);
-        aTooltip.add(StatCollector.translateToLocalFormatted(Reference.MOD_ID_LOWER + "_tooltip.seedBed.1", getCapacity(tMeta)));
-        aTooltip.add(StatCollector.translateToLocalFormatted(Reference.MOD_ID_LOWER + "_tooltip.seedBed.2", getWaterConsumption(tMeta)));
+        aTooltip.add(
+            StatCollector.translateToLocalFormatted(Reference.MOD_ID_LOWER + "_tooltip.seedBed.1", getCapacity(tMeta)));
+        aTooltip.add(
+            StatCollector
+                .translateToLocalFormatted(Reference.MOD_ID_LOWER + "_tooltip.seedBed.2", getWaterConsumption(tMeta)));
     }
 
     @Override

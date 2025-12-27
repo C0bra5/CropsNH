@@ -1,11 +1,11 @@
 package com.gtnewhorizon.cropsnh.farming.requirements.growth;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.api.IWorldGrowthRequirement;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.Tuple2;
 
 public class MachineOnlyGrowthRequirement implements IWorldGrowthRequirement {

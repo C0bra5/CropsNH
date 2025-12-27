@@ -1,7 +1,5 @@
 package com.gtnewhorizon.cropsnh.recipes;
 
-import java.util.Locale;
-
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ICropMutation;
 import com.gtnewhorizon.cropsnh.init.CropsNHUITextures;

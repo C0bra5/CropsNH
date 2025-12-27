@@ -4,10 +4,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.util.StatCollector;
 
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

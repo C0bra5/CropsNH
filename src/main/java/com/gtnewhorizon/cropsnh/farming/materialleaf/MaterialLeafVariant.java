@@ -2,7 +2,6 @@ package com.gtnewhorizon.cropsnh.farming.materialleaf;
 
 import java.util.List;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -10,6 +9,7 @@ import net.minecraft.util.StatCollector;
 
 import com.gtnewhorizon.cropsnh.api.IMaterialLeafVariant;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

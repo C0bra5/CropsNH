@@ -2,7 +2,6 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -11,6 +10,7 @@ import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;

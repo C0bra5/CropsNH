@@ -2,11 +2,11 @@ package com.gtnewhorizon.cropsnh.crops.food.bop;
 
 import java.awt.Color;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.OreDictHelper;
 
 public class CropTurnip extends CropFood {

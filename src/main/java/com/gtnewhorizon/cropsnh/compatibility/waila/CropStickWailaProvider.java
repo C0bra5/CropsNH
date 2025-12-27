@@ -2,7 +2,6 @@ package com.gtnewhorizon.cropsnh.compatibility.waila;
 
 import java.util.List;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -16,6 +15,7 @@ import com.gtnewhorizon.cropsnh.api.IGrowthRequirement;
 import com.gtnewhorizon.cropsnh.api.ISeedStats;
 import com.gtnewhorizon.cropsnh.farming.SeedStats;
 import com.gtnewhorizon.cropsnh.reference.Names;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.tileentity.TileEntityCrop;
 
 import mcp.mobius.waila.api.IWailaConfigHandler;
@@ -72,7 +72,8 @@ public class CropStickWailaProvider implements IWailaDataProvider {
 
                     if (nbt.getBoolean(Names.NBT.sick)) {
                         information.add(
-                            EnumChatFormatting.RED + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.isSick")
+                            EnumChatFormatting.RED
+                                + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.isSick")
                                 + EnumChatFormatting.RESET);
                     }
 

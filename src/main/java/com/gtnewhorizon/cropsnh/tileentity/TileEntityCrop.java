@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -46,6 +45,7 @@ import com.gtnewhorizon.cropsnh.items.ItemGenericSeed;
 import com.gtnewhorizon.cropsnh.reference.Constants;
 import com.gtnewhorizon.cropsnh.reference.Data;
 import com.gtnewhorizon.cropsnh.reference.Names;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.WorldUtils;
 
 import cpw.mods.fml.relauncher.Side;
@@ -241,7 +241,8 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
                 if (!(this.crop instanceof CropWeed)) {
                     if (this.isSick) {
                         information.add(
-                            EnumChatFormatting.RED + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.isSick")
+                            EnumChatFormatting.RED
+                                + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.isSick")
                                 + EnumChatFormatting.RESET);
                     }
 

@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.util.StatCollector;
 
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.IMutationPool;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 public class MutationPool implements IMutationPool {
 

@@ -2,11 +2,11 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 import gregtech.api.enums.VoltageIndex;
 

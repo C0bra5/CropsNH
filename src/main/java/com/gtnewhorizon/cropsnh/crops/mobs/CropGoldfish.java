@@ -2,7 +2,6 @@ package com.gtnewhorizon.cropsnh.crops.mobs;
 
 import java.awt.Color;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +11,7 @@ import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.tileentity.TileEntityCrop;
 
 import gregtech.api.objects.XSTR;
@@ -40,7 +40,8 @@ public class CropGoldfish extends NHCropCard {
 
     @Override
     public String getFlavourText() {
-        return ConfigurationHandler.putAnEndToExistentialDread ? null : Reference.MOD_ID_LOWER + "_crops.goldfish.flavour";
+        return ConfigurationHandler.putAnEndToExistentialDread ? null
+            : Reference.MOD_ID_LOWER + "_crops.goldfish.flavour";
     }
 
     @Override

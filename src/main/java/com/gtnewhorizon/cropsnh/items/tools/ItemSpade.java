@@ -2,7 +2,6 @@ package com.gtnewhorizon.cropsnh.items.tools;
 
 import java.util.List;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -15,6 +14,7 @@ import com.gtnewhorizon.cropsnh.api.ICropRightClickHandler;
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.items.ItemCropsNH;
 import com.gtnewhorizon.cropsnh.reference.Names;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 
 import cpw.mods.fml.relauncher.Side;

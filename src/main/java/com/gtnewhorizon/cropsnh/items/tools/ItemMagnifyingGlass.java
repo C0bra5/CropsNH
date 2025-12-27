@@ -3,7 +3,6 @@ package com.gtnewhorizon.cropsnh.items.tools;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,6 +15,7 @@ import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.api.ISeedStats;
 import com.gtnewhorizon.cropsnh.items.ItemCropsNH;
 import com.gtnewhorizon.cropsnh.reference.Names;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.tileentity.TileEntityCrop;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 

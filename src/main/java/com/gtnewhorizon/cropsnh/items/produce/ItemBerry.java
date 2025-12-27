@@ -2,7 +2,6 @@ package com.gtnewhorizon.cropsnh.items.produce;
 
 import java.util.List;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,6 +12,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizon.cropsnh.utility.RegisterHelper;
 
@@ -66,7 +66,8 @@ public class ItemBerry extends ItemFood {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return "item." + Reference.MOD_ID_LOWER + ":berry."
+        return "item." + Reference.MOD_ID_LOWER
+            + ":berry."
             + textureNames[Math.min(textureNames.length - 1, Math.max(0, CropsNHUtils.getItemMeta(itemstack)))];
     }
 

@@ -2,7 +2,6 @@ package com.gtnewhorizon.cropsnh.crops.ic2;
 
 import java.awt.Color;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
@@ -15,6 +14,7 @@ import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 import com.gtnewhorizon.cropsnh.farming.requirements.BlockUnderRequirement;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
 import com.gtnewhorizon.cropsnh.reference.Names;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 public class CropTerraWart extends NHCropCard {
 

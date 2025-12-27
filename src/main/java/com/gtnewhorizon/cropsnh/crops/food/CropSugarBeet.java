@@ -2,13 +2,13 @@ package com.gtnewhorizon.cropsnh.crops.food;
 
 import java.awt.Color;
 
-import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 public class CropSugarBeet extends NHCropCard {
 
@@ -37,6 +37,7 @@ public class CropSugarBeet extends NHCropCard {
     protected IIcon[] registerTextures(IIconRegister register) {
         // yes it uses the same textures as wild carrots, no idk why
         return new IIcon[] { register.registerIcon("carrots_stage_0"), register.registerIcon("carrots_stage_1"),
-            register.registerIcon("carrots_stage_2"), register.registerIcon(Reference.MOD_ID_LOWER + ":crops/wildCarrot/3") };
+            register.registerIcon("carrots_stage_2"),
+            register.registerIcon(Reference.MOD_ID_LOWER + ":crops/wildCarrot/3") };
     }
 }
