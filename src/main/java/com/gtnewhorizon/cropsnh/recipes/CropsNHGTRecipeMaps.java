@@ -30,7 +30,7 @@ public class CropsNHGTRecipeMaps {
         .create(ICropMutation.class, "cropsnh_crop_mutation");
 
     public static final RecipeMap<SeedGeneratorBackend> fakeSeedGeneratorRecipes = RecipeMapBuilder
-        .of(Reference.MOD_ID.toLowerCase(Locale.ROOT) + ".recipes.seedGenerator", SeedGeneratorBackend::new)
+        .of(Reference.MOD_ID_LOWER + ".recipes.seedGenerator", SeedGeneratorBackend::new)
         .maxIO(2, 1, 1, 0)
         .minInputs(1, 1)
         .frontend(SeedGeneratorFrontend::new)
@@ -44,7 +44,7 @@ public class CropsNHGTRecipeMaps {
         .build();
 
     public static final RecipeMap<CropBreederBackend> fakeCropBreederRecipeMap = RecipeMapBuilder
-        .of(Reference.MOD_ID.toLowerCase(Locale.ROOT) + ".recipes.cropBreeder", CropBreederBackend::new)
+        .of(Reference.MOD_ID_LOWER + ".recipes.cropBreeder", CropBreederBackend::new)
         .maxIO(6, 1, 1, 0)
         .minInputs(2, 1)
         .frontend(CropBreederFrontend::new)
@@ -58,7 +58,7 @@ public class CropsNHGTRecipeMaps {
         .build();
 
     public static final RecipeMap<CropGeneExtractorBackend> fakeCropGeneExtractorRecipeMap = RecipeMapBuilder
-        .of(Reference.MOD_ID.toLowerCase(Locale.ROOT) + ".recipes.cropGeneExtractor", CropGeneExtractorBackend::new)
+        .of(Reference.MOD_ID_LOWER + ".recipes.cropGeneExtractor", CropGeneExtractorBackend::new)
         .maxIO(2, 1, 0, 0)
         .minInputs(2, 0)
         .useSpecialSlot()
@@ -76,7 +76,7 @@ public class CropsNHGTRecipeMaps {
         .build();
 
     public static final RecipeMap<CropSynthesizerBackend> fakeCropSynthesizerRecipeMap = RecipeMapBuilder
-        .of(Reference.MOD_ID.toLowerCase(Locale.ROOT) + ".recipes.cropSynthesizer", CropSynthesizerBackend::new)
+        .of(Reference.MOD_ID_LOWER + ".recipes.cropSynthesizer", CropSynthesizerBackend::new)
         .maxIO(4, 1, 1, 0)
         .minInputs(4, 1)
         .frontend(CropSynthesizerFrontend::new)

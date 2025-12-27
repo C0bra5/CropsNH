@@ -12,7 +12,7 @@ import codechicken.nei.config.DataDumper;
 public class AlternateSeedDumper extends DataDumper {
 
     public AlternateSeedDumper() {
-        super("tools.dump." + Reference.MOD_ID.toLowerCase() + ".alternateSeed");
+        super("tools.dump." + Reference.MOD_ID_LOWER + ".alternateSeed");
     }
 
     @Override

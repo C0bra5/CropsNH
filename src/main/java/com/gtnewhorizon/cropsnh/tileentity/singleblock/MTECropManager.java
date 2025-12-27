@@ -873,18 +873,18 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
 
     public static final UITexture PROGRESSBAR_WATER = GTUITextures.PROGRESSBAR_BOILER_WATER;
     public static final UITexture PROGRESSBAR_WEED_EX = UITexture
-        .fullImage(Reference.MOD_ID.toLowerCase(), "gui/progressbar/cropmanager_weed_ex");
+        .fullImage(Reference.MOD_ID_LOWER, "gui/progressbar/cropmanager_weed_ex");
     public static final UITexture PROGRESSBAR_LIQUID_FERTILIZER = UITexture
-        .fullImage(Reference.MOD_ID.toLowerCase(), "gui/progressbar/cropmanager_liquid_fertilizer");
+        .fullImage(Reference.MOD_ID_LOWER, "gui/progressbar/cropmanager_liquid_fertilizer");
 
     public static final UITexture BUTTON_OVERLAY_TOGGLE_WATER = UITexture
-        .fullImage(Reference.MOD_ID.toLowerCase(), "gui/overlay_button/water_toggle");
+        .fullImage(Reference.MOD_ID_LOWER, "gui/overlay_button/water_toggle");
     public static final UITexture BUTTON_OVERLAY_TOGGLE_WEED_EX = UITexture
-        .fullImage(Reference.MOD_ID.toLowerCase(), "gui/overlay_button/weed_ex_toggle");
+        .fullImage(Reference.MOD_ID_LOWER, "gui/overlay_button/weed_ex_toggle");
     public static final UITexture BUTTON_OVERLAY_TOGGLE_FERTILIZER = UITexture
-        .fullImage(Reference.MOD_ID.toLowerCase(), "gui/overlay_button/fertilizer_toggle");
+        .fullImage(Reference.MOD_ID_LOWER, "gui/overlay_button/fertilizer_toggle");
     public static final UITexture BUTTON_OVERLAY_TOGGLE_HARVEST = UITexture
-        .fullImage(Reference.MOD_ID.toLowerCase(), "gui/overlay_button/harvest_toggle");
+        .fullImage(Reference.MOD_ID_LOWER, "gui/overlay_button/harvest_toggle");
 
     private static void addToggleWidget(ModularWindow.Builder builder, Supplier<Boolean> supplier,
         Consumer<Boolean> consumer, UITexture texture, String baseTooltip, int x, int y) {

@@ -26,7 +26,7 @@ public enum SeedShape implements ISeedShape {
     IIcon lightIcon = null;
 
     SeedShape() {
-        this.texturePath = Reference.MOD_ID + ":"
+        this.texturePath = Reference.MOD_ID_LOWER + ":"
             + Names.Objects.genericSeed
             + "/"
             + this.name()

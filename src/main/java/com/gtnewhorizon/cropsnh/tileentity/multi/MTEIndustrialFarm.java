@@ -625,7 +625,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
             .addGlassEnergyLimitInfo()
             .addInfo(
                 StatCollector.translateToLocal(
-                    EnumChatFormatting.GREEN + Reference.MOD_ID.toLowerCase() + "_tooltip.MBTT.multiAmpsWithUpgrade"))
+                    EnumChatFormatting.GREEN + Reference.MOD_ID_LOWER + "_tooltip.MBTT.multiAmpsWithUpgrade"))
             .addCasingInfoRange("Agricultural Casing", 8 * 2 + MIN_SLICES * 2, 8 * 2 + MAX_SLICES * 2, false)
             .addEnergyHatch("Any Casing", 1)
             .addInputBus("Any Casing", 1)
@@ -715,11 +715,11 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
     public String getMachineModeName() {
         return switch (this.machineMode) {
             case MODE_FARM -> StatCollector
-                .translateToLocal(Reference.MOD_ID.toLowerCase() + "_tooltip.industrialFarm.mode.farm");
+                .translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.mode.farm");
             case MODE_OUTPUT -> StatCollector
-                .translateToLocal(Reference.MOD_ID.toLowerCase() + "_tooltip.industrialFarm.mode.output");
+                .translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.mode.output");
             default -> StatCollector
-                .translateToLocal(Reference.MOD_ID.toLowerCase() + "_tooltip.industrialFarm.mode.input");
+                .translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.mode.input");
         };
     }
 
@@ -738,31 +738,31 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
     /** Can't insert a seed because the existing block under didn't match the new seed. */
     @Nonnull
     public static final CheckRecipeResult CHECK_RECIPE_RESULT_BLOCK_UNDER_MISMATCH_INPUT = SimpleCheckRecipeResult
-        .ofFailure(Reference.MOD_ID.toLowerCase() + ".industrialFarm.blockUnderMismatch.input");
+        .ofFailure(Reference.MOD_ID_LOWER + ".industrialFarm.blockUnderMismatch.input");
     /** Can't insert a seed because the existing block under didn't match the new seed. */
     @Nonnull
     public static final CheckRecipeResult CHECK_RECIPE_RESULT_BLOCK_UNDER_MISMATCH_FARM = SimpleCheckRecipeResult
-        .ofFailure(Reference.MOD_ID.toLowerCase() + ".industrialFarm.blockUnderMismatch.farm");
+        .ofFailure(Reference.MOD_ID_LOWER + ".industrialFarm.blockUnderMismatch.farm");
     /** Can't insert a seed because the required under-block wasn't found */
     @Nonnull
     public static final CheckRecipeResult CHECK_RECIPE_RESULT_BLOCK_UNDER_NOT_FOUND = SimpleCheckRecipeResult
-        .ofFailure(Reference.MOD_ID.toLowerCase() + ".industrialFarm.blockUnderNotFound");
+        .ofFailure(Reference.MOD_ID_LOWER + ".industrialFarm.blockUnderNotFound");
     /** The current tier of seed bed is too low for this seed. */
     @Nonnull
     public static final CheckRecipeResult CHECK_RECIPE_RESULT_SEED_BED_TIER_TOO_LOW = SimpleCheckRecipeResult
-        .ofFailure(Reference.MOD_ID.toLowerCase() + ".industrialFarm.seedBedTierTooLow");
+        .ofFailure(Reference.MOD_ID_LOWER + ".industrialFarm.seedBedTierTooLow");
     /** Can't insert any more seeds because the IF is full. */
     @Nonnull
     public static final CheckRecipeResult CHECK_RECIPE_RESULT_SEEDS_FULL = SimpleCheckRecipeResult
-        .ofFailure(Reference.MOD_ID.toLowerCase() + ".industrialFarm.seedsFull");
+        .ofFailure(Reference.MOD_ID_LOWER + ".industrialFarm.seedsFull");
     /** Can't run because there are too many seeds in the machine. */
     @Nonnull
     public static final CheckRecipeResult CHECK_RECIPE_RESULT_SEED_OVERFLOW = SimpleCheckRecipeResult
-        .ofFailure(Reference.MOD_ID.toLowerCase() + ".industrialFarm.seedOverflow");
+        .ofFailure(Reference.MOD_ID_LOWER + ".industrialFarm.seedOverflow");
     /** Can't generate resources because the growth requires aren't met */
     @Nonnull
     public static final CheckRecipeResult CHECK_RECIPE_RESULT_CANNOT_GROW = SimpleCheckRecipeResult
-        .ofFailure(Reference.MOD_ID.toLowerCase() + ".industrialFarm.cannotGrow");
+        .ofFailure(Reference.MOD_ID_LOWER + ".industrialFarm.cannotGrow");
 
     @Override
     public @Nonnull CheckRecipeResult checkProcessing() {

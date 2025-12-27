@@ -60,7 +60,7 @@ public class ConfigurationHandler {
         if (config == null) {
             String directory = event.getModConfigurationDirectory()
                 .toString() + '/'
-                + Reference.MOD_ID.toLowerCase()
+                + Reference.MOD_ID_LOWER
                 + '/';
             config = new Configuration(new File(directory, "Configuration.cfg"));
         }

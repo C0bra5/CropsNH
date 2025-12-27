@@ -6,5 +6,5 @@ import com.gtnewhorizons.modularui.api.drawable.UITexture;
 public class CropsNHUITextures {
 
     public static final UITexture OVERLAY_SLOT_SEED = UITexture
-        .fullImage(Reference.MOD_ID.toLowerCase(), "gui/overlay_slot/seed");
+        .fullImage(Reference.MOD_ID_LOWER, "gui/overlay_slot/seed");
 }

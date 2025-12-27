@@ -40,10 +40,10 @@ public class NEICropsNHCropstickBreedingHandler extends CropsNHNEIHandler {
 
     // gets the texture to display the recipe in
     private static final String background2 = new ResourceLocation(
-        Reference.MOD_ID.toLowerCase(),
+        Reference.MOD_ID_LOWER,
         "textures/gui/nei/breeding2.png").toString();
     private static final String background4 = new ResourceLocation(
-        Reference.MOD_ID.toLowerCase(),
+        Reference.MOD_ID_LOWER,
         "textures/gui/nei/breeding4.png").toString();
 
     private static final int COLOR_BLACK = 1644054;

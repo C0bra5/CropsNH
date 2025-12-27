@@ -185,7 +185,7 @@ public class NEICropsNHMutationPoolHandler extends CropsNHNEIHandler {
     // gets the texture to display the recipe in
     @Override
     public String getGuiTexture() {
-        return new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/gui/nei/mutationPool.png").toString();
+        return new ResourceLocation(Reference.MOD_ID_LOWER, "textures/gui/nei/mutationPool.png").toString();
     }
 
     @Override
