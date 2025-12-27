@@ -4,19 +4,13 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.blocks.abstracts.CropsNHBlockIndustrialFarmTiredComponent;
-import com.gtnewhorizon.cropsnh.loaders.FertilizerLoader;
 import com.gtnewhorizon.cropsnh.reference.Names;
-import com.gtnewhorizon.cropsnh.tileentity.TileEntityCrop;
-import com.gtnewhorizon.cropsnh.tileentity.multi.MTEIndustrialFarm;
-
-import cpw.mods.fml.common.LoaderException;
-import gregtech.api.enums.VoltageIndex;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 
 public class BlockFertilizerUnit extends CropsNHBlockIndustrialFarmTiredComponent {
 
@@ -43,36 +37,8 @@ public class BlockFertilizerUnit extends CropsNHBlockIndustrialFarmTiredComponen
             CropsNHItemList.FertilizerUnit_UXV);
     }
 
-    private final static int MIN_TIER = VoltageIndex.MV;
-    private final static int MAX_TIER = VoltageIndex.UXV;
-    /** The amount of liquid fertilizer a single fertilizer item should create */
-    private final static int FERTILIZER_ITEM_LIQUID_OUTPUT = 144;
-
-    private final static int[] CONSUMPTION_LOOKUP;
-
-    static {
-        // runtime validation for future proofing
-        if (MAX_TIER < MIN_TIER) {
-            throw new LoaderException(
-                String.format("MIN_TIER (%d) should be lower than MAX_TIER (%s)", MIN_TIER, MAX_TIER));
-        }
-        CONSUMPTION_LOOKUP = new int[MAX_TIER - MIN_TIER + 1];
-        // calculate the consumption rate scalar
-        for (int i = 0; i < CONSUMPTION_LOOKUP.length; i++) {
-            // scalar amount is computed from max seed capacity.
-            CONSUMPTION_LOOKUP[i] = (int) Math.ceil(
-                BlockSeedBed.getCapacity(i + MIN_TIER) * (double) FERTILIZER_ITEM_LIQUID_OUTPUT
-                    / (TileEntityCrop.TICK_RATE * FertilizerLoader.FERTILIZER_ITEM_POTENCY)
-                    * MTEIndustrialFarm.CYCLE_DURATION);
-        }
-    }
-
-    public static int getFertilizerConsumptionPerCycle(int tier) {
-        if (tier < MIN_TIER || MAX_TIER < tier) {
-            throw new IndexOutOfBoundsException(
-                String.format("tier should be between %d and %d (was %d)", MIN_TIER, MAX_TIER, tier));
-        }
-        return CONSUMPTION_LOOKUP[tier - MIN_TIER];
+    public static int getFertilizerConsumptionPerCycle(int aTier) {
+        return BlockSeedBed.getWaterConsumption(aTier);
     }
 
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advancedTooltips) {
@@ -82,7 +48,7 @@ public class BlockFertilizerUnit extends CropsNHBlockIndustrialFarmTiredComponen
         tooltip.add(
             StatCollector.translateToLocalFormatted(
                 "cropsnh_tooltip.fertilizerUnit.1",
-                getFertilizerConsumptionPerCycle(Items.feather.getDamage(stack))));
+                getFertilizerConsumptionPerCycle(CropsNHUtils.getItemMeta(stack))));
         if (advancedTooltips) {
             tooltip.add(
                 StatCollector

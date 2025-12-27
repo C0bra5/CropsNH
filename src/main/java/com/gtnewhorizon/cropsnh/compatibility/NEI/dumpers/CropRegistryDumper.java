@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 import codechicken.nei.config.DataDumper;
 
 public class CropRegistryDumper extends DataDumper {
 
     public CropRegistryDumper() {
-        super("tools.dump.cropsnh.cropRegistry");
+        super("tools.dump." + Reference.MOD_ID.toLowerCase() + ".cropRegistry");
     }
 
     @Override

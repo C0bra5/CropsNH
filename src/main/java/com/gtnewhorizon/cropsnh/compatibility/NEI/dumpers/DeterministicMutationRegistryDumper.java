@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import com.gtnewhorizon.cropsnh.farming.registries.MutationRegistry;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 import codechicken.nei.config.DataDumper;
 
 public class DeterministicMutationRegistryDumper extends DataDumper {
 
     public DeterministicMutationRegistryDumper() {
-        super("tools.dump.cropsnh.deterministicMutations");
+        super("tools.dump." + Reference.MOD_ID.toLowerCase() + ".deterministicMutations");
     }
 
     @Override

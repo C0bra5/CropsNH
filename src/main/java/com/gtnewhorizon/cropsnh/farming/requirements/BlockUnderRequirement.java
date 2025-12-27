@@ -13,7 +13,6 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -26,6 +25,8 @@ import com.gtnewhorizon.cropsnh.api.BlockWithMeta;
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.api.IMachineBreedingRequirement;
+import com.gtnewhorizon.cropsnh.api.IMachineGrowthRequirement;
+import com.gtnewhorizon.cropsnh.api.ISeedData;
 import com.gtnewhorizon.cropsnh.api.IWorldBreedingRequirement;
 import com.gtnewhorizon.cropsnh.api.IWorldGrowthRequirement;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
@@ -45,8 +46,8 @@ import gregtech.common.blocks.TileEntityOres;
 /**
  * Used to prevent a crop from growing unless there is a specific block under it.
  */
-public class BlockUnderRequirement
-    implements IWorldGrowthRequirement, IWorldBreedingRequirement, IMachineBreedingRequirement {
+public class BlockUnderRequirement implements IWorldGrowthRequirement, IWorldBreedingRequirement,
+    IMachineBreedingRequirement, IMachineGrowthRequirement {
 
     private static final HashMap<String, BlockUnderRequirement> registrations = new HashMap<>();
 
@@ -149,6 +150,12 @@ public class BlockUnderRequirement
         return new BlockUnderTarget(block, meta, te);
     }
 
+    @Override
+    public boolean canGrow(ISeedData seedData, IGregTechTileEntity te, ItemStack[] catalysts) {
+        return Arrays.stream(catalysts)
+            .anyMatch(this::isValidBlockUnder);
+    }
+
     public static class BlockUnderTarget {
 
         public final Block block;
@@ -192,11 +199,14 @@ public class BlockUnderRequirement
 
     /**
      * Checks if an item stack contains a valid under block for this requirement.
-     * 
+     *
      * @param stack The stack to validate
      * @return True if the stack contains a valid under block.
      */
     public boolean isValidBlockUnder(ItemStack stack) {
+        // ensure valid stack
+        if (CropsNHUtils.isStackInvalid(stack)) return false;
+
         // GT Material check
         for (Materials material : this.materials) {
             if (checkGTBlockOrOreMaterial(stack, material)) {
@@ -212,8 +222,8 @@ public class BlockUnderRequirement
         }
 
         // Block conversion
-        Block block = Block.getBlockFromItem(stack.getItem());
-        return block.getMaterial() != Material.air && blocks.contains(block, Items.feather.getDamage(stack));
+        Block block = CropsNHUtils.getBlockFromItem(stack);
+        return block.getMaterial() != Material.air && blocks.contains(block, CropsNHUtils.getItemMeta(stack));
     }
 
     public boolean canGrow(Block block, int meta, TileEntity te) {
@@ -257,9 +267,9 @@ public class BlockUnderRequirement
             ItemStack oreDictStack = OreDictionary.getOres(oreDict)
                 .get(aux);
             if (oreDictStack.getItem() != stack.getItem()) continue;
-            int dmg = Items.feather.getDamage(oreDictStack);
+            int dmg = CropsNHUtils.getItemMeta(oreDictStack);
             // check for both the old and the new wildcard value, this helps with a couple things
-            if (Items.feather.getDamage(stack) == dmg || OreDictionary.WILDCARD_VALUE == dmg || -1 == dmg) return true;
+            if (CropsNHUtils.getItemMeta(stack) == dmg || OreDictionary.WILDCARD_VALUE == dmg || -1 == dmg) return true;
         }
         return false;
     }

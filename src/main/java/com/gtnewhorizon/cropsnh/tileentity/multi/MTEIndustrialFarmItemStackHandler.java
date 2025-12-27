@@ -1,6 +1,5 @@
 package com.gtnewhorizon.cropsnh.tileentity.multi;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import org.jetbrains.annotations.Nullable;
@@ -39,6 +38,8 @@ public class MTEIndustrialFarmItemStackHandler extends ItemStackHandler {
             case MTEIndustrialFarm.SLOT_SEED -> {
                 ISeedData tSeedData = CropsNHUtils.getAnalyzedSeedData(stack);
                 if (tSeedData == null) return false;
+                if (tSeedData.getCrop()
+                    .getMinSeedBedTier() > multiblock.mUpgradeTier) return false;
                 // prevent manual insertion of seeds that have underblock requirements.
                 for (IGrowthRequirement req : tSeedData.getCrop()
                     .getGrowthRequirements()) {
@@ -64,7 +65,7 @@ public class MTEIndustrialFarmItemStackHandler extends ItemStackHandler {
                 // must be an environmental module
                 if (!(stack.getItem() instanceof ItemEnvironmentalModule)) return false;
                 // the module cannot be blank.
-                return ItemEnvironmentalModule.getBiomeTag(Items.feather.getDamage(stack)) != null;
+                return ItemEnvironmentalModule.getBiomeTag(CropsNHUtils.getItemMeta(stack)) != null;
             }
         }
     }

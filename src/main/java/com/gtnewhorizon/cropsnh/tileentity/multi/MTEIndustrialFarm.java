@@ -31,24 +31,24 @@ import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.gtnewhorizon.cropsnh.items.ItemEnvironmentalModule;
-import com.gtnewhorizon.cropsnh.tileentity.TileEntityCrop;
-import ic2.api.crops.CropCard;
-import kubatech.tileentity.gregtech.multiblock.MTEExtremeIndustrialGreenhouse;
 import net.minecraft.block.Block;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 
 import com.cleanroommc.modularui.utils.item.CombinedInvWrapper;
 import com.cleanroommc.modularui.utils.item.IItemHandlerModifiable;
 import com.gtnewhorizon.cropsnh.api.IGrowthRequirement;
+import com.gtnewhorizon.cropsnh.api.IMachineGrowthRequirement;
 import com.gtnewhorizon.cropsnh.api.ISeedData;
 import com.gtnewhorizon.cropsnh.blocks.BlockAdvancedHarvestingUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockEnvironmentalEnhancementUnit;
@@ -57,10 +57,16 @@ import com.gtnewhorizon.cropsnh.blocks.BlockGrowthAccelerationUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockOverclockedGrowthAccelerationUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockSeedBed;
 import com.gtnewhorizon.cropsnh.blocks.abstracts.CropsNHBlockIndustrialFarmTiredComponent;
+import com.gtnewhorizon.cropsnh.farming.registries.FertilizerRegistry;
+import com.gtnewhorizon.cropsnh.farming.registries.HydrationRegistry;
 import com.gtnewhorizon.cropsnh.farming.requirements.BlockUnderRequirement;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
+import com.gtnewhorizon.cropsnh.items.ItemEnvironmentalModule;
 import com.gtnewhorizon.cropsnh.reference.Data;
+import com.gtnewhorizon.cropsnh.reference.Reference;
+import com.gtnewhorizon.cropsnh.tileentity.TileEntityCrop;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
+import com.gtnewhorizon.cropsnh.utility.IFDropTable;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.IStructureElement;
@@ -70,6 +76,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
+import gregtech.api.enums.VoidingMode;
 import gregtech.api.enums.VoltageIndex;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -87,7 +94,6 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.common.gui.modularui.multiblock.base.MTEMultiBlockBaseGui;
 import gregtech.common.misc.GTStructureChannels;
-import kubatech.api.eig.EIGDropTable;
 
 public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustrialFarm>
     implements ISurvivalConstructable {
@@ -98,12 +104,19 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
     public static final int SIMULATED_WATER_STORAGE = 200;
     /** Whether the crop can see the sky when calculating the growth speed. (true because uv lamps or something) */
     public static final boolean SIMULATED_CAN_SEE_SKY = true;
-    /** The amount of fertilizer that should be stored in the crop stick when calculating the growth sped while there is no fertilizer unit installed */
+    /**
+     * The amount of fertilizer that should be stored in the crop stick when calculating the growth sped while there is
+     * no fertilizer unit installed
+     */
     public static final int SIMULATED_FERTILIZER_STORAGE_WHEN_FERTILIZER_UNIT_MISSING = 20;
-    /** The amount of fertilizer that should be stored in the crop stick when calculating the growth sped while there is a fertilizer unit installed */
+    /**
+     * The amount of fertilizer that should be stored in the crop stick when calculating the growth sped while there is
+     * a fertilizer unit installed
+     */
     public static final int SIMULATED_FERTILIZER_STORAGE_WHEN_FERTILIZER_UNIT_INSTALLED = 200;
 
     private final static String NBT_INVENTORY_TAG = "mIFInventory";
+    private final static String NBT_OUTPUT_TRACKER = "mOutputTracker";
 
     /** The default mode, used to insert seed and under-block */
     public static final int MODE_INPUT = 0;
@@ -118,6 +131,9 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
     public final static int SLOT_BLOCK_UNDER = 1;
     /** Starting slot index of the environmental slots in the custom inventory */
     public final static int SLOT_ENV_CARD_START = 2;
+
+    /** Amount of fertilizer per seed slot in the machine */
+    public static final double CYCLE_TICK_RATE_SCALAR = (double) CYCLE_DURATION / TileEntityCrop.TICK_RATE;
 
     /** How many times the output and water/fertilizer consumption of the multi should be doubled. */
     public int mExpectedOCs = 0;
@@ -141,7 +157,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
     public int mOverclockedGrowthAccelerationUnitCount = 0;
 
     /** The tracker for the drop progress */
-    public EIGDropTable mOutputTracker = new EIGDropTable();
+    public IFDropTable mOutputTracker = new IFDropTable();
     /** ItemStack handler for the custom slots. */
     public MTEIndustrialFarmItemStackHandler mIFStackHandler = new MTEIndustrialFarmItemStackHandler(this);
     /** Multi-Inv wrapper since it needs to respond to both the controller slot and the custom slots. */
@@ -234,6 +250,21 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
             -1,
             MTEIndustrialFarm::setUpgradeTier,
             MTEIndustrialFarm::getUpgradeTier));
+    }
+
+    @Override
+    public boolean supportsVoidProtection() {
+        return true;
+    }
+
+    @Override
+    public Set<VoidingMode> getAllowedVoidingModes() {
+        return VoidingMode.ITEM_ONLY_MODES;
+    }
+
+    @Override
+    public VoidingMode getDefaultVoidingMode() {
+        return VoidingMode.VOID_NONE;
     }
 
     @Override
@@ -419,7 +450,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
             2,
             -1,
             !mMachine);
-        if (!tSuccess || this.mGlassTier < MIN_CASING_TIER) return false;
+        if (!tSuccess || this.mGlassTier < MIN_CASING_TIER || this.mUpgradeTier < MIN_CASING_TIER) return false;
 
         int tSlices = GTUtility.clamp(this.mUpgradeTier - MIN_CASING_TIER + MIN_SLICES, MIN_SLICES, MAX_SLICES);
         for (int tSliceIndex = 1; tSliceIndex < tSlices; tSliceIndex++) {
@@ -439,7 +470,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
                 2,
                 -tSliceIndex - 1,
                 !mMachine);
-            if (!tSuccess || this.mGlassTier < MIN_CASING_TIER) return false;
+            if (!tSuccess || this.mGlassTier < MIN_CASING_TIER || this.mUpgradeTier < MIN_CASING_TIER) return false;
         }
 
         tSuccess = STRUCTURE_DEFINITION.check(
@@ -458,7 +489,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
             2,
             -tSlices - 1,
             !mMachine);
-        if (!tSuccess || this.mGlassTier < MIN_CASING_TIER) return false;
+        if (!tSuccess || this.mGlassTier < MIN_CASING_TIER || this.mUpgradeTier < MIN_CASING_TIER) return false;
 
         if (this.mOutputBusses.size() < 1) return false;
         if (this.mInputHatches.size() < 1) return false;
@@ -538,7 +569,7 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
 
     @Override
     public ITexture[] getTexture(IGregTechTileEntity baseMetaTileEntity, ForgeDirection sideDirection,
-                                 ForgeDirection facingDirection, int colorIndex, boolean active, boolean redstoneLevel) {
+        ForgeDirection facingDirection, int colorIndex, boolean active, boolean redstoneLevel) {
         ITexture casingTexture = Textures.BlockIcons.casingTexturePages[0][CASING_INDEX];
         if (sideDirection == facingDirection) {
             if (active) return new ITexture[] { casingTexture, TextureFactory.builder()
@@ -579,19 +610,22 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
         return new MTEIndustrialFarm(this.mName);
     }
+
     // endregion ctor
 
     // region tooltips
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Industrial Farm")
-            .addInfo("Used to grow a crops at an industrial scale.")
+        tt.addMachineType("Industrial Crop Cultivator")
+            .addInfo("Grows crops at an industrial scale.")
             .addInfo("The length of the machine depends on the tier of the seed bed.");
 
         tt.beginVariableStructureBlock(5, 5, 4, 4, 2 + MIN_SLICES, 2 + MAX_SLICES, false)
             .addGlassEnergyLimitInfo()
-            .addInfo(StatCollector.translateToLocal("cropsnh_tooltip.MBTT.multiAmpsWithUpgrade"))
+            .addInfo(
+                StatCollector.translateToLocal(
+                    EnumChatFormatting.GREEN + Reference.MOD_ID.toLowerCase() + "_tooltip.MBTT.multiAmpsWithUpgrade"))
             .addCasingInfoRange("Agricultural Casing", 8 * 2 + MIN_SLICES * 2, 8 * 2 + MAX_SLICES * 2, false)
             .addEnergyHatch("Any Casing", 1)
             .addInputBus("Any Casing", 1)
@@ -643,12 +677,14 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
         if (aNBT.hasKey(NBT_INVENTORY_TAG, Data.NBTType._object)) {
             this.mIFStackHandler.deserializeNBT(aNBT.getCompoundTag(NBT_INVENTORY_TAG));
         }
+        this.mOutputTracker = new IFDropTable(aNBT, NBT_OUTPUT_TRACKER);
     }
 
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
         aNBT.setTag(NBT_INVENTORY_TAG, this.mIFStackHandler.serializeNBT());
+        aNBT.setTag(NBT_OUTPUT_TRACKER, this.mOutputTracker.save());
     }
     // endregion NBT
 
@@ -678,9 +714,12 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
     @Override
     public String getMachineModeName() {
         return switch (this.machineMode) {
-            case MODE_FARM -> StatCollector.translateToLocal("cropsnh_tooltip.industrialFarm.mode.farm");
-            case MODE_OUTPUT -> StatCollector.translateToLocal("cropsnh_tooltip.industrialFarm.mode.output");
-            default -> StatCollector.translateToLocal("cropsnh_tooltip.industrialFarm.mode.input");
+            case MODE_FARM -> StatCollector
+                .translateToLocal(Reference.MOD_ID.toLowerCase() + "_tooltip.industrialFarm.mode.farm");
+            case MODE_OUTPUT -> StatCollector
+                .translateToLocal(Reference.MOD_ID.toLowerCase() + "_tooltip.industrialFarm.mode.output");
+            default -> StatCollector
+                .translateToLocal(Reference.MOD_ID.toLowerCase() + "_tooltip.industrialFarm.mode.input");
         };
     }
 
@@ -693,34 +732,56 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
             GTGuiTextures.OVERLAY_BUTTON_CYCLIC,
             GTGuiTextures.OVERLAY_BUTTON_ALLOW_OUTPUT);
     }
-    //endregion gui
+    // endregion gui
 
     // region processing
     /** Can't insert a seed because the existing block under didn't match the new seed. */
     @Nonnull
-    public static final CheckRecipeResult CHECK_RECIPE_RESULT_BLOCK_UNDER_MISMATCH = SimpleCheckRecipeResult
-        .ofFailure("cropsnh.industrialFarm.blockUnderMismatch");
+    public static final CheckRecipeResult CHECK_RECIPE_RESULT_BLOCK_UNDER_MISMATCH_INPUT = SimpleCheckRecipeResult
+        .ofFailure(Reference.MOD_ID.toLowerCase() + ".industrialFarm.blockUnderMismatch.input");
+    /** Can't insert a seed because the existing block under didn't match the new seed. */
+    @Nonnull
+    public static final CheckRecipeResult CHECK_RECIPE_RESULT_BLOCK_UNDER_MISMATCH_FARM = SimpleCheckRecipeResult
+        .ofFailure(Reference.MOD_ID.toLowerCase() + ".industrialFarm.blockUnderMismatch.farm");
     /** Can't insert a seed because the required under-block wasn't found */
     @Nonnull
     public static final CheckRecipeResult CHECK_RECIPE_RESULT_BLOCK_UNDER_NOT_FOUND = SimpleCheckRecipeResult
-        .ofFailure("cropsnh.industrialFarm.blockUnderNotFound");
+        .ofFailure(Reference.MOD_ID.toLowerCase() + ".industrialFarm.blockUnderNotFound");
+    /** The current tier of seed bed is too low for this seed. */
+    @Nonnull
+    public static final CheckRecipeResult CHECK_RECIPE_RESULT_SEED_BED_TIER_TOO_LOW = SimpleCheckRecipeResult
+        .ofFailure(Reference.MOD_ID.toLowerCase() + ".industrialFarm.seedBedTierTooLow");
     /** Can't insert any more seeds because the IF is full. */
     @Nonnull
     public static final CheckRecipeResult CHECK_RECIPE_RESULT_SEEDS_FULL = SimpleCheckRecipeResult
-        .ofFailure("cropsnh.industrialFarm.seedsFull");
+        .ofFailure(Reference.MOD_ID.toLowerCase() + ".industrialFarm.seedsFull");
+    /** Can't run because there are too many seeds in the machine. */
+    @Nonnull
+    public static final CheckRecipeResult CHECK_RECIPE_RESULT_SEED_OVERFLOW = SimpleCheckRecipeResult
+        .ofFailure(Reference.MOD_ID.toLowerCase() + ".industrialFarm.seedOverflow");
     /** Can't generate resources because the growth requires aren't met */
     @Nonnull
     public static final CheckRecipeResult CHECK_RECIPE_RESULT_CANNOT_GROW = SimpleCheckRecipeResult
-        .ofFailure("cropsnh.industrialFarm.cannotGrow");
+        .ofFailure(Reference.MOD_ID.toLowerCase() + ".industrialFarm.cannotGrow");
 
     @Override
     public @Nonnull CheckRecipeResult checkProcessing() {
-        return switch (this.machineMode) {
-            case MODE_INPUT -> this.checkProcessingInputMode();
-            case MODE_FARM -> this.checkProcessingFarmMode();
-            case MODE_OUTPUT -> this.checkProcessingOutputMode();
-            default -> CheckRecipeResultRegistry.NO_RECIPE;
-        };
+        switch (this.machineMode) {
+            case MODE_INPUT:
+                this.mOutputTracker.clear();
+                return this.checkProcessingInputMode();
+            case MODE_FARM:
+                CheckRecipeResult result = this.checkProcessingFarmMode();
+                if (!result.wasSuccessful()) {
+                    this.mOutputTracker.clear();
+                }
+                return result;
+            case MODE_OUTPUT:
+                this.mOutputTracker.clear();
+                return this.checkProcessingOutputMode();
+            default:
+                return CheckRecipeResultRegistry.NO_RECIPE;
+        }
     }
 
     // region input mode
@@ -781,6 +842,8 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
             // check if it's an analyzed crop
             final ISeedData tSeedData = CropsNHUtils.getAnalyzedSeedData(tSeedCandidate);
             if (tSeedData == null) continue;
+            if (tSeedData.getCrop()
+                .getMinSeedBedTier() > this.mUpgradeTier) return CHECK_RECIPE_RESULT_SEED_BED_TIER_TOO_LOW;
             // check if the crop can grow
             if (getGrowthSpeedUnscaled(tSeedData) <= 0) return CHECK_RECIPE_RESULT_CANNOT_GROW;
             // if it has a block under try to consume it
@@ -791,14 +854,14 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
                     if (CropsNHUtils.isStackValid(tExistingBlockUnderStack)) {
                         // check if the existing block under matches the new crop.
                         if (!tBlockUnderReq.isValidBlockUnder(tExistingBlockUnderStack)) {
-                            return CHECK_RECIPE_RESULT_BLOCK_UNDER_MISMATCH;
+                            return CHECK_RECIPE_RESULT_BLOCK_UNDER_MISMATCH_INPUT;
                         }
                         tNewBlockUnderStack = tExistingBlockUnderStack;
                     } else {
                         for (tBlockUnderIndex = 0; tBlockUnderIndex < aInputs.size(); tBlockUnderIndex++) {
                             ItemStack tBlockUnderCandidate = aInputs.get(tBlockUnderIndex);
                             // abort early if it's the seed candidate or the not a valid under-block.
-                            if (tBlockUnderIndex == tSeedIndex || CropsNHUtils.isStackInvalid(tBlockUnderCandidate)
+                            if (tBlockUnderIndex == tSeedIndex
                                 || !tBlockUnderReq.isValidBlockUnder(tBlockUnderCandidate)) continue;
                             // else save the stack for later.
                             tNewBlockUnderStack = tBlockUnderCandidate.copy();
@@ -960,18 +1023,112 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
     }
 
     // region farm mode
+
+    private int getAmountToConsumeBasedOnPotency(int aMissingPotency, int aInputPotency, int aInputAmount) {
+        if (aMissingPotency <= 0 || aInputPotency <= 0 || aInputAmount <= 0) return 0;
+        // Prefer over-consuming in case something with a stupid high potency gets introduced.
+        int tMaxConsume = aMissingPotency / aInputPotency + ((aMissingPotency % aInputPotency) > 0 ? 1 : 0);
+        return (int) Math.min(tMaxConsume, aInputAmount);
+    }
+
     private CheckRecipeResult checkProcessingFarmMode() {
+        // state checks
+        if (this.mUpgradeTier < MIN_CASING_TIER) return CheckRecipeResultRegistry.INTERNAL_ERROR;
+
         // get seed
         ISeedData tSeedData = CropsNHUtils.getAnalyzedSeedData(this.getSeedStack());
         if (tSeedData == null) return CheckRecipeResultRegistry.NO_RECIPE;
-        // calc drops
-        EIGDropTable tDropProgess = getDropsPerCycle(tSeedData);
-        if (tDropProgess == null) return CHECK_RECIPE_RESULT_CANNOT_GROW;
-        // add drops to tracker
-        tDropProgess.addTo(this.mOutputTracker, tSeedData.getStack().stackSize);
-        // save stuff to output
-        this.mOutputItems = this.mOutputTracker.getDrops();
 
+        // check if the seed can grow in the machine.
+        if (tSeedData.getStack().stackSize > this.mSeedCapacity) return CHECK_RECIPE_RESULT_SEED_OVERFLOW;
+        if (tSeedData.getCrop()
+            .getMinSeedBedTier() > this.mUpgradeTier) return CHECK_RECIPE_RESULT_SEED_BED_TIER_TOO_LOW;
+
+        // check the machine growth requirements
+        ItemStack[] tGrowthCatalysts;
+        ItemStack tUnderBlockStack = this.getBlockUnderStack();
+        if (CropsNHUtils.isStackValid(tUnderBlockStack)) {
+            tGrowthCatalysts = new ItemStack[] { tUnderBlockStack };
+        } else {
+            tGrowthCatalysts = new ItemStack[0];
+        }
+        for (IGrowthRequirement req : tSeedData.getCrop()
+            .getGrowthRequirements()) {
+            if (req instanceof IMachineGrowthRequirement tMachineGrowthReq) {
+                if (!tMachineGrowthReq.canGrow(tSeedData, this.getBaseMetaTileEntity(), tGrowthCatalysts)) {
+                    // custom logic for this one to display a custom message in case some update changes something.
+                    if (req instanceof BlockUnderRequirement) {
+                        return CHECK_RECIPE_RESULT_BLOCK_UNDER_MISMATCH_FARM;
+                    }
+                    return CHECK_RECIPE_RESULT_CANNOT_GROW;
+                }
+            }
+        }
+
+        // note on fluid consumption:
+        // it's intended to just scale per capacity and not per how many seeds are in the machine.
+        // The power cost doesn't scale to seed count either which is on purpose.
+        // the liquid consumption formula is:
+        // Math.ceil(Math.ceil(this.mSeedCapacity * CYCLE_DURATION / (double)TileEntityCrop.TICK_RATE * (1 <<
+        // this.mExpectedOCs)) / potencyPer1LOfLiquid)
+        // Desmos visualizer: https://www.desmos.com/calculator/gmul5gq6cv
+        List<Pair<FluidStack, Integer>> tFluidsToConsume = new ArrayList<>();
+        int tWaterPotencyMissing = (int) Math.ceil(
+            this.mSeedCapacity * CYCLE_TICK_RATE_SCALAR
+                * (this.mExpectedOCs <= 63 ? 1L << this.mExpectedOCs : GTUtility.powInt(2.0d, this.mExpectedOCs)));
+        int tFertilizerPotencyMissing = this.mFertilizerUnitCount > 0 ? tWaterPotencyMissing : 0;
+        for (FluidStack tFluidStack : this.getStoredFluids()) {
+            if (CropsNHUtils.isStackInvalid(tFluidStack)) continue;
+            Fluid tFluid = tFluidStack.getFluid();
+            int tRemaining = tFluidStack.amount;
+            int tPotency;
+            // consume water if needed
+            if (tWaterPotencyMissing > 0 && (tPotency = HydrationRegistry.instance.getPotency(tFluid)) > 0) {
+                int tAmountToConsume = getAmountToConsumeBasedOnPotency(tWaterPotencyMissing, tPotency, tRemaining);
+                tRemaining -= tAmountToConsume;
+                tWaterPotencyMissing -= tAmountToConsume * tPotency;
+            }
+            // consume fertilizer if needed
+            if (tFertilizerPotencyMissing > 0 && tRemaining > 0
+                && (tPotency = FertilizerRegistry.instance.getPotency(tFluid)) > 0) {
+                int tAmountToConsume = getAmountToConsumeBasedOnPotency(
+                    tFertilizerPotencyMissing,
+                    tPotency,
+                    tRemaining);
+                tRemaining -= tAmountToConsume;
+                tFertilizerPotencyMissing -= tAmountToConsume * tPotency;
+            }
+            // if we consumed something add it to the list for later consumption.
+            if (tRemaining > 0L) {
+                tFluidsToConsume.add(Pair.of(tFluidStack, tRemaining));
+                if (tFertilizerPotencyMissing <= 0 && tWaterPotencyMissing <= 0) break;
+            }
+        }
+        if (tWaterPotencyMissing > 0 || tFertilizerPotencyMissing > 0) return CheckRecipeResultRegistry.NO_RECIPE;
+
+        // calc drops
+        IFDropTable tDropProgess = getDropsPerCycle(tSeedData);
+        if (tDropProgess == null) return CHECK_RECIPE_RESULT_CANNOT_GROW;
+        tDropProgess.addTo(this.mOutputTracker, tSeedData.getStack().stackSize);
+        // check if output void protection is enabled
+        if (this.voidingMode.protectItem) {
+            ItemEjectionHelper tHelper = new ItemEjectionHelper(this.getOutputBusses(), true);
+            ItemStack[] tDrops = this.mOutputTracker.getDrops(true);
+            if (tDrops.length != 0 && tHelper.ejectItems(Arrays.asList(tDrops), 1) <= 0) {
+                // remove the added items
+                tDropProgess.addTo(this.mOutputTracker, -tSeedData.getStack().stackSize);
+                // return output full.
+                return CheckRecipeResultRegistry.ITEM_OUTPUT_FULL;
+            }
+        }
+        // consume fluids
+        for (Pair<FluidStack, Integer> tFluidToConsume : tFluidsToConsume) {
+            tFluidToConsume.getLeft().amount = tFluidToConsume.getRight();
+        }
+        // output if everything is safe
+        this.mOutputItems = this.mOutputTracker.getDrops(false);
+
+        // calc power cost
         this.lEUt = -this.mExpectedEUt;
         this.mEfficiency = (10000 - (getIdealStatus() - getRepairStatus()) * 1000);
         this.mEfficiencyIncrease = 10000;
@@ -981,14 +1138,15 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
 
     // endregion farm mode
 
-
     // endregion processing
 
     // region simulations
     /**
      * Calculates the number of growth points a crop will gain each growth tick if it was on a crop stick.
+     *
      * @param aCrop The crop to calculate the growth speed of.
-     * @return The number of growth points per crop stick growth cycle, if the value is <= 0 the crop would get sick.
+     * @return The number of growth points per crop stick growth cycle, if the value is <= 0 the crop would get sick or
+     *         cannot grow.
      */
     public int getGrowthSpeedUnscaled(ISeedData aCrop) {
         // that thing really shouldn't be null when we are calculating this.
@@ -1002,65 +1160,113 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
         for (int i = 0; i < this.mEnvironmentalEnhancementUnitCount; i++) {
             ItemStack tStack = this.getEnvironmentalModuleStack(i);
             if (CropsNHUtils.isStackInvalid(tStack) || !(tStack.getItem() instanceof ItemEnvironmentalModule)) continue;
-            tBiomeTags.add(ItemEnvironmentalModule.getBiomeTag(Items.feather.getDamage(tStack)));
+            tBiomeTags.add(ItemEnvironmentalModule.getBiomeTag(CropsNHUtils.getItemMeta(tStack)));
         }
-        int tLikedBiomes = (int)aCrop.getCrop().getLikedBiomeTags().stream().filter(tBiomeTags::contains).count();
+        int tLikedBiomes = (int) aCrop.getCrop()
+            .getLikedBiomeTags()
+            .stream()
+            .filter(tBiomeTags::contains)
+            .count();
         // calc fertilizer storage to simulate
-        int tFertilizerStorage = this.mFertilizerUnitCount <= 0 ? SIMULATED_FERTILIZER_STORAGE_WHEN_FERTILIZER_UNIT_MISSING : SIMULATED_FERTILIZER_STORAGE_WHEN_FERTILIZER_UNIT_INSTALLED;
+        int tFertilizerStorage = this.mFertilizerUnitCount <= 0
+            ? SIMULATED_FERTILIZER_STORAGE_WHEN_FERTILIZER_UNIT_MISSING
+            : SIMULATED_FERTILIZER_STORAGE_WHEN_FERTILIZER_UNIT_INSTALLED;
         // calc available nutrient points for growth speed calculation
-        int tNutrients = TileEntityCrop.getNutrientsPerCycle(tLikedBiomes, tBiome.rainfall, SIMULATED_CAN_SEE_SKY, SIMULATED_WATER_STORAGE, tFertilizerStorage);
+        int tNutrients = TileEntityCrop.getNutrientsPerCycle(
+            tLikedBiomes,
+            tBiome.rainfall,
+            SIMULATED_CAN_SEE_SKY,
+            SIMULATED_WATER_STORAGE,
+            tFertilizerStorage);
         // calculate the base growth speed
-        return TileEntityCrop.getGrowthRate(tNutrients, aCrop.getCrop().getTier(), aCrop.getStats().getGrowth());
+        return TileEntityCrop.getGrowthRate(
+            tNutrients,
+            aCrop.getCrop()
+                .getTier(),
+            aCrop.getStats()
+                .getGrowth());
+    }
+
+    /**
+     * @return The growth speed multiplier based on the installed upgrades.
+     */
+    private double getGrowthSpeedMultiplier() {
+        double multiplier = 1.0d;
+        // apply additive bonuses
+        multiplier += this.mGrowthAccelerationUnitCount * BlockGrowthAccelerationUnit.GROWTH_SPEED_BONUS;
+        // apply multiplicative bonuses
+        multiplier *= 1.0d + (this.mFertilizerUnitCount * BlockFertilizerUnit.GROWTH_SPEED_MULTIPLIER);
+        // apply overclocks
+        multiplier *= this.mExpectedOCs <= 63 ? 1L << this.mExpectedOCs : GTUtility.powInt(2.0d, this.mExpectedOCs);
+        return multiplier;
     }
 
     /**
      * Calculates the amount of progress towards maturity that a crop will gain each IF cycle.
+     *
      * @param aCrop The crop to simulate.
      * @return The percentage of the crop's overall growth cycle completed each cycle, can be above 100%.
      */
     public double getGrowthProgressPerCycle(ISeedData aCrop) {
         // calc unscaled growth speed of crop.
-        int tUnscaledGrowthSpeed = getGrowthSpeedUnscaled(aCrop);
+        int tUnscaledGrowthSpeed = this.getGrowthSpeedUnscaled(aCrop);
         if (tUnscaledGrowthSpeed <= 0) return -1;
         // calculate growth points per cycle
-        double tGrowthPerCycle = (((double)tUnscaledGrowthSpeed) / TileEntityCrop.TICK_RATE) * CYCLE_DURATION;
-        // apply additive bonuses
-        tGrowthPerCycle += this.mGrowthAccelerationUnitCount * BlockGrowthAccelerationUnit.GROWTH_SPEED_BONUS;
-        // apply multiplicative bonuses
-        tGrowthPerCycle *= 1 + (this.mFertilizerUnitCount * BlockFertilizerUnit.GROWTH_SPEED_MULTIPLIER);
-        // apply overclocks
-        tGrowthPerCycle *= 1 << this.mOverclockedGrowthAccelerationUnitCount;
+        double tGrowthPerCycle = (((double) tUnscaledGrowthSpeed) / TileEntityCrop.TICK_RATE) * CYCLE_DURATION;
+        // apply growth speed multipliers
+        tGrowthPerCycle *= this.getGrowthSpeedMultiplier();
         // calculate percentage grown each tick.
-        return tGrowthPerCycle / aCrop.getCrop().getGrowthDuration();
+        return tGrowthPerCycle / aCrop.getCrop()
+            .getGrowthDuration();
+    }
+
+    /**
+     * @return The growth speed multiplier based on the installed upgrades.
+     */
+    private double getHarvestRoundMultiplier() {
+        double multiplier = 1.0d;
+        // additive bonuses
+        // Yes it's intended to start at 40% more harvests (due to min tier.
+        // This is to make the multi inherently better than the equivalent crop manager)
+        multiplier += this.mUpgradeTier * 0.2d;
+        multiplier += this.mFertilizerUnitCount * BlockFertilizerUnit.HARVEST_ROUND_BONUS;
+        // multiplicative bonuses
+        multiplier *= 1.0d + (this.mAdvancedHarvestingUnitCount * BlockAdvancedHarvestingUnit.HARVEST_ROUND_MULTIPLIER);
+        return multiplier;
     }
 
     /**
      * Calculates the drops that should be outputted each cycle.
+     *
      * @param aCrop The crop to simulate
      * @return The drop table or null if it can't grow.
      */
-    public @Nullable EIGDropTable getDropsPerCycle(ISeedData aCrop) {
+    public @Nullable IFDropTable getDropsPerCycle(ISeedData aCrop) {
         // calculate how much progress is done each cycle
         double tProgressPerCycle = getGrowthProgressPerCycle(aCrop);
         if (tProgressPerCycle <= 0) return null;
 
         // calc avg drop stack size increase
-        double avgDropIncrease = TileEntityCrop.getAvgDropCountIncrease(aCrop.getStats().getGain());
+        double avgDropIncrease = TileEntityCrop.getAvgDropCountIncrease(
+            aCrop.getStats()
+                .getGain());
 
         // calc average number of created drops per harvest
-        double avgDropCount = TileEntityCrop.getAvgDropRounds(aCrop.getCrop(), aCrop.getStats().getGain());
-        // apply additive bonuses
-        avgDropCount += this.mFertilizerUnitCount * BlockFertilizerUnit.HARVEST_ROUND_BONUS;
-        // apply multiplicative bonuses.
-        avgDropCount *= (1 + (this.mUpgradeTier * 0.20D) + (this.mAdvancedHarvestingUnitCount * BlockAdvancedHarvestingUnit.HARVEST_ROUND_MULTIPLIER));
+        double avgDropCount = TileEntityCrop.getAvgDropRounds(
+            aCrop.getCrop(),
+            aCrop.getStats()
+                .getGain());
+        avgDropCount *= this.getHarvestRoundMultiplier();
 
         // create drop table
-        EIGDropTable drops = new EIGDropTable();
-        for (Map.Entry<ItemStack, Integer> entry : aCrop.getCrop().getDropTable().entrySet()) {
+        IFDropTable drops = new IFDropTable();
+        for (Map.Entry<ItemStack, Integer> entry : aCrop.getCrop()
+            .getDropTable()
+            .entrySet()) {
             ItemStack stack = entry.getKey();
             double chance = entry.getValue() / 10_000D;
             // scale by chance and progress completed each cycle.
-            drops.addDrop(stack, (avgDropIncrease + stack.stackSize) * chance * tProgressPerCycle);
+            drops.addDrop(stack, (avgDropIncrease + stack.stackSize) * avgDropCount * chance * tProgressPerCycle);
         }
 
         return drops;

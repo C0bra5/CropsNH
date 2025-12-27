@@ -12,6 +12,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizon.cropsnh.utility.RegisterHelper;
 
 import cpw.mods.fml.relauncher.Side;
@@ -65,7 +66,7 @@ public class ItemBerry extends ItemFood {
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
         return "item.cropsnh:berry."
-            + textureNames[Math.min(textureNames.length - 1, Math.max(0, itemstack.getItemDamage()))];
+            + textureNames[Math.min(textureNames.length - 1, Math.max(0, CropsNHUtils.getItemMeta(itemstack)))];
     }
 
     @SideOnly(Side.CLIENT)
@@ -79,7 +80,7 @@ public class ItemBerry extends ItemFood {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        String name = textureNames[Math.min(textureNames.length - 1, Math.max(0, stack.getItemDamage()))];
+        String name = textureNames[Math.min(textureNames.length - 1, Math.max(0, CropsNHUtils.getItemMeta(stack)))];
         list.add(StatCollector.translateToLocal("cropsnh_tooltip.berry." + name + ".1"));
         list.add(StatCollector.translateToLocal("cropsnh_tooltip.berry." + name + ".2"));
     }

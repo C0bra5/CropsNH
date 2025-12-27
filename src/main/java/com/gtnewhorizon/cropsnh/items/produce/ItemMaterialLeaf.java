@@ -13,6 +13,7 @@ import net.minecraft.util.IIcon;
 
 import com.gtnewhorizon.cropsnh.api.IMaterialLeafVariant;
 import com.gtnewhorizon.cropsnh.creativetab.CropsNHTab;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -54,16 +55,16 @@ public class ItemMaterialLeaf extends Item {
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean showAdvancedItemTooltips) {
-        if (variants.containsKey(stack.getItemDamage())) {
-            variants.get(stack.getItemDamage())
+        if (variants.containsKey(CropsNHUtils.getItemMeta(stack))) {
+            variants.get(CropsNHUtils.getItemMeta(stack))
                 .getTooltip(list);
         }
     }
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        if (variants.containsKey(stack.getItemDamage())) {
-            return variants.get(stack.getItemDamage())
+        if (variants.containsKey(CropsNHUtils.getItemMeta(stack))) {
+            return variants.get(CropsNHUtils.getItemMeta(stack))
                 .getUnlocalizedName();
         }
         return "unknown leaf";

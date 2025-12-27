@@ -101,8 +101,8 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
             // register lines
             // spotless:off
             this.textLines.add(StatCollector.translateToLocalFormatted("cropsnh_nei.crops.tier", crop.getTier()));
-            this.textLines.add(StatCollector.translateToLocalFormatted( "cropsnh_nei.rops.growthDuration", GTUtility.formatNumbers(crop.getGrowthDuration())));
-            this.textLines.add(StatCollector.translateToLocalFormatted( "cropsnh_nei.rops.dropMult", GTUtility.formatNumbers(crop.getDropChance())));
+            this.textLines.add(StatCollector.translateToLocalFormatted( "cropsnh_nei.crops.growthDuration", GTUtility.formatNumbers(crop.getGrowthDuration())));
+            this.textLines.add(StatCollector.translateToLocalFormatted( "cropsnh_nei.crops.dropMult", GTUtility.formatNumbers(crop.getDropChance())));
             //spotless:on
 
             for (IGrowthRequirement req : crop.getGrowthRequirements()) {
@@ -188,7 +188,8 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
                 if (drop == null || drop.getItem() == null) {
                     continue;
                 }
-                if (drop.getItem() == item.getItem() && drop.getItemDamage() == item.getItemDamage()) {
+                if (drop.getItem() == item.getItem()
+                    && CropsNHUtils.getItemMeta(drop) == CropsNHUtils.getItemMeta(item)) {
                     arecipes.add(new CachedCropRecipe(null, cc));
                     break;
                 }
@@ -217,7 +218,7 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
         // find crops it's a soil or under-block for.
         outer: for (ICropCard cropCard : CropRegistry.instance.getAllInRegistrationOrder()) {
             if (cropCard.getSoilTypes()
-                .isRegistered(block, item.getItemDamage())) {
+                .isRegistered(block, CropsNHUtils.getItemMeta(item))) {
                 arecipes.add(new CachedCropRecipe(null, cropCard));
                 // crops shouldn't be getting registered more than once
                 continue;
@@ -225,7 +226,7 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
             // register mutations for which this is a block under.
             for (IGrowthRequirement req : cropCard.getGrowthRequirements()) {
                 if (!(req instanceof BlockUnderRequirement)) continue;
-                if (((BlockUnderRequirement) req).canGrow(block, item.getItemDamage(), null)) {
+                if (((BlockUnderRequirement) req).canGrow(block, CropsNHUtils.getItemMeta(item), null)) {
                     arecipes.add(new CachedCropRecipe(null, cropCard));
                     // crops shouldn't be getting registered more than once
                     continue outer;

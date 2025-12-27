@@ -4,15 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import com.gtnewhorizon.cropsnh.farming.registries.MutationRegistry;
+import com.gtnewhorizon.cropsnh.farming.registries.HydrationRegistry;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 
 import codechicken.nei.config.DataDumper;
 
-public class MutationPoolRegistryDumper extends DataDumper {
+public class HydrationFluidsRegistryDumper extends DataDumper {
 
-    public MutationPoolRegistryDumper() {
-        super("tools.dump." + Reference.MOD_ID.toLowerCase() + ".mutationPools");
+    public HydrationFluidsRegistryDumper() {
+        super("tools.dump." + Reference.MOD_ID.toLowerCase() + ".hydrationFluids");
     }
 
     @Override
@@ -43,7 +43,7 @@ public class MutationPoolRegistryDumper extends DataDumper {
     @Override
     public void dumpTo(File file) throws IOException {
         PrintWriter w = new PrintWriter(file);
-        w.print(MutationRegistry.instance.dumpMutationPools());
+        w.print(HydrationRegistry.instance.dumpCSV());
         w.flush();
         w.close();
     }

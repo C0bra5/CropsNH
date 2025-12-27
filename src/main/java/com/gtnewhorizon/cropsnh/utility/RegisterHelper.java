@@ -1,13 +1,8 @@
 package com.gtnewhorizon.cropsnh.utility;
 
-import java.util.ArrayList;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
 
 import com.gtnewhorizon.cropsnh.reference.Reference;
 
@@ -29,19 +24,5 @@ public abstract class RegisterHelper {
         item.setUnlocalizedName(Reference.MOD_ID.toLowerCase() + ':' + name);
         LogHelper.info("registering " + item.getUnlocalizedName());
         GameRegistry.registerItem(item, name);
-    }
-
-    public static void removeRecipe(ItemStack stack) {
-        ArrayList recipes = (ArrayList) CraftingManager.getInstance()
-            .getRecipeList();
-        ItemStack result;
-        for (int i = 0; i < recipes.size(); i++) {
-            IRecipe recipe = (IRecipe) recipes.get(i);
-            result = recipe.getRecipeOutput();
-            if (result != null && stack.getItem() == result.getItem()
-                && stack.getItemDamage() == result.getItemDamage()) {
-                recipes.remove(i);
-            }
-        }
     }
 }

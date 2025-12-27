@@ -1,81 +1,81 @@
 package com.gtnewhorizon.cropsnh.farming.registries;
 
-import java.util.Comparator;
-import java.util.stream.Collectors;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
-import com.gtnewhorizon.cropsnh.api.IFertilizerRegistry;
-import com.gtnewhorizon.cropsnh.utility.DebugHelper;
-import com.gtnewhorizon.cropsnh.utility.MetaMap;
+import com.gtnewhorizon.cropsnh.api.IPotencyRegistry;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
-public class FertilizerRegistry implements IFertilizerRegistry {
+public class FertilizerRegistry implements IPotencyRegistry {
 
     public static final FertilizerRegistry instance = new FertilizerRegistry();
 
-    /**
-     * A list of fertilizers along with their potency.
-     */
-    public MetaMap<Item, Integer> fertilisers = new MetaMap<>();
+    private final ItemPotencyRegistry itemRegistry = new ItemPotencyRegistry();
+
+    private final FluidPotencyRegistry fluidRegistry = new FluidPotencyRegistry();
 
     @Override
     public void register(Item item, int meta, int potency) {
-        this.fertilisers.putIfAbsent(item, meta, potency, true);
+        this.itemRegistry.register(item, meta, potency);
     }
 
     @Override
     public boolean isRegistered(ItemStack stack) {
-        if (stack == null || stack.getItem() == null) return false;
-        return this.isRegistered(stack.getItem(), stack.getItemDamage());
+        return this.itemRegistry.isRegistered(stack);
     }
 
     @Override
     public boolean isRegistered(Item item, int meta) {
-        if (item == null) return false;
-        return this.fertilisers.containsKey(item, meta);
+        return this.itemRegistry.isRegistered(item, meta);
     }
 
     @Override
-    public int getPotnecy(ItemStack item) {
-        return this.getPotnecy(item.getItem(), item.getItemDamage());
+    public int getPotency(ItemStack stack) {
+        return this.itemRegistry.getPotency(stack);
     }
 
     @Override
-    public int getPotnecy(Item item, int meta) {
-        return this.fertilisers.getOrDefault(item, meta, 0);
+    public int getPotency(Item item, int meta) {
+        return this.itemRegistry.getPotency(item, meta);
+    }
+
+    @Override
+    public void register(Fluid fluid, int potency) {
+        this.fluidRegistry.register(fluid, potency);
+    }
+
+    @Override
+    public boolean isRegistered(FluidStack stack) {
+        return this.fluidRegistry.isRegistered(stack);
+    }
+
+    @Override
+    public boolean isRegistered(Fluid fluid) {
+        return this.fluidRegistry.isRegistered(fluid);
+    }
+
+    @Override
+    public int getPotency(FluidStack stack) {
+        return this.fluidRegistry.getPotency(stack);
+    }
+
+    @Override
+    public int getPotency(Fluid fluid) {
+        return this.fluidRegistry.getPotency(fluid);
     }
 
     /**
      * @return a csv dump of all the registered fertilizers
      */
-    public String dump() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(DebugHelper.makeCSVLine("Potency", "Item"));
-        sb.append(System.lineSeparator());
-        if (this.fertilisers.isEmpty()) {
-            sb.append("empty");
-        } else {
-            sb.append(
-                this.fertilisers.getStream()
-                    .sorted(Comparator.comparing(a -> a.value))
-                    .map(e -> {
-                        StringBuilder sbm = new StringBuilder();
-                        sbm.append(e.value);
-                        sbm.append(",");
-                        sbm.append(
-                            GameRegistry.findUniqueIdentifierFor(e.key)
-                                .toString());
-                        if (e.meta != null) {
-                            sbm.append(":");
-                            sbm.append(e.meta);
-                        }
-                        return sbm.toString();
-                    })
-                    .collect(Collectors.joining(System.lineSeparator())));
-        }
-        return sb.toString();
+    public String dumpItemsCSV() {
+        return this.itemRegistry.dumpCSV();
+    }
+
+    /**
+     * @return a csv dump of all the registered fertilizers
+     */
+    public String dumpFluidsCSV() {
+        return this.fluidRegistry.dumpCSV();
     }
 }

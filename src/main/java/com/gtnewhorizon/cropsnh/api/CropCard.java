@@ -33,14 +33,44 @@ import gregtech.api.util.GTUtility;
 
 public abstract class CropCard implements ICropCard {
 
+    /**
+     * This value is the string id of the crop, it takes the form of modID:cropName
+     */
     protected final String id;
+    /**
+     * This value is auto-assigned, it should not be used to identify the crop for recipes.
+     * This value only exists for post-load lookups like in the registries.
+     */
     private int numericId = 0;
+    /**
+     * The drop table of the crop.
+     */
     protected final HashMap<ItemStack, Integer> dropTable = new HashMap<>();
+    /**
+     * The list of growth requirements associated with the crop.
+     */
     protected final ArrayList<IGrowthRequirement> growthRequirements = new ArrayList<>();
+    /**
+     * The list of liked biome tags for the crop.
+     * If the biome the crop is in contains 2 of the tags it will gain a massive nutrient boost.
+     */
     protected final HashSet<BiomeDictionary.Type> likedBiomes = new HashSet<>();
+    /**
+     * List of items that can be used to plant the crop on a crop stick at 1/1/1 stats.
+     */
     protected final ArrayList<ItemStack> alternateSeeds = new ArrayList<>();
+    /**
+     * List of items that can be used to create new seeds in a duplicator machine, leave empty if no catalyst is
+     * required.
+     */
     protected final ArrayList<ItemStack> duplicationCatalysts = new ArrayList<>();
+    /**
+     * The list of duplication catalysts that are shown in NEI, this includes the ore dicts.
+     */
     protected final ArrayList<Object> duplicationCatalystsForNEI = new ArrayList<>();
+    /**
+     * The colors to use when decorating the item icon of the seed.
+     */
     protected final int[] colors;
 
     public CropCard(String modId, String id, int color1, int color2) {

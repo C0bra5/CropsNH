@@ -47,6 +47,7 @@ dependencies {
     runtimeOnly("com.github.GTNewHorizons:neiaddons:1.17.0:dev")
     runtimeOnly("com.github.GTNewHorizons:StructureLib:1.4.25:dev")
     runtimeOnly("com.github.GTNewHorizons:BlockRenderer6343:1.4.4:dev")
+    runtimeOnly("com.github.GTNewHorizons:worldedit-gtnh:v0.0.8:dev")
 }
 
 project.getConfigurations()

@@ -7,7 +7,10 @@ import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.VoltageIndex;
+import gregtech.api.util.GTOreDictUnificator;
 
 public class CropStargatium extends NHCropCard {
 
@@ -16,7 +19,8 @@ public class CropStargatium extends NHCropCard {
     public CropStargatium() {
         super("stargatium", new Color(0x333333), new Color(0x555555));
 
-        this.addDrop(CropsNHItemList.stargatiumLeaf.get(1), 100_00);
+        this.addDrop(CropsNHItemList.stargatiumLeaf.get(1), 75_00);
+        this.addDrop(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Endstone, 1L), 25_00);
 
         this.addBlockUnderRequirement("naquadah");
 

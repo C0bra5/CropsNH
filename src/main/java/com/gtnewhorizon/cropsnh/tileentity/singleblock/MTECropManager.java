@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -15,14 +14,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.farming.registries.FertilizerRegistry;
-import com.gtnewhorizon.cropsnh.init.CropsNHFluids;
+import com.gtnewhorizon.cropsnh.farming.registries.HydrationRegistry;
+import com.gtnewhorizon.cropsnh.farming.registries.WeedEXRegistry;
 import com.gtnewhorizon.cropsnh.reference.Data;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.NBTHelper;
@@ -37,7 +36,6 @@ import com.gtnewhorizons.modularui.common.widget.SlotGroup;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
-import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
 import gregtech.api.gui.modularui.GTUIInfos;
 import gregtech.api.gui.modularui.GTUITextures;
@@ -47,9 +45,7 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.implementations.MTETieredMachineBlock;
 import gregtech.api.render.TextureFactory;
-import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTUtility;
-import gtPlusPlus.core.item.ModItems;
 import gtPlusPlus.core.util.math.MathUtils;
 import gtPlusPlus.xmod.gregtech.api.gui.GTPPUITextures;
 import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
@@ -72,26 +68,6 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
     private final static int GLOBAL_UPDATE_RATE = 2 * 20 + 10;
     private final static int CACHE_REFRESH_EMPTY = GLOBAL_UPDATE_RATE * 2;
     private final static int CACHE_REFRESH_ANY = GLOBAL_UPDATE_RATE * 12;
-
-    // fluid whitelists
-    public static final ConcurrentHashMap<Fluid, Integer> ALLOWED_WATER = new ConcurrentHashMap<>();
-    public static final ConcurrentHashMap<Fluid, Integer> ALLOWED_WEED_EX = new ConcurrentHashMap<>();
-    public static final ConcurrentHashMap<Fluid, Integer> ALLOWED_LIQUID_FERTILIZER = new ConcurrentHashMap<>();
-
-    public static void init() {
-        // allowed waters
-        ALLOWED_WATER.putIfAbsent(FluidRegistry.WATER, 1);
-        ALLOWED_WATER.putIfAbsent(
-            GTModHandler.getDistilledWater(1L)
-                .getFluid(),
-            2);
-        // allowed liquid weed ex
-        ALLOWED_WEED_EX.putIfAbsent(FluidRegistry.getFluid("potion.poison.strong"), 1);
-        ALLOWED_WEED_EX.putIfAbsent(Materials.WeedEX9000.mFluid, 10);
-        // allowed liquid fertilizer
-        ALLOWED_LIQUID_FERTILIZER.putIfAbsent(ModItems.fluidFertBasic, 1);
-        ALLOWED_LIQUID_FERTILIZER.putIfAbsent(CropsNHFluids.enrichedFertilizer, 10);
-    }
 
     public boolean mHarvestEnabled = true;
     public boolean mWeedEXEnabled = false;
@@ -535,7 +511,7 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
                     continue;
                 }
                 // check if it's a valid fertilizer
-                int fertPotency = FertilizerRegistry.instance.getPotnecy(stack);
+                int fertPotency = FertilizerRegistry.instance.getPotency(stack);
                 if (fertPotency <= 0) continue;
                 // consume if we aren't simulating
                 if (!aSimulate) {
@@ -564,7 +540,7 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
     // region water status
 
     public int getWaterPotency(Fluid fluid) {
-        return ALLOWED_WATER.getOrDefault(fluid, 0);
+        return HydrationRegistry.instance.getPotency(fluid);
     }
 
     public int getWaterCapacity() {
@@ -584,7 +560,7 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
     // region weed ex status
 
     public int getWeedEXPotency(Fluid fluid) {
-        return ALLOWED_WEED_EX.getOrDefault(fluid, 0);
+        return WeedEXRegistry.instance.getPotency(fluid);
     }
 
     public int getWeedEXCapacity() {
@@ -605,7 +581,7 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
     // region liquid fertilizer status
 
     public int getLiquidFertilizerPotency(Fluid fluid) {
-        return ALLOWED_LIQUID_FERTILIZER.getOrDefault(fluid, 0);
+        return FertilizerRegistry.instance.getPotency(fluid);
     }
 
     public int getLiquidFertilizerCapacity() {

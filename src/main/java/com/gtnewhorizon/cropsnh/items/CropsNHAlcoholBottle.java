@@ -17,6 +17,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.gtnewhorizon.cropsnh.creativetab.CropsNHTab;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -93,7 +94,7 @@ public class CropsNHAlcoholBottle extends ItemPotion {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        int meta = itemstack.getItemDamage();
+        int meta = CropsNHUtils.getItemMeta(itemstack);
         if (meta >= textureNames.length) {
             meta = 0;
         }
@@ -138,7 +139,7 @@ public class CropsNHAlcoholBottle extends ItemPotion {
                 Collections
                     .addAll(list, GTUtility.breakLines(StatCollector.translateToLocal("cropsnh_tooltip.alcohol.5")));
                 list.add("");
-                if (stack.getItemDamage() == 8) {
+                if (CropsNHUtils.getItemMeta(stack) == 8) {
                     list.add(StatCollector.translateToLocal("cropsnh_tooltip.alcohol.6"));
                 } else {
                     list.add(StatCollector.translateToLocal("cropsnh_tooltip.alcohol.7"));
@@ -148,14 +149,15 @@ public class CropsNHAlcoholBottle extends ItemPotion {
     }
 
     @Override
-    public List<PotionEffect> getEffects(ItemStack p_77832_1_) {
-        return p_77832_1_ == null ? Collections.emptyList() : this.getEffects(p_77832_1_.getItemDamage());
+    public List<PotionEffect> getEffects(ItemStack stack) {
+        return GTUtility.isStackInvalid(stack) ? Collections.emptyList()
+            : this.getEffects(CropsNHUtils.getItemMeta(stack));
     }
 
     @Override
-    public List<PotionEffect> getEffects(int p_77834_1_) {
+    public List<PotionEffect> getEffects(int meta) {
         List<PotionEffect> effects = new ArrayList<>();
-        switch (p_77834_1_) {
+        switch (meta) {
             case 0:
             case 3:
             case 6:

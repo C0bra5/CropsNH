@@ -81,7 +81,10 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
     public final static int HIGH_HUMIDITY_LIKED_BIOME_EQUIVALENCE = 1;
     /** The maximum amount of times the liked biome bonus can be awarded. */
     public final static int MAX_LIKED_BIOME_TAG_COUNT = 2;
-    /** The number of nutrient points awarded per linked biome tags in the current crop's biome (awarded a max of 2 times). */
+    /**
+     * The number of nutrient points awarded per linked biome tags in the current crop's biome (awarded a max of 2
+     * times).
+     */
     public final static int LIKED_BIOME_BONUS = 14;
     /** A value by which nutrient points are multiplied. */
     public final static int NUTRIENT_POINT_SCALE = 5;
@@ -644,27 +647,41 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
         BiomeGenBase biome = this.worldObj.getBiomeGenForCoordsBody(this.xCoord, this.zCoord);
         BiomeDictionary.Type[] biomeTags = BiomeDictionary.getTypesForBiome(biome);
         // check number of liked biomes.
-        int likedBiomes = (int)this.crop.getLikedBiomeTags().stream().filter(liked -> Arrays.stream(biomeTags).anyMatch(tag -> liked == tag)).count();
+        int likedBiomes = (int) this.crop.getLikedBiomeTags()
+            .stream()
+            .filter(
+                liked -> Arrays.stream(biomeTags)
+                    .anyMatch(tag -> liked == tag))
+            .count();
         // check if block can see the sky.
         boolean canSeeSky = this.worldObj.canBlockSeeTheSky(this.xCoord, this.yCoord + 1, this.zCoord);
         // calc available nutrients
-        int nutrients = getNutrientsPerCycle(likedBiomes, biome.rainfall, canSeeSky, this.waterStorage, this.fertilizerStorage);
+        int nutrients = getNutrientsPerCycle(
+            likedBiomes,
+            biome.rainfall,
+            canSeeSky,
+            this.waterStorage,
+            this.fertilizerStorage);
         // compute growth rate
         return getGrowthRate(nutrients, this.crop.getTier(), this.stats.getGrowth());
     }
 
-
     /**
      * Calculates the nutrient points for a crop stick given a set of environmental factors.
+     *
      * @param likedBiomeTagsCount The number of liked biome tags in the current biome.
-     * @param biomeHumidity The humidity of the current biome.
-     * @param canSeeSky True if the crop can see the sky.
-     * @param waterStorage How much water is stored in the crop stick.
-     * @param fertilizerStorage How much water is stored in the crop stick.
+     * @param biomeHumidity       The humidity of the current biome.
+     * @param canSeeSky           True if the crop can see the sky.
+     * @param waterStorage        How much water is stored in the crop stick.
+     * @param fertilizerStorage   How much water is stored in the crop stick.
      * @return The number of nutrients available to the crop in the crop stick.
      */
-    public static int getNutrientsPerCycle(int likedBiomeTagsCount, float biomeHumidity, boolean canSeeSky, int waterStorage,
-                                           int fertilizerStorage) {
+    public static int getNutrientsPerCycle(int likedBiomeTagsCount, float biomeHumidity, boolean canSeeSky,
+        int waterStorage, int fertilizerStorage) {
+        // spotless:off
+        // LaTeX for the current growth formula.
+        // n_{utrients}=n_{utrientPointScale}\cdot\left(b_{aseNutrientValue}+\operatorname{floor}\left(\frac{\left(\min\left(m_{axWaterBonusAt},w_{ater}\right)+9\right)}{10}\right)+\operatorname{floor}\left(\frac{\left(\min\left(m_{axFertilizerBonusAt},f_{ertilizer}\right)+9\right)}{10}\right)+\left\{s_{kyAccess}>0:s_{kyAccessBonus},0\right\}+\max\left(\operatorname{floor}\left(\min\left(1,\frac{B_{iomeHumidity}-l_{owHumidityThreshold}}{h_{ighHumidityThreshold}-l_{owHumidityThreshold}}\right)\cdot l_{ikedBiomeBonus}\right),l_{ikedBiomeTags}\cdot l_{ikedBiomeBonus}\right)\right)
+        // spotless:on
         likedBiomeTagsCount = Math.min(MAX_LIKED_BIOME_TAG_COUNT, likedBiomeTagsCount);
         waterStorage = Math.min(MAX_WATER_BONUS_AT, waterStorage);
         fertilizerStorage = Math.min(MAX_FERTILIZER_BONUS_AT, fertilizerStorage);
@@ -673,18 +690,20 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
         nutrients += ((waterStorage + 9) / 10);
         nutrients += ((fertilizerStorage + 9) / 10);
         nutrients += (canSeeSky ? 0 : SKY_ACCESS_BONUS);
-        float humidityBonus = (biomeHumidity - LOW_HUMIDITY_THRESHOLD) / (HIGH_HUMIDITY_THRESHOLD - LOW_HUMIDITY_THRESHOLD);
-        humidityBonus = Math.min(1.0f, humidityBonus * LIKED_BIOME_BONUS);
-        nutrients += Math.max((int)humidityBonus, (likedBiomeTagsCount * LIKED_BIOME_BONUS));
+        float humidityBonus = (biomeHumidity - LOW_HUMIDITY_THRESHOLD)
+            / (HIGH_HUMIDITY_THRESHOLD - LOW_HUMIDITY_THRESHOLD);
+        humidityBonus = Math.min(1.0f, humidityBonus) * LIKED_BIOME_BONUS;
+        nutrients += Math.max((int) humidityBonus, (likedBiomeTagsCount * LIKED_BIOME_BONUS));
         nutrients *= NUTRIENT_POINT_SCALE;
         return nutrients;
     }
 
     /**
      * Calculates the growth speed of a crop in a crop stick.
+     *
      * @param nutrientPoints The number of nutrient points available to the crop.
-     * @param tier The tier of the crop.
-     * @param growth The growth stat of the crop.
+     * @param tier           The tier of the crop.
+     * @param growth         The growth stat of the crop.
      * @return The speed at which the crop should grow, if the value is <= 0 the crop should get sick.
      */
     public static int getGrowthRate(int nutrientPoints, int tier, int growth) {
@@ -695,9 +714,8 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
 
         int baseSpeed = BASE_GROWTH_SPEED + growth;
         if (nutrientPoints >= need) {
-            return baseSpeed * (100 + (nutrientPoints-need)) / 100;
-        }
-        else {
+            return baseSpeed * (100 + (nutrientPoints - need)) / 100;
+        } else {
             return Math.max(baseSpeed * (100 - (need - nutrientPoints) * 4) / 100, 0);
         }
     }
@@ -943,7 +961,7 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
         // items that implement ICropRightClickHandler will be able to
         if (heldItem != null && heldItem.stackSize > 0) {
             // check if it's a fertilizer
-            int fertilizerPotency = FertilizerRegistry.instance.getPotnecy(heldItem);
+            int fertilizerPotency = FertilizerRegistry.instance.getPotency(heldItem);
             if (fertilizerPotency > 0) {
                 if (this.addFertilizer(fertilizerPotency, 90, 100, false)) {
                     if (!player.capabilities.isCreativeMode) {

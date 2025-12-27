@@ -19,7 +19,6 @@ import com.gtnewhorizon.cropsnh.loaders.SoilLoader;
 import com.gtnewhorizon.cropsnh.proxy.IProxy;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTECropBreeder;
-import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTECropManager;
 import com.gtnewhorizon.cropsnh.tileentity.singleblock.MTESeedGenerator;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 
@@ -86,7 +85,6 @@ public class CropsNH {
         proxy.registerRenderers();
         WailaRegistry.onInit();
         MTELoader.init();
-        MTECropManager.init();
         MTESeedGenerator.init();
         MTECropBreeder.init();
         LogHelper.debug("Initialization Complete");

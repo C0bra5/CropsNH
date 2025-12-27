@@ -104,15 +104,11 @@ public class MetaMap<K, V> {
             return this.wildcards.getOrDefault(key, defaultValue);
         }
         // if key not found in meta map, check wildcards
-        if (!map.containsKey(key)) {
+        if (!this.map.containsKey(key)) {
             return this.wildcards.getOrDefault(key, defaultValue);
         }
         // fetch the meta map
         HashMap<Integer, V> metaMap = map.get(key);
-        // if meta not found in meta map, check wildcards
-        if (!metaMap.containsKey(meta)) {
-            return this.wildcards.getOrDefault(meta, defaultValue);
-        }
         return metaMap.getOrDefault(meta, defaultValue);
     }
 

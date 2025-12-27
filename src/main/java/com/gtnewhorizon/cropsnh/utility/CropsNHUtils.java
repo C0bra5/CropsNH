@@ -10,10 +10,14 @@ import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemSkull;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraftforge.fluids.FluidStack;
 
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ISeedData;
@@ -75,6 +79,8 @@ public abstract class CropsNHUtils {
     public static Block getBlockFromItem(Item item) {
         if (item == null) {
             return null;
+        } else if (item instanceof ItemSkull) {
+            return Blocks.skull;
         } else if (item instanceof ItemBlock) {
             return ((ItemBlock) item).field_150939_a;
         } else {
@@ -120,9 +126,17 @@ public abstract class CropsNHUtils {
         return aStack == null || aStack.getItem() == null || aStack.stackSize <= 0;
     }
 
+    public static boolean isStackValid(FluidStack aStack) {
+        return (aStack != null) && aStack.getFluid() != null && aStack.amount > 0;
+    }
+
+    public static boolean isStackInvalid(FluidStack aStack) {
+        return aStack == null || aStack.getFluid() == null || aStack.amount <= 0;
+    }
+
     /**
      * Copies the stack and returns a new stack with the given stack size.
-     * 
+     *
      * @param aStack The stack to copy.
      * @param aSize  The size of the new stack.
      * @return The copied stack with the requested size.
@@ -132,5 +146,9 @@ public abstract class CropsNHUtils {
         ItemStack ret = aStack.copy();
         ret.stackSize = aSize;
         return ret;
+    }
+
+    public static int getItemMeta(ItemStack aStack) {
+        return Items.feather.getDamage(aStack);
     }
 }

@@ -135,7 +135,7 @@ public class MTECropGeneExtractor extends MTEBasicMachine {
         if (seedData != null && isDataOrb(dataOrb) && circuitStack != null) {
 
             // find the data to inject into the orb
-            int circuitNo = circuitStack.getItemDamage();
+            int circuitNo = CropsNHUtils.getItemMeta(circuitStack);
             String title, name;
             switch (circuitNo) {
                 case 1 -> {

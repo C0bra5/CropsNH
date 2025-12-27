@@ -2,18 +2,13 @@ package com.gtnewhorizon.cropsnh.tileentity.multi;
 
 import java.util.function.Supplier;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import com.cleanroommc.modularui.api.drawable.IDrawable;
+import com.cleanroommc.modularui.api.widget.IWidget;
 import com.cleanroommc.modularui.drawable.DynamicDrawable;
 import com.cleanroommc.modularui.drawable.Rectangle;
 import com.cleanroommc.modularui.factory.PosGuiData;
-import com.cleanroommc.modularui.screen.ModularContainer;
 import com.cleanroommc.modularui.screen.ModularPanel;
 import com.cleanroommc.modularui.screen.UISettings;
 import com.cleanroommc.modularui.screen.viewport.GuiContext;
@@ -108,14 +103,15 @@ public class MTEIndustrialFarmGui extends MTEMultiBlockBaseGui<MTEIndustrialFarm
     private static class DisabledSlotOverlay extends DynamicDrawable {
 
         public static final IDrawable GRAY_TEXTURE = new Rectangle() {
+
             @Override
             public void draw(GuiContext context, int x0, int y0, int width, int height, WidgetTheme widgetTheme) {
                 // adds 1 pixel of padding to only gray out slot contents and not the slot outline
                 super.draw(context, x0 + 1, y0 + 1, width - 2, height - 2, widgetTheme);
             }
         }
-        // #80000000 (ARGB)
-        .setColor(-2147483648);
+            // #80000000 (ARGB)
+            .setColor(-2147483648);
 
         public DisabledSlotOverlay(Supplier<Boolean> supplier) {
             super(() -> supplier.get() ? GRAY_TEXTURE : IDrawable.EMPTY);
@@ -127,7 +123,10 @@ public class MTEIndustrialFarmGui extends MTEMultiBlockBaseGui<MTEIndustrialFarm
             || CropsNHUtils.isStackValid(multiblock.getBlockUnderStack()));
 
     private ItemSlot createEnvModuleSlot(int index) {
-        return new ItemSlot().slot(new ModularSlot(multiblock.mIFStackHandler, MTEIndustrialFarm.SLOT_ENV_CARD_START + index) {}.slotGroup("if_inv"))
+        return new ItemSlot()
+            .slot(
+                new ModularSlot(multiblock.mIFStackHandler, MTEIndustrialFarm.SLOT_ENV_CARD_START + index) {}
+                    .slotGroup("if_inv"))
             .tooltipDynamic(x -> {
                 x.addLine(StatCollector.translateToLocal("cropsnh_tooltip.industrialFarm.environmentalModule"));
                 x.addLine(
@@ -146,12 +145,18 @@ public class MTEIndustrialFarmGui extends MTEMultiBlockBaseGui<MTEIndustrialFarm
     }
 
     @Override
+    protected IWidget makeTitleTextWidget() {
+        return super.makeTitleTextWidget();
+    }
+
+    @Override
     protected Flow createLeftPanelGapRow(ModularPanel parent, PanelSyncManager syncManager) {
         return super.createLeftPanelGapRow(parent, syncManager).childIf(
             multiblock.doesBindPlayerInventory(),
-            new ItemSlot().slot(
-                new ModularSlot(multiblock.mIFStackHandler, MTEIndustrialFarm.SLOT_SEED).ignoreMaxStackSize(true)
-                    .slotGroup("if_inv"))
+            new ItemSlot()
+                .slot(
+                    new ModularSlot(multiblock.mIFStackHandler, MTEIndustrialFarm.SLOT_SEED).ignoreMaxStackSize(true)
+                        .slotGroup("if_inv"))
                 .tooltipDynamic(x -> {
                     x.addLine(StatCollector.translateToLocal("cropsnh_tooltip.industrialFarm.seedSlot"));
                     x.addLine(
@@ -168,9 +173,11 @@ public class MTEIndustrialFarmGui extends MTEMultiBlockBaseGui<MTEIndustrialFarm
                 .overlay(SEED_SLOT_DISABLED_OVERLAY))
             .childIf(
                 multiblock.doesBindPlayerInventory(),
-                new ItemSlot().slot(
-                    new ModularSlot(multiblock.mIFStackHandler, MTEIndustrialFarm.SLOT_BLOCK_UNDER).ignoreMaxStackSize(true)
-                        .slotGroup("if_inv"))
+                new ItemSlot()
+                    .slot(
+                        new ModularSlot(multiblock.mIFStackHandler, MTEIndustrialFarm.SLOT_BLOCK_UNDER)
+                            .ignoreMaxStackSize(true)
+                            .slotGroup("if_inv"))
                     .tooltipDynamic(x -> {
                         x.addLine(StatCollector.translateToLocal("cropsnh_tooltip.industrialFarm.blockUnderSlot"));
                         x.addLine(

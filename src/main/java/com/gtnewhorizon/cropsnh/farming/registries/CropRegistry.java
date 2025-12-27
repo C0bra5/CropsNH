@@ -19,6 +19,7 @@ import com.gtnewhorizon.cropsnh.api.ICropRegistry;
 import com.gtnewhorizon.cropsnh.api.IGrowthRequirement;
 import com.gtnewhorizon.cropsnh.items.ItemGenericSeed;
 import com.gtnewhorizon.cropsnh.reference.Names;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizon.cropsnh.utility.DebugHelper;
 import com.gtnewhorizon.cropsnh.utility.MetaMap;
 
@@ -53,7 +54,7 @@ public class CropRegistry implements ICropRegistry {
 
     @Override
     public ICropCard fromAlternateSeed(ItemStack stack) {
-        return alternateSeedList.getOrDefault(stack.getItem(), stack.getItemDamage(), null);
+        return alternateSeedList.getOrDefault(stack.getItem(), CropsNHUtils.getItemMeta(stack), null);
     }
 
     @Override
@@ -80,7 +81,7 @@ public class CropRegistry implements ICropRegistry {
     @Override
     public boolean isAlternateSeed(ItemStack stack) {
         if (stack.getItem() instanceof ItemGenericSeed || stack.getItem() == null) return false;
-        return this.alternateSeedList.containsKey(stack.getItem(), stack.getItemDamage());
+        return this.alternateSeedList.containsKey(stack.getItem(), CropsNHUtils.getItemMeta(stack));
     }
 
     @Override
@@ -113,7 +114,7 @@ public class CropRegistry implements ICropRegistry {
         Iterable<ItemStack> alternateSeeds = crop.getAlternateSeeds();
         if (alternateSeeds == null) return;
         for (ItemStack alternateSeed : alternateSeeds) {
-            map.put(alternateSeed.getItem(), alternateSeed.getItemDamage(), crop);
+            map.put(alternateSeed.getItem(), CropsNHUtils.getItemMeta(alternateSeed), crop);
         }
     }
 

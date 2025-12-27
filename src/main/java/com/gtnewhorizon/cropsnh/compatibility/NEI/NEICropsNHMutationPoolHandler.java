@@ -173,7 +173,7 @@ public class NEICropsNHMutationPoolHandler extends CropsNHNEIHandler {
     // returns the name for this recipe
     @Override
     public String getRecipeName() {
-        return StatCollector.translateToLocal("cropsnh_nei.mutationPool.poolName");
+        return StatCollector.translateToLocal("cropsnh_nei.mutationPool.title");
     }
 
     // returns the id for this recipe

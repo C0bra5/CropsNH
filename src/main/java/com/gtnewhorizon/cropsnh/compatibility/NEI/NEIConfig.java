@@ -6,9 +6,12 @@ import com.gtnewhorizon.cropsnh.CropsNH;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.AlternateSeedDumper;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.CropRegistryDumper;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.DeterministicMutationRegistryDumper;
-import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.FertilizerRegistryDumper;
+import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.FertilizerFluidsRegistryDumper;
+import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.FertilizerItemsRegistryDumper;
+import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.HydrationFluidsRegistryDumper;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.MutationPoolRegistryDumper;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.SoilRegistryDumper;
+import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.WeedEXFluidsRegistryDumper;
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
 import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
@@ -44,9 +47,12 @@ public class NEIConfig implements IConfigureNEI {
         API.addOption(new AlternateSeedDumper());
         API.addOption(new CropRegistryDumper());
         API.addOption(new DeterministicMutationRegistryDumper());
-        API.addOption(new FertilizerRegistryDumper());
+        API.addOption(new FertilizerFluidsRegistryDumper());
+        API.addOption(new FertilizerItemsRegistryDumper());
+        API.addOption(new HydrationFluidsRegistryDumper());
         API.addOption(new MutationPoolRegistryDumper());
         API.addOption(new SoilRegistryDumper());
+        API.addOption(new WeedEXFluidsRegistryDumper());
     }
 
     private static void registerNEITabs() {

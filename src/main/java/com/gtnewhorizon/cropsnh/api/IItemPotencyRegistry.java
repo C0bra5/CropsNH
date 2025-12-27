@@ -3,7 +3,7 @@ package com.gtnewhorizon.cropsnh.api;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public interface IFertilizerRegistry {
+public interface IItemPotencyRegistry {
 
     void register(Item item, int meta, int potency);
 
@@ -11,7 +11,7 @@ public interface IFertilizerRegistry {
 
     boolean isRegistered(Item item, int meta);
 
-    int getPotnecy(ItemStack stack);
+    int getPotency(ItemStack stack);
 
-    int getPotnecy(Item item, int meta);
+    int getPotency(Item item, int meta);
 }

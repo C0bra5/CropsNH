@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import com.gtnewhorizon.cropsnh.farming.registries.FertilizerRegistry;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 import codechicken.nei.config.DataDumper;
 
-public class FertilizerRegistryDumper extends DataDumper {
+public class FertilizerItemsRegistryDumper extends DataDumper {
 
-    public FertilizerRegistryDumper() {
-        super("tools.dump.cropsnh.fertilizers");
+    public FertilizerItemsRegistryDumper() {
+        super("tools.dump." + Reference.MOD_ID.toLowerCase() + ".fertilizerItems");
     }
 
     @Override
@@ -42,7 +43,7 @@ public class FertilizerRegistryDumper extends DataDumper {
     @Override
     public void dumpTo(File file) throws IOException {
         PrintWriter w = new PrintWriter(file);
-        w.print(FertilizerRegistry.instance.dump());
+        w.print(FertilizerRegistry.instance.dumpItemsCSV());
         w.flush();
         w.close();
     }

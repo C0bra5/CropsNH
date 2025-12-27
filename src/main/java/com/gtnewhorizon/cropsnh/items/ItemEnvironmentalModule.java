@@ -7,7 +7,6 @@ import javax.annotation.Nullable;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -17,6 +16,7 @@ import net.minecraftforge.common.BiomeDictionary;
 import com.gtnewhorizon.cropsnh.creativetab.CropsNHTab;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
 import com.gtnewhorizon.cropsnh.reference.Reference;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -86,7 +86,7 @@ public class ItemEnvironmentalModule extends Item {
 
     @Override
     public String getItemStackDisplayName(ItemStack itemStack) {
-        if (Items.feather.getDamage(itemStack) == 0) {
+        if (CropsNHUtils.getItemMeta(itemStack) == 0) {
             return StatCollector.translateToLocal(NAME_BLANK);
         }
         return StatCollector.translateToLocalFormatted(
@@ -101,7 +101,7 @@ public class ItemEnvironmentalModule extends Item {
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        ModuleData tag = VARIANTS.getOrDefault(Items.feather.getDamage(stack), null);
+        ModuleData tag = VARIANTS.getOrDefault(CropsNHUtils.getItemMeta(stack), null);
         // default if unknown
         if (tag == null) {
             return "???";
@@ -126,7 +126,7 @@ public class ItemEnvironmentalModule extends Item {
         if (pass == 0) {
             return cardIcon;
         }
-        ModuleData data = VARIANTS.getOrDefault(Items.feather.getDamage(stack), null);
+        ModuleData data = VARIANTS.getOrDefault(CropsNHUtils.getItemMeta(stack), null);
         return data == null ? missingIcon : data.icon;
     }
 
