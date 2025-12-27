@@ -168,8 +168,8 @@ cropsnh_tooltip.growthAccelerationUnit.2.adv=Increases power usage by %1$.0f%% p
 # Fertilizer Unit
 cropsnh_tooltip.fertilizerUnit.0=Allows the Industrial Farm to consume fertilizer in order to boost production.
 cropsnh_tooltip.fertilizerUnit.1=Requires %1$dL of fertilizer per cycle.
-cropsnh_tooltip.fertilizerUnit.2=Increases growth speed %1$.0f%%.
-cropsnh_tooltip.fertilizerUnit.2.adv=Increases growth speed %1$.0f%% (multiplicative).
+cropsnh_tooltip.fertilizerUnit.2=Increases growth speed by %1$.0f%%.
+cropsnh_tooltip.fertilizerUnit.2.adv=Increases growth speed by %1$.0f%% (multiplicative).
 cropsnh_tooltip.fertilizerUnit.3=Increases number of drops by %1$1.2f.
 cropsnh_tooltip.fertilizerUnit.3.adv=Increases number of drops by %1$1.2f.
 cropsnh_tooltip.fertilizerUnit.4=Increases power usage by %1$.0f%%.
@@ -293,32 +293,6 @@ nei.options.tools.dump.cropsnh.hydrationFluids=Hydration
 nei.options.tools.dump.cropsnh.mutationPools=Mutation Pools
 nei.options.tools.dump.cropsnh.soilRegistry=Soils
 nei.options.tools.dump.cropsnh.weedEXFluids=WeedEX
-
-
-
-# Open Computers Compat
-# cropsnh_description.peripheralHelp=Method Help
-# cropsnh_description.method.analyze=Orders the analyzer to analyze the current specimen
-# cropsnh_description.method.getBaseBlock=Returns the necessary base block for the crop at the specified direction or the specimen in the analyzer if no direction is specified
-# cropsnh_description.method.getBaseBlockType=Returns the base block type (NONE, BELOW, NEAR) for the crop at the specified direction or the specimen in the analyzer if no direction is specified
-# cropsnh_description.method.getBrightness=Returns the current light level for the crop at the specified direction
-# cropsnh_description.method.getBrightnessRange=Returns the required light level range for the crop at the specified direction or the specimen in the analyzer if no direction is specified
-# cropsnh_description.method.getCurrentSoil=Returns the current soil below the crop at the specified direction or the specimen in the analyzer if no direction is specified
-# cropsnh_description.method.getGrowthStage=Returns the growth percentage of the crop at the specified direction
-# cropsnh_description.method.getNeededSoil=Returns the required soil for the crop at the specified direction or the specimen in the analyzer if no direction is specified
-# cropsnh_description.method.getPlant=Returns the seed currently planted on the crop at the specified direction
-# cropsnh_description.method.getSpecimen=Returns the specimen currently in the analyzer
-# cropsnh_description.method.getStats=Returns the stats [growth, gain, strength] of crop at the specified direction or the specimen in the analyzer if no direction is specified
-# cropsnh_description.method.hasJournal=Returns if the analyzer has a journal
-# cropsnh_description.method.hasPlant=Returns if there is a plant on the crop sticks at the specified direction
-# cropsnh_description.method.hasWeeds=Returns if there are weeds on the crop at the specified direction
-# cropsnh_description.method.isAnalyzed=Returns if the crop at the specified direction, or the specimen in the analyzer (if no direction is specified) is analyzed
-# cropsnh_description.method.isCrossCrop=Returns if the crop at the specified direction is a cross crop
-# cropsnh_description.method.isFertile=Returns if the crop at the specified direction is fertile and can grow
-# cropsnh_description.method.isMature=Returns if the crop crop at the specified direction is mature
-# cropsnh_description.method.needsBaseBlock=Returns if the crop crop at the specified direction needs a base block
-# cropsnh_arg.direction=direction
-# cropsnh_arg.direction.optional=(optional) direction
 
 
 # Generic Seeds
@@ -566,6 +540,7 @@ cropsnh_growthReq.blockUnder.thaumium=Needs a block of thaumium under it to grow
 cropsnh_growthReq.blockUnder.thauminite=Needs a block of thauminite under it to grow.
 cropsnh_growthReq.blockUnder.ichorium=Needs a block of ichorium under it to grow.
 # Misc Block Growth Requirement
+cropsnh_growthReq.blockUnder.skull=Needs a skull under it to grow.
 cropsnh_growthReq.blockUnder.snow=Needs a block of snow under it to grow.
 cropsnh_growthReq.blockUnder.glowstone=Needs a block of glowstone under it to grow.
 cropsnh_growthReq.blockUnder.blaze=Needs a block of blaze under it to grow.
