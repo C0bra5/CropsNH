@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.items;
 
 import java.util.List;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -111,28 +112,28 @@ public class ItemGenericSeed extends ItemCropsNH {
             }
 
             if (crop.getCrossingThreshold() < 0.0f) {
-                toolTip.add(StatCollector.translateToLocal("cropsnh_tooltip.seed_must_use_synthesizer_to_replicate"));
+                toolTip.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.seed_must_use_synthesizer_to_replicate"));
             }
 
             toolTip.add(
                 String.format(
                     "%s- %s: %d%s",
                     EnumChatFormatting.GREEN,
-                    StatCollector.translateToLocal("cropsnh_tooltip.growth"),
+                    StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.growth"),
                     stats.getGrowth(),
                     EnumChatFormatting.RESET));
             toolTip.add(
                 String.format(
                     "%s- %s: %d%s",
                     EnumChatFormatting.GREEN,
-                    StatCollector.translateToLocal("cropsnh_tooltip.gain"),
+                    StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.gain"),
                     stats.getGain(),
                     EnumChatFormatting.RESET));
             toolTip.add(
                 String.format(
                     "%s- %s: %d%s",
                     EnumChatFormatting.GREEN,
-                    StatCollector.translateToLocal("cropsnh_tooltip.resistance"),
+                    StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.resistance"),
                     stats.getResistance(),
                     EnumChatFormatting.RESET));
             Iterable<IGrowthRequirement> reqs = crop.getGrowthRequirements();
@@ -142,7 +143,7 @@ public class ItemGenericSeed extends ItemCropsNH {
                 }
             }
         } else {
-            toolTip.add(" " + StatCollector.translateToLocal("cropsnh_tooltip.unidentified"));
+            toolTip.add(" " + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.unidentified"));
         }
     }
 

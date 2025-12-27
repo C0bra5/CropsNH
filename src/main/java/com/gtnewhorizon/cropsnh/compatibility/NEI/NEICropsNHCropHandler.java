@@ -35,7 +35,7 @@ import gregtech.api.util.GTUtility;
 public class NEICropsNHCropHandler extends CropsNHNEIHandler {
 
     // this is a class which handles the recipe for crop products (has to contain a CachedRecipe for the products)
-    private static final String id = "cropsNHCrops";
+    private static final String id = Reference.MOD_ID + "Crops";
 
     public static final int X_seed = 33;
     public static final int Y_seed = 20;
@@ -100,9 +100,9 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
 
             // register lines
             // spotless:off
-            this.textLines.add(StatCollector.translateToLocalFormatted("cropsnh_nei.crops.tier", crop.getTier()));
-            this.textLines.add(StatCollector.translateToLocalFormatted( "cropsnh_nei.crops.growthDuration", GTUtility.formatNumbers(crop.getGrowthDuration())));
-            this.textLines.add(StatCollector.translateToLocalFormatted( "cropsnh_nei.crops.dropMult", GTUtility.formatNumbers(crop.getDropChance())));
+            this.textLines.add(StatCollector.translateToLocalFormatted(Reference.MOD_ID_LOWER + "_nei.crops.tier", crop.getTier()));
+            this.textLines.add(StatCollector.translateToLocalFormatted( Reference.MOD_ID_LOWER + "_nei.crops.growthDuration", GTUtility.formatNumbers(crop.getGrowthDuration())));
+            this.textLines.add(StatCollector.translateToLocalFormatted( Reference.MOD_ID_LOWER + "_nei.crops.dropMult", GTUtility.formatNumbers(crop.getDropChance())));
             //spotless:on
 
             for (IGrowthRequirement req : crop.getGrowthRequirements()) {
@@ -238,7 +238,7 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
     // returns the name for this recipe
     @Override
     public String getRecipeName() {
-        return StatCollector.translateToLocal("cropsnh_nei.crops.title");
+        return StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_nei.crops.title");
     }
 
     // returns the id for this recipe

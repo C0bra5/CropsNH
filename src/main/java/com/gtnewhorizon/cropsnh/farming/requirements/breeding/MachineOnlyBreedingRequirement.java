@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.farming.requirements.breeding;
 
 import java.util.ArrayList;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -18,6 +19,6 @@ public class MachineOnlyBreedingRequirement implements IWorldBreedingRequirement
 
     @Override
     public String getDescription() {
-        return StatCollector.translateToLocal("cropsnh_breedingReq.lockout.machineOnly");
+        return StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_breedingReq.lockout.machineOnly");
     }
 }

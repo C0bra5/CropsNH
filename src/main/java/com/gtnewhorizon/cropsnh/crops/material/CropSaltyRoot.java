@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
@@ -27,7 +28,7 @@ public class CropSaltyRoot extends NHCropCard {
 
     @Override
     public String getFlavourText() {
-        return "cropsnh_crops.saltyRoot.flavour";
+        return Reference.MOD_ID_LOWER + "_crops.saltyRoot.flavour";
     }
 
     @Override

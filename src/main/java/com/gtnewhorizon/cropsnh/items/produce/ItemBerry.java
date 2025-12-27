@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.items.produce;
 
 import java.util.List;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -59,13 +60,13 @@ public class ItemBerry extends ItemFood {
         this.icons = new IIcon[textureNames.length];
 
         for (int i = 0; i < this.icons.length; ++i) {
-            this.icons[i] = iconRegister.registerIcon("cropsnh:berry_" + textureNames[i]);
+            this.icons[i] = iconRegister.registerIcon(Reference.MOD_ID_LOWER + ":berry_" + textureNames[i]);
         }
     }
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return "item.cropsnh:berry."
+        return "item." + Reference.MOD_ID_LOWER + ":berry."
             + textureNames[Math.min(textureNames.length - 1, Math.max(0, CropsNHUtils.getItemMeta(itemstack)))];
     }
 
@@ -81,8 +82,8 @@ public class ItemBerry extends ItemFood {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
         String name = textureNames[Math.min(textureNames.length - 1, Math.max(0, CropsNHUtils.getItemMeta(stack)))];
-        list.add(StatCollector.translateToLocal("cropsnh_tooltip.berry." + name + ".1"));
-        list.add(StatCollector.translateToLocal("cropsnh_tooltip.berry." + name + ".2"));
+        list.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.berry." + name + ".1"));
+        list.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.berry." + name + ".2"));
     }
 
 }

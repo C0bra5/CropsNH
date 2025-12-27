@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.items.tools;
 
 import java.util.List;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -40,7 +41,7 @@ public class ItemSpade extends ItemCropsNH implements ICropLeftClickHandler, ICr
     @SideOnly(Side.CLIENT)
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
-        list.add(StatCollector.translateToLocal("cropsnh_tooltip.spade"));
+        list.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.spade"));
     }
 
     @Override

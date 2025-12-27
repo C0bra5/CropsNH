@@ -33,12 +33,6 @@ public final class Names {
         public static final String fertilizer = "fert";
         public static final String weedEX = "weedex";
         // #endregion crop stick stuff
-
-        public static final String material = "material";
-        public static final String x = "cropsnhX";
-        public static final String y = "cropsnhY";
-        public static final String z = "cropsnhZ";
-        public static final String direction = "direction";
     }
 
     public static class DataOrb {

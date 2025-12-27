@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.items.tools;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -42,7 +43,7 @@ public class ItemMagnifyingGlass extends ItemCropsNH implements ICropRightClickH
     @SideOnly(Side.CLIENT)
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
-        list.add(StatCollector.translateToLocal("cropsnh_tooltip.magnifyingGlass"));
+        list.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.magnifyingGlass"));
     }
 
     @Override

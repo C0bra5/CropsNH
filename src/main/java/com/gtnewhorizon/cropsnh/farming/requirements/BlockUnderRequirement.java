@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
@@ -79,7 +80,7 @@ public class BlockUnderRequirement implements IWorldGrowthRequirement, IWorldBre
     private BlockUnderRequirement(String materialDescription) {
         this.materialDescription = materialDescription;
         this.unlocalizedDesc = new Tuple2<>(
-            "cropsnh_growthReq.blockUnder." + this.materialDescription,
+            Reference.MOD_ID_LOWER + "_growthReq.blockUnder." + this.materialDescription,
             new Object[] {});
     }
 

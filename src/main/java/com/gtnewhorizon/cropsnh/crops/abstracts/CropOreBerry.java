@@ -6,6 +6,7 @@ import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 public abstract class CropOreBerry extends NHCropCard {
 
@@ -45,6 +46,6 @@ public abstract class CropOreBerry extends NHCropCard {
 
     @Override
     protected String getBaseTexturePath() {
-        return "cropsnh:crops/oreBerries/" + this.materialName + "/";
+        return Reference.MOD_ID_LOWER + ":crops/oreBerries/" + this.materialName + "/";
     }
 }

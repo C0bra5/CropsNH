@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.farming.materialleaf;
 
 import java.util.List;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.util.StatCollector;
 
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
@@ -20,7 +21,7 @@ public class CopponFiberVariant extends MaterialLeafVariant {
     public void getTooltip(List list) {
         super.getTooltip(list);
         if (ConfigurationHandler.enableEasterEggs) {
-            list.add(StatCollector.translateToLocal("cropsnh_tooltip.copponFiber"));
+            list.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.copponFiber"));
         }
     }
 }

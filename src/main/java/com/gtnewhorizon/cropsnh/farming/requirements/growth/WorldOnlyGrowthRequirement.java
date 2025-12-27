@@ -1,5 +1,6 @@
 package com.gtnewhorizon.cropsnh.farming.requirements.growth;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -12,7 +13,7 @@ public class WorldOnlyGrowthRequirement implements IWorldGrowthRequirement {
     private final Tuple2<String, Object[]> unlocalizedDesc;
 
     public WorldOnlyGrowthRequirement() {
-        this.unlocalizedDesc = new Tuple2<>("cropsnh_growthReq.lockout.machineOnly", new Object[] {});
+        this.unlocalizedDesc = new Tuple2<>(Reference.MOD_ID_LOWER + "_growthReq.lockout.machineOnly", new Object[] {});
     }
 
     @Override

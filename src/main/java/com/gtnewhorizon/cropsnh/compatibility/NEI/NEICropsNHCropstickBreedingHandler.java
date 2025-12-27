@@ -30,7 +30,7 @@ import codechicken.nei.recipe.HandlerInfo;
 public class NEICropsNHCropstickBreedingHandler extends CropsNHNEIHandler {
 
     // this is a class which handles the recipe for crop products (has to contain a CachedRecipe for the products)
-    private static final String id = "cropsNHBreeding";
+    private static final String id = Reference.MOD_ID + "Breeding";
 
     public static final int X_seed = 75;
     public static final int Y_seed = 22;
@@ -225,7 +225,7 @@ public class NEICropsNHCropstickBreedingHandler extends CropsNHNEIHandler {
     // returns the name for this recipe
     @Override
     public String getRecipeName() {
-        return StatCollector.translateToLocal("cropsnh_nei.breeding.title");
+        return StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_nei.breeding.title");
     }
 
     // returns the id for this recipe

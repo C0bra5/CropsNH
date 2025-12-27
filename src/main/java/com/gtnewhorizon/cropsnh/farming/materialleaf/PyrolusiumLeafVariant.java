@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.util.StatCollector;
 
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
@@ -35,20 +36,20 @@ public class PyrolusiumLeafVariant extends MaterialLeafVariant {
             switch (rand) {
                 case 1:
                     this.iconName += ".canada";
-                    this.unlocalizedExtraTooltip = "cropsnh_tooltip.pyrolusiumLeaf.canada";
+                    this.unlocalizedExtraTooltip = Reference.MOD_ID_LOWER + "_tooltip.pyrolusiumLeaf.canada";
                     break;
                 case 2:
                     this.iconName += ".banada";
-                    this.unlocalizedExtraTooltip = "cropsnh_tooltip.pyrolusiumLeaf.banana";
+                    this.unlocalizedExtraTooltip = Reference.MOD_ID_LOWER + "_tooltip.pyrolusiumLeaf.banana";
                     break;
                 default:
                     this.iconName += "." + XSTR.XSTR_INSTANCE.nextInt(4);
-                    this.unlocalizedExtraTooltip = "cropsnh_tooltip.pyrolusiumLeaf.normal";
+                    this.unlocalizedExtraTooltip = Reference.MOD_ID_LOWER + "_tooltip.pyrolusiumLeaf.normal";
                     break;
             }
         } else {
             this.iconName = ".1";
-            this.unlocalizedExtraTooltip = "cropsnh_tooltip.pyrolusiumLeaf.normal";
+            this.unlocalizedExtraTooltip = Reference.MOD_ID_LOWER + "_tooltip.pyrolusiumLeaf.normal";
         }
     }
 

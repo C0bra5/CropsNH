@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.recipes.frontends;
 
 import java.util.List;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
@@ -25,7 +26,7 @@ public class CropSynthesizerFrontend extends RecipeMapFrontend {
         if (pStack.isFluid()) {
             currentTip.add(
                 EnumChatFormatting.RESET
-                    + StatCollector.translateToLocal("cropsnh_nei.cropSynthesizer.tooltip.fluidCost"));
+                    + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_nei.cropSynthesizer.tooltip.fluidCost"));
             return currentTip;
         }
         return super.handleNEIItemInputTooltip(currentTip, pStack);
@@ -37,7 +38,7 @@ public class CropSynthesizerFrontend extends RecipeMapFrontend {
         if (!pStack.isFluid()) {
             currentTip.add(
                 EnumChatFormatting.RESET
-                    + StatCollector.translateToLocal("cropsnh_nei.cropSynthesizer.tooltip.output"));
+                    + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_nei.cropSynthesizer.tooltip.output"));
             return currentTip;
         }
         return super.handleNEIItemOutputTooltip(currentTip, pStack);

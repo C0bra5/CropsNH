@@ -926,7 +926,7 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
             () -> mWaterEnabled,
             val -> mWaterEnabled = val,
             BUTTON_OVERLAY_TOGGLE_WATER,
-            "cropsnh_tooltip.cropManager.water.",
+            Reference.MOD_ID_LOWER + "_tooltip.cropManager.water.",
             7,
             63);
 
@@ -936,7 +936,7 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
             () -> mWeedEXEnabled,
             val -> mWeedEXEnabled = val,
             BUTTON_OVERLAY_TOGGLE_WEED_EX,
-            "cropsnh_tooltip.cropManager.weedEX.",
+            Reference.MOD_ID_LOWER + "_tooltip.cropManager.weedEX.",
             27,
             63);
 
@@ -946,7 +946,7 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
             () -> mFertilizerEnabled,
             val -> mFertilizerEnabled = val,
             BUTTON_OVERLAY_TOGGLE_FERTILIZER,
-            "cropsnh_tooltip.cropManager.fertilizer.",
+            Reference.MOD_ID_LOWER + "_tooltip.cropManager.fertilizer.",
             47,
             63);
 
@@ -956,7 +956,7 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
             () -> mHarvestEnabled,
             val -> mHarvestEnabled = val,
             BUTTON_OVERLAY_TOGGLE_HARVEST,
-            "cropsnh_tooltip.cropManager.harvest.",
+            Reference.MOD_ID_LOWER + "_tooltip.cropManager.harvest.",
             67,
             63);
 
@@ -1005,7 +1005,7 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
             PROGRESSBAR_WATER,
             this::getWaterAmount,
             this::getWaterCapacity,
-            "cropsnh_tooltip.cropManager.water",
+            Reference.MOD_ID_LOWER + "_tooltip.cropManager.water",
             this::setWaterAmount,
             47,
             7);
@@ -1016,7 +1016,7 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
             PROGRESSBAR_WEED_EX,
             this::getWeedEXAmount,
             this::getWeedEXCapacity,
-            "cropsnh_tooltip.cropManager.weedEX",
+            Reference.MOD_ID_LOWER + "_tooltip.cropManager.weedEX",
             this::setWeedEXAmount,
             57,
             7);
@@ -1027,7 +1027,7 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
             PROGRESSBAR_LIQUID_FERTILIZER,
             this::getLiquidFertilizerAmount,
             this::getLiquidFertilizerCapacity,
-            "cropsnh_tooltip.cropManager.liquidFertilizer",
+            Reference.MOD_ID_LOWER + "_tooltip.cropManager.liquidFertilizer",
             this::setLiquidFertilizerAmount,
             67,
             7);

@@ -18,11 +18,6 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public abstract class TileEntityCropsNH extends TileEntity {
 
-    /**
-     * The orientation of the block.
-     * Defaults to ForgeDirection.UNKNOWN;
-     */
-    private ForgeDirection orientation = ForgeDirection.UNKNOWN;
 
     /**
      * Saves the tile entity to an NBTTag.
@@ -32,9 +27,6 @@ public abstract class TileEntityCropsNH extends TileEntity {
     @Override
     public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
-        if (this.orientation != null) {
-            tag.setByte(Names.NBT.direction, (byte) this.orientation.ordinal());
-        }
     }
 
     /**
@@ -45,50 +37,6 @@ public abstract class TileEntityCropsNH extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
-        if (tag.hasKey(Names.NBT.direction)) {
-            this.setOrientation(tag.getByte(Names.NBT.direction));
-        }
-    }
-
-    /**
-     * Determines if the block may be rotated.
-     *
-     * @return if the block rotates.
-     */
-
-    public abstract boolean isRotatable();
-
-    /**
-     * Retrieves the block's orientation as a ForgeDirection.
-     *
-     * @return the block's orientation.
-     */
-    public final ForgeDirection getOrientation() {
-        return orientation;
-    }
-
-    /**
-     * Sets the block's orientation.
-     *
-     * @param orientation the new orientation of the block.
-     */
-    public final void setOrientation(ForgeDirection orientation) {
-        if (this.isRotatable() && orientation != ForgeDirection.UNKNOWN) {
-            this.orientation = orientation;
-            if (this.worldObj != null) {
-                this.markForUpdate();
-            }
-        }
-    }
-
-    /**
-     * Sets the block's orientation from an integer.
-     * This is not the recommended method, and is only included for serialization purposes.
-     *
-     * @param orientation the orientation index
-     */
-    private void setOrientation(int orientation) {
-        this.setOrientation(ForgeDirection.getOrientation(orientation));
     }
 
     @Override

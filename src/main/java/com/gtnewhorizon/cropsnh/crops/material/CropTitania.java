@@ -7,6 +7,7 @@ import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import gregtech.api.enums.VoltageIndex;
 
 public class CropTitania extends NHCropCard {
@@ -27,7 +28,7 @@ public class CropTitania extends NHCropCard {
 
     @Override
     public String getFlavourText() {
-        return "cropsnh_crops.titania.flavour";
+        return Reference.MOD_ID_LOWER + "_crops.titania.flavour";
     }
 
     @Override

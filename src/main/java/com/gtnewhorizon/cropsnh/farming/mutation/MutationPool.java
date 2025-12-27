@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.util.StatCollector;
 
 import com.gtnewhorizon.cropsnh.api.ICropCard;
@@ -20,7 +21,7 @@ public class MutationPool implements IMutationPool {
 
     @Override
     public String getUnlocalisedName() {
-        return "cropsnh_mutationPool." + this.name;
+        return Reference.MOD_ID_LOWER + "_mutationPool." + this.name;
     }
 
     /**

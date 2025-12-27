@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.crops.ic2;
 
 import java.awt.Color;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
@@ -66,6 +67,6 @@ public class CropTerraWart extends NHCropCard {
 
     @Override
     public String getUnlocalizedName() {
-        return "item.cropsnh:terraWart.name";
+        return "item." + Reference.MOD_ID_LOWER + ":terraWart.name";
     }
 }

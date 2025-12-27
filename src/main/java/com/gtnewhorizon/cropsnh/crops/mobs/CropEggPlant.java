@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.crops.mobs;
 
 import java.awt.Color;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -25,7 +26,7 @@ public class CropEggPlant extends CropFood {
 
     @Override
     public String getFlavourText() {
-        return "cropsnh_crops.eggPlant.flavour";
+        return Reference.MOD_ID_LOWER + "_crops.eggPlant.flavour";
     }
 
     @Override

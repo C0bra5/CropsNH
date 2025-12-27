@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
+import com.gtnewhorizon.cropsnh.reference.Reference;
 
 public abstract class CropBaseStoneLily extends NHCropCard {
 
@@ -37,6 +38,6 @@ public abstract class CropBaseStoneLily extends NHCropCard {
 
     @Override
     protected String getBaseTexturePath() {
-        return "cropsnh:crops/stoneLilies/" + this.materialName + "/";
+        return Reference.MOD_ID_LOWER + ":crops/stoneLilies/" + this.materialName + "/";
     }
 }

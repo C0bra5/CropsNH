@@ -1,5 +1,6 @@
 package com.gtnewhorizon.cropsnh.compatibility.waila;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.tileentity.TileEntityCrop;
 
 import cpw.mods.fml.common.event.FMLInterModComms;
@@ -14,7 +15,7 @@ public class WailaRegistry {
         FMLInterModComms.sendMessage(
             Mods.Waila.ID,
             "register",
-            "com.gtnewhorizon.cropsnh.compatibility.waila.WailaRegistry.initWaila");
+            "com.gtnewhorizon." + Reference.MOD_ID_LOWER + ".compatibility.waila.WailaRegistry.initWaila");
     }
 
     public static void initWaila(IWailaRegistrar registry) {

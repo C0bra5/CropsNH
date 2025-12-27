@@ -1,5 +1,6 @@
 package com.gtnewhorizon.cropsnh.loaders.gtrecipes;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
@@ -26,19 +27,19 @@ public abstract class CropGeneExtractorFakeRecipeLoader extends BaseGTRecipeLoad
             String unlocalizedName;
             switch (circuitNo) {
                 case 1:
-                    unlocalizedName = "cropsnh_nei.cropGeneExtractor.tooltip.scanSpecimen";
+                    unlocalizedName = Reference.MOD_ID_LOWER + "_nei.cropGeneExtractor.tooltip.scanSpecimen";
                     break;
                 case 2:
-                    unlocalizedName = "cropsnh_nei.cropGeneExtractor.tooltip.scanGrowth";
+                    unlocalizedName = Reference.MOD_ID_LOWER + "_nei.cropGeneExtractor.tooltip.scanGrowth";
                     break;
                 case 3:
-                    unlocalizedName = "cropsnh_nei.cropGeneExtractor.tooltip.scanGain";
+                    unlocalizedName = Reference.MOD_ID_LOWER + "_nei.cropGeneExtractor.tooltip.scanGain";
                     break;
                 case 4:
-                    unlocalizedName = "cropsnh_nei.cropGeneExtractor.tooltip.scanResistance";
+                    unlocalizedName = Reference.MOD_ID_LOWER + "_nei.cropGeneExtractor.tooltip.scanResistance";
                     break;
                 default:
-                    unlocalizedName = "cropsnh_nei.cropGeneExtractor.tooltip.error";
+                    unlocalizedName = Reference.MOD_ID_LOWER + "_nei.cropGeneExtractor.tooltip.error";
                     break;
             }
             this.orb = ItemList.Tool_DataOrb.getWithName(1L, StatCollector.translateToLocal(unlocalizedName));

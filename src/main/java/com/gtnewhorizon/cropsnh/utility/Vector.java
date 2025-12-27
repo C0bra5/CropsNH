@@ -19,35 +19,6 @@ public class Vector {
         this.z = z;
     }
 
-    public Vector(Vec3 vec) {
-        this.x = vec.xCoord;
-        this.y = vec.yCoord;
-        this.z = vec.zCoord;
-    }
-
-    public Vector(NBTTagCompound tag) throws UnknownPositionException {
-        if (!tag.hasKey(Names.NBT.x)) {
-            throw new UnknownPositionException();
-        }
-        if (!tag.hasKey(Names.NBT.y)) {
-            throw new UnknownPositionException();
-        }
-        if (!tag.hasKey(Names.NBT.z)) {
-            throw new UnknownPositionException();
-        }
-        this.x = tag.getDouble(Names.NBT.x);
-        this.y = tag.getDouble(Names.NBT.y);
-        this.z = tag.getDouble(Names.NBT.z);
-    }
-
-    public NBTTagCompound writeToNBT() {
-        NBTTagCompound tag = new NBTTagCompound();
-        tag.setDouble(Names.NBT.x, x);
-        tag.setDouble(Names.NBT.y, y);
-        tag.setDouble(Names.NBT.z, z);
-        return tag;
-    }
-
     public void setX(double x) {
         this.x = x;
     }

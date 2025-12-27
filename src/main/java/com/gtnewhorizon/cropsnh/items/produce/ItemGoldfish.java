@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.items.produce;
 
 import java.util.List;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,13 +29,13 @@ public class ItemGoldfish extends ItemFood {
 
     @SideOnly(value = Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        this.itemIcon = iconRegister.registerIcon("cropsnh:goldfish");
+        this.itemIcon = iconRegister.registerIcon(Reference.MOD_ID_LOWER + ":goldfish");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        list.add(StatCollector.translateToLocal("cropsnh_tooltip.goldfish"));
+        list.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.goldfish"));
     }
 
     @Override

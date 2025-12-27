@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.crops.cropnh;
 
 import java.awt.Color;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -17,7 +18,7 @@ public class CropHemp extends NHCropCard {
 
     @Override
     public String getFlavourText() {
-        return "cropsnh_crops.hemp.flavour";
+        return Reference.MOD_ID_LOWER + "_crops.hemp.flavour";
     }
 
     @Override

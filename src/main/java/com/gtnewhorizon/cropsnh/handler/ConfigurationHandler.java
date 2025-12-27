@@ -18,7 +18,7 @@ public class ConfigurationHandler {
     public static class Categories {
 
         public static final String CATEGORY_WEEDS = "weeds";
-        public static final String CATEGORY_CROPSNH = "cropsnh";
+        public static final String CATEGORY_CROPSNH = Reference.MOD_ID_LOWER;
         public static final String CATEGORY_CROPS = "crops";
         public static final String CATEGORY_RENDERING = "rendering";
     }

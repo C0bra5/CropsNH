@@ -1,5 +1,6 @@
 package com.gtnewhorizon.cropsnh.farming.requirements.growth;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -12,7 +13,7 @@ import com.gtnewhorizon.cropsnh.utility.Tuple2;
  */
 public class MaxLightLevelGrowthRequirement implements IWorldGrowthRequirement {
 
-    private final static String unlocalizedDesc = "cropsnh_growthReq.maxLight.format";
+    private final static String unlocalizedDesc = Reference.MOD_ID_LOWER + "_growthReq.maxLight.format";
     private final int maxLightLevel;
 
     public MaxLightLevelGrowthRequirement(int maxLightLevel) {

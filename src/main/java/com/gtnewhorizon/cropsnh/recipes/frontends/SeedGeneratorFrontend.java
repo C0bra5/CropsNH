@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.recipes.frontends;
 
 import java.util.List;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
@@ -25,7 +26,7 @@ public class SeedGeneratorFrontend extends RecipeMapFrontend {
         if (pStack.isFluid()) {
             currentTip.add(
                 EnumChatFormatting.RESET
-                    + StatCollector.translateToLocal("cropsnh_nei.seedGenerator.tooltip.fluidCost"));
+                    + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_nei.seedGenerator.tooltip.fluidCost"));
             return currentTip;
         }
         return super.handleNEIItemInputTooltip(currentTip, pStack);

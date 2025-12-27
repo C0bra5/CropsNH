@@ -8,6 +8,7 @@ import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import gregtech.api.enums.VoltageIndex;
 
 public class CropPyrolusium extends NHCropCard {
@@ -26,7 +27,7 @@ public class CropPyrolusium extends NHCropCard {
 
     @Override
     public String getFlavourText() {
-        return ConfigurationHandler.enableEasterEggs ? "cropsnh_crops.pyrolusium.flavour" : super.getFlavourText();
+        return ConfigurationHandler.enableEasterEggs ? Reference.MOD_ID_LOWER + "_crops.pyrolusium.flavour" : super.getFlavourText();
     }
 
     @Override

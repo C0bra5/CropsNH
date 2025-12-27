@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.tileentity.multi;
 
 import java.util.function.Supplier;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.util.StatCollector;
 
 import com.cleanroommc.modularui.api.drawable.IDrawable;
@@ -128,12 +129,12 @@ public class MTEIndustrialFarmGui extends MTEMultiBlockBaseGui<MTEIndustrialFarm
                 new ModularSlot(multiblock.mIFStackHandler, MTEIndustrialFarm.SLOT_ENV_CARD_START + index) {}
                     .slotGroup("if_inv"))
             .tooltipDynamic(x -> {
-                x.addLine(StatCollector.translateToLocal("cropsnh_tooltip.industrialFarm.environmentalModule"));
+                x.addLine(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.environmentalModule"));
                 x.addLine(
                     StatCollector.translateToLocal(
                         multiblock.mEnvironmentalEnhancementUnitCount >= 1 + index
-                            ? "cropsnh_tooltip.industrialFarm.environmentalModule.enabled"
-                            : "cropsnh_tooltip.industrialFarm.environmentalModule.disabled"));
+                            ? Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.environmentalModule.enabled"
+                            : Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.environmentalModule.disabled"));
             })
             .background(
                 GTGuiTextures.SLOT_ITEM_STANDARD,
@@ -158,15 +159,15 @@ public class MTEIndustrialFarmGui extends MTEMultiBlockBaseGui<MTEIndustrialFarm
                     new ModularSlot(multiblock.mIFStackHandler, MTEIndustrialFarm.SLOT_SEED).ignoreMaxStackSize(true)
                         .slotGroup("if_inv"))
                 .tooltipDynamic(x -> {
-                    x.addLine(StatCollector.translateToLocal("cropsnh_tooltip.industrialFarm.seedSlot"));
+                    x.addLine(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.seedSlot"));
                     x.addLine(
                         StatCollector.translateToLocalFormatted(
-                            "cropsnh_tooltip.industrialFarm.capacity",
+                            Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.capacity",
                             multiblock.mSeedCapacity));
                     if (CropsNHUtils.isStackValid(multiblock.getBlockUnderStack())) {
                         x.addLine(
                             StatCollector
-                                .translateToLocal("cropsnh_tooltip.industrialFarm.seedWithBlockExtractionWarning"));
+                                .translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.seedWithBlockExtractionWarning"));
                     }
                 })
                 .background(GTGuiTextures.SLOT_ITEM_STANDARD, CropsNHUITexturesMUI2.OVERLAY_SLOT_SEED_STANDARD)
@@ -179,15 +180,15 @@ public class MTEIndustrialFarmGui extends MTEMultiBlockBaseGui<MTEIndustrialFarm
                             .ignoreMaxStackSize(true)
                             .slotGroup("if_inv"))
                     .tooltipDynamic(x -> {
-                        x.addLine(StatCollector.translateToLocal("cropsnh_tooltip.industrialFarm.blockUnderSlot"));
+                        x.addLine(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.blockUnderSlot"));
                         x.addLine(
                             StatCollector.translateToLocalFormatted(
-                                "cropsnh_tooltip.industrialFarm.capacity",
+                                Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.capacity",
                                 multiblock.mSeedCapacity));
                         if (CropsNHUtils.isStackValid(multiblock.getBlockUnderStack())) {
-                            x.addLine(StatCollector.translateToLocal("cropsnh_tooltip.industrialFarm.blockExtraction"));
+                            x.addLine(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.blockExtraction"));
                         } else {
-                            x.addLine(StatCollector.translateToLocal("cropsnh_tooltip.industrialFarm.blockInsertion"));
+                            x.addLine(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.blockInsertion"));
                         }
                     })
                     .background(GTGuiTextures.SLOT_ITEM_STANDARD, GTGuiTextures.OVERLAY_SLOT_BLOCK_STANDARD)

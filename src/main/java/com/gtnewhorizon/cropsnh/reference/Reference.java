@@ -13,6 +13,6 @@ public final class Reference {
     public static final String VERSION = "1.7.10-" + MOD_VERSION;
 
     public static final String AUTHOR = "InfinityRaider & C0bra5";
-    public static final String CLIENT_PROXY_CLASS = "com.gtnewhorizon.cropsnh.proxy.ClientProxy";
-    public static final String SERVER_PROXY_CLASS = "com.gtnewhorizon.cropsnh.proxy.ServerProxy";
+    public static final String CLIENT_PROXY_CLASS = "com.gtnewhorizon." + MOD_ID_LOWER + ".proxy.ClientProxy";
+    public static final String SERVER_PROXY_CLASS = "com.gtnewhorizon." + MOD_ID_LOWER + ".proxy.ServerProxy";
 }

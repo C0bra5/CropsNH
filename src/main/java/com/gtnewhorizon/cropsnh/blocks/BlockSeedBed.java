@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.blocks;
 
 import java.util.List;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -77,10 +78,10 @@ public class BlockSeedBed extends CropsNHBlockIndustrialFarmTiredComponent {
     public void addInformation(ItemStack aStack, EntityPlayer aPlayer, List<String> aTooltip,
         boolean aAdvancedTooltips) {
         super.addInformation(aStack, aPlayer, aTooltip, aAdvancedTooltips);
-        aTooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.seedBed.0"));
+        aTooltip.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.seedBed.0"));
         int tMeta = CropsNHUtils.getItemMeta(aStack);
-        aTooltip.add(StatCollector.translateToLocalFormatted("cropsnh_tooltip.seedBed.1", getCapacity(tMeta)));
-        aTooltip.add(StatCollector.translateToLocalFormatted("cropsnh_tooltip.seedBed.2", getWaterConsumption(tMeta)));
+        aTooltip.add(StatCollector.translateToLocalFormatted(Reference.MOD_ID_LOWER + "_tooltip.seedBed.1", getCapacity(tMeta)));
+        aTooltip.add(StatCollector.translateToLocalFormatted(Reference.MOD_ID_LOWER + "_tooltip.seedBed.2", getWaterConsumption(tMeta)));
     }
 
     @Override

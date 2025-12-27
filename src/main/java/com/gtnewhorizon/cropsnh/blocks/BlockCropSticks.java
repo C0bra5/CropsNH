@@ -1,5 +1,6 @@
 package com.gtnewhorizon.cropsnh.blocks;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
@@ -259,7 +260,7 @@ public class BlockCropSticks extends BlockContainerCropsNH {
 
     @Override
     public String getItemIconName() {
-        return "cropsnh:cropSticks";
+        return Reference.MOD_ID_LOWER + ":cropSticks";
     }
 
     /**

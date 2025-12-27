@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -112,11 +113,6 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
 
     public TileEntityCrop() {
         this.ticker = XSTR.XSTR_INSTANCE.nextInt(256);
-    }
-
-    @Override
-    public boolean isRotatable() {
-        return false;
     }
 
     // region status checks
@@ -232,12 +228,12 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
     public void getMagnifyingGlassStatus(List<String> information) {
         if (this.crop != null) {
             if (this.hasWeed()) {
-                information.add(StatCollector.translateToLocal("cropsnh_tooltip.weeds"));
+                information.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.weeds"));
             } else {
                 String header, value;
 
                 // Add the seed name
-                header = StatCollector.translateToLocal("cropsnh_tooltip.seed");
+                header = StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.seed");
                 value = StatCollector.translateToLocal(this.crop.getUnlocalizedName());
                 information.add(header + ": " + value);
 
@@ -245,7 +241,7 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
                 if (!(this.crop instanceof CropWeed)) {
                     if (this.isSick) {
                         information.add(
-                            EnumChatFormatting.RED + StatCollector.translateToLocal("cropsnh_tooltip.isSick")
+                            EnumChatFormatting.RED + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.isSick")
                                 + EnumChatFormatting.RESET);
                     }
 
@@ -261,29 +257,29 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
                         information.add(
                             String.format(
                                 "%s -- %s: %d  %s: %d  %s: %d",
-                                StatCollector.translateToLocal("cropsnh_tooltip.stats"),
-                                StatCollector.translateToLocal("cropsnh_tooltip.growth"),
+                                StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.stats"),
+                                StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.growth"),
                                 this.stats.getGrowth(),
-                                StatCollector.translateToLocal("cropsnh_tooltip.gain"),
+                                StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.gain"),
                                 this.stats.getGain(),
-                                StatCollector.translateToLocal("cropsnh_tooltip.resistance"),
+                                StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.resistance"),
                                 this.stats.getResistance()));
                     }
                 }
             }
         } else {
-            information.add(StatCollector.translateToLocal("cropsnh_tooltip.empty"));
+            information.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.empty"));
         }
 
         information.add(
             String.format(
                 "%s -- %s: %d  %s: %d  %s: %d",
-                StatCollector.translateToLocal("cropsnh_tooltip.soil"),
-                StatCollector.translateToLocal("cropsnh_tooltip.fertilizer"),
+                StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.soil"),
+                StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.fertilizer"),
                 this.fertilizerStorage,
-                StatCollector.translateToLocal("cropsnh_tooltip.water"),
+                StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.water"),
                 this.waterStorage,
-                StatCollector.translateToLocal("cropsnh_tooltip.weedEx"),
+                StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.weedEx"),
                 this.weedEXStorage));
     }
 
@@ -993,189 +989,8 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
         if (this.isMature()) {
             this.doPlayerHarvest();
         }
-        // TODO: DELETE IC2 DROP SIMULATOR ONCE ALL CROPS ARE PORTED OVER
-        // if (heldItem != null) {
-        // ArrayList<Pair<Float, String>> a = new ArrayList<Pair<Float, String>>();
-        // System.out.println("--------------------------");
-        // StringBuilder sb = new StringBuilder();
-        // for (ic2.api.crops.CropCard cc : Crops.instance.getCrops()
-        // .stream()
-        // .sorted(Comparator.comparing(ic2.api.crops.CropCard::getId))
-        // .collect(Collectors.toList())) {
-        // sb.append(
-        // String.format(
-        // "{\"id\":%d,\"name\":\"%s\",\"rus\":\"\",\"tier\":%d,\"stats\":{\"che\":%d,\"foo\":%d,\"def\":%d,\"col\":%d,\"wee\":%d},\"attributes\":\"%s\",\"mod\":\"\"},\n",
-        // cc.getId(),
-        // StatCollector.translateToLocal(cc.displayName()),
-        // cc.tier(),
-        // cc.stat(0),
-        // cc.stat(1),
-        // cc.stat(2),
-        // cc.stat(3),
-        // cc.stat(4),
-        // String.join(" ", cc.attributes())));
-        // float l = 0;
-        // FakeTileEntityCrop te = new FakeTileEntityCrop(
-        // cc,
-        // this.xCoord,
-        // this.yCoord,
-        // this.zCoord,
-        // this.worldObj);
-        // for (int j = 0; j < 1000; j++) {
-        // if (cc == Crops.instance.getCropCard("IC2", "stickreed")) {
-        // for (int i = 3 - XSTR.XSTR_INSTANCE.nextInt(3); i < cc.maxSize(); i++) {
-        // te.setSize((byte) i);
-        // l += cc.growthDuration(te);
-        // }
-        // } else {
-        // for (int i = cc.getSizeAfterHarvest(te); i < cc.maxSize(); i++) {
-        // te.setSize((byte) i);
-        // l += cc.growthDuration(te);
-        // }
-        // }
-        // }
-        // a.add(new Pair<>(l / 1000, cc.displayName()));
-        // }
-        // System.out.println("\n" + sb.toString());
-        // a.sort(Comparator.comparing(p -> p.getKey()));
-        // System.out.println("--------------------------");
-        // for (Pair<Float, String> p : a) {
-        // System.out.println(p.getValue() + ": " + p.getKey());
-        // }
-        // ic2.api.crops.CropCard cc = Crops.instance.getCropCard(heldItem);
-        // if (cc == null) return true;
-        // FakeTileEntityCrop te = new FakeTileEntityCrop(cc, this.xCoord, this.yCoord, this.zCoord, this.worldObj);
-        // te.setSize((byte) 1);
-        // long duration = 0;
-        // final int maxRounds = 1_000_000;
-        // for (int round = 0; round < maxRounds; round++) {
-        // te.setSize((byte) cc.maxSize());
-        // for (byte i = cc.getSizeAfterHarvest(te); i < cc.maxSize(); i++) {
-        // te.setSize(i);
-        // duration += cc.growthDuration(te);
-        // }
-        // }
-        // te.setSize((byte) cc.maxSize());
-        // ItemStackMap<Integer[]> drops = new ItemStackMap<>();
-        // for (int i = 0; i < maxRounds; i++) {
-        // ItemStack drop = cc.getGain(te);
-        // if (drop != null) {
-        // ItemStack key = drop.copy();
-        // key.stackSize = 1;
-        // drops.merge(
-        // key,
-        // new Integer[] { 1, drop.stackSize },
-        // (o, n) -> new Integer[] { o[0] + n[0], o[1] + n[1] });
-        // }
-        // }
-        // System.out.println("--------------------------");
-        // System.out.println("name: " + heldItem.getDisplayName());
-        // System.out.println("creator: " + cc.discoveredBy());
-        // System.out.println("tier: " + cc.tier());
-        // System.out.println("Growth duration: " + (int) ((double) duration / (double) maxRounds));
-        // System.out.println("drop gain chance: " + cc.dropGainChance());
-        // for (Map.Entry<ItemStack, Integer[]> entry : drops.entrySet()) {
-        // String format = String.format(
-        // "%s : %.2f%% | %.2f",
-        // entry.getKey()
-        // .getDisplayName(),
-        // (double) entry.getValue()[0] / (double) maxRounds * 100,
-        // (double) entry.getValue()[1] / (double) entry.getValue()[0]);
-        // System.out.println(format);
-        // }
-        // }
         return true;
     }
-
-    // private static class FakeTileEntityCrop extends ic2.core.crop.TileEntityCrop {
-    //
-    // public Set<Block> reqBlockSet = new HashSet<>();
-    // public Set<String> reqBlockOreDict = new HashSet<>();
-    //
-    // public FakeTileEntityCrop(ic2.api.crops.CropCard cc, int x, int y, int z, World world) {
-    // super();
-    // this.ticker = 1;
-    //
-    // // put seed in crop stick
-    // this.setWorldObj(world);
-    // this.setCrop(cc);
-    // this.setGrowth((byte) 1);
-    // this.setGain((byte) 1);
-    // this.setResistance((byte) 1);
-    //
-    // this.xCoord = x;
-    // this.yCoord = y;
-    // this.zCoord = z;
-    // this.blockType = Block.getBlockFromItem(Ic2Items.crop.getItem());
-    // this.blockMetadata = 0;
-    //
-    // this.waterStorage = 200;
-    // this.humidity = 22;
-    // this.nutrientStorage = 200;
-    // this.nutrients = 23;
-    // this.airQuality = 10;
-    // }
-    //
-    // @Override
-    // public void updateEntity() {}
-    //
-    // @Override
-    // public World getWorld() {
-    // return this.getWorldObj();
-    // }
-    //
-    // @Override
-    // public boolean isBlockBelow(Block reqBlock) {
-    // this.reqBlockSet.add(reqBlock);
-    // return super.isBlockBelow(reqBlock);
-    // }
-    //
-    // @Override
-    // public boolean isBlockBelow(String oreDictionaryName) {
-    // this.reqBlockOreDict.add(oreDictionaryName);
-    // return super.isBlockBelow(oreDictionaryName);
-    // }
-    //
-    // // region environment simulation
-    //
-    // @Override
-    // public int getLightLevel() {
-    // // 9 should allow most light dependent crops to grow
-    // // the only exception I know of the eating plant which checks
-    // return 15;
-    // }
-    //
-    // @Override
-    // public byte getHumidity() {
-    // return this.humidity;
-    // }
-    //
-    // @Override
-    // public byte updateHumidity() {
-    // return this.humidity;
-    // }
-    //
-    // @Override
-    // public byte getNutrients() {
-    // return this.nutrients;
-    // }
-    //
-    // @Override
-    // public byte updateNutrients() {
-    // return this.nutrients;
-    // }
-    //
-    // @Override
-    // public byte getAirQuality() {
-    // return this.airQuality;
-    // }
-    //
-    // @Override
-    // public byte updateAirQuality() {
-    // return this.nutrients;
-    // }
-    //
-    // }
 
     @Override
     public boolean onLeftClick(EntityPlayer player, ItemStack heldItem) {

@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.farming.materialleaf;
 
 import java.util.List;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -23,9 +24,9 @@ public class MaterialLeafVariant implements IMaterialLeafVariant {
 
     public MaterialLeafVariant(int id, String unlocalizedName, String materialType) {
         this.id = id;
-        this.iconName = "cropsnh:materialLeaf/" + unlocalizedName;
-        this.unlocalizedName = "item.cropsnh:materialLeaf." + unlocalizedName;
-        this.unlocalizedTooltip = "cropsnh_tooltip.leaf." + materialType;
+        this.iconName = Reference.MOD_ID_LOWER + ":materialLeaf/" + unlocalizedName;
+        this.unlocalizedName = "item." + Reference.MOD_ID_LOWER + ":materialLeaf." + unlocalizedName;
+        this.unlocalizedTooltip = Reference.MOD_ID_LOWER + "_tooltip.leaf." + materialType;
     }
 
     @Override

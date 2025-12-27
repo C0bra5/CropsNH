@@ -25,9 +25,9 @@ import gregtech.api.recipe.metadata.SimpleRecipeMetadataKey;
 public class CropsNHGTRecipeMaps {
 
     public static final RecipeMetadataKey<ICropCard> CROPSNH_CROP_METADATAKEY = SimpleRecipeMetadataKey
-        .create(ICropCard.class, "cropsnh_crop");
+        .create(ICropCard.class, Reference.MOD_ID_LOWER + "_crop");
     public static final RecipeMetadataKey<ICropMutation> CROPSNH_CROP_MUTATION_METADATAKEY = SimpleRecipeMetadataKey
-        .create(ICropMutation.class, "cropsnh_crop_mutation");
+        .create(ICropMutation.class, Reference.MOD_ID_LOWER + "_crop_mutation");
 
     public static final RecipeMap<SeedGeneratorBackend> fakeSeedGeneratorRecipes = RecipeMapBuilder
         .of(Reference.MOD_ID_LOWER + ".recipes.seedGenerator", SeedGeneratorBackend::new)

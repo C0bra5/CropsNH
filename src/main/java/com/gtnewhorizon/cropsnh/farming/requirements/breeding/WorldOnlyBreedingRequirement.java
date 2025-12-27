@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
@@ -28,6 +29,6 @@ public class WorldOnlyBreedingRequirement implements IMachineBreedingRequirement
 
     @Override
     public String getDescription() {
-        return StatCollector.translateToLocal("cropsnh_breedingReq.lockout.worldOnly");
+        return StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_breedingReq.lockout.worldOnly");
     }
 }

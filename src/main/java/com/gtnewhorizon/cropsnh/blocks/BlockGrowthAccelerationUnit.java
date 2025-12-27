@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.blocks;
 
 import java.util.List;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -37,31 +38,31 @@ public class BlockGrowthAccelerationUnit extends CropsNHBlockIndustrialFarmTired
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advancedTooltips) {
         super.addInformation(stack, player, tooltip, advancedTooltips);
         // specific
-        tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.growthAccelerationUnit.0"));
+        tooltip.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.growthAccelerationUnit.0"));
         if (advancedTooltips) {
             tooltip.add(
                 StatCollector.translateToLocalFormatted(
-                    "cropsnh_tooltip.growthAccelerationUnit.1.adv",
+                    Reference.MOD_ID_LOWER + "_tooltip.growthAccelerationUnit.1.adv",
                     GROWTH_SPEED_BONUS * 100));
             tooltip.add(
                 StatCollector.translateToLocalFormatted(
-                    "cropsnh_tooltip.growthAccelerationUnit.2.adv",
+                    Reference.MOD_ID_LOWER + "_tooltip.growthAccelerationUnit.2.adv",
                     BASE_POWER_INCREASE * 100));
         } else {
             tooltip.add(
                 StatCollector
-                    .translateToLocalFormatted("cropsnh_tooltip.growthAccelerationUnit.1", GROWTH_SPEED_BONUS * 100));
+                    .translateToLocalFormatted(Reference.MOD_ID_LOWER + "_tooltip.growthAccelerationUnit.1", GROWTH_SPEED_BONUS * 100));
             tooltip.add(
                 StatCollector
-                    .translateToLocalFormatted("cropsnh_tooltip.growthAccelerationUnit.2", BASE_POWER_INCREASE * 100));
+                    .translateToLocalFormatted(Reference.MOD_ID_LOWER + "_tooltip.growthAccelerationUnit.2", BASE_POWER_INCREASE * 100));
         }
         // generic
-        tooltip.add(StatCollector.translateToLocal("cropsnh_tooltip.upgradeTierMustMatchSeedBed"));
+        tooltip.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.upgradeTierMustMatchSeedBed"));
     }
 
     @Override
     public void registerBlockIcons(IIconRegister aIconRegister) {
         super.registerBlockIcons(aIconRegister);
-        this.mBottomIcon = this.mTopIcon = aIconRegister.registerIcon("cropsnh:industrialFarm/growthAccelerationUnit");
+        this.mBottomIcon = this.mTopIcon = aIconRegister.registerIcon(Reference.MOD_ID_LOWER + ":industrialFarm/growthAccelerationUnit");
     }
 }

@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.crops.mobs;
 
 import java.awt.Color;
 
+import com.gtnewhorizon.cropsnh.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,7 +40,7 @@ public class CropGoldfish extends NHCropCard {
 
     @Override
     public String getFlavourText() {
-        return ConfigurationHandler.putAnEndToExistentialDread ? null : "cropsnh_crops.goldfish.flavour";
+        return ConfigurationHandler.putAnEndToExistentialDread ? null : Reference.MOD_ID_LOWER + "_crops.goldfish.flavour";
     }
 
     @Override
