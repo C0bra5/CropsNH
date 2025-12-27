@@ -3,26 +3,27 @@ package com.gtnewhorizon.cropsnh.farming.requirements.growth;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.api.IWorldGrowthRequirement;
 import com.gtnewhorizon.cropsnh.reference.Reference;
-import com.gtnewhorizon.cropsnh.utility.Tuple2;
 
 public class MachineOnlyGrowthRequirement implements IWorldGrowthRequirement {
 
-    private final Tuple2<String, Object[]> unlocalizedDesc;
+    private final Pair<String, Object[]> unlocalizedDesc;
 
     public MachineOnlyGrowthRequirement() {
-        this.unlocalizedDesc = new Tuple2<>(Reference.MOD_ID_LOWER + "_growthReq.lockout.machineOnly", new Object[] {});
+        this.unlocalizedDesc = Pair.of(Reference.MOD_ID_LOWER + "_growthReq.lockout.machineOnly", new Object[] {});
     }
 
     @Override
     public String getDescription() {
-        return StatCollector.translateToLocalFormatted(this.unlocalizedDesc.item1, this.unlocalizedDesc.item2);
+        return StatCollector.translateToLocalFormatted(this.unlocalizedDesc.getLeft(), this.unlocalizedDesc.getRight());
     }
 
     @Override
-    public Tuple2<String, Object[]> getUnlocalisedDescription() {
+    public Pair<String, Object[]> getUnlocalizedDescription() {
         return this.unlocalizedDesc;
     }
 

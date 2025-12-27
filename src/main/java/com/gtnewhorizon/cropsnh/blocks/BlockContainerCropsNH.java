@@ -3,17 +3,12 @@ package com.gtnewhorizon.cropsnh.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import com.gtnewhorizon.cropsnh.blocks.abstracts.BlockCropsNH;
 import com.gtnewhorizon.cropsnh.reference.Names;
 import com.gtnewhorizon.cropsnh.reference.Reference;
-import com.gtnewhorizon.cropsnh.tileentity.TileEntityCropsNH;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -58,35 +53,6 @@ public abstract class BlockContainerCropsNH extends BlockCropsNH implements ITil
 
     private static String wrapName(String name) {
         return Reference.MOD_ID + ':' + Names.TileEntity.tileEntity + '_' + name;
-    }
-
-    /**
-     * Sets the block's orientation based upon the direction the player is looking when the block is placed.
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
-        TileEntity te = world.getTileEntity(x, y, z);
-        if (te != null && te instanceof TileEntityCropsNH) {
-            TileEntityCropsNH tile = (TileEntityCropsNH) world.getTileEntity(x, y, z);
-            if (tile.isRotatable()) {
-                int direction = MathHelper.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-                switch (direction) {
-                    case 0:
-                        tile.setOrientation(ForgeDirection.NORTH);
-                        break;
-                    case 1:
-                        tile.setOrientation(ForgeDirection.EAST);
-                        break;
-                    case 2:
-                        tile.setOrientation(ForgeDirection.SOUTH);
-                        break;
-                    case 3:
-                        tile.setOrientation(ForgeDirection.WEST);
-                        break;
-                }
-            }
-        }
     }
 
     @Override

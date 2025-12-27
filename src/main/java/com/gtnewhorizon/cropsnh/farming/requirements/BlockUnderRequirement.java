@@ -21,6 +21,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.gtnewhorizon.cropsnh.api.BlockWithMeta;
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
@@ -32,7 +34,6 @@ import com.gtnewhorizon.cropsnh.api.IWorldGrowthRequirement;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizon.cropsnh.utility.MetaSet;
-import com.gtnewhorizon.cropsnh.utility.Tuple2;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
@@ -75,13 +76,12 @@ public class BlockUnderRequirement implements IWorldGrowthRequirement, IWorldBre
     private final Set<Materials> materials = new HashSet<>();
     private final Set<String> oreDictionaries = new HashSet<String>();
     private final MetaSet<Block> blocks = new MetaSet<>();
-    private final Tuple2<String, Object[]> unlocalizedDesc;
+    private final Pair<String, Object[]> unlocalizedDesc;
 
     private BlockUnderRequirement(String materialDescription) {
         this.materialDescription = materialDescription;
-        this.unlocalizedDesc = new Tuple2<>(
-            Reference.MOD_ID_LOWER + "_growthReq.blockUnder." + this.materialDescription,
-            new Object[] {});
+        this.unlocalizedDesc = Pair
+            .of(Reference.MOD_ID_LOWER + "_growthReq.blockUnder." + this.materialDescription, new Object[] {});
     }
 
     public BlockUnderRequirement addMaterial(Materials... args) {
@@ -116,11 +116,11 @@ public class BlockUnderRequirement implements IWorldGrowthRequirement, IWorldBre
 
     @Override
     public String getDescription() {
-        return StatCollector.translateToLocalFormatted(this.unlocalizedDesc.item1, unlocalizedDesc.item2);
+        return StatCollector.translateToLocalFormatted(this.unlocalizedDesc.getLeft(), unlocalizedDesc.getRight());
     }
 
     @Override
-    public Tuple2<String, Object[]> getUnlocalisedDescription() {
+    public Pair<String, Object[]> getUnlocalizedDescription() {
         return this.unlocalizedDesc;
     }
 

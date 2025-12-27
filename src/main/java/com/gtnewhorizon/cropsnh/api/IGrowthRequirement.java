@@ -1,6 +1,6 @@
 package com.gtnewhorizon.cropsnh.api;
 
-import com.gtnewhorizon.cropsnh.utility.Tuple2;
+import org.apache.commons.lang3.tuple.Pair;
 
 public interface IGrowthRequirement {
 
@@ -12,6 +12,6 @@ public interface IGrowthRequirement {
     /**
      * @return A short description shown in the seed's tooltip.
      */
-    Tuple2<String, Object[]> getUnlocalisedDescription();
+    Pair<String, Object[]> getUnlocalizedDescription();
 
 }
