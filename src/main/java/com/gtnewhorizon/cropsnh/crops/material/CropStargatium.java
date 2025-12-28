@@ -6,6 +6,7 @@ import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
+import com.gtnewhorizon.cropsnh.farming.requirements.growth.MachineOnlyGrowthRequirement;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
@@ -28,10 +29,17 @@ public class CropStargatium extends NHCropCard {
         this.addDuplicationCatalyst("dustNaquadahOxideMixture", 1);
         this.addDuplicationCatalyst("dustNaquadria", 1);
         this.addDuplicationCatalyst("dustNaquadriaOxideMixture", 1);
+
+        this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
     }
 
     @Override
     public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.IV;
+    }
+
+    @Override
+    public int getMinSeedBedTier() {
         return VoltageIndex.IV;
     }
 

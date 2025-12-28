@@ -21,12 +21,11 @@ public abstract class CommonProxy implements IProxy {
     }
 
     @Override
-    public void registerEventHandlers() {
-
-    }
+    public void registerEventHandlers() {}
 
     @Override
     public void initConfiguration(FMLPreInitializationEvent event) {
         ConfigurationHandler.init(event);
     }
+
 }

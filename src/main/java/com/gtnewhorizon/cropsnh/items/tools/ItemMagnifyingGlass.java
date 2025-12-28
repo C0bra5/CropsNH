@@ -60,7 +60,8 @@ public class ItemMagnifyingGlass extends ItemCropsNH implements ICropRightClickH
     @Override
     public boolean onRightClick(World world, ICropStickTile te, EntityPlayer player, ItemStack heldItem) {
         // analyze the crop if there is a crop
-        ISeedStats stats = te.getStats();
+        ISeedStats stats = te.getSeed()
+            .getStats();
         if (te.hasCrop() && stats != null) {
             stats.setAnalyzed(true);
         }

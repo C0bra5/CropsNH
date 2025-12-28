@@ -70,8 +70,7 @@ public class BlockCropSticks extends BlockContainerCropsNH {
 
         // else ensure that we have a crop tile
         final TileEntity te = world.getTileEntity(x, y, z);
-        if (!(te instanceof ICropStickTile)) return true;
-        final ICropStickTile crop = (ICropStickTile) te;
+        if (!(te instanceof final ICropStickTile crop)) return true;
         final ItemStack heldItem = player.getCurrentEquippedItem();
 
         // if it can interact with crops deffer to that tool's logic.
@@ -96,8 +95,7 @@ public class BlockCropSticks extends BlockContainerCropsNH {
 
         // else ensure that we have a crop tile
         final TileEntity te = world.getTileEntity(x, y, z);
-        if (!(te instanceof ICropStickTile)) return;
-        final ICropStickTile crop = (ICropStickTile) te;
+        if (!(te instanceof final ICropStickTile crop)) return;
         final ItemStack heldItem = player.getCurrentEquippedItem();
 
         // if it can interact with crops deffer to that tool's logic.
@@ -128,12 +126,12 @@ public class BlockCropSticks extends BlockContainerCropsNH {
         // check if crops can stay
         final TileEntity te = world.getTileEntity(x, y, z);
         boolean shouldRemove = !this.canBlockStay(world, x, y, z);
-        if (!shouldRemove && te instanceof ICropStickTile) {
-            ICropStickTile cropTE = (ICropStickTile) te;
-            if (cropTE.getCrop() != null) {
+        if (!shouldRemove && te instanceof ICropStickTile cropTE) {
+            if (cropTE.getSeed() != null) {
                 Block b = world.getBlock(x, y - 1, z);
                 int meta = world.getBlockMetadata(x, y - 1, z);
-                shouldRemove = !cropTE.getCrop()
+                shouldRemove = !cropTE.getSeed()
+                    .getCrop()
                     .getSoilTypes()
                     .isRegistered(b, meta);
             }
@@ -178,8 +176,7 @@ public class BlockCropSticks extends BlockContainerCropsNH {
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World worldIn, int x, int y, int z) {
         double d = 0.2;
-        return AxisAlignedBB
-            .getBoundingBox((double) d, (double) 0.0, (double) d, (double) (1.0 - d), (double) 0.7, (double) (1.0 - d));
+        return AxisAlignedBB.getBoundingBox(d, 0.0d, d, (1.0d - d), 0.7d, (1.0d - d));
     }
 
     @Override
@@ -313,5 +310,4 @@ public class BlockCropSticks extends BlockContainerCropsNH {
     public ItemStack getWailaStack(BlockCropsNH block, TileEntityCropsNH tea) {
         return new ItemStack(CropsNHBlocks.blockCrop, 1, 0);
     }
-
 }

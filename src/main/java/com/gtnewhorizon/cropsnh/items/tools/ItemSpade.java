@@ -88,13 +88,15 @@ public class ItemSpade extends ItemCropsNH implements ICropLeftClickHandler, ICr
             ItemStack seedDrop = te.getSeedStack();
             if (seedDrop != null) {
                 seedDrop.stackSize = getSeedCount(
-                    te.getStats()
+                    te.getSeed()
+                        .getStats()
                         .getResistance());
                 if (seedDrop.stackSize > 0) {
                     te.dropItem(seedDrop);
                 }
             }
             if (clearAfter) te.clear();
+            else te.setGrowthProgress(0);
             return true;
         }
         return true;

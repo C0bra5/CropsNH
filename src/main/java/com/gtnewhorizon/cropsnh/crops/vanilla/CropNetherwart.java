@@ -18,6 +18,7 @@ import com.gtnewhorizon.cropsnh.api.ISeedStats;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
+import com.gtnewhorizon.cropsnh.farming.SeedData;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 import com.gtnewhorizon.cropsnh.reference.Data;
 
@@ -100,9 +101,10 @@ public class CropNetherwart extends NHCropCard {
         // if right click with snow blocks netherwart may turn into terrawart.
         if (heldItem.getItem() == Item.getItemFromBlock(Blocks.snow)) {
             if (data.getChance() > XSTR.XSTR_INSTANCE.nextInt(10000)) {
-                ISeedStats stats = te.getStats();
+                ISeedStats stats = te.getSeed()
+                    .getStats();
                 te.clear();
-                te.plantSeed(CropsNHCrops.TerraWart, stats);
+                te.plantSeed(new SeedData(CropsNHCrops.TerraWart, stats));
             } else {
                 // Increase the chance just to make it slightly more likely and to act a bad luck protection.
                 // At most, I'd like players to spend a stack of snow blocks on this.

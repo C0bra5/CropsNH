@@ -6,6 +6,7 @@ import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
+import com.gtnewhorizon.cropsnh.farming.requirements.growth.MachineOnlyGrowthRequirement;
 
 import gregtech.api.enums.VoltageIndex;
 
@@ -23,6 +24,8 @@ public class CropScheelinium extends NHCropCard {
         this.addDuplicationCatalyst("dustTungsten", 1);
         this.addDuplicationCatalyst("dustTungstate", 1);
         this.addDuplicationCatalyst("dustScheelite", 1);
+
+        this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
     }
 
     @Override
@@ -32,6 +35,11 @@ public class CropScheelinium extends NHCropCard {
 
     @Override
     public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.EV;
+    }
+
+    @Override
+    public int getMinSeedBedTier() {
         return VoltageIndex.EV;
     }
 

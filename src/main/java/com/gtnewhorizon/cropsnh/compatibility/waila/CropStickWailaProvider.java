@@ -12,8 +12,10 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.gtnewhorizon.cropsnh.api.IGrowthRequirement;
+import com.gtnewhorizon.cropsnh.api.ISeedData;
 import com.gtnewhorizon.cropsnh.api.ISeedStats;
-import com.gtnewhorizon.cropsnh.farming.SeedStats;
+import com.gtnewhorizon.cropsnh.farming.SeedData;
+import com.gtnewhorizon.cropsnh.reference.Data;
 import com.gtnewhorizon.cropsnh.reference.Names;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.tileentity.TileEntityCrop;
@@ -29,20 +31,25 @@ public class CropStickWailaProvider implements IWailaDataProvider {
     @Override
     public ItemStack getWailaStack(IWailaDataAccessor dataAccessor, IWailaConfigHandler configHandler) {
         TileEntity te = dataAccessor.getTileEntity();
-        if (te instanceof TileEntityCrop) {
-            TileEntityCrop cropTE = (TileEntityCrop) te;
-            if (cropTE.hasWeed()) {
+        if (te instanceof TileEntityCrop teCrop) {
+            if (teCrop.hasWeed()) {
                 return weedStack;
             }
-            return ((TileEntityCrop) te).getSeedStack();
+            NBTTagCompound nbt = dataAccessor.getNBTData();
+            ISeedData seedData = nbt.hasKey(Names.NBT.crop, Data.NBTType._object)
+                ? new SeedData(nbt.getCompoundTag(Names.NBT.crop))
+                : teCrop.getSeed();
+            if (seedData != null) {
+                return seedData.getStack();
+            }
         }
         return null;
     }
 
     @Override
-    public List<String> getWailaHead(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor dataAccessor,
+    public List<String> getWailaHead(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor dataAccessor,
         IWailaConfigHandler configHandler) {
-        return currenttip;
+        return currentTip;
     }
 
     @Override
@@ -50,20 +57,24 @@ public class CropStickWailaProvider implements IWailaDataProvider {
         IWailaConfigHandler configHandler) {
         TileEntity te = dataAccessor.getTileEntity();
         NBTTagCompound nbt = dataAccessor.getNBTData();
-        if (te instanceof TileEntityCrop) {
-            TileEntityCrop teCrop = (TileEntityCrop) te;
+        if (te instanceof TileEntityCrop teCrop) {
             if (teCrop.hasCrop()) {
                 if (teCrop.hasWeed()) {
                     information.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.weeds"));
                 } else {
                     String header, value;
-
-                    // Add the seed name
-                    header = StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.seed");
-                    value = StatCollector.translateToLocal(
-                        teCrop.getCrop()
-                            .getUnlocalizedName());
-                    information.add(header + ": " + value);
+                    ISeedData seedData = nbt.hasKey(Names.NBT.crop, Data.NBTType._object)
+                        ? new SeedData(nbt.getCompoundTag(Names.NBT.crop))
+                        : teCrop.getSeed();
+                    if (seedData.getStats()
+                        .isAnalyzed()) {
+                        // Add the seed name
+                        header = StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.seed");
+                        value = StatCollector.translateToLocal(
+                            seedData.getCrop()
+                                .getUnlocalizedName());
+                        information.add(header + ": " + value);
+                    }
 
                     // add growth progress
                     header = StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.progress");
@@ -85,7 +96,7 @@ public class CropStickWailaProvider implements IWailaDataProvider {
                     }
 
                     // write out the stats of the crop if the stats exist
-                    ISeedStats stats = SeedStats.readFromNBT(nbt);
+                    ISeedStats stats = seedData.getStats();
                     if (stats.isAnalyzed()) {
                         information.add(
                             String.format(
@@ -127,7 +138,6 @@ public class CropStickWailaProvider implements IWailaDataProvider {
     public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x,
         int y, int z) {
         if (te instanceof TileEntityCrop) {
-            TileEntityCrop teCrop = (TileEntityCrop) te;
             tag.setFloat("waila_perc", ((TileEntityCrop) te).getGrowthPercent());
             te.writeToNBT(tag);
         }

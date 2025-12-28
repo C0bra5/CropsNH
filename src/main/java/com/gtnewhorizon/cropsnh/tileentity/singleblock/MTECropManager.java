@@ -330,7 +330,8 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
                 if (GTUtility.isStackInvalid(aStack)) continue;
                 if (this.getHarvestBonusChance() > MathUtils.randInt(1, 100)) {
                     aStack.stackSize += getBonusStackIncrease(
-                        crop.getStats()
+                        crop.getSeed()
+                            .getStats()
                             .getGain());
                 }
                 dropTracker.merge(aStack, aStack.stackSize, Integer::sum);

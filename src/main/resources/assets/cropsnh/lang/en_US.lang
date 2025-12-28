@@ -86,7 +86,8 @@ cropsnh_tooltip.seed=Seed
 cropsnh_tooltip.stats=Stats
 cropsnh_tooltip.growth=Growth
 cropsnh_tooltip.gain=Gain
-cropsnh_tooltip.resistance=Strength
+cropsnh_tooltip.resistance=Resistance
+cropsnh_tooltip.min_seed_bed_tier=Minimum seed bed tier: %1$s
 cropsnh_tooltip.soil=Soil
 cropsnh_tooltip.fertilizer=Fertilizer
 cropsnh_tooltip.water=Water
@@ -158,13 +159,13 @@ GT5U.gui.text.cropsnh.industrialFarm.seedOverflow=Seed Storage exceeds current c
 GT5U.gui.text.cropsnh.industrialFarm.cannotGrow=This seed cannot grow in the current environment.
 
 # Industrial Farm Scanner Tooltips
-cropsnh_tooltip.industrialFarm.scanner.0=Tier: §e%1$d§r
-cropsnh_tooltip.industrialFarm.scanner.1=Capacity: §e%1$d§r
-cropsnh_tooltip.industrialFarm.scanner.2=Harvest Bonus: §e%1$.3f§r%%
-cropsnh_tooltip.industrialFarm.scanner.3=Growth Speed Bonus: §e%1$.3f§r%%
-cropsnh_tooltip.industrialFarm.scanner.4=Water Usage: §e%1$d§rL/§e%2$d§rt
-cropsnh_tooltip.industrialFarm.scanner.5=Fertilizer Usage: §e%1$d§rL/§e%2$d§rt
-cropsnh_tooltip.industrialFarm.scanner.6=Nutrient Score: §e%1$d§r out of §e%2$d§r
+cropsnh_tooltip.industrialFarm.scanner.0=Tier: §e%1$s§r
+cropsnh_tooltip.industrialFarm.scanner.1=Capacity: §e%1$s§r
+cropsnh_tooltip.industrialFarm.scanner.2=Harvest Bonus: §e%1$s§r%%
+cropsnh_tooltip.industrialFarm.scanner.3=Growth Speed Bonus: §e%1$s§r%%
+cropsnh_tooltip.industrialFarm.scanner.4=Water Usage: §e%1$d§rL/§e%2$s§rt
+cropsnh_tooltip.industrialFarm.scanner.5=Fertilizer Usage: §e%1$s§rL/§e%2$s§rt
+cropsnh_tooltip.industrialFarm.scanner.6=Nutrient Score: §e%1$s§r out of §e%2$s§r
 
 # Seed Bed
 cropsnh_tooltip.seedBed.0=Determines the tier of the industrial farm.
@@ -285,7 +286,7 @@ cropsnh_nei.breeding.title=Crop Breeding
 cropsnh.recipes.seedGenerator=Seed Generator
 cropsnh_nei.seedGenerator.tooltip.fluidCost=cost = 100L * (growth + gain + resistance)
 cropsnh.recipes.cropBreeder=Crop Breeder
-cropsnh_nei.cropBreeder.tooltip.fluidCost=cost = (1000L * OutputTier)  + (500L * (growth + gain + resistance)).
+cropsnh_nei.cropBreeder.tooltip.fluidCost=cost = (1,000L * OutputTier)  + (500L * (growth + gain + resistance)).
 cropsnh_nei.cropBreeder.tooltip.outputStats=The resulting stats will be an average of the parents.
 cropsnh_nei.cropBreeder.tooltip.successChance=Success chance depends on the tier of the machine.
 cropsnh.recipes.cropGeneExtractor=Crop Gene Extractor
@@ -489,8 +490,7 @@ cropsnh_crops.zomplant=Zomplant
 cropsnh_breedingReq.lockout.machineOnly=Requires the crop breeder
 cropsnh_breedingReq.lockout.worldOnly=Must use crop sticks
 # Lockout Growth Requirements
-cropsnh_growthReq.lockout.machineOnly=Can only be grown in the industrial garden.
-cropsnh_growthReq.lockout.worldOnly=Can only be grown in a crop stick.
+cropsnh_growthReq.lockout.machineOnly=Can only be harvested in the Industrial Farm.
 # Light Growth Requirements
 cropsnh_growthReq.minLight.format=Needs a light Level of %1$d or higher.
 cropsnh_growthReq.maxLight.format=Needs a light Level of %1$d or lower.

@@ -21,4 +21,5 @@ public class MachineOnlyBreedingRequirement implements IWorldBreedingRequirement
     public String getDescription() {
         return StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_breedingReq.lockout.machineOnly");
     }
+
 }

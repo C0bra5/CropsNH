@@ -11,6 +11,7 @@ import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
+import com.gtnewhorizon.cropsnh.farming.requirements.growth.MachineOnlyGrowthRequirement;
 
 import gregtech.api.enums.VoltageIndex;
 
@@ -28,6 +29,8 @@ public class CropStarwart extends NHCropCard {
         this.addDuplicationCatalyst("dustNetherStar", 1);
         this.addDuplicationCatalyst("netherStar", 1);
         this.addDuplicationCatalyst(new ItemStack(Items.skull, 3, 1));
+
+        this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
     }
 
     @Override
@@ -37,6 +40,11 @@ public class CropStarwart extends NHCropCard {
 
     @Override
     public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.EV;
+    }
+
+    @Override
+    public int getMinSeedBedTier() {
         return VoltageIndex.EV;
     }
 

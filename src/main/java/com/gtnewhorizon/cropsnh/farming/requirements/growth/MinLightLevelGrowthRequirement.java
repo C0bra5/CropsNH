@@ -35,4 +35,9 @@ public class MinLightLevelGrowthRequirement implements IWorldGrowthRequirement {
     public boolean canGrow(World world, ICropStickTile tile, int x, int y, int z) {
         return world.getBlockLightValue(x, y, z) >= this.minLightLevel;
     }
+
+    @Override
+    public boolean onlyPreventsHarvest() {
+        return false;
+    }
 }

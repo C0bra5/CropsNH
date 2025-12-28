@@ -643,44 +643,44 @@ public class MTEIndustrialFarm extends MTEExtendedPowerMultiBlockBase<MTEIndustr
         ret.add(
             StatCollector.translateToLocalFormatted(
                 Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.scanner.0",
-                this.mUpgradeTier));
+                GTUtility.formatNumbers(this.mUpgradeTier)));
         // capacity
         ret.add(
             StatCollector.translateToLocalFormatted(
                 Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.scanner.1",
-                this.mSeedCapacity));
+                GTUtility.formatNumbers(this.mSeedCapacity)));
         // Harvest Modifier
         ret.add(
             StatCollector.translateToLocalFormatted(
                 Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.scanner.2",
-                this.getHarvestRoundMultiplier() * 100.0f));
+                GTUtility.formatNumbers(this.getHarvestRoundMultiplier() * 100.0f)));
         // Growth Modifier
         ret.add(
             StatCollector.translateToLocalFormatted(
                 Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.scanner.3",
-                this.getGrowthSpeedMultiplier() * 100.0f));
+                GTUtility.formatNumbers(this.getGrowthSpeedMultiplier() * 100.0f)));
         // Water Usage per Cycle
         int waterUsage = this.getConsumablePotencyNeededPerCycle();
         ret.add(
             StatCollector.translateToLocalFormatted(
                 Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.scanner.4",
-                waterUsage,
-                CYCLE_DURATION));
+                GTUtility.formatNumbers(waterUsage),
+                GTUtility.formatNumbers(CYCLE_DURATION)));
         // Fertilizer Usage per Cycle
         int fertUsage = this.mFertilizerUnitCount > 0 ? waterUsage : 0;
         ret.add(
             StatCollector.translateToLocalFormatted(
                 Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.scanner.5",
-                fertUsage,
-                CYCLE_DURATION));
+                GTUtility.formatNumbers(fertUsage),
+                GTUtility.formatNumbers(CYCLE_DURATION)));
         // nutrient score
         ISeedData tSeedData = CropsNHUtils.getAnalyzedSeedData(this.getSeedStack());
         if (tSeedData != null) {
             ret.add(
                 StatCollector.translateToLocalFormatted(
                     Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.scanner.6",
-                    this.getNutrientScore(tSeedData),
-                    TileEntityCrop.MAX_NUTRIENT_SCORE));
+                    GTUtility.formatNumbers(this.getNutrientScore(tSeedData)),
+                    GTUtility.formatNumbers(TileEntityCrop.MAX_NUTRIENT_SCORE)));
         }
         return ret.toArray(new String[0]);
     }

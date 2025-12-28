@@ -6,6 +6,7 @@ import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
+import com.gtnewhorizon.cropsnh.farming.requirements.growth.MachineOnlyGrowthRequirement;
 
 import gregtech.api.enums.VoltageIndex;
 
@@ -13,9 +14,14 @@ public class CropMagicalNightshade extends NHCropCard {
 
     public CropMagicalNightshade() {
         super("magicalNightshade", new Color(0x20001B), new Color(0xB4009C));
+
         this.addDrop(CropsNHItemList.magicEssence.get(1), 100_00);
+
         this.addBlockUnderRequirement("ichorium");
+
         this.addDuplicationCatalyst(CropsNHItemList.magicEssence.get(1));
+
+        this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
     }
 
     @Override
@@ -30,6 +36,11 @@ public class CropMagicalNightshade extends NHCropCard {
 
     @Override
     public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.HV;
+    }
+
+    @Override
+    public int getMinSeedBedTier() {
         return VoltageIndex.HV;
     }
 

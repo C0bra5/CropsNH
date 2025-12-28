@@ -24,6 +24,8 @@ import com.gtnewhorizon.cropsnh.init.CropsNHItems;
 import com.gtnewhorizon.cropsnh.reference.Names;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 
+import gregtech.api.enums.GTValues;
+
 public class ItemGenericSeed extends ItemCropsNH {
 
     @Override
@@ -143,6 +145,13 @@ public class ItemGenericSeed extends ItemCropsNH {
                 for (IGrowthRequirement req : reqs) {
                     toolTip.add(req.getDescription());
                 }
+            }
+            int minSeedBedTier = crop.getMinSeedBedTier();
+            if (minSeedBedTier >= 0) {
+                toolTip.add(
+                    StatCollector.translateToLocalFormatted(
+                        Reference.MOD_ID_LOWER + "_tooltip.min_seed_bed_tier",
+                        GTValues.TIER_COLORS[minSeedBedTier] + GTValues.VN[minSeedBedTier] + EnumChatFormatting.RESET));
             }
         } else {
             toolTip.add(" " + StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.unidentified"));

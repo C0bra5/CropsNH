@@ -41,8 +41,8 @@ public class BlockSeedBed extends CropsNHBlockIndustrialFarmTiredComponent {
             CropsNHItemList.SeedBed_UXV);
     }
 
-    private final static int MIN_TIER = VoltageIndex.MV;
-    private final static int MAX_TIER = VoltageIndex.UXV;
+    public final static int MIN_TIER = VoltageIndex.MV;
+    public final static int MAX_TIER = VoltageIndex.UXV;
 
     private final static int[] WATER_CONSUMPTION_LOOKUP;
 

@@ -31,4 +31,9 @@ public class MachineOnlyGrowthRequirement implements IWorldGrowthRequirement {
     public boolean canGrow(World world, ICropStickTile tile, int x, int y, int z) {
         return false;
     }
+
+    @Override
+    public boolean onlyPreventsHarvest() {
+        return true;
+    }
 }

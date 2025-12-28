@@ -6,6 +6,7 @@ import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
+import com.gtnewhorizon.cropsnh.farming.requirements.growth.MachineOnlyGrowthRequirement;
 
 import gregtech.api.enums.VoltageIndex;
 
@@ -18,6 +19,8 @@ public class CropTransformium extends NHCropCard {
         this.addDrop(CropsNHItemList.uumBerry.get(1), 10_00);
 
         this.addLikedBiomes(BiomeDictionary.Type.END, BiomeDictionary.Type.COLD);
+
+        this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
     }
 
     @Override
@@ -27,6 +30,11 @@ public class CropTransformium extends NHCropCard {
 
     @Override
     public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.EV;
+    }
+
+    @Override
+    public int getMinSeedBedTier() {
         return VoltageIndex.EV;
     }
 

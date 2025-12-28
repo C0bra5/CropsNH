@@ -8,6 +8,7 @@ import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.PlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
+import com.gtnewhorizon.cropsnh.farming.requirements.growth.MachineOnlyGrowthRequirement;
 
 import gregtech.api.enums.Mods;
 import gregtech.api.enums.VoltageIndex;
@@ -22,6 +23,8 @@ public class CropSpaceFlower extends NHCropCard {
         if (Mods.GalacticraftCore.isModLoaded()) {
             this.addBlockUnderRequirement("moon");
         }
+
+        this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
     }
 
     @Override
@@ -36,6 +39,11 @@ public class CropSpaceFlower extends NHCropCard {
 
     @Override
     public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.IV;
+    }
+
+    @Override
+    public int getMinSeedBedTier() {
         return VoltageIndex.IV;
     }
 

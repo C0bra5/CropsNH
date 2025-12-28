@@ -178,7 +178,7 @@ public abstract class CropCard implements ICropCard {
 
     @Override
     public float getCrossingThreshold() {
-        return 1.0f;
+        return 0.8f;
     }
 
     @Override
@@ -194,7 +194,8 @@ public abstract class CropCard implements ICropCard {
     @Override
     public boolean spreadsWeeds(ICropStickTile te) {
         if (!te.isMature()) return false;
-        ISeedStats stats = te.getStats();
+        ISeedStats stats = te.getSeed()
+            .getStats();
         if (stats == null) return false;
         // if resistance is greater than or equal to growth we don't spread seeds.
         if (stats.getResistance() >= stats.getGrowth()) return false;

@@ -18,6 +18,7 @@ public final class Names {
 
         // #region seed stuff
         public static final String crop = "crop";
+        public static final String amount = "amount";
         public static final String growth = "gr";
         public static final String gain = "ga";
         public static final String resistance = "re";

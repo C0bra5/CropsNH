@@ -133,6 +133,11 @@ public class BlockUnderRequirement implements IWorldGrowthRequirement, IWorldBre
     }
 
     @Override
+    public boolean onlyPreventsHarvest() {
+        return false;
+    }
+
+    @Override
     public boolean canBreed(ArrayList<ICropCard> parents, World world, ICropStickTile tile, int x, int y, int z) {
         return canGrow(world, tile, x, y, z);
     }

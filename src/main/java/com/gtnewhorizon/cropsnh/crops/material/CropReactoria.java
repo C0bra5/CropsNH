@@ -8,6 +8,7 @@ import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
+import com.gtnewhorizon.cropsnh.farming.requirements.growth.MachineOnlyGrowthRequirement;
 
 import gregtech.api.enums.VoltageIndex;
 
@@ -26,6 +27,8 @@ public class CropReactoria extends NHCropCard {
         this.addDuplicationCatalyst("dustUranium", 1);
         this.addDuplicationCatalyst("dustUranium235", 1);
         this.addDuplicationCatalyst("dustUraninite", 2);
+
+        this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
     }
 
     @Override
@@ -35,6 +38,11 @@ public class CropReactoria extends NHCropCard {
 
     @Override
     public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.EV;
+    }
+
+    @Override
+    public int getMinSeedBedTier() {
         return VoltageIndex.EV;
     }
 

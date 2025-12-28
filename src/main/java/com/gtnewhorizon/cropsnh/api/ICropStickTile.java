@@ -32,12 +32,7 @@ public interface ICropStickTile {
     /**
      * @return the ICrop instance planted on this crop
      */
-    ICropCard getCrop();
-
-    /**
-     * @return the stats for this crop
-     */
-    ISeedStats getStats();
+    ISeedData getSeed();
 
     /**
      * @return Any additional data this crop might hold
@@ -86,7 +81,7 @@ public interface ICropStickTile {
      * @param cc    The seed being planted.
      * @param stats The stats of the seed being planted.
      */
-    boolean tryPlantSeed(ICropCard cc, ISeedStats stats);
+    boolean tryPlantSeed(ISeedData seedData);
 
     /**
      * Sets the crop in the crop stick, and resets the growth progress.
@@ -94,7 +89,7 @@ public interface ICropStickTile {
      * @param cc    The crop to plant.
      * @param stats The stats of the new crop.
      */
-    void plantSeed(ICropCard cc, ISeedStats stats);
+    void plantSeed(ISeedData seedData);
 
     /**
      * Clears the plant from this crop
@@ -214,9 +209,21 @@ public interface ICropStickTile {
     int getGrowthProgress();
 
     /**
+     * Sets the current growth progress.
+     * 
+     * @param prog How many progress points to set the crop to.
+     */
+    void setGrowthProgress(int prog);
+
+    /**
      * @return The growth progress of the seed.
      */
     float getGrowthPercent();
+
+    /**
+     * @return The growth progress to add on the next growth tick;
+     */
+    int calcGrowthRate();
 
     /**
      * Fired when a player right-clicks the crop block.

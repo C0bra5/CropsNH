@@ -168,6 +168,7 @@ public class CropRegistry implements ICropRegistry {
                 "Render Shape",
                 // growth related things
                 "Tier",
+                "Min Seed Bed Tier",
                 "Growth Duration",
                 "Breeding Threshold",
                 "Crossing Threshold",
@@ -207,6 +208,7 @@ public class CropRegistry implements ICropRegistry {
                             cc.getRenderShape().getName(),
                             // growth related things
                             cc.getTier(),
+                            cc.getMinSeedBedTier(),
                             cc.getGrowthDuration(),
                             cc.getBreedingThreshold(),
                             cc.getCrossingThreshold(),

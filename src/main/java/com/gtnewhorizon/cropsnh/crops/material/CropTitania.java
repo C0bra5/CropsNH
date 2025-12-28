@@ -6,6 +6,7 @@ import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
+import com.gtnewhorizon.cropsnh.farming.requirements.growth.MachineOnlyGrowthRequirement;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 
 import gregtech.api.enums.VoltageIndex;
@@ -24,6 +25,8 @@ public class CropTitania extends NHCropCard {
         this.addDuplicationCatalyst("dustTitanium", 1);
         this.addDuplicationCatalyst("dustRutile", 2);
         this.addDuplicationCatalyst("dustIlmenite", 2);
+
+        this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
     }
 
     @Override
@@ -38,6 +41,11 @@ public class CropTitania extends NHCropCard {
 
     @Override
     public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.EV;
+    }
+
+    @Override
+    public int getMinSeedBedTier() {
         return VoltageIndex.EV;
     }
 

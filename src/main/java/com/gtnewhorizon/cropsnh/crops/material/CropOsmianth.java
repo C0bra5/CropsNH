@@ -10,6 +10,7 @@ import com.gtnewhorizon.cropsnh.api.PlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
+import com.gtnewhorizon.cropsnh.farming.requirements.growth.MachineOnlyGrowthRequirement;
 
 import gregtech.api.enums.VoltageIndex;
 
@@ -25,6 +26,8 @@ public class CropOsmianth extends NHCropCard {
         this.addBlockUnderRequirement("osmium");
 
         this.addDuplicationCatalyst("dustOsmium", 1);
+
+        this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
     }
 
     @Override
@@ -34,6 +37,11 @@ public class CropOsmianth extends NHCropCard {
 
     @Override
     public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.IV;
+    }
+
+    @Override
+    public int getMinSeedBedTier() {
         return VoltageIndex.IV;
     }
 

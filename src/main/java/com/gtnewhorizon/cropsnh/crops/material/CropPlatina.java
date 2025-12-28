@@ -6,6 +6,7 @@ import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
+import com.gtnewhorizon.cropsnh.farming.requirements.growth.MachineOnlyGrowthRequirement;
 
 import gregtech.api.enums.VoltageIndex;
 
@@ -21,6 +22,8 @@ public class CropPlatina extends NHCropCard {
         this.addBlockUnderRequirement("platinum");
 
         this.addDuplicationCatalyst("dustPlatinum", 1);
+
+        this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
     }
 
     @Override
@@ -30,6 +33,11 @@ public class CropPlatina extends NHCropCard {
 
     @Override
     public int getMachineBreedingRecipeTier() {
+        return VoltageIndex.HV;
+    }
+
+    @Override
+    public int getMinSeedBedTier() {
         return VoltageIndex.HV;
     }
 
