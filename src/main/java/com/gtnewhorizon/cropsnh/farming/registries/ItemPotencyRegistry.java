@@ -57,8 +57,6 @@ public class ItemPotencyRegistry implements IItemPotencyRegistry {
                 .sorted(Comparator.comparing(a -> a.value))
                 .map(e -> {
                     StringBuilder sbm = new StringBuilder();
-                    sbm.append(e.value);
-                    sbm.append(",");
                     sbm.append(
                         GameRegistry.findUniqueIdentifierFor(e.key)
                             .toString());
@@ -66,7 +64,7 @@ public class ItemPotencyRegistry implements IItemPotencyRegistry {
                         sbm.append(":");
                         sbm.append(e.meta);
                     }
-                    return sbm.toString();
+                    return DebugHelper.makeCSVLine(e.value, sbm.toString());
                 })
                 .collect(Collectors.joining(System.lineSeparator())));
         return sb.toString();

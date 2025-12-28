@@ -24,6 +24,7 @@ import com.gtnewhorizon.cropsnh.utility.DebugHelper;
 import com.gtnewhorizon.cropsnh.utility.MetaMap;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.common.BiomeDictionary;
 
 public class CropRegistry implements ICropRegistry {
 
@@ -169,6 +170,7 @@ public class CropRegistry implements ICropRegistry {
                 // growth related things
                 "Tier",
                 "Min Seed Bed Tier",
+                "Liked Biomes",
                 "Growth Duration",
                 "Breeding Threshold",
                 "Crossing Threshold",
@@ -209,6 +211,7 @@ public class CropRegistry implements ICropRegistry {
                             // growth related things
                             cc.getTier(),
                             cc.getMinSeedBedTier(),
+                            cc.getLikedBiomeTags().stream().map(BiomeDictionary.Type::name).collect(Collectors.joining(" ")),
                             cc.getGrowthDuration(),
                             cc.getBreedingThreshold(),
                             cc.getCrossingThreshold(),
