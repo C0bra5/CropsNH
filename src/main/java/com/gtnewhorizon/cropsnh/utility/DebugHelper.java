@@ -9,8 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
 /**
  * A class to aid in the management of debug data.
  */
@@ -72,10 +70,7 @@ public abstract class DebugHelper {
             sb.append(" x ");
         }
         // item
-        sb.append(GameRegistry.findUniqueIdentifierFor(stack.getItem()));
-        // damage
-        sb.append(":");
-        sb.append(stack.stackSize);
+        sb.append(stack.getDisplayName());
         // nbt
         if (stack.hasTagCompound()) {
             sb.append(stack.stackTagCompound.toString());
