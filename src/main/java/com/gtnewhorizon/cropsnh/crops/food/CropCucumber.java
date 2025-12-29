@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.food;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
 
 import gregtech.api.enums.ItemList;
@@ -13,6 +15,8 @@ public class CropCucumber extends CropFood {
         // TODO: MOVE ITEM DROP TO CROPS NH OR SOMETHING
         this.addDrop(ItemList.Crop_Drop_Cucumber.get(1L), 100_00);
         this.addAlternateSeed("seedCucumber");
+        // likes warm soils mostly
+        this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.LUSH);
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
@@ -20,10 +21,16 @@ public class CropSnowbell extends NHCropCard {
 
     public CropSnowbell() {
         super("snowbell", new Color(0x33A9FF), new Color(0xA5D9FF));
+
         this.addAlternateSeed(OreDictHelper.getCopiedOreStack("seedSnowbell", 1));
+
         this.addDrop(OreDictHelper.getCopiedOreStack("itemSnowbell", 1), 89_00);
+
         this.addDrop(new ItemStack(Items.snowball, 1, 0), 10_00);
+
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Cryolite, 1), 2_50);
+
+        this.addLikedBiomes(BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.COLD);
     }
 
     @Override

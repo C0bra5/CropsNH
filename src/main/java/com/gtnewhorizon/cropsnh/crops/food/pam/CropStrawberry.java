@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.food.pam;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
 import com.gtnewhorizon.cropsnh.utility.OreDictHelper;
 
@@ -12,6 +14,8 @@ public class CropStrawberry extends CropFood {
         this.addDrop(OreDictHelper.getCopiedOreStack("cropStrawberry", 1), 100_00);
         this.addAlternateSeed("seedStrawberry");
         this.addAlternateSeed("cropStrawberry");
+        // not very fussy about it's soil
+        this.addLikedBiomes(BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH);
     }
 
     @Override

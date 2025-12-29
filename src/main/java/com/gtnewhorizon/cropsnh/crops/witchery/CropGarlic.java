@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.witchery;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
@@ -11,8 +13,12 @@ public class CropGarlic extends CropFood {
 
     public CropGarlic() {
         super("garlic", new Color(0xA88F7B), new Color(0xF3E7DC));
+
         this.addAlternateSeed(OreDictHelper.getCopiedOreStack("cropGarlic", 1));
+
         this.addDrop(OreDictHelper.getCopiedOreStack("cropGarlic", 1), 100_00);
+
+        this.addLikedBiomes(BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.DRY);
     }
 
     @Override

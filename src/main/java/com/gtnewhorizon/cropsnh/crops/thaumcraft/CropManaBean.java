@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Objects;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
@@ -42,6 +43,8 @@ public class CropManaBean extends NHCropCard {
         this.addDuplicationCatalyst("shardEarth", 1);
         this.addDuplicationCatalyst("shardOrder", 1);
         this.addDuplicationCatalyst("shardEntropy", 1);
+
+        this.addLikedBiomes(BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.FOREST);
     }
 
     private static ItemStack getBean(Aspect aspect) {

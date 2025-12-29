@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 
@@ -23,6 +24,8 @@ public class CropEnderbloom extends NHCropCard {
 
         // gate to HV for those who want to be lazy as early acquisition is meant to be more of a challenge run thing.
         this.addDuplicationCatalyst(new ItemStack(Items.ender_eye, 1, 0));
+
+        this.addLikedBiomes(BiomeDictionary.Type.END, BiomeDictionary.Type.COLD);
     }
 
     @Override

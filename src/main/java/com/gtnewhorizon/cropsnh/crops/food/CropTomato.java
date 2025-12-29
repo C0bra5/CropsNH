@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.food;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
 
 import gregtech.api.enums.ItemList;
@@ -15,6 +17,8 @@ public class CropTomato extends CropFood {
         this.addDrop(ItemList.Crop_Drop_MTomato.get(1), 25_00);
         this.addAlternateSeed("seedTomato");
         this.addAlternateSeed("cropTomato");
+        // Likes warm weather, and a good dose of water.
+        this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.WET);
     }
 
     @Override

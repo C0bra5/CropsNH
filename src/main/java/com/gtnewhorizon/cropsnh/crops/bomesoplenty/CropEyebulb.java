@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.bomesoplenty;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
@@ -18,8 +19,12 @@ public class CropEyebulb extends NHCropCard {
 
     public CropEyebulb() {
         super("eyebulb", new Color(0x552323), new Color(0x875D5D));
+
         this.addDrop(new ItemStack(BOPCBlocks.flowers, 1, 13), 100_00);
+
         this.addAlternateSeed(new ItemStack(BOPCBlocks.flowers, 1, 13));
+
+        this.addLikedBiomes(BiomeDictionary.Type.NETHER, BiomeDictionary.Type.SPOOKY);
     }
 
     @Override

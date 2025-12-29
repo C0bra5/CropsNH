@@ -26,10 +26,10 @@ public class CropBlazereed extends NHCropCard {
         this.addDrop(new ItemStack(Items.blaze_powder, 1, 0), 75_00);
         this.addDrop(new ItemStack(Items.blaze_rod, 1, 0), 25_00);
 
-        this.addLikedBiomes(BiomeDictionary.Type.NETHER, BiomeDictionary.Type.HOT);
-
         this.addDuplicationCatalyst(new ItemStack(Items.blaze_powder, 2, 0));
         this.addDuplicationCatalyst(new ItemStack(Items.blaze_rod, 1, 0));
+
+        this.addLikedBiomes(BiomeDictionary.Type.NETHER, BiomeDictionary.Type.HOT);
     }
 
     @Override

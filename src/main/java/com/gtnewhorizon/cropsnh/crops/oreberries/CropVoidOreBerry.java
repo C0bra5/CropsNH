@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.oreberries;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropOreBerry;
 import com.gtnewhorizon.cropsnh.farming.requirements.growth.MaxLightLevelGrowthRequirement;
 
@@ -22,6 +24,9 @@ public class CropVoidOreBerry extends CropOreBerry {
         this.addGrowthRequirement(new MaxLightLevelGrowthRequirement(10));
 
         this.addDuplicationCatalyst(Materials.Void.getNuggets(1));
+
+        // tainted land (this makes me feel evil)
+        this.addLikedBiomes(BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.WASTELAND);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -27,6 +29,8 @@ public class CropTitania extends NHCropCard {
         this.addDuplicationCatalyst("dustIlmenite", 2);
 
         this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
+
+        this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.SAVANNA);
     }
 
     @Override

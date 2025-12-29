@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -21,6 +23,9 @@ public class CropPlumbilia extends NHCropCard {
         this.addBlockUnderRequirement("lead");
 
         this.addDuplicationCatalyst("dustLead", 1);
+        // I was going to choose plums as a basis, but the stuff will literally grow everywhere
+        // it's actually one of the first domesticated crops in human history.
+        this.addLikedBiomes(BiomeDictionary.Type.SAVANNA, BiomeDictionary.Type.PLAINS);
     }
 
     @Override

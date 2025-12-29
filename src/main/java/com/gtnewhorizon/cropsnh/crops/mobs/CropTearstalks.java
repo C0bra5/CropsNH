@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
@@ -17,6 +18,8 @@ public class CropTearstalks extends NHCropCard {
         this.addDrop(new ItemStack(Items.ghast_tear, 1, 0), 66_66);
 
         this.addDuplicationCatalyst(new ItemStack(Items.ghast_tear, 1, 0));
+        // Ghasts look like they are dead on the inside
+        this.addLikedBiomes(BiomeDictionary.Type.NETHER, BiomeDictionary.Type.DEAD);
     }
 
     @Override

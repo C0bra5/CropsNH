@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.natura.nether;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -18,6 +19,8 @@ public class CropThornvine extends NHCropCard {
         super("thornvine", new Color(0x987005), new Color(0xDFE485));
         this.addDrop(new ItemStack(NContent.thornVines, 2), 100_00);
         this.addAlternateSeed(new ItemStack(NContent.thornVines, 1));
+
+        this.addLikedBiomes(BiomeDictionary.Type.NETHER, BiomeDictionary.Type.DRY);
     }
 
     @Override

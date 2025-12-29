@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
 
@@ -13,6 +14,8 @@ public class CropWheat extends CropFood {
         super("wheat", new Color(0xB7BB3F), new Color(0x00E210));
         this.addDrop(new ItemStack(Items.wheat, 1), 10_000);
         this.addAlternateSeed(new ItemStack(Items.wheat_seeds, 1));
+        // not much to say here
+        this.addLikedBiomes(BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH);
     }
 
     @Override

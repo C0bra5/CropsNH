@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
@@ -31,6 +32,8 @@ public class CropStarwart extends NHCropCard {
         this.addDuplicationCatalyst(new ItemStack(Items.skull, 3, 1));
 
         this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
+
+        this.addLikedBiomes(BiomeDictionary.Type.NETHER, BiomeDictionary.Type.DEAD);
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.awt.Color;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
@@ -17,6 +18,7 @@ public class CropMelon extends CropFood {
         this.addAlternateSeed(new ItemStack(Items.melon_seeds, 1));
         this.addDrop(new ItemStack(Items.melon, 4), 6666);
         this.addDrop(new ItemStack(Blocks.melon_block, 1), 3333);
+        this.addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.LUSH);
     }
 
     @Override

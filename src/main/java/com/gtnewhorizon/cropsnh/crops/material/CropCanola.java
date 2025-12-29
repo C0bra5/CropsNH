@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 
@@ -11,6 +13,9 @@ public class CropCanola extends NHCropCard {
         super("canola", new Color(0x627F40), new Color(0x6E8E48));
 
         this.addDrop(CropsNHItemList.canolaFLower.get(1), 100_00);
+
+        // canada.jpg
+        this.addLikedBiomes(BiomeDictionary.Type.COLD, BiomeDictionary.Type.PLAINS);
     }
 
     @Override

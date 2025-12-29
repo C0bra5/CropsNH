@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.ic2;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
@@ -19,6 +21,8 @@ public class CropShining extends NHCropCard {
         this.addDrop(Materials.Silver.getDustTiny(1), 100_00);
         this.addGrowthRequirement(BlockUnderRequirement.get("silver"));
         this.addDuplicationCatalyst("dustSilver", 1);
+        // movie reference
+        this.addLikedBiomes(BiomeDictionary.Type.COLD, BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.SPOOKY);
     }
 
     @Override

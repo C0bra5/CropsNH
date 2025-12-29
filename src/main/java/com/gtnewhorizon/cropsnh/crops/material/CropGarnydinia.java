@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.api.PlantRenderShape;
@@ -46,6 +48,8 @@ public class CropGarnydinia extends NHCropCard {
         this.addDuplicationCatalyst("dustGarnetSand", 1);
         this.addDuplicationCatalyst("gemGarnetRed", 1);
         this.addDuplicationCatalyst("gemGarnetYellow", 1);
+
+        this.addLikedBiomes(BiomeDictionary.Type.SAVANNA, BiomeDictionary.Type.SANDY, BiomeDictionary.Type.MESA);
     }
 
     @Override

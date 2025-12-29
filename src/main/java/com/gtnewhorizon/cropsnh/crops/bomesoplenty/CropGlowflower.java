@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.bomesoplenty;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
@@ -18,9 +19,18 @@ public class CropGlowflower extends NHCropCard {
 
     public CropGlowflower() {
         super("glowflower", new Color(0x004D4C), new Color(0x12A4A2));
+
         this.addDrop(new ItemStack(BOPCBlocks.flowers, 2, 3), 100_00);
+
         this.addAlternateSeed(new ItemStack(BOPCBlocks.flowers, 1, 3));
+
         this.addDuplicationCatalyst("dustGlowstone", 1);
+        // mystic grove tags
+        this.addLikedBiomes(
+            BiomeDictionary.Type.WET,
+            BiomeDictionary.Type.LUSH,
+            BiomeDictionary.Type.MAGICAL,
+            BiomeDictionary.Type.FOREST);
     }
 
     @Override

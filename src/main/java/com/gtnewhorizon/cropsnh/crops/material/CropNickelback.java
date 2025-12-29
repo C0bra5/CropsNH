@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -22,6 +24,8 @@ public class CropNickelback extends NHCropCard {
         this.addBlockUnderRequirement("nickel");
 
         this.addDuplicationCatalyst("dustNickel", 1);
+        // Look at this photograph, every time I do, it makes me cry :(
+        this.addLikedBiomes(BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH);
     }
 
     @Override

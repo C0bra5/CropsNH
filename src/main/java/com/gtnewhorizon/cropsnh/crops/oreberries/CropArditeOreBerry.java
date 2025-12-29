@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.oreberries;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropOreBerry;
 import com.gtnewhorizon.cropsnh.farming.requirements.growth.MaxLightLevelGrowthRequirement;
 
@@ -20,6 +22,8 @@ public class CropArditeOreBerry extends CropOreBerry {
         this.addGrowthRequirement(new MaxLightLevelGrowthRequirement(10));
 
         this.addDuplicationCatalyst("nuggetArdite", 1);
+
+        this.addLikedBiomes(BiomeDictionary.Type.NETHER, BiomeDictionary.Type.HOT);
     }
 
     @Override

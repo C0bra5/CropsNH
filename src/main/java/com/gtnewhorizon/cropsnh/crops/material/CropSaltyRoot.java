@@ -24,6 +24,8 @@ public class CropSaltyRoot extends NHCropCard {
         this.addDuplicationCatalyst("dustRockSalt", 1);
         this.addDuplicationCatalyst("gemRockSalt", 1);
         this.addDuplicationCatalyst("dustSaltpeter", 1);
+
+        this.addLikedBiomes(BiomeDictionary.Type.DRY, BiomeDictionary.Type.DEAD);
     }
 
     @Override

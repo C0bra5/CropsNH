@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
@@ -19,6 +21,9 @@ public class CropIndigo extends NHCropCard {
         this.addDrop(CropsNHItemList.indigoBlossom.get(1), 100_00);
 
         this.addAlternateSeed(CropsNHItemList.indigoBlossom.get(1));
+
+        // mostly rain forest.
+        this.addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.LUSH);
     }
 
     @Override

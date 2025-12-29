@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -23,6 +25,8 @@ public class CropPyrolusium extends NHCropCard {
         this.addBlockUnderRequirement("manganese");
 
         this.addDuplicationCatalyst("dustManganese", 1);
+        // manganese burns very bright
+        this.addLikedBiomes(BiomeDictionary.Type.NETHER, BiomeDictionary.Type.HOT);
     }
 
     @Override

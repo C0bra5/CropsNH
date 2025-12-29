@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.oreberries;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropOreBerry;
 import com.gtnewhorizon.cropsnh.farming.requirements.growth.MaxLightLevelGrowthRequirement;
@@ -21,6 +22,8 @@ public class CropKnightmetalBerry extends CropOreBerry {
         this.addGrowthRequirement(new MaxLightLevelGrowthRequirement(10));
 
         this.addDuplicationCatalyst("nuggetKnightmetal", 1);
+
+        this.addLikedBiomes(BiomeDictionary.Type.SPOOKY, BiomeDictionary.Type.DEAD);
     }
 
     @Override

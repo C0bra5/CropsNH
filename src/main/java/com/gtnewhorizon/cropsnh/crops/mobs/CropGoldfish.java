@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -21,6 +22,8 @@ public class CropGoldfish extends NHCropCard {
     public CropGoldfish() {
         super("goldfish", new Color(0xF8910F), new Color(0xFAC815));
         this.addDrop(new ItemStack(CropsNHItems.goldfish, 1), 100_00);
+        // spooky because existential fish dread.
+        this.addLikedBiomes(BiomeDictionary.Type.RIVER, BiomeDictionary.Type.WET, BiomeDictionary.Type.SPOOKY);
     }
 
     @Override

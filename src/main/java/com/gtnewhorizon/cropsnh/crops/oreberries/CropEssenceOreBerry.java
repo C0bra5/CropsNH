@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.oreberries;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropOreBerry;
@@ -23,6 +24,8 @@ public class CropEssenceOreBerry extends CropOreBerry {
         this.addAlternateSeed(new ItemStack(TinkerWorld.oreBerries, 1, 5));
 
         this.addBlockUnderRequirement("skull");
+
+        this.addLikedBiomes(BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.DEAD);
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
@@ -21,6 +22,8 @@ public class CropSlimeplant extends NHCropCard {
         this.addDrop(new ItemStack(Items.slime_ball, 1, 0), 100_00);
 
         this.addDuplicationCatalyst("slimeball", 1);
+
+        this.addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.SWAMP);
     }
 
     @Override

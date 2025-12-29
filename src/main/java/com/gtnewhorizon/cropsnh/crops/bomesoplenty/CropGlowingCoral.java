@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.bomesoplenty;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
@@ -18,6 +19,8 @@ public class CropGlowingCoral extends NHCropCard {
         this.addAlternateSeed(new ItemStack(BOPCBlocks.coral1, 1, 15));
         this.addBlockUnderRequirement("glowstone");
         this.addDuplicationCatalyst("dustGlowstone", 1);
+        // coral reef tags
+        this.addLikedBiomes(BiomeDictionary.Type.WATER, BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.RIVER);
     }
 
     @Override

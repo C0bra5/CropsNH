@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.ic2;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
@@ -19,6 +21,8 @@ public class CropStagnium extends NHCropCard {
         this.addDrop(Materials.Tin.getDustTiny(1), 100_00);
         this.addGrowthRequirement(BlockUnderRequirement.get("tin"));
         this.addDuplicationCatalyst("dustTin", 1);
+        // going by the word stagnate, something cold and un-changing.
+        this.addLikedBiomes(BiomeDictionary.Type.COLD, BiomeDictionary.Type.SPARSE, BiomeDictionary.Type.DRY);
     }
 
     @Override

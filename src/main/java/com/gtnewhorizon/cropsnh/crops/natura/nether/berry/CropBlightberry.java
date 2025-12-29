@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.natura.nether.berry;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -18,6 +19,8 @@ public class CropBlightberry extends NHCropCard {
         super("blightberry", new Color(0x3BC956), new Color(0xA3F2A0));
         this.addDrop(new ItemStack(NContent.netherBerryItem, 2, 0), 100_00);
         this.addAlternateSeed(new ItemStack(NContent.netherBerryItem, 1, 0));
+
+        this.addLikedBiomes(BiomeDictionary.Type.NETHER, BiomeDictionary.Type.DRY);
     }
 
     @Override

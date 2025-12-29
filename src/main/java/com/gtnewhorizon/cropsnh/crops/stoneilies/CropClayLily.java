@@ -19,10 +19,10 @@ public class CropClayLily extends CropBaseStoneLily {
 
         this.addBlockUnderRequirement("clay");
 
-        this.addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.SWAMP);
-
         this.addDuplicationCatalyst("dustClay", 1);
         this.addDuplicationCatalyst("itemClay", 1);
+
+        this.addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.RIVER, BiomeDictionary.Type.SWAMP);
     }
 
     @Override

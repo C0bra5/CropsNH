@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.food.natura;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
 
@@ -15,6 +16,8 @@ public class CropBlackberry extends CropFood {
         this.addDrop(new ItemStack(NContent.berryItem, 3, 2), 100_00);
         this.addAlternateSeed("cropBlackberry");
         this.addAlternateSeed("seedBlackberry");
+        // needs a good dose of water and loves to grow in very dense bushy areas
+        this.addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.LUSH);
     }
 
     @Override

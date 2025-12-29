@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.natura;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.PlantRenderShape;
@@ -22,6 +23,8 @@ public class CropCotton extends NHCropCard {
         this.addAlternateSeed("seedCotton");
 
         this.addGrowthRequirement(new MinLightLevelGrowthRequirement(9));
+        // generally likes heavier soils and does not like cold.
+        this.addLikedBiomes(BiomeDictionary.Type.DRY, BiomeDictionary.Type.HOT);
     }
 
     @Override

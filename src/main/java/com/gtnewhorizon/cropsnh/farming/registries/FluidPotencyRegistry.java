@@ -58,7 +58,11 @@ public class FluidPotencyRegistry implements IFluidPotencyRegistry {
             this.registry.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue())
-                .map(e -> DebugHelper.makeCSVLine(e.getValue(), e.getKey().getName()))
+                .map(
+                    e -> DebugHelper.makeCSVLine(
+                        e.getValue(),
+                        e.getKey()
+                            .getName()))
                 .collect(Collectors.joining(System.lineSeparator())));
         return sb.toString();
     }

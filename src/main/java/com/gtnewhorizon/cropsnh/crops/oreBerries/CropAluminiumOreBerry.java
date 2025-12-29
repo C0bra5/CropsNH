@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.oreberries;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropOreBerry;
 import com.gtnewhorizon.cropsnh.farming.requirements.growth.MaxLightLevelGrowthRequirement;
@@ -24,6 +25,9 @@ public class CropAluminiumOreBerry extends CropOreBerry {
         this.addGrowthRequirement(new MaxLightLevelGrowthRequirement(10));
 
         this.addDuplicationCatalyst("nuggetAluminium", 1);
+
+        // tundra
+        this.addLikedBiomes(BiomeDictionary.Type.COLD, BiomeDictionary.Type.DRY);
     }
 
     @Override

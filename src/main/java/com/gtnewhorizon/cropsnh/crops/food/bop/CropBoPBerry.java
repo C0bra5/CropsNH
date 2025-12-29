@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.food.bop;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
 
@@ -12,6 +13,7 @@ public class CropBoPBerry extends CropFood {
         super("bopBerry", new Color(0xB33636), new Color(0xFF4C4C));
         this.addDrop(new ItemStack(biomesoplenty.api.content.BOPCItems.food, 3, 0), 100_00);
         this.addAlternateSeed(new ItemStack(biomesoplenty.api.content.BOPCItems.food, 1, 0));
+        this.addLikedBiomes(BiomeDictionary.Type.FOREST, BiomeDictionary.Type.DENSE);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -24,6 +26,8 @@ public class CropPlatina extends NHCropCard {
         this.addDuplicationCatalyst("dustPlatinum", 1);
 
         this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
+        // stolen from bees
+        this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY);
     }
 
     @Override

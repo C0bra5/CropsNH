@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
 import com.gtnewhorizon.cropsnh.reference.Reference;
@@ -17,6 +18,8 @@ public class CropEggPlant extends CropFood {
         this.addDrop(new ItemStack(Items.feather, 1, 0), 30_00);
         this.addDrop(new ItemStack(Items.chicken, 1, 0), 10_00);
         this.addAlternateSeed(new ItemStack(Items.egg, 1, 0));
+
+        this.addLikedBiomes(BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.FOREST);
     }
 
     @Override

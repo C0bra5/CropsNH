@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
@@ -19,14 +21,14 @@ public class CropOlivia extends NHCropCard {
         super("olivia", new Color(0x79CD79), new Color(0x96FF96));
 
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Olivine, 1L), 75_00);
-
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.gem, Materials.Olivine, 1L), 25_00);
 
         this.addBlockUnderRequirement("olivine");
 
         this.addDuplicationCatalyst("gemOlivine", 1);
-
         this.addDuplicationCatalyst("dustOlivine", 1);
+        // olives like hilly climates with usually dry seasons
+        this.addLikedBiomes(BiomeDictionary.Type.HILLS, BiomeDictionary.Type.DRY);
     }
 
     @Override

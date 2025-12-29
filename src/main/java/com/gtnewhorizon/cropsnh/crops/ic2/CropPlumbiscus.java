@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.ic2;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
@@ -19,6 +21,8 @@ public class CropPlumbiscus extends NHCropCard {
         this.addDrop(Materials.Lead.getDustTiny(1), 100_00);
         this.addGrowthRequirement(BlockUnderRequirement.get("lead"));
         this.addDuplicationCatalyst("dustLead", 1);
+        // hibiscus likes warm temperate/tropical areas.
+        this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.WET);
     }
 
     @Override

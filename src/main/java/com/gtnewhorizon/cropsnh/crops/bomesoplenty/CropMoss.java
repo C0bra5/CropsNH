@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.bomesoplenty;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 
@@ -20,6 +21,8 @@ public class CropMoss extends NHCropCard {
         this.addAlternateSeed(new ItemStack(TFBlocks.plant, 1, 3));
         this.addAlternateSeed(new ItemStack(BOPCBlocks.moss, 1));
         this.addAlternateSeed(new ItemStack(BOPCBlocks.treeMoss, 1));
+        // bayou, temperate rainforest
+        addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.LUSH);
     }
 
     @Override

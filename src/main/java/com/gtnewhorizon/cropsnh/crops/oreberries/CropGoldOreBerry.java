@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.oreberries;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropOreBerry;
 import com.gtnewhorizon.cropsnh.farming.requirements.growth.MaxLightLevelGrowthRequirement;
@@ -19,6 +20,8 @@ public class CropGoldOreBerry extends CropOreBerry {
         this.addBlockUnderRequirement("gold");
         this.addGrowthRequirement(new MaxLightLevelGrowthRequirement(10));
         this.addDuplicationCatalyst("nuggetGold", 1);
+        // mesa
+        this.addLikedBiomes(BiomeDictionary.Type.MESA, BiomeDictionary.Type.SANDY);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.food;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.PlantRenderShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
@@ -16,6 +18,8 @@ public class CropOnion extends CropFood {
         this.addDrop(ItemList.Crop_Drop_Onion.get(1), 100_00);
         this.addAlternateSeed("seedOnion");
         this.addAlternateSeed("cropOnion");
+        // Prefers siltier soils
+        this.addLikedBiomes(BiomeDictionary.Type.DRY, BiomeDictionary.Type.SANDY, BiomeDictionary.Type.SPARSE);
     }
 
     @Override

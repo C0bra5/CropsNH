@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.food.natura;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
 
@@ -15,6 +16,8 @@ public class CropBlueberry extends CropFood {
         this.addDrop(new ItemStack(NContent.berryItem, 3, 1), 100_00);
         this.addAlternateSeed("cropBlueberry");
         this.addAlternateSeed("seedBlueberry");
+        // wild blueberries can often be found forests, usually with dry or gravely soils.
+        this.addLikedBiomes(BiomeDictionary.Type.HILLS, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.LUSH);
     }
 
     @Override

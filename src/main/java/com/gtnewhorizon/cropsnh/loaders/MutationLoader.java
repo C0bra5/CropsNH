@@ -489,7 +489,7 @@ public class MutationLoader {
 
         // region ic2
         new CropMutation(Cyazint, AzureBluet, BlueOrchid)
-            .addToMutationPools(aBlue, aFlower)
+            .addToMutationPools(aBlue, aFlower, aAddictive)
             .register();
         new CropMutation(Cyprium, OrangeTulip, Pumpkin, StoneLily)
             .addToMutationPools(aOrange, aLeaves, aMetal)

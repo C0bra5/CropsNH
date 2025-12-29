@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.food.natura;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
@@ -22,6 +23,8 @@ public class CropSaguaroCactus extends CropFood {
         this.addDrop(new ItemStack(NContent.seedFood, 3, 0), 50_00);
         this.addAlternateSeed(new ItemStack(NContent.seedFood, 1, 0));
         this.addAlternateSeed(new ItemStack(NContent.saguaro, 1, 0));
+        // likes a well drained soil
+        this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.SANDY);
     }
 
     @Override

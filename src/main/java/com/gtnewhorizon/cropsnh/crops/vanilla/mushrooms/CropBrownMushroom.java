@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
@@ -13,8 +14,12 @@ public class CropBrownMushroom extends CropMushroom {
 
     public CropBrownMushroom() {
         super("brownMushroom", new Color(0x8F4E1B), new Color(0xCC9978));
+
         this.addDrop(new ItemStack(Blocks.brown_mushroom, 1), 10_000);
+
         this.addAlternateSeed(new ItemStack(Blocks.brown_mushroom, 1));
+
+        this.addLikedBiomes(BiomeDictionary.Type.MUSHROOM, BiomeDictionary.Type.WET, BiomeDictionary.Type.SWAMP);
     }
 
     @Override

@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ICropRegistry;
@@ -24,7 +25,6 @@ import com.gtnewhorizon.cropsnh.utility.DebugHelper;
 import com.gtnewhorizon.cropsnh.utility.MetaMap;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraftforge.common.BiomeDictionary;
 
 public class CropRegistry implements ICropRegistry {
 
@@ -211,7 +211,7 @@ public class CropRegistry implements ICropRegistry {
                             // growth related things
                             cc.getTier(),
                             cc.getMinSeedBedTier(),
-                            cc.getLikedBiomeTags().stream().map(BiomeDictionary.Type::name).collect(Collectors.joining(" ")),
+                            cc.getLikedBiomeTags().stream().map(BiomeDictionary.Type::name).collect(Collectors.joining(", ")),
                             cc.getGrowthDuration(),
                             cc.getBreedingThreshold(),
                             cc.getCrossingThreshold(),

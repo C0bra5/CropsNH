@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.bomesoplenty;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
@@ -23,6 +24,8 @@ public class CropGlowshroom extends NHCropCard {
         this.addDrop(new ItemStack(BOPCBlocks.mushrooms, 1, 3), 100_00);
         this.addAlternateSeed(new ItemStack(BOPCBlocks.mushrooms, 1, 3));
         this.addDuplicationCatalyst("dustGlowstone", 1);
+        // part of mushroom forest + nether
+        this.addLikedBiomes(BiomeDictionary.Type.NETHER, BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.MUSHROOM);
     }
 
     @Override

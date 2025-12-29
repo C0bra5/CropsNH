@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -22,6 +24,9 @@ public class CropFerru extends NHCropCard {
         this.addGrowthRequirement(BlockUnderRequirement.get("iron"));
 
         this.addDuplicationCatalyst("dustIron", 1);
+
+        // iron tends to be easily found in mountains
+        this.addLikedBiomes(BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS);
     }
 
     @Override

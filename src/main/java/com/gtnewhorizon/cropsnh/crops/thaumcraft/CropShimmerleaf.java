@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.thaumcraft;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
@@ -26,6 +27,8 @@ public class CropShimmerleaf extends NHCropCard {
         this.addBlockUnderRequirement("quicksilver");
 
         this.addDuplicationCatalyst("nuggetMercury", 1);
+
+        this.addLikedBiomes(BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.LUSH);
     }
 
     @Override

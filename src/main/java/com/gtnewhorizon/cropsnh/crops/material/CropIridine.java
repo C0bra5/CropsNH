@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
@@ -28,6 +30,8 @@ public class CropIridine extends NHCropCard {
         this.addDuplicationCatalyst("dustIridium", 1);
 
         this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
+        // white as it's flower
+        this.addLikedBiomes(BiomeDictionary.Type.SNOWY, BiomeDictionary.Type.COLD);
     }
 
     @Override

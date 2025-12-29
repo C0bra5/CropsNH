@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
@@ -13,6 +15,9 @@ public class CropMilkwart extends NHCropCard {
         super("milkwart", new Color(0xA8A8A8), new Color(0xECECEC));
 
         this.addDrop(CropsNHItemList.milkwart.get(1), 100_00);
+
+        // cows like to eat grass
+        this.addLikedBiomes(BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH);
     }
 
     @Override

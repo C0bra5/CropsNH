@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.oreberries;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropOreBerry;
 import com.gtnewhorizon.cropsnh.farming.requirements.growth.MaxLightLevelGrowthRequirement;
@@ -19,6 +20,8 @@ public class CropIronOreBerry extends CropOreBerry {
         this.addBlockUnderRequirement("iron");
         this.addGrowthRequirement(new MaxLightLevelGrowthRequirement(10));
         this.addDuplicationCatalyst("nuggetIron", 1);
+        // iron tends to be easily found in mountains
+        this.addLikedBiomes(BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS);
     }
 
     @Override

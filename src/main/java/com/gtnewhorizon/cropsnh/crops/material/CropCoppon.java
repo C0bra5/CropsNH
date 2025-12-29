@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -21,6 +23,9 @@ public class CropCoppon extends NHCropCard {
         this.addBlockUnderRequirement("copper");
 
         this.addDuplicationCatalyst("dustCopper", 1);
+
+        // red like the sand
+        this.addLikedBiomes(BiomeDictionary.Type.SAVANNA, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY);
     }
 
     @Override

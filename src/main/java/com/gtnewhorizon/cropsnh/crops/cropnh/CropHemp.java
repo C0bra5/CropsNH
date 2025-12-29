@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.reference.Reference;
@@ -14,6 +15,8 @@ public class CropHemp extends NHCropCard {
         super("hemp", new Color(0x275600), new Color(0xBBB49D));
         // TODO: CONSIDER IF WE WANT TO KEEP FLAX OR HEMP AROUND
         this.addDrop(new ItemStack(Items.string, 2, 0), 100_00);
+
+        this.addLikedBiomes(BiomeDictionary.Type.DRY, BiomeDictionary.Type.SANDY);
     }
 
     @Override
@@ -33,7 +36,7 @@ public class CropHemp extends NHCropCard {
 
     @Override
     public int getGrowthDuration() {
-        return 2200;
+        return 800;
     }
 
     @Override

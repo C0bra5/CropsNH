@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
@@ -31,6 +32,9 @@ public class CropDiareed extends NHCropCard {
 
         this.addDuplicationCatalyst("dustDiamond", 1);
         this.addDuplicationCatalyst("gemDiamond", 1);
+
+        // Gives you the gold shoulder
+        this.addLikedBiomes(BiomeDictionary.Type.COLD, BiomeDictionary.Type.SPARSE);
     }
 
     @Override

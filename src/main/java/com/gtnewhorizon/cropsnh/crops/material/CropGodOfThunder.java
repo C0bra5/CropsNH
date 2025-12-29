@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -24,6 +26,8 @@ public class CropGodOfThunder extends NHCropCard {
         this.addDuplicationCatalyst("dustThorium", 1);
 
         this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
+        // these plants are the result of one of Zeus's drunken rampages
+        this.addLikedBiomes(BiomeDictionary.Type.WASTELAND, BiomeDictionary.Type.SPARSE);
     }
 
     @Override

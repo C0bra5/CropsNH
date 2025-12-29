@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -21,6 +23,9 @@ public class CropAurelia extends NHCropCard {
         this.addBlockUnderRequirement("gold");
 
         this.addDuplicationCatalyst("dustGold", 1);
+        // mesa
+        this.addLikedBiomes(BiomeDictionary.Type.MESA, BiomeDictionary.Type.SANDY);
+
     }
 
     @Override

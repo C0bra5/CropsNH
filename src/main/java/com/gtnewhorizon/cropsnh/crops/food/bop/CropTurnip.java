@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
 import com.gtnewhorizon.cropsnh.reference.Reference;
@@ -16,6 +17,8 @@ public class CropTurnip extends CropFood {
         this.addDrop(OreDictHelper.getCopiedOreStack("cropTurnip", 1), 100_00);
         this.addAlternateSeed("seedTurnip");
         this.addAlternateSeed("cropTurnip");
+        // prefers silty soils, harder to grow in summer
+        this.addLikedBiomes(BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.WET, BiomeDictionary.Type.COLD);
     }
 
     @Override

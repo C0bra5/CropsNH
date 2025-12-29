@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.food;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.api.PlantRenderShape;
@@ -20,6 +22,8 @@ public class CropLemon extends NHCropCard {
         this.addDrop(ItemList.Crop_Drop_Lemon.get(1), 100_00);
         this.addAlternateSeed("seedLemon");
         this.addAlternateSeed("cropLemon");
+        // hates cold with a passion
+        this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.PLAINS);
     }
 
     @Override

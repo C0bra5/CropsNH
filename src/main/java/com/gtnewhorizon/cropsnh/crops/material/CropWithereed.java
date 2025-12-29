@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
@@ -33,6 +34,8 @@ public class CropWithereed extends NHCropCard {
 
         this.addDuplicationCatalyst("dustCoal", 1);
         this.addDuplicationCatalyst("gemCoal", 1);
+
+        this.addLikedBiomes(BiomeDictionary.Type.DEAD, BiomeDictionary.Type.SPOOKY);
     }
 
     @Override

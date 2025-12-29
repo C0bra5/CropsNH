@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.ic2;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
@@ -18,6 +20,7 @@ public class CropCyprium extends NHCropCard {
         this.addDrop(Materials.Copper.getDustTiny(1), 100_00);
         this.addGrowthRequirement(BlockUnderRequirement.get("copper"));
         this.addDuplicationCatalyst("dustCopper", 1);
+        this.addLikedBiomes(BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.LUSH);
     }
 
     @Override

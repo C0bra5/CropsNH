@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -18,6 +19,8 @@ public class CropCorpseplant extends NHCropCard {
         this.addDrop(new ItemStack(Items.dye, 1, 15), 62_50);
         this.addDrop(new ItemStack(Items.rotten_flesh, 1, 0), 25_00);
         this.addDrop(new ItemStack(Items.bone, 1, 0), 12_50);
+
+        this.addLikedBiomes(BiomeDictionary.Type.DEAD, BiomeDictionary.Type.SPOOKY);
     }
 
     @Override

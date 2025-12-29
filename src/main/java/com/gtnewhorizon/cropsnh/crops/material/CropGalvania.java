@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -21,6 +23,9 @@ public class CropGalvania extends NHCropCard {
         this.addBlockUnderRequirement("zinc");
 
         this.addDuplicationCatalyst("dustZinc", 1);
+
+        // probably won't rust
+        this.addLikedBiomes(BiomeDictionary.Type.DRY, BiomeDictionary.Type.HOT);
     }
 
     @Override

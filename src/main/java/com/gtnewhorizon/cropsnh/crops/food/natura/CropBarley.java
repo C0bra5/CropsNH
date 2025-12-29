@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.food.natura;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
 import com.gtnewhorizon.cropsnh.utility.OreDictHelper;
 
@@ -11,6 +13,8 @@ public class CropBarley extends CropFood {
         super("barley", new Color(0x285221), new Color(0x84C63D));
         this.addDrop(OreDictHelper.getCopiedOreStack("cropBarley", 1), 100_00);
         this.addAlternateSeed("seedBarley");
+        // likes well drained soils
+        this.addLikedBiomes(BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.DRY);
     }
 
     @Override

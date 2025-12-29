@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.bomesoplenty;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
@@ -16,6 +17,12 @@ public class CropIvy extends NHCropCard {
         super("ivy", new Color(0x1B4509), new Color(0x338011));
         this.addDrop(new ItemStack(BOPCBlocks.ivy, 2, 0), 100_00);
         this.addAlternateSeed(new ItemStack(BOPCBlocks.ivy, 1, 0));
+        // under-garden (nether)
+        this.addLikedBiomes(
+            BiomeDictionary.Type.NETHER,
+            BiomeDictionary.Type.JUNGLE,
+            BiomeDictionary.Type.MAGICAL,
+            BiomeDictionary.Type.DENSE);
     }
 
     @Override

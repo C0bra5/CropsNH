@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
@@ -25,6 +27,8 @@ public class CropSpaceFlower extends NHCropCard {
         }
 
         this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
+        // moon
+        this.addLikedBiomes(BiomeDictionary.Type.COLD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.DEAD);
     }
 
     @Override

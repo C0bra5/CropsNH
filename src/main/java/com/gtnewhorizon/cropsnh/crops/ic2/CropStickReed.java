@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.ic2;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
@@ -21,6 +23,8 @@ public class CropStickReed extends NHCropCard {
         // TODO: REPLACE WITH RESIN REPLACEMENT DOWN THE LINE
         this.addDrop(ItemList.IC2_Resin.get(1L), 10_000);
         this.addDuplicationCatalyst(ItemList.IC2_Resin.get(1L));
+        // going to treat it like sugar cane
+        this.addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY);
     }
 
     @Override

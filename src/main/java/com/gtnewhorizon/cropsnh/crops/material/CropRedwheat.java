@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.requirements.growth.MaxLightLevelGrowthRequirement;
@@ -23,6 +24,8 @@ public class CropRedwheat extends NHCropCard {
         this.addBlockUnderRequirement("redstone");
 
         this.addDuplicationCatalyst("dustRedstone", 1);
+
+        this.addLikedBiomes(BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.HOT);
     }
 
     @Override

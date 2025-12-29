@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
@@ -23,6 +24,8 @@ public class CropMeatrose extends CropFood {
         this.addDrop(new ItemStack(Items.fish, 1, 0), 10_00);
         this.addDrop(new ItemStack(Items.beef, 1, 0), 10_00);
         this.addDrop(new ItemStack(Items.porkchop, 1, 0), 10_00);
+
+        this.addLikedBiomes(BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.MAGICAL);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.witchery;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.PlantRenderShape;
@@ -13,8 +15,12 @@ public class CropGlintWeed extends NHCropCard {
 
     public CropGlintWeed() {
         super("glintWeed", new Color(0xB3890B), new Color(0xB3890B));
+
         this.addAlternateSeed(OreDictHelper.getCopiedOreStack("cropGlintWeed", 1));
+
         this.addDrop(OreDictHelper.getCopiedOreStack("cropGlintWeed", 1), 100_00);
+
+        this.addLikedBiomes(BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.SANDY);
     }
 
     @Override

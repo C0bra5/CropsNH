@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -24,6 +25,8 @@ public class CropGlowheat extends NHCropCard {
         this.addBlockUnderRequirement("glowstone");
 
         this.addDuplicationCatalyst("dustGlowstone", 1);
+
+        this.addLikedBiomes(BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.HOT, BiomeDictionary.Type.NETHER);
     }
 
     @Override

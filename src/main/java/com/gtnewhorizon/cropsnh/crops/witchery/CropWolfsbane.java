@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.witchery;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.PlantRenderShape;
@@ -13,8 +15,12 @@ public class CropWolfsbane extends NHCropCard {
 
     public CropWolfsbane() {
         super("wolfsbane", new Color(0x76716E), new Color(0xDAD0CE));
+
         this.addAlternateSeed(OreDictHelper.getCopiedOreStack("seedWolfsBane", 1));
+
         this.addDrop(OreDictHelper.getCopiedOreStack("itemWolfsBane", 1), 100_00);
+
+        this.addLikedBiomes(BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.SPOOKY);
     }
 
     @Override

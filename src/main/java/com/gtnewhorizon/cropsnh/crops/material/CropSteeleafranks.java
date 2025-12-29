@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.material;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -26,6 +27,8 @@ public class CropSteeleafranks extends NHCropCard {
 
         this.addDuplicationCatalyst("dustSteeleaf", 1);
         this.addDuplicationCatalyst("ingotSteeleaf", 1);
+
+        this.addLikedBiomes(BiomeDictionary.Type.SPOOKY, BiomeDictionary.Type.DEAD);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.twilightforest;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.PlantRenderShape;
@@ -21,6 +22,8 @@ public class CropTorchberry extends NHCropCard {
         this.addAlternateSeed(new ItemStack(TFItems.torchberries, 1));
 
         this.addGrowthRequirement(new MaxLightLevelGrowthRequirement(10));
+
+        this.addLikedBiomes(BiomeDictionary.Type.FOREST, BiomeDictionary.Type.HILLS);
     }
 
     @Override

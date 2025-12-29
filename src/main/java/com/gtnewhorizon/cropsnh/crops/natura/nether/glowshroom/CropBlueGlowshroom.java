@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.natura.nether.glowshroom;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
@@ -24,6 +25,8 @@ public class CropBlueGlowshroom extends NHCropCard {
         this.addAlternateSeed(new ItemStack(NContent.glowshroom, 1, 2));
 
         this.addDuplicationCatalyst("dustGlowstone", 1);
+
+        this.addLikedBiomes(BiomeDictionary.Type.NETHER, BiomeDictionary.Type.MUSHROOM, BiomeDictionary.Type.MAGICAL);
     }
 
     @Override

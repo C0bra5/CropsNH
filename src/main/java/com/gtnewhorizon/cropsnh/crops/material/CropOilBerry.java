@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -17,6 +19,8 @@ public class CropOilBerry extends NHCropCard {
         super("oilBerry", new Color(0x0A0A0A), new Color(0x333333));
 
         this.addDrop(CropsNHItemList.oilBerry.get(1), 100_00);
+        // Dinos need to die if we are going to get more of this stuff...
+        this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.WASTELAND);
     }
 
     @Override

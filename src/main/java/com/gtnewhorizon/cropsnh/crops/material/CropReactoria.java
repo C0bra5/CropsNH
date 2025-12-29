@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
@@ -29,6 +31,9 @@ public class CropReactoria extends NHCropCard {
         this.addDuplicationCatalyst("dustUraninite", 2);
 
         this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
+
+        // very "spicy"
+        this.addLikedBiomes(BiomeDictionary.Type.COLD, BiomeDictionary.Type.HOT);
     }
 
     @Override

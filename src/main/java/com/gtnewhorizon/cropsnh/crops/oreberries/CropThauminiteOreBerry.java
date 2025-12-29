@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.oreberries;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropOreBerry;
 import com.gtnewhorizon.cropsnh.farming.requirements.growth.MaxLightLevelGrowthRequirement;
 import com.gtnewhorizon.cropsnh.utility.OreDictHelper;
@@ -20,6 +22,9 @@ public class CropThauminiteOreBerry extends CropOreBerry {
         this.addGrowthRequirement(new MaxLightLevelGrowthRequirement(10));
 
         this.addDuplicationCatalyst("nuggetThauminite", 1);
+
+        // magical forest
+        this.addLikedBiomes(BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.FOREST);
     }
 
     @Override

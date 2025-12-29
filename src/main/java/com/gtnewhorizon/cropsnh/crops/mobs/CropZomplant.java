@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
@@ -17,7 +18,10 @@ public class CropZomplant extends NHCropCard {
 
     public CropZomplant() {
         super("zomplant", new Color(0x3A6529), new Color(0x679056));
+
         this.addDrop(new ItemStack(Items.rotten_flesh, 1, 0), 100_00);
+
+        this.addLikedBiomes(BiomeDictionary.Type.DEAD, BiomeDictionary.Type.WASTELAND);
     }
 
     @Override

@@ -18,9 +18,9 @@ public class CropEndStoneLily extends CropBaseStoneLily {
 
         this.addBlockUnderRequirement("endStone");
 
-        this.addLikedBiomes(BiomeDictionary.Type.END, BiomeDictionary.Type.DRY, BiomeDictionary.Type.COLD);
-
         this.addDuplicationCatalyst("dustEndstone", 1);
+
+        this.addLikedBiomes(BiomeDictionary.Type.END, BiomeDictionary.Type.DRY, BiomeDictionary.Type.COLD);
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.awt.Color;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 
@@ -15,6 +16,8 @@ public class CropSpidernip extends NHCropCard {
         this.addDrop(new ItemStack(Items.string, 1, 0), 66_66);
         this.addDrop(new ItemStack(Items.spider_eye, 1, 0), 16_67);
         this.addDrop(new ItemStack(Blocks.web, 1, 0), 16_67);
+
+        this.addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.LUSH);
     }
 
     @Override

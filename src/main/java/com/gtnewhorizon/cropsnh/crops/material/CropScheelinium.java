@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -26,6 +28,8 @@ public class CropScheelinium extends NHCropCard {
         this.addDuplicationCatalyst("dustScheelite", 1);
 
         this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
+
+        this.addLikedBiomes(BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.WET, BiomeDictionary.Type.COLD);
     }
 
     @Override

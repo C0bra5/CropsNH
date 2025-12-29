@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
@@ -22,6 +24,9 @@ public class CropMagicalNightshade extends NHCropCard {
         this.addDuplicationCatalyst(CropsNHItemList.magicEssence.get(1));
 
         this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
+
+        // this tag combination shouldn't exist.
+        this.addLikedBiomes(BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.COLD);
     }
 
     @Override

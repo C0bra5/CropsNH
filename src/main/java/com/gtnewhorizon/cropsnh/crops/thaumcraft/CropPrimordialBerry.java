@@ -22,11 +22,11 @@ public class CropPrimordialBerry extends NHCropCard {
         primPerl.stackSize = 1;
         this.addDrop(primPerl.copy(), 10000);
 
-        this.addLikedBiomes(BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.SPOOKY);
-
         this.addAlternateSeed(primPerl.copy());
 
         this.addGrowthRequirement(BlockUnderRequirement.get("ichorium"));
+
+        this.addLikedBiomes(BiomeDictionary.Type.END, BiomeDictionary.Type.MAGICAL);
     }
 
     @Override

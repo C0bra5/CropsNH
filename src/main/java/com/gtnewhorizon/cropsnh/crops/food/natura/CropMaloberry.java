@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.food.natura;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
 
@@ -17,6 +18,8 @@ public class CropMaloberry extends CropFood {
         this.addAlternateSeed("cropGooseberry");
         this.addAlternateSeed("seedMaloberry");
         this.addAlternateSeed("seedGooseberry");
+        // likes higher latitudes, but doesn't live in the snow too much.
+        this.addLikedBiomes(BiomeDictionary.Type.COLD, BiomeDictionary.Type.WET, BiomeDictionary.Type.LUSH);
     }
 
     @Override

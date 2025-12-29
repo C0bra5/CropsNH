@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
 
@@ -13,6 +14,8 @@ public class CropCarrot extends CropFood {
         super("carrot", new Color(0xE58700), new Color(0xEEAE7D));
         this.addDrop(new ItemStack(Items.carrot, 1), 10_000);
         this.addAlternateSeed(new ItemStack(Items.carrot, 1));
+        // prefers sandier soils
+        this.addLikedBiomes(BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY);
     }
 
     @Override

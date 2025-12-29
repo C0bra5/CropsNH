@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.food;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
 
 import gregtech.api.enums.ItemList;
@@ -13,6 +15,8 @@ public class CropGrape extends CropFood {
         this.addDrop(ItemList.Crop_Drop_Grapes.get(1), 100_00);
         this.addAlternateSeed("seedGrape");
         this.addAlternateSeed("cropGrape");
+        // likes warm soils mostly
+        this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.SPARSE);
     }
 
     @Override

@@ -20,12 +20,13 @@ public class CropBobsYerUncleRanks extends NHCropCard {
 
         this.addDrop(CropsNHItemList.bobsYerUncleBerry.get(1), 100_00);
 
-        this.addLikedBiomes(BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS);
-
         this.addBlockUnderRequirement("emerald");
 
         this.addDuplicationCatalyst("gemEmerald", 1);
         this.addDuplicationCatalyst("dustEmerald", 1);
+
+        // emerald generation
+        this.addLikedBiomes(BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS);
     }
 
     @Override

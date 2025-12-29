@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -21,6 +23,9 @@ public class CropMicadia extends NHCropCard {
         this.addBlockUnderRequirement("mica");
 
         this.addDuplicationCatalyst("dustMica", 1);
+
+        // Often found in gravely hills
+        this.addLikedBiomes(BiomeDictionary.Type.HILLS, BiomeDictionary.Type.SPARSE);
     }
 
     @Override

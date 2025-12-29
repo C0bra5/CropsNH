@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.food.natura;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
 
@@ -15,6 +16,8 @@ public class CropRaspberry extends CropFood {
         this.addDrop(new ItemStack(NContent.berryItem, 3, 0), 100_00);
         this.addAlternateSeed("seedRaspberry");
         this.addAlternateSeed("cropRaspberry");
+        // likes a well drained soil
+        this.addLikedBiomes(BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.DRY);
     }
 
     @Override

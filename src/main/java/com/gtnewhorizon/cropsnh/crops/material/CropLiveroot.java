@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 
 import gregtech.api.enums.ItemList;
@@ -17,6 +19,8 @@ public class CropLiveroot extends NHCropCard {
 
         this.addDuplicationCatalyst(Materials.LiveRoot.getDust(1));
         this.addDuplicationCatalyst(ItemList.TF_LiveRoot.get(1));
+        // twilight forest scary
+        this.addLikedBiomes(BiomeDictionary.Type.SPOOKY, BiomeDictionary.Type.DENSE);
     }
 
     @Override

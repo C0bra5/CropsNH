@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.crops.bomesoplenty;
 import java.awt.Color;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
@@ -14,8 +15,12 @@ public class CropFloweringVine extends NHCropCard {
 
     public CropFloweringVine() {
         super("floweringVine", new Color(0x2F7D4C), new Color(0xC6C6C6));
+
         this.addDrop(new ItemStack(BOPCBlocks.flowerVine, 2, 0), 100_00);
+
         this.addAlternateSeed(new ItemStack(BOPCBlocks.flowerVine, 1, 0));
+
+        this.addLikedBiomes(BiomeDictionary.Type.JUNGLE, BiomeDictionary.Type.DENSE);
     }
 
     @Override

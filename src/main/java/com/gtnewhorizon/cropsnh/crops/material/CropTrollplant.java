@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.ISoilList;
@@ -39,6 +40,9 @@ public class CropTrollplant extends NHCropCard {
         this.addDuplicationCatalyst("screwFoolsRuby", 5);
         // A somewhat easier "streamed-lined" output since they make a lot o fthis stuff.
         this.addDuplicationCatalyst(ItemList.IC2_Scrap.get(8));
+
+        // a certain ogre really likes this place
+        this.addLikedBiomes(BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.SPOOKY);
     }
 
     @Override

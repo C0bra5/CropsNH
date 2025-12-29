@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.food;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropFood;
@@ -13,6 +15,8 @@ public class CropCoffee extends CropFood {
     public CropCoffee() {
         super("coffee", new Color(0x3D1E00), new Color(0x964F05));
         this.addDrop(Materials.Coffee.getDust(1), 10_000);
+        // likes warm temperatures, usually found in the same area as rainforests.
+        this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.LUSH, BiomeDictionary.Type.WET);
     }
 
     @Override

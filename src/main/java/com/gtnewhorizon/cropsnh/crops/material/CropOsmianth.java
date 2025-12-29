@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
@@ -28,6 +30,8 @@ public class CropOsmianth extends NHCropCard {
         this.addDuplicationCatalyst("dustOsmium", 1);
 
         this.addGrowthRequirement(new MachineOnlyGrowthRequirement());
+        // da be di da be da, da be di da be da..
+        this.addLikedBiomes(BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.RIVER);
     }
 
     @Override

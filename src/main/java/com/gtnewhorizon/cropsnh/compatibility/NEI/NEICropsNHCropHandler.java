@@ -52,8 +52,7 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
     public HandlerInfo getHandlerInfo() {
         return new HandlerInfo.Builder(id, Reference.MOD_NAME, Reference.MOD_ID)
             .setDisplayStack(CropsNHItemList.cropSticks.get(1))
-            .setHeight(130)
-            .setMaxRecipesPerPage(2)
+            .setHeight(140)
             .build();
     }
 
@@ -103,6 +102,13 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
             this.textLines.add(StatCollector.translateToLocalFormatted(Reference.MOD_ID_LOWER + "_nei.crops.tier", crop.getTier()));
             this.textLines.add(StatCollector.translateToLocalFormatted( Reference.MOD_ID_LOWER + "_nei.crops.growthDuration", GTUtility.formatNumbers(crop.getGrowthDuration())));
             this.textLines.add(StatCollector.translateToLocalFormatted( Reference.MOD_ID_LOWER + "_nei.crops.dropMult", GTUtility.formatNumbers(crop.getDropChance())));
+            this.textLines.add(StatCollector.translateToLocalFormatted(
+                Reference.MOD_ID_LOWER + "_nei.crops.likes",
+                crop.getLikedBiomeTags()
+                    .stream()
+                    .map(x -> StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.biomeTag." + x.name().toUpperCase()))
+                    .collect(Collectors.joining(", "))
+            ));
             //spotless:on
 
             for (IGrowthRequirement req : crop.getGrowthRequirements()) {

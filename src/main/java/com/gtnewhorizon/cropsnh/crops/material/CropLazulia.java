@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.material;
 
 import java.awt.Color;
 
+import net.minecraftforge.common.BiomeDictionary;
+
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
@@ -22,6 +24,8 @@ public class CropLazulia extends NHCropCard {
 
         this.addDuplicationCatalyst("gemLapis", 1);
         this.addDuplicationCatalyst("dustLapis", 1);
+        // used since the ancient times
+        this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY);
     }
 
     @Override

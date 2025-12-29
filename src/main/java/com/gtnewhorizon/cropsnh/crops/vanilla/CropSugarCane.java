@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.IPlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
@@ -19,8 +20,12 @@ public class CropSugarCane extends NHCropCard {
 
     public CropSugarCane() {
         super("sugarCane", new Color(0x698747), new Color(0xAADB74));
+
         this.addDrop(new ItemStack(Items.reeds, 2), 10_000);
+
         this.addAlternateSeed(new ItemStack(Items.reeds, 1));
+
+        this.addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.HOT);
     }
 
     @Override

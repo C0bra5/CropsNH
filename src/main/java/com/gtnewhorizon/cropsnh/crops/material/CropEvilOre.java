@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
@@ -28,6 +29,9 @@ public class CropEvilOre extends NHCropCard {
         this.addDuplicationCatalyst("dustNetherQuartz", 1);
         this.addDuplicationCatalyst("gemCertusQuartz", 1);
         this.addDuplicationCatalyst("dustCertusQuartz", 1);
+
+        // NETHER-quarts
+        this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.NETHER);
     }
 
     @Override
