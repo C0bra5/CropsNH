@@ -479,7 +479,7 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
             this.seed.getStats()
                 .getGain());
         int dropCount = (int) avgDropRounds;
-        if (XSTR.XSTR_INSTANCE.nextDouble() <= (dropCount % 1.0d)) {
+        if (XSTR.XSTR_INSTANCE.nextDouble() <= (avgDropRounds % 1.0d)) {
             dropCount++;
         }
 
