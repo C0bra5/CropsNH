@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.blocks;
 
 import java.util.List;
 
+import gregtech.api.enums.VoltageIndex;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,6 +17,7 @@ public class BlockGrowthAccelerationUnit extends CropsNHBlockIndustrialFarmTired
 
     public final static double GROWTH_SPEED_BONUS = 1.0d;
     public final static double BASE_POWER_INCREASE = 1.25d;
+    public final static int MIN_TIER = VoltageIndex.MV;
 
     public BlockGrowthAccelerationUnit() {
         super(

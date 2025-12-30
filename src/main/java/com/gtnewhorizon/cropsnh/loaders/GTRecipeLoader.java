@@ -2,8 +2,17 @@ package com.gtnewhorizon.cropsnh.loaders;
 
 import static gregtech.api.recipe.RecipeMaps.extruderRecipes;
 
+import com.gtnewhorizon.cropsnh.blocks.BlockAdvancedHarvestingUnit;
+import com.gtnewhorizon.cropsnh.blocks.BlockEnvironmentalEnhancementUnit;
+import com.gtnewhorizon.cropsnh.blocks.BlockFertilizerUnit;
+import com.gtnewhorizon.cropsnh.blocks.BlockGrowthAccelerationUnit;
+import com.gtnewhorizon.cropsnh.blocks.BlockOverclockedGrowthAccelerationUnit;
+import com.gtnewhorizon.cropsnh.blocks.BlockSeedBed;
+import com.gtnewhorizon.cropsnh.utility.ModUtils;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
@@ -28,6 +37,7 @@ import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
+import net.minecraftforge.oredict.OreDictionary;
 
 public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
 
@@ -41,14 +51,21 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         CropSynthesizerFakeRecipeLoader.postInit();
 
         addPlantLensRecipe();
-        AddSpadeRecipes();
-        AddCropStickRecipes();
-        AddCropManagerRecipes();
-        AddSeedGeneratorRecipes();
-        AddCropBreederRecipes();
+        addSpadeRecipes();
+        addCropStickRecipes();
+        addCropManagerRecipes();
+        addSeedGeneratorRecipes();
+        addCropBreederRecipes();
         addCropGeneExtractorRecipes();
         addCropSynthesizerRecipes();
-        AddNanCertificateRecipe();
+        addIndustrialFarmRecipe();
+        addSeedBedRecipes();
+        addAdvHarvestingUnitRecipes();
+        addEnvironmentalEnhancementUnitRecipes();
+        addFertilizerUnitRecipes();
+        addGrowthAccelerationUnits();
+        addOverclockedGrowthAccelerationUnits();
+        addNanCertificateRecipe();
     }
 
     private static void addPlantLensRecipe() {
@@ -58,7 +75,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
             new Object[] { " fL", " Sr", "S  ", 'L', OrePrefixes.lens.get(Materials.Glass), 'S', "stickWood" });
     }
 
-    private static void AddSpadeRecipes() {
+    private static void addSpadeRecipes() {
         GTModHandler.addCraftingRecipe(
             CropsNHItemList.spade.get(1),
             GTModHandler.RecipeBits.BITSD,
@@ -66,7 +83,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                 'S', OrePrefixes.stickLong.get(Materials.Wood) });
     }
 
-    private static void AddCropStickRecipes() {
+    private static void addCropStickRecipes() {
         // TODO: REMOVE OLD CROP STICK RECIPES FROM GT5U
 
         GTModHandler.addCraftingRecipe(
@@ -83,7 +100,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
-    private static void AddCropManagerRecipes() {
+    private static void addCropManagerRecipes() {
         int tier = VoltageIndex.LV;
         for (int i = 0; i < CROP_MANAGERS.length; i++) {
             GTModHandler.addMachineCraftingRecipe(
@@ -96,10 +113,10 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                     "CIC",
                     'A', MTEBasicMachineWithRecipe.X.ROBOT_ARM,
                     'S', MTEBasicMachineWithRecipe.X.SENSOR,
-                    'P', MTEBasicMachineWithRecipe.X.PLATE,
-                    'H', MTEBasicMachineWithRecipe.X.HULL,
-                    'C', MTEBasicMachineWithRecipe.X.CIRCUIT,
-                    'I', INPUT_HATCHES[i]
+                    'P', getPlate(tier),
+                    'H', getHull(tier),
+                    'C', getCable(tier),
+                    'I', getInputHatch(i)
                     // spotless:on
                 },
                 tier);
@@ -107,7 +124,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         }
     }
 
-    private static void AddSeedGeneratorRecipes() {
+    private static void addSeedGeneratorRecipes() {
         int tier = VoltageIndex.LV;
         for (CropsNHItemList cropsNHItemList : SEED_GENERATOR) {
             GTModHandler.addMachineCraftingRecipe(
@@ -120,10 +137,10 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                     "BDB",
                     'S', CropsNHItemList.spade.get(1),
                     'A', MTEBasicMachineWithRecipe.X.ROBOT_ARM,
-                    'W', Mods.ExtraUtilities.isModLoaded() ? new ItemStack(Block.getBlockFromName("ExtraUtilities:watering_can"), 1) : ItemList.Cell_Water.get(1L),
-                    'C', MTEBasicMachineWithRecipe.X.CIRCUIT,
-                    'H', MTEBasicMachineWithRecipe.X.HULL,
-                    'B', MTEBasicMachineWithRecipe.X.WIRE,
+                    'W', getWateringCan(),
+                    'C', getCircuit(tier),
+                    'H', getHull(tier),
+                    'B', getCable(tier),
                     // maybe consider replacing this with a tired seedbed later on.
                     'D', new ItemStack(Mods.RandomThings.isModLoaded() ? Block.getBlockFromName("RandomThings:fertilizedDirt") : Blocks.dirt, 1)
                     // spotless:on
@@ -133,7 +150,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         }
     }
 
-    private static void AddCropBreederRecipes() {
+    private static void addCropBreederRecipes() {
         int tier = VoltageIndex.LV;
         for (CropsNHItemList cropsNHItemList : CROP_BREEDER) {
             GTModHandler.addMachineCraftingRecipe(
@@ -146,9 +163,9 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                     "WDW",
                     'S', CropsNHItemList.cropSticks.get(1),
                     'A', MTEBasicMachineWithRecipe.X.ROBOT_ARM,
-                    'C', MTEBasicMachineWithRecipe.X.CIRCUIT,
-                    'H', MTEBasicMachineWithRecipe.X.HULL,
-                    'W', MTEBasicMachineWithRecipe.X.WIRE,
+                    'C', getCircuit(tier),
+                    'H', getHull(tier),
+                    'W', getCable(tier),
                     // maybe consider replacing this with a tired seedbed later on.
                     'D', new ItemStack(Mods.RandomThings.isModLoaded() ? Block.getBlockFromName("RandomThings:fertilizedDirt") : Blocks.dirt, 1)
                     // spotless:on
@@ -174,9 +191,9 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                     Mods.CropsPlusPlus.isModLoaded() ? topLine : bottomLine,
                     'S', MTEBasicMachineWithRecipe.X.SENSOR,
                     'E', MTEBasicMachineWithRecipe.X.EMITTER,
-                    'W', MTEBasicMachineWithRecipe.X.WIRE,
-                    'H', MTEBasicMachineWithRecipe.X.HULL,
-                    'C', MTEBasicMachineWithRecipe.X.BETTER_CIRCUIT,
+                    'W', getCable(tier),
+                    'H', getHull(tier),
+                    'C', getBetterCircuit(tier),
                     // spotless:on
                 },
                 tier);
@@ -199,8 +216,8 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                     "CHC",
                     Mods.CropsPlusPlus.isModLoaded() ? topLine : bottomLine,
                     'E', MTEBasicMachineWithRecipe.X.EMITTER,
-                    'C', MTEBasicMachineWithRecipe.X.BETTER_CIRCUIT,
-                    'H', MTEBasicMachineWithRecipe.X.HULL,
+                    'C', getBetterCircuit(tier),
+                    'H', getHull(tier),
                     'F', MTEBasicMachineWithRecipe.X.FIELD_GENERATOR,
                     // spotless:on
                 },
@@ -209,7 +226,175 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         }
     }
 
-    private static void AddNanCertificateRecipe() {
+    private static void addIndustrialFarmRecipe() {
+
+        GTModHandler.addMachineCraftingRecipe(
+            CropsNHItemList.IndustrialFarmController.get(1),
+            GTModHandler.RecipeBits.BITSD,
+            new Object[] {
+                // TODO: remove this anti-collision stuff when crops++ gets the boot
+                "PWS",
+                "CMC",
+                "ICI",
+                'P', MTEBasicMachineWithRecipe.X.ROBOT_ARM,
+                'W', getWateringCan(),
+                'S', MTEBasicMachineWithRecipe.X.SENSOR,
+                'C', MTEBasicMachineWithRecipe.X.CIRCUIT,
+                'M', CropsNHItemList.CropManager_MV.get(1),
+                // seed/block under storage
+                'I', ItemList.Hatch_Input_Bus_MV
+                // spotless:on
+            },
+            VoltageIndex.MV);
+    }
+
+    private static void addSeedBedRecipes() {
+        int tier = BlockSeedBed.MIN_TIER;
+        ItemStack dirt = new ItemStack(Mods.RandomThings.isModLoaded() ? Block.getBlockFromName("RandomThings:fertilizedDirt") : Blocks.dirt, 1);
+        for (CropsNHItemList output : SEED_BEDS) {
+            GTModHandler.addMachineCraftingRecipe(
+                output.get(1),
+                GTModHandler.RecipeBits.BITSD,
+                new Object[] {
+                    // TODO: remove this anti-collision stuff when crops++ gets the boot
+                    "DDD",
+                    "CHC",
+                    "PIP",
+                    'D', dirt,
+                    'C', getCircuit(tier),
+                    'H', getHull(tier),
+                    'P', getPipe(tier),
+                    'I', getInputHatch(tier),
+                    // spotless:on
+                },
+                tier);
+            tier++;
+        }
+    }
+
+    private static void addAdvHarvestingUnitRecipes() {
+        int tier = BlockAdvancedHarvestingUnit.MIN_TIER;
+        for (CropsNHItemList output : ADV_HARVESTING_UNITS) {
+            GTModHandler.addMachineCraftingRecipe(
+                output.get(1),
+                GTModHandler.RecipeBits.BITSD,
+                new Object[] {
+                    // spotless:off
+                    "RSR",
+                    "CHC",
+                    "WBW",
+                    'R', MTEBasicMachineWithRecipe.X.ROBOT_ARM,
+                    'S', MTEBasicMachineWithRecipe.X.SENSOR,
+                    'C', getCircuit(tier),
+                    'H', getHull(tier),
+                    'W', getCable(tier),
+                    'B', CropsNHItemList.BrickedAgriculturalCasing.get(1)
+                    // spotless:on
+                },
+                tier);
+            tier++;
+        }
+    }
+
+    private static void addEnvironmentalEnhancementUnitRecipes() {
+        int tier = BlockEnvironmentalEnhancementUnit.MIN_TIER;
+        for (CropsNHItemList output : ENVIRONMENTAL_ENHANCEMENT_UNITS) {
+            GTModHandler.addMachineCraftingRecipe(
+                output.get(1),
+                GTModHandler.RecipeBits.BITSD,
+                new Object[] {
+                    // spotless:off
+                    "EEE",
+                    "CHC",
+                    "WBW",
+                    'E', MTEBasicMachineWithRecipe.X.EMITTER,
+                    'C', getCircuit(tier),
+                    'H', getHull(tier),
+                    'W', getCable(tier),
+                    'B', CropsNHItemList.BrickedAgriculturalCasing.get(1)
+                    // spotless:on
+                },
+                tier);
+            tier++;
+        }
+    }
+
+    private static void addFertilizerUnitRecipes() {
+        int tier = BlockFertilizerUnit.MIN_TIER;
+        for (CropsNHItemList output : FERTILIZER_UNITS) {
+            GTModHandler.addMachineCraftingRecipe(
+                output.get(1),
+                GTModHandler.RecipeBits.BITSD,
+                new Object[] {
+                    // spotless:off
+                    "RPS",
+                    "CHC",
+                    "WBW",
+                    'R', MTEBasicMachineWithRecipe.X.ROBOT_ARM,
+                    'P', MTEBasicMachineWithRecipe.X.PUMP,
+                    'S', MTEBasicMachineWithRecipe.X.SENSOR,
+                    'C', getCircuit(tier),
+                    'H', getHull(tier),
+                    'W', getCable(tier),
+                    'B', CropsNHItemList.BrickedAgriculturalCasing.get(1)
+                    // spotless:on
+                },
+                tier);
+            tier++;
+        }
+    }
+
+    private static void addGrowthAccelerationUnits() {
+        int tier = BlockGrowthAccelerationUnit.MIN_TIER;
+        for (CropsNHItemList output : GROWTH_ACCEL_UNITS) {
+            GTModHandler.addMachineCraftingRecipe(
+                output.get(1),
+                GTModHandler.RecipeBits.BITSD,
+                new Object[] {
+                    // spotless:off
+                    "RPE",
+                    "CHC",
+                    "WBW",
+                    'R', MTEBasicMachineWithRecipe.X.ROBOT_ARM,
+                    'P', MTEBasicMachineWithRecipe.X.PUMP,
+                    'E', MTEBasicMachineWithRecipe.X.EMITTER,
+                    'C', getCircuit(tier),
+                    'H', getHull(tier),
+                    'W', getCable(tier),
+                    'B', CropsNHItemList.BrickedAgriculturalCasing.get(1)
+                    // spotless:on
+                },
+                tier);
+            tier++;
+        }
+    }
+
+    private static void addOverclockedGrowthAccelerationUnits() {
+        int tier = BlockOverclockedGrowthAccelerationUnit.MIN_TIER;
+        for (CropsNHItemList output : OC_GROWTH_ACCEL_UNITS) {
+            GTModHandler.addMachineCraftingRecipe(
+                output.get(1),
+                GTModHandler.RecipeBits.BITSD,
+                new Object[] {
+                    // spotless:off
+                    "FAF",
+                    "CGC",
+                    "WBW",
+                    'F', MTEBasicMachineWithRecipe.X.FIELD_GENERATOR,
+                    'A', getWorldAccelerator(tier),
+                    'E', MTEBasicMachineWithRecipe.X.EMITTER,
+                    'C', getCircuit(tier),
+                    'G', GROWTH_ACCEL_UNITS[tier - BlockGrowthAccelerationUnit.MIN_TIER],
+                    'W', getCable(tier),
+                    'B', CropsNHItemList.BrickedAgriculturalCasing.get(1)
+                    // spotless:on
+                },
+                tier);
+            tier++;
+        }
+    }
+
+    private static void addNanCertificateRecipe() {
         // NAN Certificate recipe
         recipe(8, 29826 * 3600 + 9 * 60 + 7, 35)
             .itemInputs(
@@ -219,7 +404,24 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
             .addTo(extruderRecipes);
     }
 
+
     // region tier item lists
+
+    public static ItemStack getWateringCan() {
+        ItemStack wateringCan = null;
+        if (ModUtils.UtilitiesInExcess.isLoaded()) {
+            Item item = GameRegistry.findItem(ModUtils.UtilitiesInExcess.modId, "watering_can_basic");
+            if (item != null) wateringCan = new ItemStack(item, 1, OreDictionary.WILDCARD_VALUE);
+        }
+        if (wateringCan == null && Mods.ExtraUtilities.isModLoaded()) {
+            Item item = GameRegistry.findItem(Mods.ExtraUtilities.getID(), "watering_can");
+            if (item != null) wateringCan = new ItemStack(item, 1, OreDictionary.WILDCARD_VALUE);
+        }
+        if (wateringCan == null) {
+            wateringCan = ItemList.Cell_Water.get(1L);
+        }
+        return wateringCan;
+    }
 
     private static final CropsNHItemList[] CROP_MANAGERS = new CropsNHItemList[] { CropsNHItemList.CropManager_LV,
         CropsNHItemList.CropManager_MV, CropsNHItemList.CropManager_HV, CropsNHItemList.CropManager_EV,
@@ -251,11 +453,139 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         CropsNHItemList.CropSynthesizer_ZPM, CropsNHItemList.CropSynthesizer_UV, CropsNHItemList.CropSynthesizer_UHV,
         CropsNHItemList.CropSynthesizer_UEV, CropsNHItemList.CropSynthesizer_UIV, CropsNHItemList.CropSynthesizer_UMV };
 
-    // I should probably PR that capability into the MTEBasicMachineWithRecipe thing
-    private static final ItemList[] INPUT_HATCHES = new ItemList[] { ItemList.Hatch_Input_LV, ItemList.Hatch_Input_MV,
-        ItemList.Hatch_Input_HV, ItemList.Hatch_Input_EV, ItemList.Hatch_Input_IV, ItemList.Hatch_Input_LuV,
-        ItemList.Hatch_Input_ZPM, ItemList.Hatch_Input_UV, ItemList.Hatch_Input_UHV, ItemList.Hatch_Input_UEV,
-        ItemList.Hatch_Input_UIV, ItemList.Hatch_Input_UMV };
+    private static final CropsNHItemList[] ADV_HARVESTING_UNITS = new CropsNHItemList[] {
+        CropsNHItemList.AdvancedHarvestingUnit_MV, CropsNHItemList.AdvancedHarvestingUnit_HV, CropsNHItemList.AdvancedHarvestingUnit_EV,
+        CropsNHItemList.AdvancedHarvestingUnit_IV, CropsNHItemList.AdvancedHarvestingUnit_LuV, CropsNHItemList.AdvancedHarvestingUnit_ZPM,
+        CropsNHItemList.AdvancedHarvestingUnit_UV, CropsNHItemList.AdvancedHarvestingUnit_UHV, CropsNHItemList.AdvancedHarvestingUnit_UEV,
+        CropsNHItemList.AdvancedHarvestingUnit_UIV, CropsNHItemList.AdvancedHarvestingUnit_UMV, CropsNHItemList.AdvancedHarvestingUnit_UXV };
 
+    private static final CropsNHItemList[] ENVIRONMENTAL_ENHANCEMENT_UNITS = new CropsNHItemList[] {
+        CropsNHItemList.EnvironmentalEnhancementUnit_MV, CropsNHItemList.EnvironmentalEnhancementUnit_HV, CropsNHItemList.EnvironmentalEnhancementUnit_EV,
+        CropsNHItemList.EnvironmentalEnhancementUnit_IV, CropsNHItemList.EnvironmentalEnhancementUnit_LuV, CropsNHItemList.EnvironmentalEnhancementUnit_ZPM,
+        CropsNHItemList.EnvironmentalEnhancementUnit_UV, CropsNHItemList.EnvironmentalEnhancementUnit_UHV, CropsNHItemList.EnvironmentalEnhancementUnit_UEV,
+        CropsNHItemList.EnvironmentalEnhancementUnit_UIV, CropsNHItemList.EnvironmentalEnhancementUnit_UMV, CropsNHItemList.EnvironmentalEnhancementUnit_UXV };
+
+    private static final CropsNHItemList[] FERTILIZER_UNITS = new CropsNHItemList[] {
+        CropsNHItemList.FertilizerUnit_MV, CropsNHItemList.FertilizerUnit_HV, CropsNHItemList.FertilizerUnit_EV,
+        CropsNHItemList.FertilizerUnit_IV, CropsNHItemList.FertilizerUnit_LuV, CropsNHItemList.FertilizerUnit_ZPM,
+        CropsNHItemList.FertilizerUnit_UV, CropsNHItemList.FertilizerUnit_UHV, CropsNHItemList.FertilizerUnit_UEV,
+        CropsNHItemList.FertilizerUnit_UIV, CropsNHItemList.FertilizerUnit_UMV, CropsNHItemList.FertilizerUnit_UXV };
+
+    private static final CropsNHItemList[] GROWTH_ACCEL_UNITS = new CropsNHItemList[] {
+        CropsNHItemList.GrowthAccelerationUnit_MV, CropsNHItemList.GrowthAccelerationUnit_HV, CropsNHItemList.GrowthAccelerationUnit_EV,
+        CropsNHItemList.GrowthAccelerationUnit_IV, CropsNHItemList.GrowthAccelerationUnit_LuV, CropsNHItemList.GrowthAccelerationUnit_ZPM,
+        CropsNHItemList.GrowthAccelerationUnit_UV, CropsNHItemList.GrowthAccelerationUnit_UHV, CropsNHItemList.GrowthAccelerationUnit_UEV,
+        CropsNHItemList.GrowthAccelerationUnit_UIV, CropsNHItemList.GrowthAccelerationUnit_UMV, CropsNHItemList.GrowthAccelerationUnit_UXV };
+
+    private static final CropsNHItemList[] OC_GROWTH_ACCEL_UNITS = new CropsNHItemList[] {
+        CropsNHItemList.OverclockedGrowthAccelerationUnit_ZPM, CropsNHItemList.OverclockedGrowthAccelerationUnit_UV,
+        CropsNHItemList.OverclockedGrowthAccelerationUnit_UHV, CropsNHItemList.OverclockedGrowthAccelerationUnit_UEV,
+        CropsNHItemList.OverclockedGrowthAccelerationUnit_UIV, CropsNHItemList.OverclockedGrowthAccelerationUnit_UMV,
+        CropsNHItemList.OverclockedGrowthAccelerationUnit_UXV };
+
+    private static final CropsNHItemList[] SEED_BEDS = new CropsNHItemList[] {
+        CropsNHItemList.SeedBed_MV, CropsNHItemList.SeedBed_HV, CropsNHItemList.SeedBed_EV,
+        CropsNHItemList.SeedBed_IV, CropsNHItemList.SeedBed_LuV, CropsNHItemList.SeedBed_ZPM,
+        CropsNHItemList.SeedBed_UV, CropsNHItemList.SeedBed_UHV, CropsNHItemList.SeedBed_UEV,
+        CropsNHItemList.SeedBed_UIV, CropsNHItemList.SeedBed_UMV, CropsNHItemList.SeedBed_UXV };
+
+
+    private static ItemList getInputHatch(int tier) {
+        return switch (tier) {
+            case VoltageIndex.ULV -> ItemList.Hatch_Input_ULV;
+            case VoltageIndex.LV -> ItemList.Hatch_Input_LV;
+            case VoltageIndex.MV -> ItemList.Hatch_Input_MV;
+            case VoltageIndex.HV -> ItemList.Hatch_Input_HV;
+            case VoltageIndex.EV -> ItemList.Hatch_Input_EV;
+            case VoltageIndex.IV -> ItemList.Hatch_Input_IV;
+            case VoltageIndex.LuV -> ItemList.Hatch_Input_LuV;
+            case VoltageIndex.ZPM -> ItemList.Hatch_Input_ZPM;
+            case VoltageIndex.UV -> ItemList.Hatch_Input_UV;
+            case VoltageIndex.UHV -> ItemList.Hatch_Input_UHV;
+            case VoltageIndex.UEV -> ItemList.Hatch_Input_UEV;
+            case VoltageIndex.UIV -> ItemList.Hatch_Input_UIV;
+            case VoltageIndex.UMV -> ItemList.Hatch_Input_UMV;
+            case VoltageIndex.UXV -> ItemList.Hatch_Input_UXV;
+            default -> ItemList.Hatch_Input_MAX;
+        };
+    }
+
+    private static ItemList getWorldAccelerator(int tier) {
+        return switch (tier) {
+            case VoltageIndex.LV -> ItemList.AcceleratorLV;
+            case VoltageIndex.MV -> ItemList.AcceleratorMV;
+            case VoltageIndex.HV -> ItemList.AcceleratorHV;
+            case VoltageIndex.EV -> ItemList.AcceleratorEV;
+            case VoltageIndex.IV -> ItemList.AcceleratorIV;
+            case VoltageIndex.LuV -> ItemList.AcceleratorLuV;
+            case VoltageIndex.ZPM -> ItemList.AcceleratorZPM;
+            default -> ItemList.AcceleratorUV;
+        };
+    }
+
+    private static Object getCircuit(int tier) {
+        return switch (tier) {
+            case VoltageIndex.UEV -> OrePrefixes.circuit.get(Materials.UEV);
+            case VoltageIndex.UIV -> OrePrefixes.circuit.get(Materials.UIV);
+            case VoltageIndex.UMV -> OrePrefixes.circuit.get(Materials.UMV);
+            case VoltageIndex.UXV -> OrePrefixes.circuit.get(Materials.UXV);
+            default -> MTEBasicMachineWithRecipe.X.CIRCUIT;
+        };
+    }
+    private static Object getBetterCircuit(int tier) {
+        return switch (tier) {
+            case VoltageIndex.UHV -> OrePrefixes.circuit.get(Materials.UEV);
+            case VoltageIndex.UEV -> OrePrefixes.circuit.get(Materials.UIV);
+            case VoltageIndex.UIV -> OrePrefixes.circuit.get(Materials.UMV);
+            case VoltageIndex.UMV -> OrePrefixes.circuit.get(Materials.UXV);
+            default -> MTEBasicMachineWithRecipe.X.CIRCUIT;
+        };
+    }
+    private static Object getPipe(int tier) {
+        return switch (tier) {
+            case VoltageIndex.LuV -> OrePrefixes.pipeMedium.get(Materials.Enderium);
+            case VoltageIndex.ZPM -> OrePrefixes.pipeMedium.get(Materials.Naquadah);
+            case VoltageIndex.UV, VoltageIndex.UHV -> OrePrefixes.pipeMedium.get(Materials.Neutronium);
+            case VoltageIndex.UEV -> OrePrefixes.pipeMedium.get(Materials.Infinity);
+            case VoltageIndex.UIV -> OrePrefixes.pipeMedium.get(Materials.TranscendentMetal);
+            case VoltageIndex.UMV, VoltageIndex.UXV -> OrePrefixes.pipeMedium.get(Materials.SpaceTime);
+            default -> MTEBasicMachineWithRecipe.X.PIPE;
+        };
+    }
+    private static Object getCable(int tier) {
+        return switch (tier) {
+            case VoltageIndex.LuV -> OrePrefixes.cableGt01.get(Materials.VanadiumGallium);
+            case VoltageIndex.ZPM -> OrePrefixes.cableGt01.get(Materials.Naquadah);
+            case VoltageIndex.UV -> OrePrefixes.cableGt01.get(Materials.ElectrumFlux);
+            case VoltageIndex.UHV -> OrePrefixes.cableGt01.get(Materials.Bedrockium);
+            case VoltageIndex.UEV -> OrePrefixes.cableGt01.get(Materials.Draconium);
+            case VoltageIndex.UIV -> OrePrefixes.cableGt01.get(Materials.NetherStar);
+            case VoltageIndex.UMV -> OrePrefixes.cableGt01.get(Materials.Quantium);
+            case VoltageIndex.UXV -> OrePrefixes.wireGt01.get(Materials.SpaceTime);
+            default -> MTEBasicMachineWithRecipe.X.WIRE;
+        };
+    }
+    private static Object getHull(int tier) {
+        return switch (tier) {
+            case VoltageIndex.UEV -> ItemList.Hull_UEV;
+            case VoltageIndex.UIV -> ItemList.Hull_UIV;
+            case VoltageIndex.UMV -> ItemList.Hull_UMV;
+            case VoltageIndex.UXV -> ItemList.Hull_UXV;
+            default -> MTEBasicMachineWithRecipe.X.HULL;
+        };
+    }
+    private static Object getPlate(int tier) {
+        return switch (tier) {
+            case VoltageIndex.LuV -> OrePrefixes.plate.get(Materials.get("Rhodium-PlatedPalladium"));
+            case VoltageIndex.ZPM -> OrePrefixes.plate.get(Materials.Iridium);
+            case VoltageIndex.UV -> OrePrefixes.plate.get(Materials.Osmium);
+            case VoltageIndex.UHV -> OrePrefixes.plate.get(Materials.Neutronium);
+            case VoltageIndex.UEV -> OrePrefixes.plate.get(Materials.Bedrockium);
+            case VoltageIndex.UIV -> OrePrefixes.plate.get(Materials.CosmicNeutronium);
+            case VoltageIndex.UMV -> OrePrefixes.plate.get(Materials.TranscendentMetal);
+            case VoltageIndex.UXV -> OrePrefixes.plate.get(Materials.SpaceTime);
+            default -> MTEBasicMachineWithRecipe.X.PLATE;
+        };
+    }
     // endregion tier item lists
 }

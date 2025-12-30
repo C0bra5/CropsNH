@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.crops.cropnh;
 
 import java.awt.Color;
 
+import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
@@ -13,25 +14,20 @@ public class CropHemp extends NHCropCard {
 
     public CropHemp() {
         super("hemp", new Color(0x275600), new Color(0xBBB49D));
-        // TODO: CONSIDER IF WE WANT TO KEEP FLAX OR HEMP AROUND
-        this.addDrop(new ItemStack(Items.string, 2, 0), 100_00);
+
+        this.addDrop(CropsNHItemList.hempStem.get(1), 100_00);
 
         this.addLikedBiomes(BiomeDictionary.Type.DRY, BiomeDictionary.Type.SANDY);
     }
 
     @Override
-    public String getFlavourText() {
-        return Reference.MOD_ID_LOWER + "_crops.hemp.flavour";
-    }
-
-    @Override
     public String getCreator() {
-        return "Alkalus";
+        return "C0bra5";
     }
 
     @Override
     public int getTier() {
-        return 2;
+        return 5;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.gtnewhorizon.cropsnh.init;
 
+import com.gtnewhorizon.cropsnh.items.ItemHempHurd;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
@@ -34,6 +35,7 @@ public class CropsNHItems {
     public static Item berry;
     public static Item bottledAlcohol;
     public static Item fertilizer;
+    public static Item hempHurd;
     public static Item materialLeaf;
     public static Item environmentalModule;
 
@@ -68,8 +70,9 @@ public class CropsNHItems {
         CropsNHItemList.fakeJagermeisterBottle.set(new ItemStack(bottledAlcohol, 1, 9));
 
         // register fertilizer
-        fertilizer = new ItemFertilizer();
-        CropsNHItemList.fertilizer.set(new ItemStack(fertilizer, 1, 0));
+        CropsNHItemList.fertilizer.set(new ItemStack(fertilizer = new ItemFertilizer(), 1, 0));
+        // register hurds
+        CropsNHItemList.hempHurd.set(new ItemStack(hempHurd = new ItemHempHurd(), 1,0));
         // update EIG fert registry
         MTEExtremeIndustrialGreenhouse.addFertilizerItem(CropsNHItemList.fertilizer.get(1));
 
@@ -113,6 +116,7 @@ public class CropsNHItems {
         CropsNHItemList.starwart.set(MaterialLeafLoader.starwart.get());
         // brand spankin new so no need to override anything
         CropsNHItemList.hops.set(MaterialLeafLoader.hops.get());
+        CropsNHItemList.hempStem.set(MaterialLeafLoader.hempStem.get());
         //spotless:on
 
         environmentalModule = new ItemEnvironmentalModule();

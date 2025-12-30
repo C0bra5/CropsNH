@@ -13,12 +13,14 @@ import static gregtech.api.recipe.RecipeMaps.extractorRecipes;
 import static gregtech.api.recipe.RecipeMaps.fluidExtractionRecipes;
 import static gregtech.api.recipe.RecipeMaps.hammerRecipes;
 import static gregtech.api.recipe.RecipeMaps.maceratorRecipes;
+import static gregtech.api.recipe.RecipeMaps.mixerRecipes;
 import static gregtech.api.recipe.RecipeMaps.multiblockChemicalReactorRecipes;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 import static gregtech.api.util.GTRecipeBuilder.TICKS;
 import static gregtech.api.util.GTRecipeConstants.UniversalChemical;
 import static gregtech.common.items.ItemComb.Voltage;
 
+import gregtech.loaders.postload.recipes.ChemicalBathRecipes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -137,6 +139,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
         addSpaceFlowerRecipes();
         addSugarBeetRecipes();
         addGoldfishRecipes();
+        addHempStemRecipes();
     }
 
     private static void addPlantBallRecipes() {
@@ -676,6 +679,36 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
                 GTOreDictUnificator.get(OrePrefixes.nugget, Materials.Gold, 1))
             .outputChances(100_00, 90, 10)
             .addTo(maceratorRecipes);
+    }
+
+    private static void addHempStemRecipes() {
+        // Retting the stems in water to detach it from the fibers.
+        ulvRecipe(1,0)
+            .itemInputs(CropsNHItemList.hempStem.get(1))
+            .itemOutputs(new ItemStack(Items.string, 6, 0))
+            .fluidInputs(new FluidStack(FluidRegistry.WATER, 100))
+            .addTo(chemicalBathRecipes);
+
+        // macerate the sticks for plant balls (mangled fibers) and hurds for the casings
+        ulvRecipe(1, 0)
+            .itemInputs(CropsNHItemList.hempStem.get(1))
+            .itemOutputs(
+                CropsNHItemList.hempHurd.get(1),
+                ItemList.IC2_PlantballCompressed.get(1L))
+            .outputChances(100_00, 25_00)
+            .addTo(maceratorRecipes);
+
+        // IF casing recipe
+        mvRecipe(5, 0)
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Aluminium, 1),
+                CropsNHItemList.hempHurd.get(4),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Quicklime, 1)
+            )
+            .fluidInputs(new FluidStack(FluidRegistry.WATER, 1000))
+            .itemOutputs(
+                CropsNHItemList.BrickedAgriculturalCasing.get(1))
+            .addTo(assemblerRecipes);
     }
 
     // region ore conversion helpers

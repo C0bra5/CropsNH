@@ -5,11 +5,12 @@ import cpw.mods.fml.common.Loader;
 public class ModUtils {
 
     public final static ModChecker Angelica = new ModChecker("angelica");
+    public final static ModChecker UtilitiesInExcess = new ModChecker("utilitiesinexcess");
 
     public static class ModChecker {
 
         private Boolean isLoaded = null;
-        private final String modId;
+        public final String modId;
 
         public ModChecker(String modId) {
             this.modId = modId;

@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.blocks;
 
 import java.util.List;
 
+import gregtech.api.enums.VoltageIndex;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,6 +18,7 @@ public class BlockAdvancedHarvestingUnit extends CropsNHBlockIndustrialFarmTired
     public final static int MAX_UPGRADE_COUNT = 2;
     public final static double HARVEST_ROUND_MULTIPLIER = 0.2d;
     public final static double BASE_POWER_INCREASE = 0.5d;
+    public final static int MIN_TIER = VoltageIndex.MV;
 
     public BlockAdvancedHarvestingUnit() {
         super(

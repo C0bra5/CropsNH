@@ -17,12 +17,13 @@ import gregtech.api.enums.VoltageIndex;
 public class BlockOverclockedGrowthAccelerationUnit extends CropsNHBlockIndustrialFarmTiredComponent {
 
     public final static int MAX_UPGRADE_COUNT = 1;
+    public final static int MIN_TIER = VoltageIndex.ZPM;
 
     public BlockOverclockedGrowthAccelerationUnit() {
         super(
             Names.Objects.OverclockGrowthAccelerationUnit,
             "Overclocked Growth Acceleration Unit",
-            VoltageIndex.ZPM,
+            MIN_TIER,
             VoltageIndex.UXV,
             CropsNHItemList.OverclockedGrowthAccelerationUnit_ZPM,
             CropsNHItemList.OverclockedGrowthAccelerationUnit_UV,

@@ -12,7 +12,7 @@ public class CropFlax extends NHCropCard {
 
     public CropFlax() {
         super("flax", new Color(0x804D3E), new Color(0xB76E5A));
-        // TODO: CONSIDER IF WE WANT TO KEEP FLAX OR HEMP AROUND SINCE THEY DROP THE SAME THING
+
         this.addDrop(new ItemStack(Items.string, 1, 0), 100_00);
         // flax is typically found in sedimentary soils.
         this.addLikedBiomes(

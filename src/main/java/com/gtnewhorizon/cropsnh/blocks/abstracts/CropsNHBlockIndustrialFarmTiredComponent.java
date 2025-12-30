@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 import org.apache.commons.lang3.tuple.Pair;

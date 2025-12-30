@@ -2,6 +2,7 @@ package com.gtnewhorizon.cropsnh.blocks;
 
 import java.util.List;
 
+import gregtech.api.enums.VoltageIndex;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,6 +20,7 @@ public class BlockFertilizerUnit extends CropsNHBlockIndustrialFarmTiredComponen
     public final static double BASE_POWER_INCREASE = 0.5d;
     public final static double GROWTH_SPEED_MULTIPLIER = 0.5d;
     public final static double HARVEST_ROUND_BONUS = 0.5d;
+    public final static int MIN_TIER = VoltageIndex.MV;
 
     public BlockFertilizerUnit() {
         super(
@@ -58,7 +60,7 @@ public class BlockFertilizerUnit extends CropsNHBlockIndustrialFarmTiredComponen
             tooltip.add(
                 StatCollector.translateToLocalFormatted(
                     Reference.MOD_ID_LOWER + "_tooltip.fertilizerUnit.3.adv",
-                    HARVEST_ROUND_BONUS));
+                    HARVEST_ROUND_BONUS * 100));
             tooltip.add(
                 StatCollector.translateToLocalFormatted(
                     Reference.MOD_ID_LOWER + "_tooltip.fertilizerUnit.4.adv",
@@ -71,7 +73,7 @@ public class BlockFertilizerUnit extends CropsNHBlockIndustrialFarmTiredComponen
             tooltip.add(
                 StatCollector.translateToLocalFormatted(
                     Reference.MOD_ID_LOWER + "_tooltip.fertilizerUnit.3",
-                    HARVEST_ROUND_BONUS));
+                    HARVEST_ROUND_BONUS * 100));
             tooltip.add(
                 StatCollector.translateToLocalFormatted(
                     Reference.MOD_ID_LOWER + "_tooltip.fertilizerUnit.4",

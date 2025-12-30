@@ -28,6 +28,7 @@ public enum CropsNHItemList implements IItemContainer {
     // TODO: CONSIDER MOVING NAN CERTIFICATE TO GT5-U OR NH CORE MOD
     nanCertificate,
     fertilizer,
+    hempHurd,
     enrichedFertilizerCell,
 
     // MTEs
@@ -225,6 +226,7 @@ public enum CropsNHItemList implements IItemContainer {
     bobsYerUncleBerry,
     starwart,
     hops,
+    hempStem,
 
     environmentalModule_base,
     environmentalModule_HOT,

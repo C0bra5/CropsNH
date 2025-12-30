@@ -8,6 +8,7 @@ item.cropsnh:spade.name=Spade
 item.cropsnh:debugger.name=Debugger
 item.cropsnh:nanCertificate.name=Certificate of not being a noob anymore
 item.cropsnh:fertilizer.name=Fertilizer
+item.cropsnh:hempHurd.name=Chipped Hemp Hurds
 
 # Alcohol Bottles
 item.cropsnh:DKorn.bottled.name=Bottled Doppelkorn
@@ -58,6 +59,7 @@ item.cropsnh:materialLeaf.aureliaLeaf.name=Aurelia Leaf
 item.cropsnh:materialLeaf.teaLeaf.name=Tea Leaf
 item.cropsnh:materialLeaf.bobsYerUncleBerry.name=Bobs-Yer-Uncle-Berry
 item.cropsnh:materialLeaf.hops.name=Hops
+item.cropsnh:materialLeaf.hempStem.name=Hemp Stem
 # Environmental Module Items
 item.cropsnh:environmentalModule.blank=Environmental Module (%1$s)
 item.cropsnh:environmentalModule.template=Environmental Module (%1$s)
@@ -183,8 +185,8 @@ cropsnh_tooltip.fertilizerUnit.0=Allows the Industrial Farm to consume fertilize
 cropsnh_tooltip.fertilizerUnit.1=Requires %1$dL of fertilizer per cycle.
 cropsnh_tooltip.fertilizerUnit.2=Increases growth speed by %1$.0f%%.
 cropsnh_tooltip.fertilizerUnit.2.adv=Increases growth speed by %1$.0f%% (multiplicative).
-cropsnh_tooltip.fertilizerUnit.3=Increases number of drops by %1$1.2f.
-cropsnh_tooltip.fertilizerUnit.3.adv=Increases number of drops by %1$1.2f.
+cropsnh_tooltip.fertilizerUnit.3=Increases number of drops by %1$1.2f%%.
+cropsnh_tooltip.fertilizerUnit.3.adv=Increases number of drops by %1$1.2f%% (additive).
 cropsnh_tooltip.fertilizerUnit.4=Increases power usage by %1$.0f%%.
 cropsnh_tooltip.fertilizerUnit.4.adv=Increases power usage by %1$.0f%% (additive).
 # Environmental Unit
@@ -444,7 +446,6 @@ cropsnh_crops.glowheat=Glowheat
 cropsnh_crops.godOfThunder=God of Thunder
 cropsnh_crops.grape=Grape
 cropsnh_crops.hemp=Hemp
-cropsnh_crops.hemp.flavour=It prefers dry biomes. Inedible.
 cropsnh_crops.indigo=Indigo
 cropsnh_crops.iridine=Iridine
 cropsnh_crops.lazulia=Lazulia
