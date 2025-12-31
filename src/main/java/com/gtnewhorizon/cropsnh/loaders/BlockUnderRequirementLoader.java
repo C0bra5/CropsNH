@@ -1,5 +1,7 @@
 package com.gtnewhorizon.cropsnh.loaders;
 
+import ganymedes01.etfuturum.ModBlocks;
+import ganymedes01.etfuturum.blocks.BlockTuff;
 import net.minecraft.init.Blocks;
 
 import com.gtnewhorizon.cropsnh.api.BlockWithMeta;
@@ -30,6 +32,11 @@ public class BlockUnderRequirementLoader {
         BlockUnderRequirement.get("botaniaAndesite").addOreDict("stoneAndesite");
         BlockUnderRequirement.get("botaniaDiorite").addOreDict("stoneDiorite");
         BlockUnderRequirement.get("botaniaGranite").addOreDict("stoneGranite");
+        // Et Futurum Stone Lilies
+        if (Mods.EtFuturumRequiem.isModLoaded()) {
+            BlockUnderRequirement.get("tuff").addBlock(new BlockWithMeta(ModBlocks.TUFF.get(), 0));
+            BlockUnderRequirement.get("deepslate").addBlock(new BlockWithMeta(ModBlocks.DEEPSLATE.get(), 0));
+        }
         // vanilla ores
         BlockUnderRequirement.get("coal").addBlockAndOreDict().addMaterial(Materials.Coal);
         BlockUnderRequirement.get("iron").addBlockAndOreDict().addMaterial(Materials.Iron);

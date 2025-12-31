@@ -20,11 +20,6 @@ public class CropCoffee extends CropFood {
     }
 
     @Override
-    public String getCreator() {
-        return "Snoochy";
-    }
-
-    @Override
     public ISeedShape getSeedShape() {
         return SeedShape.grains;
     }

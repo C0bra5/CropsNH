@@ -81,14 +81,14 @@ public class AspectLoader {
 
         // region food crops
         ThaumcraftApi.registerObjectTag(
-            CropsNHItemList.terraWart.get(1),
+            CropsNHItemList.gaiaWart.get(1),
             new AspectList()
                 .add(Aspect.AURA, 8)
                 .add(Aspect.MAGIC, 4)
                 .add(Aspect.LIFE, 4)
         );
         ThaumcraftApi.registerObjectTag(
-            CropsNHItemList.milkwart.get(1),
+            CropsNHItemList.milkWart.get(1),
             new AspectList()
                 .add(Aspect.CROP, 1)
                 .add(Aspect.WATER, 1)
@@ -267,8 +267,8 @@ public class AspectLoader {
         addCropAspectsBasedOnMaterial(CropsNHItemList.saltyRoot.get(1), Materials.Salt, defaultTwigAspects);
         addCropAspectsBasedOnMaterial(CropsNHItemList.plumbiliaLeaf.get(1), Materials.Lead, defaultLeafAspects);
         addCropAspectsBasedOnMaterial(CropsNHItemList.argentiaLeaf.get(1), Materials.Silver, defaultLeafAspects);
-        addCropAspectsBasedOnMaterial(CropsNHItemList.ferruLeaf.get(1), Materials.Iron, defaultLeafAspects);
-        addCropAspectsBasedOnMaterial(CropsNHItemList.aureliaLeaf.get(1), Materials.Gold, defaultLeafAspects);
+        addCropAspectsBasedOnMaterial(CropsNHItemList.ferrofernLeaf.get(1), Materials.Iron, defaultLeafAspects);
+        addCropAspectsBasedOnMaterial(CropsNHItemList.auroniaLeaf.get(1), Materials.Gold, defaultLeafAspects);
         ThaumcraftApi.registerObjectTag(
             CropsNHItemList.bobsYerUncleBerry.get(1),
             new AspectList()
@@ -277,19 +277,19 @@ public class AspectLoader {
                 .add(Aspect.GREED, 1)
         );
         {
-            AspectList starwartAspects = new AspectList()
+            AspectList starWartAspects = new AspectList()
                 .add(defaultLeafAspects)
                 .add(Aspect.ELDRITCH, 1)
                 .add(Aspect.MAGIC, 1)
                 .add(Aspect.ORDER, 1)
                 .add(Aspect.LIGHT, 1);
             if (Mods.ForbiddenMagic.isModLoaded()) {
-                starwartAspects
+                starWartAspects
                     .add(Aspect.getAspect("infernus"), 1)
                     .add(Aspect.getAspect("superbia"), 1);
             }
             ThaumcraftApi.registerObjectTag(
-                CropsNHItemList.starwart.get(1),
+                CropsNHItemList.starWart.get(1),
                 new AspectList()
                     .add(defaultLeafAspects)
                     .add(Aspect.CRYSTAL, 1)

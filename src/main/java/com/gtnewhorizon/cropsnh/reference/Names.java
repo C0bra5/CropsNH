@@ -62,7 +62,7 @@ public final class Names {
         public static final String OverclockGrowthAccelerationUnit = "OverclockGrowthAccelerationUnit";
 
         // produce
-        public static final String terraWart = "terraWart";
+        public static final String gaiaWart = "gaiaWart";
         public static final String goldfish = "goldfish";
     }
 

@@ -18,11 +18,6 @@ public class CropHops extends CropFood {
     }
 
     @Override
-    public String getCreator() {
-        return "IC2 Team";
-    }
-
-    @Override
     public int getGrowthDuration() {
         return 2400;
     }

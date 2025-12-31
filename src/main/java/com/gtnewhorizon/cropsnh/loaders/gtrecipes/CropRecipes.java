@@ -13,14 +13,12 @@ import static gregtech.api.recipe.RecipeMaps.extractorRecipes;
 import static gregtech.api.recipe.RecipeMaps.fluidExtractionRecipes;
 import static gregtech.api.recipe.RecipeMaps.hammerRecipes;
 import static gregtech.api.recipe.RecipeMaps.maceratorRecipes;
-import static gregtech.api.recipe.RecipeMaps.mixerRecipes;
 import static gregtech.api.recipe.RecipeMaps.multiblockChemicalReactorRecipes;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 import static gregtech.api.util.GTRecipeBuilder.TICKS;
 import static gregtech.api.util.GTRecipeConstants.UniversalChemical;
 import static gregtech.common.items.ItemComb.Voltage;
 
-import gregtech.loaders.postload.recipes.ChemicalBathRecipes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -128,7 +126,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
         addCanolaRecipes();
         addMagicEssenceRecipes();
         addMicadiaRecipes();
-        addMilkwartRecipes();
+        addMilkWartRecipes();
         addOilBerryRecipes();
         addTineRecipes();
         addUUABerryRecipes();
@@ -181,14 +179,14 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
         createOreDuplicationRecipe(MaterialLeafLoader.plumbiliaLeaf, Materials.Lead);
         createOreDuplicationRecipe(MaterialLeafLoader.plumbiliaLeaf, Materials.Galena);
 
-        createOreDuplicationRecipe(MaterialLeafLoader.ferruLeaf, Materials.Iron);
-        createOreDuplicationRecipe(MaterialLeafLoader.ferruLeaf, Materials.Magnetite);
-        createOreDuplicationRecipe(MaterialLeafLoader.ferruLeaf, Materials.BrownLimonite);
-        createOreDuplicationRecipe(MaterialLeafLoader.ferruLeaf, Materials.YellowLimonite);
-        createOreDuplicationRecipe(MaterialLeafLoader.ferruLeaf, Materials.VanadiumMagnetite);
-        createOreDuplicationRecipe(MaterialLeafLoader.ferruLeaf, Materials.BandedIron);
-        createOreDuplicationRecipe(MaterialLeafLoader.ferruLeaf, Materials.Pyrite);
-        createOreDuplicationRecipe(MaterialLeafLoader.ferruLeaf, Materials.MeteoricIron);
+        createOreDuplicationRecipe(MaterialLeafLoader.ferrofernLeaf, Materials.Iron);
+        createOreDuplicationRecipe(MaterialLeafLoader.ferrofernLeaf, Materials.Magnetite);
+        createOreDuplicationRecipe(MaterialLeafLoader.ferrofernLeaf, Materials.BrownLimonite);
+        createOreDuplicationRecipe(MaterialLeafLoader.ferrofernLeaf, Materials.YellowLimonite);
+        createOreDuplicationRecipe(MaterialLeafLoader.ferrofernLeaf, Materials.VanadiumMagnetite);
+        createOreDuplicationRecipe(MaterialLeafLoader.ferrofernLeaf, Materials.BandedIron);
+        createOreDuplicationRecipe(MaterialLeafLoader.ferrofernLeaf, Materials.Pyrite);
+        createOreDuplicationRecipe(MaterialLeafLoader.ferrofernLeaf, Materials.MeteoricIron);
 
         createOreDuplicationRecipe(MaterialLeafLoader.nickelbackLeaf, Materials.Nickel);
         createOreDuplicationRecipe(MaterialLeafLoader.nickelbackLeaf, Materials.Garnierite);
@@ -204,8 +202,8 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
         createOreDuplicationRecipe(MaterialLeafLoader.argentiaLeaf, Materials.Silver);
         createOreDuplicationRecipe(MaterialLeafLoader.argentiaLeaf, Materials.Galena);
 
-        createOreDuplicationRecipe(MaterialLeafLoader.aureliaLeaf, Materials.Gold);
-        createOreDuplicationRecipe(MaterialLeafLoader.aureliaLeaf, Materials.Magnetite);
+        createOreDuplicationRecipe(MaterialLeafLoader.auroniaLeaf, Materials.Gold);
+        createOreDuplicationRecipe(MaterialLeafLoader.auroniaLeaf, Materials.Magnetite);
 
         createOreDuplicationRecipe(MaterialLeafLoader.micadiaFlower, Materials.Mica);
 
@@ -312,7 +310,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
                 new int[] { 50_00 })
             .addTo(extractorRecipes);
 
-        ulvRecipe(3, 75).itemInputs(MaterialLeafLoader.ferruLeaf.get(9))
+        ulvRecipe(3, 75).itemInputs(MaterialLeafLoader.ferrofernLeaf.get(9))
             .itemOutputs(
                 new ItemStack[] { GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 1) },
                 new int[] { 50_00 })
@@ -325,9 +323,9 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
         createOreConversionRecipe(MaterialLeafLoader.plumbiliaLeaf, Voltage.LV, Materials.Lead, TierAcid.t1);
         createOreConversionRecipe(MaterialLeafLoader.tineTwig, Voltage.LV, Materials.Tin, TierAcid.t1);
         createOreConversionRecipe(MaterialLeafLoader.argentiaLeaf, Voltage.LV, Materials.Silver, TierAcid.t1);
-        createOreConversionRecipe(MaterialLeafLoader.ferruLeaf, Voltage.LV, Materials.Iron, TierAcid.t1);
+        createOreConversionRecipe(MaterialLeafLoader.ferrofernLeaf, Voltage.LV, Materials.Iron, TierAcid.t1);
 
-        createOreConversionRecipe(MaterialLeafLoader.aureliaLeaf, Voltage.LV, Materials.Gold, TierAcid.t2);
+        createOreConversionRecipe(MaterialLeafLoader.auroniaLeaf, Voltage.LV, Materials.Gold, TierAcid.t2);
         // emeralds are needed for mv sensors/emitters so slightly higher reqs
         createOreConversionRecipe(MaterialLeafLoader.bobsYerUncleBerry, Voltage.LV, Materials.Emerald, TierAcid.t2);
         createOreConversionRecipe(MaterialLeafLoader.bauxiaLeaf, Voltage.MV, Materials.Bauxite, TierAcid.t2);
@@ -344,7 +342,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
         createOreConversionRecipe(MaterialLeafLoader.reactoriaStem, Voltage.EV, Materials.Uranium, TierAcid.t6);
         createOreConversionRecipe(MaterialLeafLoader.thunderFlower, Voltage.EV, Materials.Thorium, TierAcid.t6);
         createOreConversionRecipe(MaterialLeafLoader.titaniaLeaf, Voltage.EV, Materials.Titanium, TierAcid.t6);
-        createOreConversionRecipe(MaterialLeafLoader.starwart, Voltage.EV, Materials.NetherStar, TierAcid.t6);
+        createOreConversionRecipe(MaterialLeafLoader.starWart, Voltage.EV, Materials.NetherStar, TierAcid.t6);
 
         createOreConversionRecipe(
             MaterialLeafLoader.osmianthFlower,
@@ -446,10 +444,10 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
         FurnaceFuelHandler.registerFuel(CropsNHItemList.micadiaFlower.get(1), 240);
     }
 
-    private static void addMilkwartRecipes() {
+    private static void addMilkWartRecipes() {
         // milk fluid extraction
         GTValues.RA.stdBuilder()
-            .itemInputs(MaterialLeafLoader.milkwart.get(1))
+            .itemInputs(MaterialLeafLoader.milkWart.get(1))
             .itemOutputs(new ItemStack[] { Materials.Milk.getDust(1) }, new int[] { 10_00 })
             .fluidOutputs(Materials.Milk.getFluid(150))
             .duration(6 * SECONDS + 8 * TICKS)
@@ -457,7 +455,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
             .addTo(fluidExtractionRecipes);
         // milk powder extraction
         GTValues.RA.stdBuilder()
-            .itemInputs(MaterialLeafLoader.milkwart.get(1))
+            .itemInputs(MaterialLeafLoader.milkWart.get(1))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Milk, 0))
             .eut(4)
             .duration(6 * GTRecipeBuilder.SECONDS + 8 * GTRecipeBuilder.TICKS)

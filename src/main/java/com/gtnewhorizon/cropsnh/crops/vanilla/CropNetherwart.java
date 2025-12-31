@@ -88,7 +88,7 @@ public class CropNetherwart extends NHCropCard {
         return "nether_wart_stage_";
     }
 
-    // region terrawart transformation
+    // region gaia wart transformation
 
     public boolean onRightClick(ICropStickTile te, EntityPlayer player) {
         IAdditionalCropData dataUnparsed = te.getAdditionalCropData();
@@ -101,13 +101,13 @@ public class CropNetherwart extends NHCropCard {
         }
         ItemStack heldItem = player.getHeldItem();
         if (heldItem == null || heldItem.getItem() == null) return false;
-        // if right click with snow blocks netherwart may turn into terrawart.
+        // if right click with snow blocks netherwart may turn into gaia wart.
         if (heldItem.getItem() == Item.getItemFromBlock(Blocks.snow)) {
             if (data.getChance() > XSTR.XSTR_INSTANCE.nextInt(10000)) {
                 ISeedStats stats = te.getSeed()
                     .getStats();
                 te.clear();
-                te.plantSeed(new SeedData(CropsNHCrops.TerraWart, stats));
+                te.plantSeed(new SeedData(CropsNHCrops.GaiaWart, stats));
             } else {
                 // Increase the chance just to make it slightly more likely and to act a bad luck protection.
                 // At most, I'd like players to spend a stack of snow blocks on this.
@@ -165,5 +165,5 @@ public class CropNetherwart extends NHCropCard {
         }
     }
 
-    // endregion terrawart transformation
+    // endregion gaia transformation
 }

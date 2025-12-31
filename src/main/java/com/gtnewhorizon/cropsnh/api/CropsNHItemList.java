@@ -178,7 +178,7 @@ public enum CropsNHItemList implements IItemContainer {
     huckleBerry,
     sugarBeet,
     goldfish,
-    terraWart,
+    gaiaWart,
 
     // Alcohol Bottles
     fermentedWheatBottle,
@@ -201,7 +201,7 @@ public enum CropsNHItemList implements IItemContainer {
     iridineFlower,
     magicEssence,
     micadiaFlower,
-    milkwart,
+    milkWart,
     nickelbackLeaf,
     oilBerry,
     osmianthFlower,
@@ -220,11 +220,11 @@ public enum CropsNHItemList implements IItemContainer {
     saltyRoot,
     plumbiliaLeaf,
     argentiaLeaf,
-    ferruLeaf,
-    aureliaLeaf,
+    ferrofernLeaf,
+    auroniaLeaf,
     teaLeaf,
     bobsYerUncleBerry,
-    starwart,
+    starWart,
     hops,
     hempStem,
 

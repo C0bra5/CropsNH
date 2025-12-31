@@ -20,7 +20,7 @@ public class MaterialLeafLoader {
     public final static MaterialLeafVariant iridineFlower     = new MaterialLeafVariant(   5, "iridineFlower",     "iridium");
     public final static MaterialLeafVariant magicEssence      = new MaterialLeafVariant(   6, "magicEssence",      "magic");
     public final static MaterialLeafVariant micadiaFlower     = new MaterialLeafVariant(   7, "micadiaFlower",     "mica");
-    public final static MaterialLeafVariant milkwart          = new MaterialLeafVariant(   8, "milkwart",          "milk");
+    public final static MaterialLeafVariant milkWart          = new MaterialLeafVariant(   8, "milkWart",          "milk");
     public final static MaterialLeafVariant nickelbackLeaf    = new MaterialLeafVariant(   9, "nickelbackLeaf",    "nickel");
     public final static MaterialLeafVariant oilBerry          = new MaterialLeafVariant(  10, "oilBerry",          "oil");
     public final static MaterialLeafVariant osmianthFlower    = new MaterialLeafVariant(  11, "osmianthFlower",    "osmium");
@@ -39,11 +39,11 @@ public class MaterialLeafLoader {
     public final static MaterialLeafVariant saltyRoot         = new MaterialLeafVariant(  24, "saltyRoot",         "salt");
     public final static MaterialLeafVariant plumbiliaLeaf     = new MaterialLeafVariant(  25, "plumbiliaLeaf",     "lead");
     public final static MaterialLeafVariant argentiaLeaf      = new MaterialLeafVariant(  26, "argentiaLeaf",      "silver");
-    public final static MaterialLeafVariant ferruLeaf         = new MaterialLeafVariant(  27, "ferruLeaf",         "iron");
-    public final static MaterialLeafVariant aureliaLeaf       = new MaterialLeafVariant(  28, "aureliaLeaf",       "gold");
+    public final static MaterialLeafVariant ferrofernLeaf     = new MaterialLeafVariant(  27, "ferrofernLeaf",     "iron");
+    public final static MaterialLeafVariant auroniaLeaf       = new MaterialLeafVariant(  28, "auroniaLeaf",       "gold");
     public final static MaterialLeafVariant teaLeaf           = new MaterialLeafVariant(  29, "teaLeaf",           "tea");
     public final static MaterialLeafVariant bobsYerUncleBerry = new MaterialLeafVariant(  30, "bobsYerUncleBerry", "emerald");
-    public final static MaterialLeafVariant starwart          = new MaterialLeafVariant(  31, "starwart",          "netherstar");
+    public final static MaterialLeafVariant starWart          = new MaterialLeafVariant(  31, "starWart",          "netherstar");
     public final static MaterialLeafVariant hops              = new MaterialLeafVariant(  32, "hops",              "beer");
     public final static MaterialLeafVariant hempStem          = new MaterialLeafVariant(  33, "hempStem",          "string");
     //spotless:on

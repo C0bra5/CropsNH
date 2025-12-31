@@ -26,13 +26,17 @@ public class CropWithereed extends NHCropCard {
 
         this.addDrop(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Coal, 1), 66_67);
         this.addDrop(new ItemStack(Items.coal, 1, 0), 33_33);
-        // TODO: CONSIDER DROPPING SKULL CHUNKS FROM EXTRA BEES INSTEAD
+
+        // wither skull
         this.addDrop(new ItemStack(Items.skull, 1, 1), 16_67);
+        // skeleton skull
         this.addDrop(new ItemStack(Items.skull, 1, 0), 8_33);
 
         this.addBlockUnderRequirement("coal");
 
-        this.addDuplicationCatalyst("dustCoal", 1);
+        // wither skull
+        this.addDuplicationCatalyst(new ItemStack(Items.skull, 1, 1));
+        this.addDuplicationCatalyst("gemCoal", 1);
         this.addDuplicationCatalyst("gemCoal", 1);
 
         this.addLikedBiomes(BiomeDictionary.Type.DEAD, BiomeDictionary.Type.SPOOKY);

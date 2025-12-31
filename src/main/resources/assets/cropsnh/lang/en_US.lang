@@ -23,7 +23,7 @@ item.cropsnh:jagi.bottled.name=Real Bottled Jägermeister!
 item.cropsnh:njagi.bottled.name=Bottled Fake Jägermeister
 
 # Crop Produce Items
-item.cropsnh:terraWart.name=Terra Wart
+item.cropsnh:gaiaWart.name=Gaia Wart
 item.cropsnh:goldfish.name=Goldfish
 item.cropsnh:berry.huckle.name=Huckleberry
 item.cropsnh:berry.sugarbeet.name=Sugar Beet
@@ -35,7 +35,7 @@ item.cropsnh:materialLeaf.indigoBlossom.name=Indigo Blossom
 item.cropsnh:materialLeaf.iridineFlower.name=Iridine Leaf
 item.cropsnh:materialLeaf.magicEssence.name=Magic Essence
 item.cropsnh:materialLeaf.micadiaFlower.name=Micadia Flower
-item.cropsnh:materialLeaf.milkwart.name=Milkwart
+item.cropsnh:materialLeaf.milkWart.name=Milk Wart
 item.cropsnh:materialLeaf.nickelbackLeaf.name=Nickelback
 item.cropsnh:materialLeaf.oilBerry.name=Oil Berry
 item.cropsnh:materialLeaf.osmianthFlower.name=Osmianth Flower
@@ -54,8 +54,8 @@ item.cropsnh:materialLeaf.uumBerry.name=UUM Berry
 item.cropsnh:materialLeaf.saltyRoot.name=Salty Root
 item.cropsnh:materialLeaf.plumbiliaLeaf.name=Plumbilia Leaf
 item.cropsnh:materialLeaf.argentiaLeaf.name=Argentia Leaf
-item.cropsnh:materialLeaf.ferruLeaf.name=Ferru Leaf
-item.cropsnh:materialLeaf.aureliaLeaf.name=Aurelia Leaf
+item.cropsnh:materialLeaf.ferrofernLeaf.name=Ferrofern Leaf
+item.cropsnh:materialLeaf.auroniaLeaf.name=Auronia Leaf
 item.cropsnh:materialLeaf.teaLeaf.name=Tea Leaf
 item.cropsnh:materialLeaf.bobsYerUncleBerry.name=Bobs-Yer-Uncle-Berry
 item.cropsnh:materialLeaf.hops.name=Hops
@@ -318,32 +318,155 @@ cropsnh_genericSeeds.format=%1$s Seeds
 
 # Crop Names
 cropsnh_crops.weed=Weed
-# Vanilla Crops
-cropsnh_crops.sugarCane=Sugar Cane
-cropsnh_crops.redMushroom=Red Mushroom
-cropsnh_crops.brownMushroom=Brown Mushroom
-# Vanilla Bonsais
+# BoP Crop Names
+cropsnh_crops.bamboo=Bamboo
+cropsnh_crops.eyebulb=Eyebulb
+cropsnh_crops.floweringVine=Flowering Vine
+cropsnh_crops.glowflower=Glowflower
+cropsnh_crops.glowingCoral=Glowing Coral
+cropsnh_crops.glowshroom=Glowshroom
+cropsnh_crops.ivy=Ivy
+# Bonsais Crop Names
 cropsnh_crops.bonsaiOak=Oak Bonsai
 cropsnh_crops.bonsaiSpruce=Spruce Bonsai
 cropsnh_crops.bonsaiBirch=Birch Bonsai
 cropsnh_crops.bonsaiJungle=Jungle Bonsai
 cropsnh_crops.bonsaiAcacia=Acacia Bonsai
 cropsnh_crops.bonsaiDarkOak=Dark Oak Bonsai
-# Modded Bonsais
 cropsnh_crops.bonsaiRubber=Rubber Bonsai
-# IC2 Crops
-cropsnh_crops.aurelia=Aurelia
+cropsnh_crops.bonsaiSlimy=Slimy Bonsai
+# food crops names (BoP)
+cropsnh_crops.bopBerry=Berry
+cropsnh_crops.turnip=Turnip
+cropsnh_crops.wildCarrot=Wild Carrot
+# food crops names (Natura)
+cropsnh_crops.barley=Barley
+cropsnh_crops.blackberry=Blackberry
+cropsnh_crops.blueberry=Blueberry
+cropsnh_crops.maloberry=Maloberry
+cropsnh_crops.raspberry=Raspberry
+cropsnh_crops.saguaroCactus=Saguaro Cactus
+# Food Crops Names
+cropsnh_crops.chilly=Chilly
 cropsnh_crops.coffee=Coffee
-cropsnh_crops.cyprium=Cyprium
-cropsnh_crops.ferru=Ferru
+cropsnh_crops.cucumber=Cucumber
+cropsnh_crops.grape=Grape
 cropsnh_crops.hops=Hops
-cropsnh_crops.plumbiscus=Plumbiscus
-cropsnh_crops.redwheat=Redwheat
-cropsnh_crops.shining=Shining
-cropsnh_crops.stagnium=Stagnium
-cropsnh_crops.stickReed=Stickreed
-cropsnh_crops.venomilia=Venomilia
-# Stone Lilies
+cropsnh_crops.huckleberry=Huckleberry
+cropsnh_crops.meatrose=Meatrose
+cropsnh_crops.lemon=Lemon
+cropsnh_crops.onion=Onion
+cropsnh_crops.strawberry=Strawberry
+cropsnh_crops.sugarBeet=Sugar Beet
+cropsnh_crops.tea=Tea
+cropsnh_crops.tomato=Tomato
+# Material Crop Names
+cropsnh_crops.argentia=Argentia
+cropsnh_crops.auronia=Auronia
+cropsnh_crops.bauxia=Bauxia
+cropsnh_crops.bobsYerUncleRanks=Bobs-Yer-Uncle-Ranks
+cropsnh_crops.canola=Canola
+cropsnh_crops.cassitine=Cassitine
+cropsnh_crops.coppon=Coppon
+cropsnh_crops.cotton=Cotton
+cropsnh_crops.dayflower=Dayflower
+cropsnh_crops.diareed=Diareed
+cropsnh_crops.evilOre=Evil Ore
+cropsnh_crops.ferrofern=Ferrofern
+cropsnh_crops.fertilia=Fertilia
+cropsnh_crops.flax=Flax
+cropsnh_crops.galvania=Galvania
+cropsnh_crops.garnydinia=Garnydinia
+cropsnh_crops.glowheat=Glowheat
+cropsnh_crops.godOfThunder=God of Thunder
+cropsnh_crops.hemp=Hemp
+cropsnh_crops.indigo=Indigo
+cropsnh_crops.iridine=Iridine
+cropsnh_crops.lazulia=Lazulia
+cropsnh_crops.liveroot=Liveroot
+cropsnh_crops.magicalNightshade=Magical Nightshade
+cropsnh_crops.malaxia=Malaxia
+cropsnh_crops.micadia=Micadia
+cropsnh_crops.milkWart=Milk Wart
+cropsnh_crops.necrobloom=Necrobloom
+cropsnh_crops.nickelback=Nickelback
+cropsnh_crops.nickelback.flavour=Makes a nice hum in the wind.
+cropsnh_crops.oilBerry=Oil Berry
+cropsnh_crops.olivia=Olivia
+cropsnh_crops.osmianth=Osmianth
+cropsnh_crops.papyrus=Papyrus
+cropsnh_crops.platina=Platina
+cropsnh_crops.plumbilia=Plumbilia
+cropsnh_crops.plumbshade=Plumbshade
+cropsnh_crops.purpleTulip=Purple Tulip
+cropsnh_crops.pyrolusium=Pyrolusium
+cropsnh_crops.pyrolusium.flavour=It's trying it's best.
+cropsnh_crops.reactoria=Reactoria
+cropsnh_crops.redstraw=Redstraw
+cropsnh_crops.saltyRoot=Salty Root
+cropsnh_crops.saltyRoot.flavour=Inedible.
+cropsnh_crops.sapphirum=Sapphirum
+cropsnh_crops.scheelinium=Scheelinium
+cropsnh_crops.silviscus=Silviscus
+cropsnh_crops.spaceFlower=Space Flower
+cropsnh_crops.stargatium=Stargatium
+cropsnh_crops.starWart=Star Wart
+cropsnh_crops.steeleafranks=Steeleafranks
+cropsnh_crops.stickyCane=Sticky Cane
+cropsnh_crops.tine=Tine
+cropsnh_crops.titania=Titania
+cropsnh_crops.titania.flavour=The queen of crops.
+cropsnh_crops.transformium=Transformium
+cropsnh_crops.trollplant=Trollplant
+cropsnh_crops.trollplant.flavour=Trololololol, lololol, lololol!
+cropsnh_crops.withereed=Withereed
+# Mob Crop Names
+cropsnh_crops.blazereed=Blazereed
+cropsnh_crops.corium=Corium
+cropsnh_crops.corpseplant=Corpseplant
+cropsnh_crops.creeperweed=Creeperweed
+cropsnh_crops.eggPlant=Egg Plant
+cropsnh_crops.eggPlant.flavour=Not to be Confused With Eggplants.
+cropsnh_crops.enderbloom=Enderbloom
+cropsnh_crops.goldfish=Goldfish
+cropsnh_crops.goldfish.flavour=Screams.
+cropsnh_crops.inkbloom=Inkbloom
+cropsnh_crops.slimeplant=Slimeplant
+cropsnh_crops.spidernip=Spidernip
+cropsnh_crops.tearstalks=Tearstalks
+cropsnh_crops.zomplant=Zomplant
+# Natura Nether Berry Crop Names
+cropsnh_crops.blightberry=Blightberry
+cropsnh_crops.duskberry=Duskberry
+cropsnh_crops.skyberry=Skyberry
+cropsnh_crops.stingberry=Stingberry
+# Natura Nether Glowshroom Names
+cropsnh_crops.blueGlowshroom=Blue Glowshroom
+cropsnh_crops.greenGlowshroom=Green Glowshroom
+cropsnh_crops.purpleGlowshroom=Purple Glowshroom
+# Natura Nether Crop Names
+cropsnh_crops.thornvine=Thronvine
+# Ore Berries
+cropsnh_crops.aluminiumOreBerry=Aluminium Ore Berry
+cropsnh_crops.arditeOreBerry=Ardite Ore Berry
+cropsnh_crops.cobaltOreBerry=Cobalt Ore Berry
+cropsnh_crops.copperOreBerry=Copper Ore Berry
+cropsnh_crops.essenceOreBerry=Essence Berry
+cropsnh_crops.goldOreBerry=Gold Ore Berry
+cropsnh_crops.ironOreBerry=Iron Ore Berry
+cropsnh_crops.knightmetalOreBerry=Knightly Ore Berry
+cropsnh_crops.thauminiteOreBerry=Thauminite Ore Berry
+cropsnh_crops.thaumiumOreBerry=Thaumium Ore Berry
+cropsnh_crops.tinOreBerry=Tin Ore Berry
+cropsnh_crops.voidOreBerry=Void Metal Ore Berry
+# Stone Lily Crop Names (Botania)
+cropsnh_crops.andesiteLily=Andesite Lily
+cropsnh_crops.dioriteLily=Diorite Lily
+cropsnh_crops.graniteLily=Granite Lily
+# Stone Lily Crop Names (Et Futurum Requiem)
+cropsnh_crops.deepslateLily=Deepslate Lily
+cropsnh_crops.tuffLily=Tuff Lily
+# Stone Lily Crop Names
 cropsnh_crops.stoneLily=Stone Lily
 cropsnh_crops.sandLily=Sand Lily
 cropsnh_crops.clayLily=Clay Lily
@@ -354,138 +477,19 @@ cropsnh_crops.blackGraniteLily=Black Granite Lily
 cropsnh_crops.redGraniteLily=Red Granite Lily
 cropsnh_crops.basaltLily=Basalt Lily
 cropsnh_crops.marbleLily=Marble Lily
-cropsnh_crops.graniteLily=Granite Lily
-cropsnh_crops.andesiteLily=Andesite Lily
-cropsnh_crops.dioriteLily=Diorite Lily
-# Crops++ GregTech Crops
-cropsnh_crops.garnydinia=Garnydinia
-# TiC Crops
-cropsnh_crops.bonsaiSlimy=Slimy Bonsai
-# Ore Berries
-cropsnh_crops.aluminiumOreBerry=Aluminium Ore Berry
-cropsnh_crops.copperOreBerry=Copper Ore Berry
-cropsnh_crops.essenceOreBerry=Essence Berry
-cropsnh_crops.goldOreBerry=Gold Ore Berry
-cropsnh_crops.ironOreBerry=Iron Ore Berry
-cropsnh_crops.tinOreBerry=Tin Ore Berry
-cropsnh_crops.arditeOreBerry=Ardite Ore Berry
-cropsnh_crops.cobaltOreBerry=Cobalt Ore Berry
-cropsnh_crops.voidOreBerry=Void Metal Ore Berry
-cropsnh_crops.thaumiumOreBerry=Thaumium Ore Berry
-cropsnh_crops.thauminiteOreBerry=Thauminite Ore Berry
-cropsnh_crops.knightmetalOreBerry=Knightly Ore Berry
-# Crops++ Thaumcraft Crops
+# Thaumcraft Crops
 cropsnh_crops.primordialBerry=Primordial Berry
 cropsnh_crops.cinderpearl=Cinderpearl
 cropsnh_crops.shimmerleaf=Shimmerleaf
 cropsnh_crops.manaBean=Mana Bean
-# Crops++ Twilight Forest Crops
+# Twilight Forest Crops
 cropsnh_crops.torchberry=Torchberry
-# Crops++ BoP
-cropsnh_crops.bamboo=Bamboo
-cropsnh_crops.bopBerry=Berry
-cropsnh_crops.eyebulb=Eyebulb
-cropsnh_crops.floweringVine=Flowering Vine
-cropsnh_crops.glowflower=Glowflower
-cropsnh_crops.glowingCoral=Glowing Coral
-cropsnh_crops.glowshroom=Glowshroom
-cropsnh_crops.ivy=Ivy
-cropsnh_crops.turnip=Turnip
-cropsnh_crops.wildCarrot=Wild Carrot
-# Crops++ Natura
-cropsnh_crops.barley=Barley
-cropsnh_crops.blackberry=Blackberry
-cropsnh_crops.blueberry=Blueberry
-cropsnh_crops.cotton=Cotton
-cropsnh_crops.maloberry=Maloberry
-cropsnh_crops.raspberry=Raspberry
-cropsnh_crops.saguaroCactus=Saguaro Cactus
-# Crops++ Natura Nether
-cropsnh_crops.blightberry=Blightberry
-cropsnh_crops.blueGlowshroom=Blue Glowshroom
-cropsnh_crops.duskberry=Duskberry
-cropsnh_crops.greenGlowshroom=Green Glowshroom
-cropsnh_crops.purpleGlowshroom=Purple Glowshroom
-cropsnh_crops.skyberry=Skyberry
-cropsnh_crops.stingberry=Stingberry
-cropsnh_crops.thornvine=Thronvine
-# Crops++ native
-cropsnh_crops.goldfish=Goldfish
-cropsnh_crops.goldfish.flavour=Screams.
-cropsnh_crops.huckleberry=Huckleberry
-cropsnh_crops.magicalNightshade=Magical Nightshade
-cropsnh_crops.papyrus=Papyrus
-cropsnh_crops.spaceFlower=Space Flower
-cropsnh_crops.strawberry=Strawberry
-cropsnh_crops.sugarBeet=Sugar Beet
+# Vanilla Crops
+cropsnh_crops.sugarCane=Sugar Cane
+cropsnh_crops.redMushroom=Red Mushroom
+cropsnh_crops.brownMushroom=Brown Mushroom
 cropsnh_crops.vine=Vine
 cropsnh_crops.waterLily=Water Lily
-# Material Crops
-cropsnh_crops.argentia=Argentia
-cropsnh_crops.bauxia=Bauxia
-cropsnh_crops.blackthorn=Blackthorn
-cropsnh_crops.blazereed=Blazereed
-cropsnh_crops.bobsYerUncleRanks=Bobs-Yer-Uncle-Ranks
-cropsnh_crops.canola=Canola
-cropsnh_crops.chilly=Chilly
-cropsnh_crops.coppon=Coppon
-cropsnh_crops.corium=Corium
-cropsnh_crops.corpseplant=Corpseplant
-cropsnh_crops.creeperweed=Creeperweed
-cropsnh_crops.cucumber=Cucumber
-cropsnh_crops.cyazint=Cyazint
-cropsnh_crops.diareed=Diareed
-cropsnh_crops.eggPlant=Egg Plant
-cropsnh_crops.eggPlant.flavour=Not to be Confused With Eggplants.
-cropsnh_crops.enderbloom=Enderbloom
-cropsnh_crops.evilOre=Evil Ore
-cropsnh_crops.fertilia=Fertilia
-cropsnh_crops.flax=Flax
-cropsnh_crops.galvania=Galvania
-cropsnh_crops.glowheat=Glowheat
-cropsnh_crops.godOfThunder=God of Thunder
-cropsnh_crops.grape=Grape
-cropsnh_crops.hemp=Hemp
-cropsnh_crops.indigo=Indigo
-cropsnh_crops.iridine=Iridine
-cropsnh_crops.lazulia=Lazulia
-cropsnh_crops.lemon=Lemon
-cropsnh_crops.liveroot=Liveroot
-cropsnh_crops.meatrose=Meatrose
-cropsnh_crops.micadia=Micadia
-cropsnh_crops.milkwart=Milkwart
-cropsnh_crops.nickelback=Nickelback
-cropsnh_crops.nickelback.flavour=Makes a nice hum in the wind.
-cropsnh_crops.oilBerry=Oil Berry
-cropsnh_crops.olivia=Olivia
-cropsnh_crops.onion=Onion
-cropsnh_crops.osmianth=Osmianth
-cropsnh_crops.platina=Platina
-cropsnh_crops.plumbilia=Plumbilia
-cropsnh_crops.purpleTulip=Purple Tulip
-cropsnh_crops.pyrolusium=Pyrolusium
-cropsnh_crops.pyrolusium.flavour=It's trying it's best.
-cropsnh_crops.reactoria=Reactoria
-cropsnh_crops.saltyRoot=Salty Root
-cropsnh_crops.saltyRoot.flavour=It prefers dry biomes. Inedible.
-cropsnh_crops.sapphirum=Sapphirum
-cropsnh_crops.scheelinium=Scheelinium
-cropsnh_crops.slimeplant=Slimeplant
-cropsnh_crops.spidernip=Spidernip
-cropsnh_crops.stargatium=Stargatium
-cropsnh_crops.starwart=Starwart
-cropsnh_crops.steeleafranks=Steeleafranks
-cropsnh_crops.tea=Tea
-cropsnh_crops.tearstalks=Tearstalks
-cropsnh_crops.tine=Tine
-cropsnh_crops.titania=Titania
-cropsnh_crops.titania.flavour=The queen of crops.
-cropsnh_crops.tomato=Tomato
-cropsnh_crops.transformium=Transformium
-cropsnh_crops.trollplant=Trollplant
-cropsnh_crops.trollplant.flavour=Trololololol, lololol, lololol!
-cropsnh_crops.withereed=Withereed
-cropsnh_crops.zomplant=Zomplant
 
 # Lockout Breeding Requirements
 cropsnh_breedingReq.lockout.machineOnly=Requires the crop breeder
@@ -507,6 +511,9 @@ cropsnh_growthReq.blockUnder.redGranite=Needs a block of red granite under it to
 cropsnh_growthReq.blockUnder.blackGranite=Needs a block of black granite under it to grow.
 cropsnh_growthReq.blockUnder.marble=Needs a block of marble under it to grow.
 cropsnh_growthReq.blockUnder.basalt=Needs a block of basalt under it to grow.
+# Et EtFuturum Stone Lily Requirements
+cropsnh_growthReq.blockUnder.deepslate=Needs a block of deepslate under it to grow.
+cropsnh_growthReq.blockUnder.tuff=Needs a block of tuff under it to grow.
 # Botania Stone Lily Growth Requirements
 cropsnh_growthReq.blockUnder.botaniaAndesite=Needs a block of andesite under it to grow.
 cropsnh_growthReq.blockUnder.botaniaDiorite=Needs a block of diorite under it to grow.
