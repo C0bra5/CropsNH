@@ -967,33 +967,82 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
     }
 
     @Override
+    public void transferDisease() {
+        if (!this.hasCrop() || this.isSick || this.hasWeed()) return;
+        if (XSTR.XSTR_INSTANCE.nextInt(Constants.MAX_SEED_STAT) > this.seed.getStats()
+            .getResistance()) {
+            this.isSick = true;
+            this.isDirty = true;
+            this.markDirty();
+        }
+    }
+
+    @Override
+    public boolean cureDisease() {
+        if (!this.hasCrop() || !this.isSick) return false;
+        this.isSick = false;
+        this.isDirty = true;
+        this.markDirty();
+        return true;
+    }
+
+    public void spreadDisease() {
+        List<ICropStickTile> neighbours = this.getNeighbours();
+        if (neighbours == null) return;
+        neighbours.removeIf(x -> !x.hasCrop());
+        if (neighbours.isEmpty()) return;
+        neighbours.get(XSTR.XSTR_INSTANCE.nextInt(neighbours.size()))
+            .transferDisease();
+    }
+
+    private void doGrowth() {
+        if (this.growthProgress < this.seed.getCrop()
+            .getGrowthDuration()) {
+            int growthRate = this.calcGrowthRate();
+            // check if the crop should get sick
+            if (growthRate <= 0) {
+                this.isSick = true;
+                this.isDirty = true;
+                this.markDirty();
+                return;
+            }
+
+            // run crop growth tick handler
+            this.seed.getCrop()
+                .onGrowthTick(this);
+            // increase growth progress
+            this.growthProgress += GTUtility.safeInt((long) (growthRate * ConfigurationHandler.growthMultiplier));
+            if (this.growthProgress > this.seed.getCrop()
+                .getGrowthDuration()) {
+                this.growthProgress = this.seed.getCrop()
+                    .getGrowthDuration();
+            }
+            // something's changed
+            this.markDirty();
+        }
+        // only request re-render when the crop is changing state to be rendered.
+        int spriteIndex = this.seed.getCrop()
+            .getSpriteIndex(this);
+        if (spriteIndex != this.spriteIndex) {
+            this.spriteIndex = spriteIndex;
+            this.isDirty = true;
+        }
+    }
+
+    @Override
     public void onGrowthTick() {
         // let the can grow logic run on the client so that it's able to tell the player why a crop isn't growing.
         boolean canGrow = this.canGrow();
         if (worldObj.isRemote) return;
         if (this.hasCrop()) {
+            // spread desises if nessesary
+            if (this.isSick) {
+                spreadDisease();
+                canGrow &= this.isSick;
+            }
             // run the growth check on client too so that the player can see why it's not growing.
             if (canGrow) {
-                seed.getCrop()
-                    .onGrowthTick(this);
-                if (this.growthProgress < this.seed.getCrop()
-                    .getGrowthDuration()) {
-                    this.growthProgress += GTUtility
-                        .safeInt((long) (this.calcGrowthRate() * ConfigurationHandler.growthMultiplier));
-                    if (this.growthProgress > this.seed.getCrop()
-                        .getGrowthDuration()) {
-                        this.growthProgress = this.seed.getCrop()
-                            .getGrowthDuration();
-                    }
-                    this.markDirty();
-                }
-                // only request re-render when the crop is changing state to be rendered.
-                int spriteIndex = this.seed.getCrop()
-                    .getSpriteIndex(this);
-                if (spriteIndex != this.spriteIndex) {
-                    this.spriteIndex = spriteIndex;
-                    this.isDirty = true;
-                }
+                doGrowth();
             }
             if (ConfigurationHandler.enableWeeds && this.seed.getCrop()
                 .spreadsWeeds(this)
@@ -1010,7 +1059,6 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
                 this.attemptBreeding();
             }
         }
-
         // consume resources if available
         if (this.fertilizerStorage > 0) this.fertilizerStorage--;
         if (this.waterStorage > 0) this.waterStorage--;

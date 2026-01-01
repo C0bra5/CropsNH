@@ -4,6 +4,7 @@ import static gregtech.api.recipe.RecipeMaps.extruderRecipes;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -53,6 +54,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         addPlantLensRecipe();
         addSpadeRecipes();
         addCropStickRecipes();
+        addPlantCureRecipe();
         addCropManagerRecipes();
         addSeedGeneratorRecipes();
         addCropBreederRecipes();
@@ -81,6 +83,13 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
             GTModHandler.RecipeBits.BITSD,
             new Object[] { "fPh", "PHP", " S ", 'P', OrePrefixes.plateDense.get(Materials.Steel), 'H', "iron_shovel",
                 'S', OrePrefixes.stickLong.get(Materials.Wood) });
+    }
+
+    public static void addPlantCureRecipe() {
+        GTModHandler.addShapelessCraftingRecipe(
+            CropsNHItemList.plantCure.get(1),
+            new Object[] { ItemList.Spray_Empty.get(1), CropsNHItemList.enrichedFertilizerCell.get(1),
+                CropsNHItemList.fertilizer.get(1), new ItemStack(Items.dye, 1, 15) });
     }
 
     private static void addCropStickRecipes() {

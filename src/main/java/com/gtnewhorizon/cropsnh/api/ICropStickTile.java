@@ -199,14 +199,26 @@ public interface ICropStickTile {
     List<ICropStickTile> getMatureNeighbours();
 
     /**
-     * @return true if the crop in the crop stick can cross
+     * @return True if the crop in the crop stick can cross
      */
     boolean canCross();
 
     /**
-     * @return true if the crop in the crop stick can breed
+     * @return True if the crop in the crop stick can breed
      */
     boolean canBreed();
+
+    /**
+     * Called when a crop should be given a disease from another surrounding crop.
+     */
+    void transferDisease();
+
+    /**
+     * Attempts to cure the crop
+     * 
+     * @return True if the crop was cured.
+     */
+    boolean cureDisease();
 
     /**
      * @return The current growth progress.
@@ -226,7 +238,7 @@ public interface ICropStickTile {
     float getGrowthPercent();
 
     /**
-     * @return The growth progress to add on the next growth tick;
+     * @return The growth progress to add on the next growth tick, if <= 0 the crop should get sick.
      */
     int calcGrowthRate();
 

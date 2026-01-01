@@ -17,6 +17,7 @@ import com.gtnewhorizon.cropsnh.items.produce.ItemGoldfish;
 import com.gtnewhorizon.cropsnh.items.produce.ItemMaterialLeaf;
 import com.gtnewhorizon.cropsnh.items.tools.ItemDebugger;
 import com.gtnewhorizon.cropsnh.items.tools.ItemMagnifyingGlass;
+import com.gtnewhorizon.cropsnh.items.tools.ItemPlantCure;
 import com.gtnewhorizon.cropsnh.items.tools.ItemSpade;
 import com.gtnewhorizon.cropsnh.loaders.MaterialLeafLoader;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
@@ -31,6 +32,7 @@ public class CropsNHItems {
     public static Item genericSeed;
     public static Item gaiaWart;
     public static Item spade;
+    public static Item plantCure;
     public static Item goldfish;
     public static Item berry;
     public static Item bottledAlcohol;
@@ -51,6 +53,8 @@ public class CropsNHItems {
         genericSeed = new ItemGenericSeed();
         spade = new ItemSpade();
         CropsNHItemList.spade.set(new ItemStack(spade, 1, 0));
+        plantCure = new ItemPlantCure();
+        CropsNHItemList.plantCure.set(new ItemStack(plantCure, 1));
         goldfish = new ItemGoldfish();
         CropsNHItemList.goldfish.set(new ItemStack(goldfish, 1, 0));
         berry = new ItemBerry();

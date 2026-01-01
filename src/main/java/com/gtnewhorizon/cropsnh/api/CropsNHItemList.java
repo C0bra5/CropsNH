@@ -30,6 +30,7 @@ public enum CropsNHItemList implements IItemContainer {
     fertilizer,
     hempHurd,
     enrichedFertilizerCell,
+    plantCure,
 
     // MTEs
     CropManager_LV,
