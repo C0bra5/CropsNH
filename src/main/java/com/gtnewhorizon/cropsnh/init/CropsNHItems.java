@@ -141,17 +141,16 @@ public class CropsNHItems {
         CropsNHItemList.environmentalModule_MAGICAL.set(ItemEnvironmentalModule.registerVariant(16, BiomeDictionary.Type.MAGICAL));
         CropsNHItemList.environmentalModule_OCEAN.set(ItemEnvironmentalModule.registerVariant(17, BiomeDictionary.Type.OCEAN));
         CropsNHItemList.environmentalModule_RIVER.set(ItemEnvironmentalModule.registerVariant(18, BiomeDictionary.Type.RIVER));
-        CropsNHItemList.environmentalModule_WATER.set(ItemEnvironmentalModule.registerVariant(19, BiomeDictionary.Type.WATER));
-        CropsNHItemList.environmentalModule_MESA.set(ItemEnvironmentalModule.registerVariant(20, BiomeDictionary.Type.MESA));
-        CropsNHItemList.environmentalModule_FOREST.set(ItemEnvironmentalModule.registerVariant(21, BiomeDictionary.Type.FOREST));
-        CropsNHItemList.environmentalModule_PLAINS.set(ItemEnvironmentalModule.registerVariant(22, BiomeDictionary.Type.PLAINS));
-        CropsNHItemList.environmentalModule_MOUNTAIN.set(ItemEnvironmentalModule.registerVariant(23, BiomeDictionary.Type.MOUNTAIN));
-        CropsNHItemList.environmentalModule_HILLS.set(ItemEnvironmentalModule.registerVariant(24, BiomeDictionary.Type.HILLS));
-        CropsNHItemList.environmentalModule_SWAMP.set(ItemEnvironmentalModule.registerVariant(25, BiomeDictionary.Type.SWAMP));
-        CropsNHItemList.environmentalModule_SANDY.set(ItemEnvironmentalModule.registerVariant(26, BiomeDictionary.Type.SANDY));
-        CropsNHItemList.environmentalModule_SNOWY.set(ItemEnvironmentalModule.registerVariant(27, BiomeDictionary.Type.SNOWY));
-        CropsNHItemList.environmentalModule_WASTELAND.set(ItemEnvironmentalModule.registerVariant(28, BiomeDictionary.Type.WASTELAND));
-        CropsNHItemList.environmentalModule_BEACH.set(ItemEnvironmentalModule.registerVariant(29, BiomeDictionary.Type.BEACH));
+        CropsNHItemList.environmentalModule_MESA.set(ItemEnvironmentalModule.registerVariant(19, BiomeDictionary.Type.MESA));
+        CropsNHItemList.environmentalModule_FOREST.set(ItemEnvironmentalModule.registerVariant(20, BiomeDictionary.Type.FOREST));
+        CropsNHItemList.environmentalModule_PLAINS.set(ItemEnvironmentalModule.registerVariant(21, BiomeDictionary.Type.PLAINS));
+        CropsNHItemList.environmentalModule_MOUNTAIN.set(ItemEnvironmentalModule.registerVariant(22, BiomeDictionary.Type.MOUNTAIN));
+        CropsNHItemList.environmentalModule_HILLS.set(ItemEnvironmentalModule.registerVariant(23, BiomeDictionary.Type.HILLS));
+        CropsNHItemList.environmentalModule_SWAMP.set(ItemEnvironmentalModule.registerVariant(24, BiomeDictionary.Type.SWAMP));
+        CropsNHItemList.environmentalModule_SANDY.set(ItemEnvironmentalModule.registerVariant(25, BiomeDictionary.Type.SANDY));
+        CropsNHItemList.environmentalModule_SNOWY.set(ItemEnvironmentalModule.registerVariant(26, BiomeDictionary.Type.SNOWY));
+        CropsNHItemList.environmentalModule_WASTELAND.set(ItemEnvironmentalModule.registerVariant(27, BiomeDictionary.Type.WASTELAND));
+        CropsNHItemList.environmentalModule_BEACH.set(ItemEnvironmentalModule.registerVariant(28, BiomeDictionary.Type.BEACH));
         //spotless:on
         LogHelper.debug("Items Registered");
     }

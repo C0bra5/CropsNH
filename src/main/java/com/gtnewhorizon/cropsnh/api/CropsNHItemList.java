@@ -248,7 +248,6 @@ public enum CropsNHItemList implements IItemContainer {
     environmentalModule_MAGICAL,
     environmentalModule_OCEAN,
     environmentalModule_RIVER,
-    environmentalModule_WATER,
     environmentalModule_MESA,
     environmentalModule_FOREST,
     environmentalModule_PLAINS,
