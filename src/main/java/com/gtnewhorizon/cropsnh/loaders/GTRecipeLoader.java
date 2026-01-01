@@ -64,6 +64,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         addSeedBedRecipes();
         addAdvHarvestingUnitRecipes();
         addEnvironmentalEnhancementUnitRecipes();
+        addEnvironmentalModuleRecipes();
         addFertilizerUnitRecipes();
         addGrowthAccelerationUnits();
         addOverclockedGrowthAccelerationUnits();
@@ -317,6 +318,184 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                 tier);
             tier++;
         }
+    }
+
+    private static void addEnvironmentalModuleRecipes() {
+        final int duractionSecs = 15;
+        final int durationFrac = 0;
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(
+                CropsNHItemList.BrickedAgriculturalCasing.get(4),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.MV, 1))
+            .itemOutputs(CropsNHItemList.environmentalModule_base.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);;
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), ItemList.Cell_Lava.get(8))
+            .itemOutputs(CropsNHItemList.environmentalModule_HOT.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.ice, 8))
+            .itemOutputs(CropsNHItemList.environmentalModule_COLD.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.dirt, 8))
+            .itemOutputs(CropsNHItemList.environmentalModule_SPARSE.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.sapling, 8, 5))
+            .itemOutputs(CropsNHItemList.environmentalModule_DENSE.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), ItemList.Cell_Water.get(8))
+            .itemOutputs(CropsNHItemList.environmentalModule_WET.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), ItemList.Cell_Air.get(8))
+            .itemOutputs(CropsNHItemList.environmentalModule_DRY.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.sapling, 8, 4))
+            .itemOutputs(CropsNHItemList.environmentalModule_SAVANNA.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.sapling, 8, 1))
+            .itemOutputs(CropsNHItemList.environmentalModule_CONIFEROUS.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.sapling, 8, 3))
+            .itemOutputs(CropsNHItemList.environmentalModule_JUNGLE.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.soul_sand, 8, 0))
+            .itemOutputs(CropsNHItemList.environmentalModule_SPOOKY.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Items.rotten_flesh, 8, 1))
+            .itemOutputs(CropsNHItemList.environmentalModule_DEAD.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.tallgrass, 8, 1))
+            .itemOutputs(CropsNHItemList.environmentalModule_LUSH.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.netherrack, 8, 0))
+            .itemOutputs(CropsNHItemList.environmentalModule_NETHER.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.end_stone, 8, 0))
+            .itemOutputs(CropsNHItemList.environmentalModule_END.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(
+                CropsNHItemList.environmentalModule_base.get(1),
+                new ItemStack(Blocks.red_mushroom, 4, 0),
+                new ItemStack(Blocks.brown_mushroom, 4, 0))
+            .itemOutputs(CropsNHItemList.environmentalModule_MUSHROOM.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        ItemStack greatWood = Mods.Thaumcraft.isModLoaded() ? thaumcraft.api.ItemApi.getBlock("blockCustomPlant", 0)
+            : new ItemStack(Items.ender_eye, 1, 0);
+        greatWood.stackSize = 8;
+        mvRecipe(duractionSecs, durationFrac).itemInputs(CropsNHItemList.environmentalModule_base.get(1), greatWood)
+            .itemOutputs(CropsNHItemList.environmentalModule_MAGICAL.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Items.dye, 8, 0))
+            .itemOutputs(CropsNHItemList.environmentalModule_OCEAN.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Items.fish, 8, 3))
+            .itemOutputs(CropsNHItemList.environmentalModule_OCEAN.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Items.fish, 8, 2))
+            .itemOutputs(CropsNHItemList.environmentalModule_OCEAN.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Items.fish, 8, 0))
+            .itemOutputs(CropsNHItemList.environmentalModule_RIVER.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Items.fish, 8, 1))
+            .itemOutputs(CropsNHItemList.environmentalModule_RIVER.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), CropsNHItemList.goldfish.get(8))
+            .itemOutputs(CropsNHItemList.environmentalModule_RIVER.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.hardened_clay, 8, 0))
+            .itemOutputs(CropsNHItemList.environmentalModule_MESA.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.sand, 8, 1))
+            .itemOutputs(CropsNHItemList.environmentalModule_MESA.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.sapling, 8, 0))
+            .itemOutputs(CropsNHItemList.environmentalModule_FOREST.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.grass, 8, 0))
+            .itemOutputs(CropsNHItemList.environmentalModule_PLAINS.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(
+                CropsNHItemList.environmentalModule_base.get(1),
+                new ItemStack(Blocks.stained_hardened_clay, 8, 9))
+            .itemOutputs(CropsNHItemList.environmentalModule_MOUNTAIN.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.cobblestone, 8, 0))
+            .itemOutputs(CropsNHItemList.environmentalModule_HILLS.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.waterlily, 8, 0))
+            .itemOutputs(CropsNHItemList.environmentalModule_SWAMP.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.sand, 8, 0))
+            .itemOutputs(CropsNHItemList.environmentalModule_SANDY.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.snow, 8, 0))
+            .itemOutputs(CropsNHItemList.environmentalModule_SNOWY.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Blocks.deadbush, 8, 0))
+            .itemOutputs(CropsNHItemList.environmentalModule_WASTELAND.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        mvRecipe(duractionSecs, durationFrac)
+            .itemInputs(CropsNHItemList.environmentalModule_base.get(1), new ItemStack(Items.reeds, 8, 0))
+            .itemOutputs(CropsNHItemList.environmentalModule_BEACH.get(1))
+            .addTo(RecipeMaps.assemblerRecipes);
     }
 
     private static void addFertilizerUnitRecipes() {
