@@ -465,9 +465,17 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
     }
 
     @Override
+    public boolean canHarvest() {
+        return !this.worldObj.isRemote && this.hasCrop()
+            && !this.hasWeed()
+            && this.isMature()
+            && this.failedChecks == null;
+    }
+
+    @Override
     public ArrayList<ItemStack> harvest() {
         // must be fully grown to harvest
-        if (!this.hasCrop() || !this.isMature() || this.failedChecks != null) return null;
+        if (!canHarvest()) return null;
 
         this.seed.getCrop()
             .onHarvest(this);
@@ -519,14 +527,13 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
     @Override
     public boolean doPlayerHarvest() {
         // check if we can harvest this crop
-        if (this.worldObj.isRemote || !this.hasCrop() || this.hasWeed() || !this.isMature()) return false;
+        if (!canHarvest()) return false;
         ArrayList<ItemStack> drops = harvest();
-        if (drops == null) return true;
-        for (ItemStack drop : drops) {
-            if (CropsNHUtils.isStackInvalid(drop)) {
-                continue;
+        if (drops != null) {
+            for (ItemStack drop : drops) {
+                if (CropsNHUtils.isStackInvalid(drop)) continue;
+                this.dropItem(drop);
             }
-            this.dropItem(drop);
         }
         return true;
     }

@@ -165,6 +165,11 @@ public interface ICropStickTile {
     int getWeedExStorage();
 
     /**
+     * @return True if the crop can be harvested.
+     */
+    boolean canHarvest();
+
+    /**
      * Harvests this crop and returns the items that were dropped.
      *
      * @return The items that were dropped
@@ -210,7 +215,7 @@ public interface ICropStickTile {
 
     /**
      * Sets the current growth progress.
-     * 
+     *
      * @param prog How many progress points to set the crop to.
      */
     void setGrowthProgress(int prog);

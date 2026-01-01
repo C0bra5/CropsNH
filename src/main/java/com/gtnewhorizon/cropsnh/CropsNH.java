@@ -1,5 +1,6 @@
 package com.gtnewhorizon.cropsnh;
 
+import com.gtnewhorizon.cropsnh.compatibility.TiC.TiCCompatHandler;
 import com.gtnewhorizon.cropsnh.compatibility.waila.WailaRegistry;
 import com.gtnewhorizon.cropsnh.farming.registries.MutationRegistry;
 import com.gtnewhorizon.cropsnh.farming.requirements.BlockUnderRequirement;
@@ -81,6 +82,7 @@ public class CropsNH {
         proxy.registerEventHandlers();
         proxy.registerRenderers();
         WailaRegistry.onInit();
+        TiCCompatHandler.onInit();
         MTELoader.init();
         MTESeedGenerator.init();
         MTECropBreeder.init();
