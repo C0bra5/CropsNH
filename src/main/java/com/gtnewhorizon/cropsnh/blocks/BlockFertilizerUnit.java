@@ -2,7 +2,6 @@ package com.gtnewhorizon.cropsnh.blocks;
 
 import java.util.List;
 
-import gregtech.api.enums.VoltageIndex;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,6 +12,8 @@ import com.gtnewhorizon.cropsnh.blocks.abstracts.CropsNHBlockIndustrialFarmTired
 import com.gtnewhorizon.cropsnh.reference.Names;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
+
+import gregtech.api.enums.VoltageIndex;
 
 public class BlockFertilizerUnit extends CropsNHBlockIndustrialFarmTiredComponent {
 

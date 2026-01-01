@@ -1,12 +1,11 @@
 package com.gtnewhorizon.cropsnh.crops.stoneilies.etfuturum;
 
-import com.gtnewhorizon.cropsnh.crops.abstracts.CropBaseStoneLily;
-import com.gtnewhorizon.cropsnh.utility.OreDictHelper;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.Mods;
+import java.awt.Color;
+
 import net.minecraftforge.common.BiomeDictionary;
 
-import java.awt.Color;
+import com.gtnewhorizon.cropsnh.crops.abstracts.CropBaseStoneLily;
+import com.gtnewhorizon.cropsnh.utility.OreDictHelper;
 
 public class CropTuffLily extends CropBaseStoneLily {
 

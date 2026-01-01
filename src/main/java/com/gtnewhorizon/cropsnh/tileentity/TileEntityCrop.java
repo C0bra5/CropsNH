@@ -13,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -26,6 +27,7 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHCrops;
+import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.IAdditionalCropData;
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ICropMutation;
@@ -1049,16 +1051,26 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
         return true;
     }
 
+    public ItemStack getSeedDrop() {
+        if (this.hasCrop() && !this.hasWeed()
+            && this.seed.getStats()
+                .getResistance() > XSTR.XSTR_INSTANCE.nextInt(Constants.MAX_SEED_STAT)) {
+            return this.getSeedStack();
+        }
+        return null;
+    }
+
     @Override
     public boolean onLeftClick(EntityPlayer player, ItemStack heldItem) {
         if (this.hasCrop() && !this.hasWeed()) {
             if (this.isMature()) {
                 this.doPlayerHarvest();
             }
-            if (this.seed.getStats()
-                .getResistance() > XSTR.XSTR_INSTANCE.nextInt(Constants.MAX_SEED_STAT)) {
-                dropItem(this.getSeedStack());
+            ItemStack seedDrop = getSeedDrop();
+            if (seedDrop != null) {
+                dropItem(seedDrop);
             }
+
             this.clear();
         }
         if (this.isCrossCrop) {
@@ -1076,14 +1088,71 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
 
     }
 
+    private boolean shouldTrample(float fallDistance) {
+        if (fallDistance > 0) {
+            // chance is slightly adjusted since this gets fired a couple times for some reason.
+            return XSTR.XSTR_INSTANCE.nextFloat() < fallDistance - 0.75f;
+        }
+        if (this.hasCrop()) {
+            // weeds cannot be trampled
+            if (this.hasWeed()) return false;
+            // max resistance prevents trampling
+            if (this.seed.getStats()
+                .getResistance() >= Constants.MAX_SEED_STAT) return false;
+            // chance of rolling for trampling increases with tier;
+            double maxRoll = 100.0d * Math.pow(
+                0.95d,
+                this.seed.getCrop()
+                    .getTier());
+            int roll = XSTR.XSTR_INSTANCE.nextInt((int) maxRoll);
+            if (roll > 0) return false;
+            // higher resistance means higher chance of surviving the trampling.
+            return XSTR.XSTR_INSTANCE.nextInt(Constants.MAX_SEED_STAT) > this.seed.getStats()
+                .getResistance();
+        }
+        return XSTR.XSTR_INSTANCE.nextInt(100) <= 0;
+    }
+
+    private static boolean hasFallen(EntityLivingBase entity) {
+        return entity.onGround && entity.fallDistance > 0.0f;
+    }
+
     @Override
     public void onEntityCollision(Entity target) {
         // only on living entities plz
         if (!(target instanceof EntityLivingBase entity)) {
             return;
         }
+        if (GTUtility.isServer() && (entity.isSprinting() || hasFallen(entity))
+            && shouldTrample(hasFallen(entity) ? entity.fallDistance : 0.0f)) {
+            // drop seed
+            ItemStack seedDrop = getSeedDrop();
+            ArrayList<ItemStack> toDrop = this.harvest();
+            if (toDrop == null) toDrop = new ArrayList<>(2);
+            if (seedDrop != null) toDrop.add(seedDrop);
+            toDrop.add(CropsNHItemList.cropSticks.get(this.isCrossCrop ? 2 : 1));
+            // no more crop in here.
+            this.clear();
+            // replace farmland with dirt if block under is farmland
+            int y = this.yCoord - 1;
+            if (this.worldObj.getBlock(this.xCoord, y, this.zCoord) == Blocks.farmland) {
+                this.worldObj.setBlock(this.xCoord, y, this.zCoord, Blocks.dirt, 0, 7);
+            }
+            // remove cropsticks
+            this.worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, Blocks.air, 0, 7);
+
+            // drop the items once the cropstick is gone
+            for (ItemStack drop : toDrop) {
+                dropItem(drop);
+            }
+
+            // self terminate
+            this.worldObj.removeTileEntity(this.xCoord, this.yCoord, this.zCoord);
+            return;
+        }
+
         // always prevent collision events if the entity is sneaking
-        if (this.seed != null && !entity.isSneaking()) {
+        if (this.hasCrop() && !entity.isSneaking()) {
             if (this.seed.getCrop()
                 .getEntityDamage() > 0) {
                 damageEntity(

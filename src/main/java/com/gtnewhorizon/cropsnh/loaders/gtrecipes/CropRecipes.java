@@ -681,18 +681,14 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
 
     private static void addHempStemRecipes() {
         // Retting the stems in water to detach it from the fibers.
-        ulvRecipe(1,0)
-            .itemInputs(CropsNHItemList.hempStem.get(1))
+        ulvRecipe(1, 0).itemInputs(CropsNHItemList.hempStem.get(1))
             .itemOutputs(new ItemStack(Items.string, 6, 0))
             .fluidInputs(new FluidStack(FluidRegistry.WATER, 100))
             .addTo(chemicalBathRecipes);
 
         // macerate the sticks for plant balls (mangled fibers) and hurds for the casings
-        ulvRecipe(1, 0)
-            .itemInputs(CropsNHItemList.hempStem.get(1))
-            .itemOutputs(
-                CropsNHItemList.hempHurd.get(1),
-                ItemList.IC2_PlantballCompressed.get(1L))
+        ulvRecipe(1, 0).itemInputs(CropsNHItemList.hempStem.get(1))
+            .itemOutputs(CropsNHItemList.hempHurd.get(1), ItemList.IC2_PlantballCompressed.get(1L))
             .outputChances(100_00, 25_00)
             .addTo(maceratorRecipes);
 
@@ -701,11 +697,9 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
             .itemInputs(
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Aluminium, 1),
                 CropsNHItemList.hempHurd.get(4),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Quicklime, 1)
-            )
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Quicklime, 1))
             .fluidInputs(new FluidStack(FluidRegistry.WATER, 1000))
-            .itemOutputs(
-                CropsNHItemList.BrickedAgriculturalCasing.get(1))
+            .itemOutputs(CropsNHItemList.BrickedAgriculturalCasing.get(1))
             .addTo(assemblerRecipes);
     }
 

@@ -1,12 +1,11 @@
 package com.gtnewhorizon.cropsnh.loaders;
 
-import ganymedes01.etfuturum.ModBlocks;
-import ganymedes01.etfuturum.blocks.BlockTuff;
 import net.minecraft.init.Blocks;
 
 import com.gtnewhorizon.cropsnh.api.BlockWithMeta;
 import com.gtnewhorizon.cropsnh.farming.requirements.BlockUnderRequirement;
 
+import ganymedes01.etfuturum.ModBlocks;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Mods;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;

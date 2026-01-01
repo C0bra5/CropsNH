@@ -2,20 +2,19 @@ package com.gtnewhorizon.cropsnh.loaders;
 
 import static gregtech.api.recipe.RecipeMaps.extruderRecipes;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+
+import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.blocks.BlockAdvancedHarvestingUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockEnvironmentalEnhancementUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockFertilizerUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockGrowthAccelerationUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockOverclockedGrowthAccelerationUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockSeedBed;
-import com.gtnewhorizon.cropsnh.utility.ModUtils;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
-import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.BaseGTRecipeLoader;
@@ -26,7 +25,9 @@ import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropSynthesizerFakeRecipeLoade
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropsPlusPlusRecipes;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.FertilizerRecipes;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.SeedGeneratorFakeRecipeLoader;
+import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Mods;
@@ -37,7 +38,6 @@ import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
-import net.minecraftforge.oredict.OreDictionary;
 
 public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
 
@@ -233,39 +233,30 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
             GTModHandler.RecipeBits.BITSD,
             new Object[] {
                 // TODO: remove this anti-collision stuff when crops++ gets the boot
-                "PWS",
-                "CMC",
-                "ICI",
-                'P', MTEBasicMachineWithRecipe.X.ROBOT_ARM,
-                'W', getWateringCan(),
-                'S', MTEBasicMachineWithRecipe.X.SENSOR,
-                'C', MTEBasicMachineWithRecipe.X.CIRCUIT,
-                'M', CropsNHItemList.CropManager_MV.get(1),
+                "PWS", "CMC", "ICI", 'P', MTEBasicMachineWithRecipe.X.ROBOT_ARM, 'W', getWateringCan(), 'S',
+                MTEBasicMachineWithRecipe.X.SENSOR, 'C', MTEBasicMachineWithRecipe.X.CIRCUIT, 'M',
+                CropsNHItemList.CropManager_MV.get(1),
                 // seed/block under storage
                 'I', ItemList.Hatch_Input_Bus_MV
-                // spotless:on
+            // spotless:on
             },
             VoltageIndex.MV);
     }
 
     private static void addSeedBedRecipes() {
         int tier = BlockSeedBed.MIN_TIER;
-        ItemStack dirt = new ItemStack(Mods.RandomThings.isModLoaded() ? Block.getBlockFromName("RandomThings:fertilizedDirt") : Blocks.dirt, 1);
+        ItemStack dirt = new ItemStack(
+            Mods.RandomThings.isModLoaded() ? Block.getBlockFromName("RandomThings:fertilizedDirt") : Blocks.dirt,
+            1);
         for (CropsNHItemList output : SEED_BEDS) {
             GTModHandler.addMachineCraftingRecipe(
                 output.get(1),
                 GTModHandler.RecipeBits.BITSD,
                 new Object[] {
                     // TODO: remove this anti-collision stuff when crops++ gets the boot
-                    "DDD",
-                    "CHC",
-                    "PIP",
-                    'D', dirt,
-                    'C', getCircuit(tier),
-                    'H', getHull(tier),
-                    'P', getPipe(tier),
-                    'I', getInputHatch(tier),
-                    // spotless:on
+                    "DDD", "CHC", "PIP", 'D', dirt, 'C', getCircuit(tier), 'H', getHull(tier), 'P', getPipe(tier), 'I',
+                    getInputHatch(tier),
+                // spotless:on
                 },
                 tier);
             tier++;
@@ -404,7 +395,6 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
             .addTo(extruderRecipes);
     }
 
-
     // region tier item lists
 
     public static ItemStack getWateringCan() {
@@ -454,28 +444,34 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         CropsNHItemList.CropSynthesizer_UEV, CropsNHItemList.CropSynthesizer_UIV, CropsNHItemList.CropSynthesizer_UMV };
 
     private static final CropsNHItemList[] ADV_HARVESTING_UNITS = new CropsNHItemList[] {
-        CropsNHItemList.AdvancedHarvestingUnit_MV, CropsNHItemList.AdvancedHarvestingUnit_HV, CropsNHItemList.AdvancedHarvestingUnit_EV,
-        CropsNHItemList.AdvancedHarvestingUnit_IV, CropsNHItemList.AdvancedHarvestingUnit_LuV, CropsNHItemList.AdvancedHarvestingUnit_ZPM,
-        CropsNHItemList.AdvancedHarvestingUnit_UV, CropsNHItemList.AdvancedHarvestingUnit_UHV, CropsNHItemList.AdvancedHarvestingUnit_UEV,
-        CropsNHItemList.AdvancedHarvestingUnit_UIV, CropsNHItemList.AdvancedHarvestingUnit_UMV, CropsNHItemList.AdvancedHarvestingUnit_UXV };
+        CropsNHItemList.AdvancedHarvestingUnit_MV, CropsNHItemList.AdvancedHarvestingUnit_HV,
+        CropsNHItemList.AdvancedHarvestingUnit_EV, CropsNHItemList.AdvancedHarvestingUnit_IV,
+        CropsNHItemList.AdvancedHarvestingUnit_LuV, CropsNHItemList.AdvancedHarvestingUnit_ZPM,
+        CropsNHItemList.AdvancedHarvestingUnit_UV, CropsNHItemList.AdvancedHarvestingUnit_UHV,
+        CropsNHItemList.AdvancedHarvestingUnit_UEV, CropsNHItemList.AdvancedHarvestingUnit_UIV,
+        CropsNHItemList.AdvancedHarvestingUnit_UMV, CropsNHItemList.AdvancedHarvestingUnit_UXV };
 
     private static final CropsNHItemList[] ENVIRONMENTAL_ENHANCEMENT_UNITS = new CropsNHItemList[] {
-        CropsNHItemList.EnvironmentalEnhancementUnit_MV, CropsNHItemList.EnvironmentalEnhancementUnit_HV, CropsNHItemList.EnvironmentalEnhancementUnit_EV,
-        CropsNHItemList.EnvironmentalEnhancementUnit_IV, CropsNHItemList.EnvironmentalEnhancementUnit_LuV, CropsNHItemList.EnvironmentalEnhancementUnit_ZPM,
-        CropsNHItemList.EnvironmentalEnhancementUnit_UV, CropsNHItemList.EnvironmentalEnhancementUnit_UHV, CropsNHItemList.EnvironmentalEnhancementUnit_UEV,
-        CropsNHItemList.EnvironmentalEnhancementUnit_UIV, CropsNHItemList.EnvironmentalEnhancementUnit_UMV, CropsNHItemList.EnvironmentalEnhancementUnit_UXV };
+        CropsNHItemList.EnvironmentalEnhancementUnit_MV, CropsNHItemList.EnvironmentalEnhancementUnit_HV,
+        CropsNHItemList.EnvironmentalEnhancementUnit_EV, CropsNHItemList.EnvironmentalEnhancementUnit_IV,
+        CropsNHItemList.EnvironmentalEnhancementUnit_LuV, CropsNHItemList.EnvironmentalEnhancementUnit_ZPM,
+        CropsNHItemList.EnvironmentalEnhancementUnit_UV, CropsNHItemList.EnvironmentalEnhancementUnit_UHV,
+        CropsNHItemList.EnvironmentalEnhancementUnit_UEV, CropsNHItemList.EnvironmentalEnhancementUnit_UIV,
+        CropsNHItemList.EnvironmentalEnhancementUnit_UMV, CropsNHItemList.EnvironmentalEnhancementUnit_UXV };
 
-    private static final CropsNHItemList[] FERTILIZER_UNITS = new CropsNHItemList[] {
-        CropsNHItemList.FertilizerUnit_MV, CropsNHItemList.FertilizerUnit_HV, CropsNHItemList.FertilizerUnit_EV,
-        CropsNHItemList.FertilizerUnit_IV, CropsNHItemList.FertilizerUnit_LuV, CropsNHItemList.FertilizerUnit_ZPM,
-        CropsNHItemList.FertilizerUnit_UV, CropsNHItemList.FertilizerUnit_UHV, CropsNHItemList.FertilizerUnit_UEV,
-        CropsNHItemList.FertilizerUnit_UIV, CropsNHItemList.FertilizerUnit_UMV, CropsNHItemList.FertilizerUnit_UXV };
+    private static final CropsNHItemList[] FERTILIZER_UNITS = new CropsNHItemList[] { CropsNHItemList.FertilizerUnit_MV,
+        CropsNHItemList.FertilizerUnit_HV, CropsNHItemList.FertilizerUnit_EV, CropsNHItemList.FertilizerUnit_IV,
+        CropsNHItemList.FertilizerUnit_LuV, CropsNHItemList.FertilizerUnit_ZPM, CropsNHItemList.FertilizerUnit_UV,
+        CropsNHItemList.FertilizerUnit_UHV, CropsNHItemList.FertilizerUnit_UEV, CropsNHItemList.FertilizerUnit_UIV,
+        CropsNHItemList.FertilizerUnit_UMV, CropsNHItemList.FertilizerUnit_UXV };
 
     private static final CropsNHItemList[] GROWTH_ACCEL_UNITS = new CropsNHItemList[] {
-        CropsNHItemList.GrowthAccelerationUnit_MV, CropsNHItemList.GrowthAccelerationUnit_HV, CropsNHItemList.GrowthAccelerationUnit_EV,
-        CropsNHItemList.GrowthAccelerationUnit_IV, CropsNHItemList.GrowthAccelerationUnit_LuV, CropsNHItemList.GrowthAccelerationUnit_ZPM,
-        CropsNHItemList.GrowthAccelerationUnit_UV, CropsNHItemList.GrowthAccelerationUnit_UHV, CropsNHItemList.GrowthAccelerationUnit_UEV,
-        CropsNHItemList.GrowthAccelerationUnit_UIV, CropsNHItemList.GrowthAccelerationUnit_UMV, CropsNHItemList.GrowthAccelerationUnit_UXV };
+        CropsNHItemList.GrowthAccelerationUnit_MV, CropsNHItemList.GrowthAccelerationUnit_HV,
+        CropsNHItemList.GrowthAccelerationUnit_EV, CropsNHItemList.GrowthAccelerationUnit_IV,
+        CropsNHItemList.GrowthAccelerationUnit_LuV, CropsNHItemList.GrowthAccelerationUnit_ZPM,
+        CropsNHItemList.GrowthAccelerationUnit_UV, CropsNHItemList.GrowthAccelerationUnit_UHV,
+        CropsNHItemList.GrowthAccelerationUnit_UEV, CropsNHItemList.GrowthAccelerationUnit_UIV,
+        CropsNHItemList.GrowthAccelerationUnit_UMV, CropsNHItemList.GrowthAccelerationUnit_UXV };
 
     private static final CropsNHItemList[] OC_GROWTH_ACCEL_UNITS = new CropsNHItemList[] {
         CropsNHItemList.OverclockedGrowthAccelerationUnit_ZPM, CropsNHItemList.OverclockedGrowthAccelerationUnit_UV,
@@ -483,12 +479,11 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         CropsNHItemList.OverclockedGrowthAccelerationUnit_UIV, CropsNHItemList.OverclockedGrowthAccelerationUnit_UMV,
         CropsNHItemList.OverclockedGrowthAccelerationUnit_UXV };
 
-    private static final CropsNHItemList[] SEED_BEDS = new CropsNHItemList[] {
-        CropsNHItemList.SeedBed_MV, CropsNHItemList.SeedBed_HV, CropsNHItemList.SeedBed_EV,
-        CropsNHItemList.SeedBed_IV, CropsNHItemList.SeedBed_LuV, CropsNHItemList.SeedBed_ZPM,
-        CropsNHItemList.SeedBed_UV, CropsNHItemList.SeedBed_UHV, CropsNHItemList.SeedBed_UEV,
-        CropsNHItemList.SeedBed_UIV, CropsNHItemList.SeedBed_UMV, CropsNHItemList.SeedBed_UXV };
-
+    private static final CropsNHItemList[] SEED_BEDS = new CropsNHItemList[] { CropsNHItemList.SeedBed_MV,
+        CropsNHItemList.SeedBed_HV, CropsNHItemList.SeedBed_EV, CropsNHItemList.SeedBed_IV, CropsNHItemList.SeedBed_LuV,
+        CropsNHItemList.SeedBed_ZPM, CropsNHItemList.SeedBed_UV, CropsNHItemList.SeedBed_UHV,
+        CropsNHItemList.SeedBed_UEV, CropsNHItemList.SeedBed_UIV, CropsNHItemList.SeedBed_UMV,
+        CropsNHItemList.SeedBed_UXV };
 
     private static ItemList getInputHatch(int tier) {
         return switch (tier) {
@@ -532,6 +527,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
             default -> MTEBasicMachineWithRecipe.X.CIRCUIT;
         };
     }
+
     private static Object getBetterCircuit(int tier) {
         return switch (tier) {
             case VoltageIndex.UHV -> OrePrefixes.circuit.get(Materials.UEV);
@@ -541,6 +537,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
             default -> MTEBasicMachineWithRecipe.X.CIRCUIT;
         };
     }
+
     private static Object getPipe(int tier) {
         return switch (tier) {
             case VoltageIndex.LuV -> OrePrefixes.pipeMedium.get(Materials.Enderium);
@@ -552,6 +549,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
             default -> MTEBasicMachineWithRecipe.X.PIPE;
         };
     }
+
     private static Object getCable(int tier) {
         return switch (tier) {
             case VoltageIndex.LuV -> OrePrefixes.cableGt01.get(Materials.VanadiumGallium);
@@ -565,6 +563,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
             default -> MTEBasicMachineWithRecipe.X.WIRE;
         };
     }
+
     private static Object getHull(int tier) {
         return switch (tier) {
             case VoltageIndex.UEV -> ItemList.Hull_UEV;
@@ -574,6 +573,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
             default -> MTEBasicMachineWithRecipe.X.HULL;
         };
     }
+
     private static Object getPlate(int tier) {
         return switch (tier) {
             case VoltageIndex.LuV -> OrePrefixes.plate.get(Materials.get("Rhodium-PlatedPalladium"));

@@ -1,7 +1,5 @@
 package com.gtnewhorizon.cropsnh.init;
 
-import com.gtnewhorizon.cropsnh.items.ItemHempHurd;
-import com.gtnewhorizon.cropsnh.items.produce.ItemGaiaWart;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
@@ -11,8 +9,10 @@ import com.gtnewhorizon.cropsnh.items.CropsNHAlcoholBottle;
 import com.gtnewhorizon.cropsnh.items.ItemEnvironmentalModule;
 import com.gtnewhorizon.cropsnh.items.ItemFertilizer;
 import com.gtnewhorizon.cropsnh.items.ItemGenericSeed;
+import com.gtnewhorizon.cropsnh.items.ItemHempHurd;
 import com.gtnewhorizon.cropsnh.items.ItemNaNCertificate;
 import com.gtnewhorizon.cropsnh.items.produce.ItemBerry;
+import com.gtnewhorizon.cropsnh.items.produce.ItemGaiaWart;
 import com.gtnewhorizon.cropsnh.items.produce.ItemGoldfish;
 import com.gtnewhorizon.cropsnh.items.produce.ItemMaterialLeaf;
 import com.gtnewhorizon.cropsnh.items.tools.ItemDebugger;
@@ -72,7 +72,7 @@ public class CropsNHItems {
         // register fertilizer
         CropsNHItemList.fertilizer.set(new ItemStack(fertilizer = new ItemFertilizer(), 1, 0));
         // register hurds
-        CropsNHItemList.hempHurd.set(new ItemStack(hempHurd = new ItemHempHurd(), 1,0));
+        CropsNHItemList.hempHurd.set(new ItemStack(hempHurd = new ItemHempHurd(), 1, 0));
         // update EIG fert registry
         MTEExtremeIndustrialGreenhouse.addFertilizerItem(CropsNHItemList.fertilizer.get(1));
 
