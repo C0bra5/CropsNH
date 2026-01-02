@@ -1,8 +1,5 @@
 package com.gtnewhorizon.cropsnh.compatibility.NEI;
 
-import net.minecraft.item.ItemStack;
-
-import com.gtnewhorizon.cropsnh.CropsNH;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.AlternateSeedDumper;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.CropRegistryDumper;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.DeterministicMutationRegistryDumper;
@@ -12,8 +9,6 @@ import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.HydrationFluidsRegistr
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.MutationPoolRegistryDumper;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.SoilRegistryDumper;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.WeedEXFluidsRegistryDumper;
-import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
-import com.gtnewhorizon.cropsnh.init.CropsNHItems;
 import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
@@ -37,8 +32,6 @@ public class NEIConfig implements IConfigureNEI {
         registerDumpers();
         // register NEI recipe handler
         registerNEITabs();
-        // hide crop blocks in NEI
-        hideItems();
     }
 
     private static void registerDumpers() {
@@ -86,17 +79,6 @@ public class NEIConfig implements IConfigureNEI {
         GuiRecipeTab.handlerMap.put(handler.getOverlayIdentifier(), handler.getHandlerInfo());
         API.registerRecipeHandler(handler);
         API.registerUsageHandler(handler);
-    }
-
-    private static void hideItems() {
-
-        LogHelper.debug("Hiding stuff in nei");
-        for (int i = 0; i < 16; i++) {
-            // hide debugger
-            if (!ConfigurationHandler.debug) {
-                CropsNH.proxy.hideItemInNEI(new ItemStack(CropsNHItems.debugItem, 1, i));
-            }
-        }
     }
 
     private static void addHandler(TemplateRecipeHandler handler) {
