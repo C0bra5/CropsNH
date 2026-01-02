@@ -10,7 +10,6 @@ import com.gtnewhorizon.cropsnh.items.ItemEnvironmentalModule;
 import com.gtnewhorizon.cropsnh.items.ItemFertilizer;
 import com.gtnewhorizon.cropsnh.items.ItemGenericSeed;
 import com.gtnewhorizon.cropsnh.items.ItemHempHurd;
-import com.gtnewhorizon.cropsnh.items.ItemNaNCertificate;
 import com.gtnewhorizon.cropsnh.items.produce.ItemBerry;
 import com.gtnewhorizon.cropsnh.items.produce.ItemGaiaWart;
 import com.gtnewhorizon.cropsnh.items.produce.ItemGoldfish;
@@ -24,7 +23,6 @@ import com.gtnewhorizon.cropsnh.utility.LogHelper;
 public class CropsNHItems {
 
     public static Item magnifyingGlass;
-    public static Item nanCertificate;
     public static Item genericSeed;
     public static Item gaiaWart;
     public static Item spade;
@@ -40,8 +38,6 @@ public class CropsNHItems {
     public static void preInit() {
         magnifyingGlass = new ItemMagnifyingGlass();
         CropsNHItemList.magnifyingGlass.set(new ItemStack(magnifyingGlass, 1, 0));
-        nanCertificate = new ItemNaNCertificate();
-        CropsNHItemList.nanCertificate.set(new ItemStack(nanCertificate, 1, 0));
 
         gaiaWart = new ItemGaiaWart();
         CropsNHItemList.gaiaWart.set(new ItemStack(gaiaWart, 1, 0));

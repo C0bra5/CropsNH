@@ -25,8 +25,6 @@ public enum CropsNHItemList implements IItemContainer {
     spade,
     cropSticks,
 
-    // TODO: CONSIDER MOVING NAN CERTIFICATE TO GT5-U OR NH CORE MOD
-    nanCertificate,
     fertilizer,
     hempHurd,
     enrichedFertilizerCell,

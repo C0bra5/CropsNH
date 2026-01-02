@@ -68,7 +68,6 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         addFertilizerUnitRecipes();
         addGrowthAccelerationUnits();
         addOverclockedGrowthAccelerationUnits();
-        addNanCertificateRecipe();
     }
 
     private static void addPlantLensRecipe() {
@@ -571,16 +570,6 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                 tier);
             tier++;
         }
-    }
-
-    private static void addNanCertificateRecipe() {
-        // NAN Certificate recipe
-        recipe(8, 29826 * 3600 + 9 * 60 + 7, 35)
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.block, Materials.Neutronium, 64),
-                GTOreDictUnificator.get(OrePrefixes.block, Materials.Neutronium, 64))
-            .itemOutputs(CropsNHItemList.nanCertificate.get(1))
-            .addTo(extruderRecipes);
     }
 
     // region tier item lists
