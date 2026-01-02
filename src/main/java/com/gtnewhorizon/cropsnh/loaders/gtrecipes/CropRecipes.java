@@ -456,7 +456,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
         // milk powder extraction
         GTValues.RA.stdBuilder()
             .itemInputs(MaterialLeafLoader.milkWart.get(1))
-            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Milk, 0))
+            .itemOutputs(Materials.Milk.getDust(1))
             .eut(4)
             .duration(6 * GTRecipeBuilder.SECONDS + 8 * GTRecipeBuilder.TICKS)
             .addTo(RecipeMaps.extractorRecipes);
