@@ -3,7 +3,7 @@ itemGroup.cropsnh=Crops NH
 
 # Generic Items
 item.cropsnh:cropSticksItem.name=Crop Sticks
-item.cropsnh:magnifyingGlass.name=Magnifying Glass
+item.cropsnh:plantLens.name=Plant Lens
 item.cropsnh:spade.name=Spade
 item.cropsnh:plantCure.name=Plant Cure
 item.cropsnh:fertilizer.name=Fertilizer
@@ -95,7 +95,7 @@ cropsnh_tooltip.fertilizer=Fertilizer
 cropsnh_tooltip.water=Water
 cropsnh_tooltip.weedEx=Weed-EX
 cropsnh_tooltip.weeds=Weeds -- BLAZE IT
-cropsnh_tooltip.magnifyingGlass=Use this to inspect crops
+cropsnh_tooltip.plantLens=Use this to inspect crops
 cropsnh_tooltip.handRake=Use this to remove weeds from crops
 cropsnh_tooltip.spade=Use this to get more seeds from your crops
 cropsnh_tooltip.empty=Nothing planted

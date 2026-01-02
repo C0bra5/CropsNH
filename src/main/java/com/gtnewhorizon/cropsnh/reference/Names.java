@@ -50,7 +50,7 @@ public final class Names {
         public static final String cropSticksTE = "cropSticksTE";
         public static final String cropSticks = "cropSticks";
         public static final String seed = "seed";
-        public static final String magnifyingGlass = "magnifyingGlass";
+        public static final String plantLens = "plantLens";
         public static final String spade = "spade";
         public static final String genericSeed = "genericSeed";
         public static final String casings1 = "casings1";

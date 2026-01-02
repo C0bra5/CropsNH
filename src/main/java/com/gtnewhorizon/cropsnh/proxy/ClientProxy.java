@@ -136,7 +136,7 @@ public class ClientProxy extends CommonProxy {
                 teCrop.getSeed()
                     .setAnalyzed(true);
             }
-            teCrop.getMagnifyingGlassStatus(event.mList);
+            teCrop.getPlantLensStatus(event.mList);
             event.mList.add(
                 StatCollector.translateToLocalFormatted(
                     Reference.MOD_ID_LOWER + "_tooltip.industrialFarm.scanner.6",

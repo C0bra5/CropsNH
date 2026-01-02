@@ -254,7 +254,7 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
     }
 
     @SideOnly(Side.CLIENT)
-    public void getMagnifyingGlassStatus(List<String> information) {
+    public void getPlantLensStatus(List<String> information) {
         if (this.hasCrop()) {
             if (this.hasWeed()) {
                 information.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.weeds"));

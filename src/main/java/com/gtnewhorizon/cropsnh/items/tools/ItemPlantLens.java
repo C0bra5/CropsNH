@@ -22,16 +22,16 @@ import com.gtnewhorizon.cropsnh.utility.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemMagnifyingGlass extends ItemCropsNH implements ICropRightClickHandler {
+public class ItemPlantLens extends ItemCropsNH implements ICropRightClickHandler {
 
-    public ItemMagnifyingGlass() {
+    public ItemPlantLens() {
         super();
         this.setMaxStackSize(1);
     }
 
     @Override
     protected String getInternalName() {
-        return Names.Objects.magnifyingGlass;
+        return Names.Objects.plantLens;
     }
 
     // I'm overriding this just to be sure
@@ -43,7 +43,7 @@ public class ItemMagnifyingGlass extends ItemCropsNH implements ICropRightClickH
     @SideOnly(Side.CLIENT)
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
-        list.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip.magnifyingGlass"));
+        list.add(StatCollector.translateToLocal(Reference.MOD_ID_LOWER + "_tooltip." + Names.Objects.plantLens));
     }
 
     @Override
@@ -74,7 +74,7 @@ public class ItemMagnifyingGlass extends ItemCropsNH implements ICropRightClickH
         // display some info text to the player about the crop if it's on the client side.
         if (te instanceof TileEntityCrop) {
             List<String> info = new ArrayList<>();
-            ((TileEntityCrop) te).getMagnifyingGlassStatus(info);
+            ((TileEntityCrop) te).getPlantLensStatus(info);
             for (String line : info) {
                 player.addChatComponentMessage(new ChatComponentText(line));
             }

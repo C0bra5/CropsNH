@@ -21,7 +21,7 @@ import gregtech.common.render.items.MetaGeneratedItemRenderer;
 public enum CropsNHItemList implements IItemContainer {
 
     // TOOLS
-    magnifyingGlass,
+    plantLens,
     spade,
     cropSticks,
 

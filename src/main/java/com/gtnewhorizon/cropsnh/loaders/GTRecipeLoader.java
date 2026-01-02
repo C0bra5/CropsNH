@@ -72,7 +72,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
 
     private static void addPlantLensRecipe() {
         GTModHandler.addCraftingRecipe(
-            CropsNHItemList.spade.get(1),
+            CropsNHItemList.plantLens.get(1),
             GTModHandler.RecipeBits.BITSD,
             new Object[] { " fL", " Sr", "S  ", 'L', OrePrefixes.lens.get(Materials.Glass), 'S', "stickWood" });
     }
@@ -81,8 +81,8 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         GTModHandler.addCraftingRecipe(
             CropsNHItemList.spade.get(1),
             GTModHandler.RecipeBits.BITSD,
-            new Object[] { "fPh", "PHP", " S ", 'P', OrePrefixes.plateDense.get(Materials.Steel), 'H', "iron_shovel",
-                'S', OrePrefixes.stickLong.get(Materials.Wood) });
+            new Object[] { "fPh", "PHP", "RSR", 'P', OrePrefixes.plateDense.get(Materials.Steel), 'H', "iron_shovel",
+                'S', OrePrefixes.stickLong.get(Materials.Wood), 'R', "plateAnyRubber" });
     }
 
     public static void addPlantCureRecipe() {

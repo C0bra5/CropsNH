@@ -14,15 +14,15 @@ import com.gtnewhorizon.cropsnh.items.produce.ItemBerry;
 import com.gtnewhorizon.cropsnh.items.produce.ItemGaiaWart;
 import com.gtnewhorizon.cropsnh.items.produce.ItemGoldfish;
 import com.gtnewhorizon.cropsnh.items.produce.ItemMaterialLeaf;
-import com.gtnewhorizon.cropsnh.items.tools.ItemMagnifyingGlass;
 import com.gtnewhorizon.cropsnh.items.tools.ItemPlantCure;
+import com.gtnewhorizon.cropsnh.items.tools.ItemPlantLens;
 import com.gtnewhorizon.cropsnh.items.tools.ItemSpade;
 import com.gtnewhorizon.cropsnh.loaders.MaterialLeafLoader;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 
 public class CropsNHItems {
 
-    public static Item magnifyingGlass;
+    public static Item plantLens;
     public static Item genericSeed;
     public static Item gaiaWart;
     public static Item spade;
@@ -36,8 +36,8 @@ public class CropsNHItems {
     public static Item environmentalModule;
 
     public static void preInit() {
-        magnifyingGlass = new ItemMagnifyingGlass();
-        CropsNHItemList.magnifyingGlass.set(new ItemStack(magnifyingGlass, 1, 0));
+        plantLens = new ItemPlantLens();
+        CropsNHItemList.plantLens.set(new ItemStack(plantLens, 1, 0));
 
         gaiaWart = new ItemGaiaWart();
         CropsNHItemList.gaiaWart.set(new ItemStack(gaiaWart, 1, 0));
