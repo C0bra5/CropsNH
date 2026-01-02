@@ -12,10 +12,20 @@ public class CropTuffLily extends CropBaseStoneLily {
     public CropTuffLily() {
         super("tuff", new Color(0x57574D), new Color(0x95978D));
 
-        this.addDrop(OreDictHelper.getCopiedOreStack("dustTuff", 9), 100_00);
-
         this.addBlockUnderRequirement("tuff");
 
         this.addLikedBiomes(BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HILLS);
+    }
+
+    private boolean dropsLoaded = false;
+
+    @Override
+    public void onLoadComplete() {
+        super.onLoadComplete();
+        // needed because this is from the core mod.
+        if (!dropsLoaded) {
+            dropsLoaded = true;
+            this.addDrop(OreDictHelper.getCopiedOreStack("dustTuff", 9), 100_00);
+        }
     }
 }

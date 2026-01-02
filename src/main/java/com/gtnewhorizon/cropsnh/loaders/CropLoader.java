@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHCrops;
+import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.crops.CropWeed;
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai;
 import com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropBamboo;
@@ -204,6 +205,12 @@ public class CropLoader {
         registerStoneLilies();
         registerVanillaCrops();
         registerWitcheryCrops();
+    }
+
+    public static void loadComplete() {
+        for (ICropCard cc : CropRegistry.instance.getAllInRegistrationOrder()) {
+            cc.onLoadComplete();
+        }
     }
 
     private static void registerBonsais() {

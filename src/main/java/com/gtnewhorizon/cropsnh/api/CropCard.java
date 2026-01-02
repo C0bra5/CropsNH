@@ -295,22 +295,10 @@ public abstract class CropCard implements ICropCard {
     // event handlers
 
     @Override
-    public void onPlanted(ICropStickTile te) {}
-
-    @Override
-    public void onSick(ICropStickTile te) {}
-
-    @Override
-    public void onCure(ICropStickTile te) {}
-
-    @Override
-    public void onTick(ICropStickTile te) {}
-
-    @Override
     public void onGrowthTick(ICropStickTile te) {}
 
     @Override
-    public void onMaturityReached(ICropStickTile te) {}
+    public void onLoadComplete() {}
 
     @Override
     public boolean onRightClick(ICropStickTile te, EntityPlayer player) {

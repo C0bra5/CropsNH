@@ -86,6 +86,7 @@ public class CropsNH {
         MTELoader.init();
         MTESeedGenerator.init();
         MTECropBreeder.init();
+        OreDictLoader.init();
         LogHelper.debug("Initialization Complete");
     }
 
@@ -93,8 +94,6 @@ public class CropsNH {
     @SuppressWarnings("unused")
     public static void postInit(FMLPostInitializationEvent event) {
         LogHelper.debug("Starting Post-Initialization");
-        // Have to do this in postInit because some mods don't register their items/blocks until init
-        OreDictLoader.postInit();
         FertilizerLoader.postInit();
         SoilLoader.postInit();
         BlockUnderRequirementLoader.postInit();
@@ -111,6 +110,7 @@ public class CropsNH {
     @SuppressWarnings("unused")
     public void onLoadComplete(FMLLoadCompleteEvent event) {
         LogHelper.debug("Starting Load-Complete");
+        CropLoader.loadComplete();
         LogHelper.debug("Load-Complete Complete");
     }
 

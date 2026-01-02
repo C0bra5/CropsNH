@@ -80,7 +80,7 @@ public interface ICropCard {
 
     /**
      * This also applies for the synthesizer's minimum voltage tier.
-     * 
+     *
      * @return The {@link gregtech.api.enums.VoltageIndex} that should be used as the minimum voltage for breeding
      *         recipes.
      */
@@ -222,36 +222,9 @@ public interface ICropCard {
     // event handlers;
 
     /**
-     * Fired when the crop is initially planted on the crop succesfully.
-     * Ignored when in the GoBlyn.
-     *
-     * @param te The cropTE in which this crop is growing.
+     * Fired when the FMLLoadCompleted event is fired.
      */
-    void onPlanted(ICropStickTile te);
-
-    /**
-     * Fired when the crop becomes sick.
-     * Ignored when in the GoBlyn.
-     *
-     * @param te The cropTE in which this crop is growing.
-     */
-    void onSick(ICropStickTile te);
-
-    /**
-     * Fired when the crop becomes cured.
-     * Ignored when in the GoBlyn.
-     *
-     * @param te The cropTE in which this crop is growing.
-     */
-    void onCure(ICropStickTile te);
-
-    /**
-     * Fired on every tick.
-     * Ignored when in the GoBlyn.
-     *
-     * @param te The cropTE in which this crop is growing.
-     */
-    void onTick(ICropStickTile te);
+    void onLoadComplete();
 
     /**
      * Fired on every growth tick.
@@ -260,13 +233,6 @@ public interface ICropCard {
      * @param te The cropTE in which this crop is growing.
      */
     void onGrowthTick(ICropStickTile te);
-
-    /**
-     * Fired when the crop reaches maturity.
-     *
-     * @param te The cropTE in which this crop is growing.
-     */
-    void onMaturityReached(ICropStickTile te);
 
     /**
      * Fired when a player right-clicks this crop.
