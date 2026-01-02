@@ -1,5 +1,7 @@
 package com.gtnewhorizon.cropsnh.loaders;
 
+import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
+import kubatech.tileentity.gregtech.multiblock.MTEExtremeIndustrialGreenhouse;
 import net.minecraft.init.Items;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
@@ -59,6 +61,9 @@ public class FertilizerLoader {
             FertilizerRegistry.instance.register(PluginCore.items.fertilizerCompound, OreDictionary.WILDCARD_VALUE, 25);
             FertilizerRegistry.instance.register(PluginCore.items.fertilizerBio, OreDictionary.WILDCARD_VALUE, 50);
         }
+
+        // add crops nh fert to EIG
+        MTEExtremeIndustrialGreenhouse.addFertilizerItem(CropsNHItemList.fertilizer.get(1));
     }
 
 }

@@ -22,8 +22,6 @@ import com.gtnewhorizon.cropsnh.items.tools.ItemSpade;
 import com.gtnewhorizon.cropsnh.loaders.MaterialLeafLoader;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 
-import kubatech.tileentity.gregtech.multiblock.MTEExtremeIndustrialGreenhouse;
-
 public class CropsNHItems {
 
     public static Item magnifyingGlass;
@@ -77,8 +75,6 @@ public class CropsNHItems {
         CropsNHItemList.fertilizer.set(new ItemStack(fertilizer = new ItemFertilizer(), 1, 0));
         // register hurds
         CropsNHItemList.hempHurd.set(new ItemStack(hempHurd = new ItemHempHurd(), 1, 0));
-        // update EIG fert registry
-        MTEExtremeIndustrialGreenhouse.addFertilizerItem(CropsNHItemList.fertilizer.get(1));
 
         MaterialLeafLoader.preInit();
         materialLeaf = new ItemMaterialLeaf();
