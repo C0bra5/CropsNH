@@ -1,11 +1,10 @@
 package com.gtnewhorizon.cropsnh.loaders;
 
-import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
-import kubatech.tileentity.gregtech.multiblock.MTEExtremeIndustrialGreenhouse;
 import net.minecraft.init.Items;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.farming.registries.FertilizerRegistry;
 import com.gtnewhorizon.cropsnh.farming.registries.HydrationRegistry;
 import com.gtnewhorizon.cropsnh.farming.registries.WeedEXRegistry;
@@ -17,6 +16,7 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.Mods;
 import gregtech.api.util.GTModHandler;
 import gtPlusPlus.core.item.ModItems;
+import kubatech.tileentity.gregtech.multiblock.MTEExtremeIndustrialGreenhouse;
 
 public class FertilizerLoader {
 

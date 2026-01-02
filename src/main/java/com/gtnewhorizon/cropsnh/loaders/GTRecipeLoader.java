@@ -1,7 +1,5 @@
 package com.gtnewhorizon.cropsnh.loaders;
 
-import static gregtech.api.recipe.RecipeMaps.extruderRecipes;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

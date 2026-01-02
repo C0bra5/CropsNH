@@ -37,11 +37,6 @@ public class AspectLoader {
                 .add(Aspect.HEAL, 2)
                 .add(Aspect.PLANT, 1));
         ThaumcraftApi.registerObjectTag(
-            CropsNHItemList.nanCertificate.get(1),
-            new AspectList().add(Aspect.METAL, 64)
-                .add(Aspect.CRAFT, 64)
-                .add(Aspect.CRYSTAL, 64));
-        ThaumcraftApi.registerObjectTag(
             CropsNHItemList.fertilizer.get(1),
             new AspectList().add(Aspect.FIRE, 3)
                 .add(Aspect.HEAL, 2)
