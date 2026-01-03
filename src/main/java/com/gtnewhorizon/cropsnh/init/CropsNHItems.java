@@ -11,6 +11,7 @@ import com.gtnewhorizon.cropsnh.items.ItemEnvironmentalModule;
 import com.gtnewhorizon.cropsnh.items.ItemFertilizer;
 import com.gtnewhorizon.cropsnh.items.ItemGenericSeed;
 import com.gtnewhorizon.cropsnh.items.ItemHempHurd;
+import com.gtnewhorizon.cropsnh.items.ItemPoisonPowder;
 import com.gtnewhorizon.cropsnh.items.produce.ItemBerry;
 import com.gtnewhorizon.cropsnh.items.produce.ItemGaiaWart;
 import com.gtnewhorizon.cropsnh.items.produce.ItemGoldfish;
@@ -49,7 +50,7 @@ public class CropsNHItems {
         CropsNHItemList.plantCure.set(new ItemStack(plantCure = new ItemPlantCure(), 1));
         CropsNHItemList.goldfish.set(new ItemStack(goldfish = new ItemGoldfish(), 1, 0));
         CropsNHItemList.fertilizer.set(new ItemStack(fertilizer = new ItemFertilizer(), 1, 0));
-        CropsNHItemList.poisonPowder.set(new ItemStack(poisonPowder = new ItemFertilizer(), 1, 0));
+        CropsNHItemList.poisonPowder.set(new ItemStack(poisonPowder = new ItemPoisonPowder(), 1, 0));
         CropsNHItemList.hempHurd.set(new ItemStack(hempHurd = new ItemHempHurd(), 1, 0));
 
         CropsNHItemList.weedEX.set(new ItemStack(weedEX = new ItemWeedEX(), 1));
