@@ -10,17 +10,18 @@ import com.gtnewhorizon.cropsnh.farming.registries.HydrationRegistry;
 import com.gtnewhorizon.cropsnh.farming.registries.WeedEXRegistry;
 import com.gtnewhorizon.cropsnh.init.CropsNHFluids;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 
 import forestry.plugins.PluginCore;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Mods;
 import gregtech.api.util.GTModHandler;
-import gtPlusPlus.core.item.ModItems;
 import kubatech.tileentity.gregtech.multiblock.MTEExtremeIndustrialGreenhouse;
 
 public class FertilizerLoader {
 
     public static final int FERTILIZER_ITEM_POTENCY = 100;
+    public static final int WEEDEX_POTENCY = 1;
 
     public static void postInit() {
         registerHydrationLiquids();
@@ -39,12 +40,12 @@ public class FertilizerLoader {
 
     private static void registerWeedEXLiquids() {
         // the strong poisonous brew is the stuff contained in weed-ex cans
-        WeedEXRegistry.instance.register(FluidRegistry.getFluid("potion.poison.strong"), 1);
+        WeedEXRegistry.instance.register(CropsNHUtils.getWeedEXFluid(), WEEDEX_POTENCY);
         WeedEXRegistry.instance.register(Materials.WeedEX9000.mFluid, 10);
     }
 
     private static void registerLiquidFertilizers() {
-        FertilizerRegistry.instance.register(ModItems.fluidFertBasic, 1);
+        FertilizerRegistry.instance.register(CropsNHUtils.getFertilizerFluid(), 1);
         FertilizerRegistry.instance.register(CropsNHFluids.enrichedFertilizer, 10);
     }
 

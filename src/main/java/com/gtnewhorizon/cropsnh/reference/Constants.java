@@ -31,4 +31,9 @@ public final class Constants {
      */
     public static final float UNIT = 1 / (float) WHOLE;
 
+    /**
+     * The amount of strong poisonous brew that a weedex represents.
+     */
+    public static final int WEEDEX_CAPACITY = 750;
+
 }

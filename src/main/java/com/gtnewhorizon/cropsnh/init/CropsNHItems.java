@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.init;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.items.CropsNHAlcoholBottle;
@@ -17,7 +18,10 @@ import com.gtnewhorizon.cropsnh.items.produce.ItemMaterialLeaf;
 import com.gtnewhorizon.cropsnh.items.tools.ItemPlantCure;
 import com.gtnewhorizon.cropsnh.items.tools.ItemPlantLens;
 import com.gtnewhorizon.cropsnh.items.tools.ItemSpade;
+import com.gtnewhorizon.cropsnh.items.tools.ItemWeedEX;
 import com.gtnewhorizon.cropsnh.loaders.MaterialLeafLoader;
+import com.gtnewhorizon.cropsnh.reference.Constants;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 
 public class CropsNHItems {
@@ -27,27 +31,32 @@ public class CropsNHItems {
     public static Item gaiaWart;
     public static Item spade;
     public static Item plantCure;
+    public static Item weedEX;
     public static Item goldfish;
     public static Item berry;
     public static Item bottledAlcohol;
     public static Item fertilizer;
+    public static Item poisonPowder;
     public static Item hempHurd;
     public static Item materialLeaf;
     public static Item environmentalModule;
 
     public static void preInit() {
-        plantLens = new ItemPlantLens();
-        CropsNHItemList.plantLens.set(new ItemStack(plantLens, 1, 0));
-
-        gaiaWart = new ItemGaiaWart();
-        CropsNHItemList.gaiaWart.set(new ItemStack(gaiaWart, 1, 0));
         genericSeed = new ItemGenericSeed();
-        spade = new ItemSpade();
-        CropsNHItemList.spade.set(new ItemStack(spade, 1, 0));
-        plantCure = new ItemPlantCure();
-        CropsNHItemList.plantCure.set(new ItemStack(plantCure, 1));
-        goldfish = new ItemGoldfish();
-        CropsNHItemList.goldfish.set(new ItemStack(goldfish, 1, 0));
+        CropsNHItemList.plantLens.set(new ItemStack(plantLens = new ItemPlantLens(), 1, 0));
+        CropsNHItemList.gaiaWart.set(new ItemStack(gaiaWart = new ItemGaiaWart(), 1, 0));
+        CropsNHItemList.spade.set(new ItemStack(spade = new ItemSpade(), 1, 0));
+        CropsNHItemList.plantCure.set(new ItemStack(plantCure = new ItemPlantCure(), 1));
+        CropsNHItemList.goldfish.set(new ItemStack(goldfish = new ItemGoldfish(), 1, 0));
+        CropsNHItemList.fertilizer.set(new ItemStack(fertilizer = new ItemFertilizer(), 1, 0));
+        CropsNHItemList.poisonPowder.set(new ItemStack(poisonPowder = new ItemFertilizer(), 1, 0));
+        CropsNHItemList.hempHurd.set(new ItemStack(hempHurd = new ItemHempHurd(), 1, 0));
+
+        CropsNHItemList.weedEX.set(new ItemStack(weedEX = new ItemWeedEX(), 1));
+        FluidContainerRegistry.registerFluidContainer(
+            CropsNHUtils.getWeedEXFluid(Constants.WEEDEX_CAPACITY),
+            CropsNHItemList.weedEX.get(1));
+
         berry = new ItemBerry();
         CropsNHItemList.huckleBerry.set(new ItemStack(berry, 1, 0));
         CropsNHItemList.sugarBeet.set(new ItemStack(berry, 1, 1));
@@ -64,14 +73,8 @@ public class CropsNHItems {
         CropsNHItemList.realJagermeisterBottle.set(new ItemStack(bottledAlcohol, 1, 8));
         CropsNHItemList.fakeJagermeisterBottle.set(new ItemStack(bottledAlcohol, 1, 9));
 
-        // register fertilizer
-        CropsNHItemList.fertilizer.set(new ItemStack(fertilizer = new ItemFertilizer(), 1, 0));
-        // register hurds
-        CropsNHItemList.hempHurd.set(new ItemStack(hempHurd = new ItemHempHurd(), 1, 0));
-
         MaterialLeafLoader.preInit();
         materialLeaf = new ItemMaterialLeaf();
-
         // spotless:off
         CropsNHItemList.bauxiaLeaf.set(MaterialLeafLoader.bauxiaLeaf.get());
         CropsNHItemList.canolaFLower.set(MaterialLeafLoader.canolaFLower.get());

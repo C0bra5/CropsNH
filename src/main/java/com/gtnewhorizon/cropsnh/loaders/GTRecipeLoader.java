@@ -5,6 +5,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
@@ -24,6 +26,8 @@ import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropSynthesizerFakeRecipeLoade
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropsPlusPlusRecipes;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.FertilizerRecipes;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.SeedGeneratorFakeRecipeLoader;
+import com.gtnewhorizon.cropsnh.reference.Constants;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -53,6 +57,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         addSpadeRecipes();
         addCropStickRecipes();
         addPlantCureRecipe();
+        addPoisonPowderRecipes();
         addCropManagerRecipes();
         addSeedGeneratorRecipes();
         addCropBreederRecipes();
@@ -83,11 +88,33 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                 'S', OrePrefixes.stickLong.get(Materials.Wood), 'R', "plateAnyRubber" });
     }
 
-    public static void addPlantCureRecipe() {
+    private static void addPlantCureRecipe() {
         GTModHandler.addShapelessCraftingRecipe(
             CropsNHItemList.plantCure.get(1),
             new Object[] { ItemList.Spray_Empty.get(1), CropsNHItemList.enrichedFertilizerCell.get(1),
                 CropsNHItemList.fertilizer.get(1), new ItemStack(Items.dye, 1, 15) });
+    }
+
+    private static void addPoisonPowderRecipes() {
+        recipe(2, 20, 0).itemInputs(new ItemStack(Blocks.red_mushroom, 1, 0))
+            .itemOutputs(CropsNHItemList.poisonPowder.get(1))
+            .addTo(RecipeMaps.maceratorRecipes);
+        lvRecipe(15, 0).itemInputs(new ItemStack(Items.poisonous_potato, 1, 0))
+            .itemOutputs(CropsNHItemList.poisonPowder.get(1))
+            .addTo(RecipeMaps.maceratorRecipes);
+        lvRecipe(15, 0).itemInputs(new ItemStack(Items.spider_eye, 1, 0))
+            .itemOutputs(CropsNHItemList.poisonPowder.get(1))
+            .addTo(RecipeMaps.maceratorRecipes);
+
+        // poison powder to weed-ex fluid
+        recipe(4, 6, 40).itemInputs(CropsNHItemList.poisonPowder.get(1))
+            .fluidInputs(new FluidStack(FluidRegistry.WATER, Constants.WEEDEX_CAPACITY))
+            .fluidOutputs(CropsNHUtils.getWeedEXFluid(Constants.WEEDEX_CAPACITY))
+            .addTo(RecipeMaps.brewingRecipes);
+        recipe(4, 6, 40).itemInputs(CropsNHItemList.poisonPowder.get(1))
+            .fluidInputs(GTModHandler.getDistilledWater(Constants.WEEDEX_CAPACITY))
+            .fluidOutputs(CropsNHUtils.getWeedEXFluid(Constants.WEEDEX_CAPACITY))
+            .addTo(RecipeMaps.brewingRecipes);
     }
 
     private static void addCropStickRecipes() {

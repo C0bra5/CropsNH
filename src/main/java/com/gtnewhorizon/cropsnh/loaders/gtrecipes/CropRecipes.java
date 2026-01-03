@@ -48,7 +48,6 @@ import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTRecipeConstants;
 import gregtech.api.util.GTUtility;
-import ic2.core.Ic2Items;
 import thaumcraft.common.config.ConfigItems;
 
 public abstract class CropRecipes extends BaseGTRecipeLoader {
@@ -154,7 +153,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
 
         if (BiomesOPlenty.isModLoaded()) {
             lvRecipe(3, 25).itemInputs(GTModHandler.getModItem(BiomesOPlenty.ID, "treeMoss", 4))
-                .itemOutputs(Ic2Items.plantBall.copy())
+                .itemOutputs(ItemList.IC2_Plantball.get(1L))
                 .duration(15 * SECONDS)
                 .eut(2)
                 .addTo(compressorRecipes);

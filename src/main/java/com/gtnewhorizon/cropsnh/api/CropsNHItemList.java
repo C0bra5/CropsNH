@@ -26,9 +26,11 @@ public enum CropsNHItemList implements IItemContainer {
     cropSticks,
 
     fertilizer,
+    poisonPowder,
     hempHurd,
     enrichedFertilizerCell,
     plantCure,
+    weedEX,
 
     // MTEs
     CropManager_LV,

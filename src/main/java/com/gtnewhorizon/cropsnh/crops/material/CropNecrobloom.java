@@ -10,19 +10,19 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.BiomeDictionary;
 
+import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 
-import gregtech.api.enums.ItemList;
 import gregtech.api.objects.XSTR;
 
 public class CropNecrobloom extends NHCropCard {
 
     public CropNecrobloom() {
         super("necrobloom", new Color(0x440F69), new Color(0x8921CC));
-        this.addDrop(ItemList.IC2_Grin_Powder.get(1L), 100_00);
+        this.addDrop(CropsNHItemList.poisonPowder.get(1), 95_00);
         this.addDrop(new ItemStack(Items.dye, 1, 5), 5_00);
         // brings ruin
         this.addLikedBiomes(BiomeDictionary.Type.DEAD, BiomeDictionary.Type.WASTELAND);

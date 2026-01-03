@@ -17,6 +17,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSkull;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.gtnewhorizon.cropsnh.api.ICropCard;
@@ -150,5 +152,21 @@ public abstract class CropsNHUtils {
 
     public static int getItemMeta(ItemStack aStack) {
         return Items.feather.getDamage(aStack);
+    }
+
+    public static Fluid getWeedEXFluid() {
+        return FluidRegistry.getFluid("potion.poison.strong");
+    }
+
+    public static FluidStack getWeedEXFluid(int amount) {
+        return new FluidStack(getWeedEXFluid(), amount);
+    }
+
+    public static Fluid getFertilizerFluid() {
+        return FluidRegistry.getFluid("fluid.fertiliser");
+    }
+
+    public static FluidStack getFertilizerFluid(int amount) {
+        return new FluidStack(getFertilizerFluid(), amount);
     }
 }
