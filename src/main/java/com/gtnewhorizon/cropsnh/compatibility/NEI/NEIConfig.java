@@ -1,5 +1,6 @@
 package com.gtnewhorizon.cropsnh.compatibility.NEI;
 
+import com.gtnewhorizon.cropsnh.CropsNH;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.AlternateSeedDumper;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.CropRegistryDumper;
 import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.DeterministicMutationRegistryDumper;
@@ -12,6 +13,7 @@ import com.gtnewhorizon.cropsnh.compatibility.NEI.dumpers.WeedEXFluidsRegistryDu
 import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
+import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
@@ -20,14 +22,12 @@ import codechicken.nei.recipe.GuiRecipeTab;
 import codechicken.nei.recipe.GuiUsageRecipe;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import cpw.mods.fml.common.event.FMLInterModComms;
-import gregtech.GTMod;
-import gregtech.api.enums.Mods;
 
 public class NEIConfig implements IConfigureNEI {
 
     @Override
     public void loadConfig() {
-        if (!Mods.NotEnoughItems.isModLoaded()) return;
+        if (!ModUtils.NotEnoughItems.isModLoaded()) return;
         // register dumpers
         registerDumpers();
         // register NEI recipe handler
@@ -35,7 +35,7 @@ public class NEIConfig implements IConfigureNEI {
     }
 
     private static void registerDumpers() {
-        if (!Mods.NotEnoughItems.isModLoaded()) return;
+        if (!ModUtils.NotEnoughItems.isModLoaded()) return;
         LogHelper.debug("Registering NEI dumpers");
         API.addOption(new AlternateSeedDumper());
         API.addOption(new CropRegistryDumper());
@@ -49,7 +49,7 @@ public class NEIConfig implements IConfigureNEI {
     }
 
     private static void registerNEITabs() {
-        if (!Mods.NotEnoughItems.isModLoaded()) return;
+        if (!ModUtils.NotEnoughItems.isModLoaded()) return;
         LogHelper.debug("Registering NEI recipe tabs");
 
         // crop product handler
@@ -83,10 +83,10 @@ public class NEIConfig implements IConfigureNEI {
 
     private static void addHandler(TemplateRecipeHandler handler) {
         FMLInterModComms.sendRuntimeMessage(
-            GTMod.GT,
+            CropsNH.INSTANCE,
             "NEIPlugins",
             "register-crafting-handler",
-            "gregtech@" + handler.getRecipeName() + "@" + handler.getOverlayIdentifier());
+            Reference.MOD_ID_LOWER + "@" + handler.getRecipeName() + "@" + handler.getOverlayIdentifier());
         GuiCraftingRecipe.craftinghandlers.add(handler);
         GuiUsageRecipe.usagehandlers.add(handler);
     }

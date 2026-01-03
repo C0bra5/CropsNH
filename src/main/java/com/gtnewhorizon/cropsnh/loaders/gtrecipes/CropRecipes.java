@@ -30,6 +30,7 @@ import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.IMaterialLeafVariant;
 import com.gtnewhorizon.cropsnh.items.produce.ItemMaterialLeaf;
 import com.gtnewhorizon.cropsnh.loaders.MaterialLeafLoader;
+import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
 import bartworks.system.material.Werkstoff;
 import bartworks.system.material.WerkstoffLoader;
@@ -38,7 +39,6 @@ import cofh.core.util.energy.FurnaceFuelHandler;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
-import gregtech.api.enums.Mods;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.interfaces.IRecipeMap;
@@ -248,25 +248,25 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
         createOreDuplicationRecipe(MaterialLeafLoader.bobsYerUncleBerry, Materials.Emerald);
         createOreDuplicationRecipe(MaterialLeafLoader.bobsYerUncleBerry, Materials.Beryllium);
 
-        if (Mods.GalacticraftCore.isModLoaded()) {
+        if (ModUtils.GalacticraftCore.isModLoaded()) {
             createOreDuplicationRecipe(MaterialLeafLoader.spaceFlower.get(9), Materials.MeteoricIron, Voltage.HV);
             createOreDuplicationRecipe(
                 MaterialLeafLoader.spaceFlower.get(9),
-                getModItem(Mods.GalacticraftCore.ID, "item.meteoricIronRaw", 1, 0),
+                getModItem(ModUtils.GalacticraftCore.ID, "item.meteoricIronRaw", 1, 0),
                 Materials.MeteoricIron,
                 Voltage.HV);
         }
 
-        if (Mods.GalacticraftMars.isModLoaded()) {
+        if (ModUtils.GalacticraftMars.isModLoaded()) {
             createOreDuplicationRecipe(MaterialLeafLoader.spaceFlower.get(9), Materials.Desh, Voltage.HV);
             createOreDuplicationRecipe(
                 MaterialLeafLoader.spaceFlower.get(9),
-                getModItem(Mods.GalacticraftMars.ID, "item.null", 1, 0),
+                getModItem(ModUtils.GalacticraftMars.ID, "item.null", 1, 0),
                 Materials.Desh,
                 Voltage.HV);
         }
 
-        if (Mods.GalaxySpace.isModLoaded()) {
+        if (ModUtils.GalaxySpace.isModLoaded()) {
             createOreDuplicationRecipe(MaterialLeafLoader.spaceFlower.get(9), Materials.Oriharukon, Voltage.HV);
             createOreDuplicationRecipe(MaterialLeafLoader.spaceFlower.get(9), Materials.Ledox, Voltage.HV);
             createOreDuplicationRecipe(MaterialLeafLoader.spaceFlower.get(9), Materials.CallistoIce, Voltage.HV);
@@ -377,7 +377,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
     }
 
     private static void addMagicEssenceRecipes() {
-        if (!Mods.Thaumcraft.isModLoaded()) return;
+        if (!ModUtils.Thaumcraft.isModLoaded()) return;
         // salis mundus extraction
         ulvRecipe(3, 20).itemInputs(MaterialLeafLoader.magicEssence.get(1))
             .itemOutputs(new ItemStack(ConfigItems.itemResource, 16, 14))
@@ -396,27 +396,27 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
             .fluidInputs(TierAcid.t2.get(4000))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Void, 4))
             .addTo(GTRecipeConstants.UniversalChemical);
-        if (Mods.TaintedMagic.isModLoaded()) {
+        if (ModUtils.TaintedMagic.isModLoaded()) {
             // void to shadow metal conversion
             ivRecipe(12, 0).itemInputs(new Object[] { "dustVoid", 4 }, CropsNHItemList.magicEssence.get(4))
                 .fluidInputs(TierAcid.t4.get(16_000))
                 .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Shadow, 4))
                 .addTo(GTRecipeConstants.UniversalChemical);
-            if (Mods.ThaumicTinkerer.isModLoaded() && Mods.BloodMagic.isModLoaded()) {
+            if (ModUtils.ThaumicTinkerer.isModLoaded() && ModUtils.BloodMagic.isModLoaded()) {
                 // shadow metal to ichorium conversion
                 luvRecipe(90, 0)
                     .itemInputs(
                         new Object[] { "dustVoid", 4 },
                         CropsNHItemList.magicEssence.get(8),
                         new Object[] { "ingotOsmiridium", 1 },
-                        getModItem(Mods.BloodMagic.ID, "bloodMagicBaseItems", 4, 28),
-                        getModItem(Mods.BloodMagic.ID, "bloodMagicBaseItems", 4, 29))
+                        getModItem(ModUtils.BloodMagic.ID, "bloodMagicBaseItems", 4, 28),
+                        getModItem(ModUtils.BloodMagic.ID, "bloodMagicBaseItems", 4, 29))
                     .fluidInputs(TierAcid.t6.get(190_000))
                     .itemOutputs(GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1))
                     .addTo(GTRecipeConstants.UniversalChemical);
             }
         }
-        if (Mods.GalacticraftCore.isModLoaded()) {
+        if (ModUtils.GalacticraftCore.isModLoaded()) {
             ivRecipe(90, 0).itemInputs(CropsNHItemList.spaceFlower.get(16), CropsNHItemList.magicEssence.get(4))
                 .fluidInputs(
                     Materials.Platinum.getMolten(288),
@@ -431,10 +431,10 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
             .addTo(autoclaveRecipes);
 
         // inert prim perl crafting recipe
-        if (Mods.NewHorizonsCoreMod.isModLoaded() && Mods.WitchingGadgets.isModLoaded()) {
+        if (ModUtils.NewHorizonsCoreMod.isModLoaded() && ModUtils.WitchingGadgets.isModLoaded()) {
             evRecipe(5 * 60, 0).itemInputs(CropsNHItemList.magicEssence.get(64))
                 .fluidInputs(Materials.Ichorium.getMolten(144 * 3))
-                .itemOutputs(getModItem(Mods.NewHorizonsCoreMod.ID, "item.PrimordialPerlFragment", 3))
+                .itemOutputs(getModItem(ModUtils.NewHorizonsCoreMod.ID, "item.PrimordialPerlFragment", 3))
                 .addTo(autoclaveRecipes);
         }
     }
@@ -546,7 +546,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
     }
 
     private static void addGlowingCoralRecipes() {
-        if (!Mods.BiomesOPlenty.isModLoaded()) {
+        if (!ModUtils.BiomesOPlenty.isModLoaded()) {
             return;
         }
         // glowing coral to sunnarium
@@ -558,7 +558,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
     }
 
     private static void addNetherBerryBrewingRecipes() {
-        if (!Mods.Natura.isModLoaded()) return;
+        if (!ModUtils.Natura.isModLoaded()) return;
 
         ulvRecipe(3, 40).itemInputs(getModItem(Natura.ID, "berry.nether", 16, 0))
             .fluidInputs(Materials.Water.getFluid(750))
@@ -582,7 +582,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
     }
 
     private static void addSpaceFlowerRecipes() {
-        if (!Mods.GalacticraftCore.isModLoaded()) return;
+        if (!ModUtils.GalacticraftCore.isModLoaded()) return;
         // space flower to uum
         recipe(4, 6, 40).itemInputs(MaterialLeafLoader.spaceFlower.get(1))
             // it's growth time should make it worst than using uum berries
@@ -601,7 +601,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
             .itemOutputs(Materials.MeteoricSteel.getDust(4))
             .addTo(UniversalChemical);
 
-        if (Mods.GalacticraftMars.isModLoaded()) {
+        if (ModUtils.GalacticraftMars.isModLoaded()) {
             // titanium to desh
             hvRecipe(12, 0).itemInputs(new Object[] { "dustTitanium", 4 }, MaterialLeafLoader.spaceFlower.get(4))
                 .fluidInputs(TierAcid.t4.get())
@@ -609,7 +609,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
                 .addTo(UniversalChemical);
         }
 
-        if (Mods.GalaxySpace.isModLoaded()) {
+        if (ModUtils.GalaxySpace.isModLoaded()) {
             // bismuth to oriharukon
             hvRecipe(12, 0).itemInputs(new Object[] { "dustBismuth", 4 }, MaterialLeafLoader.spaceFlower.get(8))
                 .fluidInputs(TierAcid.t4.get())
@@ -628,7 +628,7 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
                 .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ledox, 4))
                 .addTo(UniversalChemical);
 
-            if (Mods.Avaritia.isModLoaded()) {
+            if (ModUtils.Avaritia.isModLoaded()) {
                 // crustal matrix ingot to mysterious crystal.
                 zpmRecipe(12, 0)
                     .itemInputs(getModItem(Avaritia.ID, "Resource", 1, 1), MaterialLeafLoader.spaceFlower.get(16))

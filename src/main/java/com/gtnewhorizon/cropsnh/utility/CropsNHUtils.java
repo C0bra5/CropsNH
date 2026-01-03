@@ -28,9 +28,9 @@ import com.gtnewhorizon.cropsnh.farming.SeedStats;
 import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
 import com.gtnewhorizon.cropsnh.items.ItemGenericSeed;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gregtech.api.util.GTUtility;
 
 public abstract class CropsNHUtils {
 
@@ -97,8 +97,7 @@ public abstract class CropsNHUtils {
      * @return Null if nothing was found else the seed data for the stack.
      */
     public static @Nullable ISeedData getAnalyzedSeedData(ItemStack aStack) {
-        if (GTUtility.isStackInvalid(aStack) || aStack.stackSize <= 0 || !(aStack.getItem() instanceof ItemGenericSeed))
-            return null;
+        if (CropsNHUtils.isStackInvalid(aStack) || !(aStack.getItem() instanceof ItemGenericSeed)) return null;
         // check that it's a crop card and that it can cross.
         ICropCard cc = CropRegistry.instance.get(aStack);
         if (cc == null || cc.getCrossingThreshold() < 0.0f) return null;
@@ -168,5 +167,17 @@ public abstract class CropsNHUtils {
 
     public static FluidStack getFertilizerFluid(int amount) {
         return new FluidStack(getFertilizerFluid(), amount);
+    }
+
+    public static boolean isServer() {
+        return FMLCommonHandler.instance()
+            .getEffectiveSide()
+            .isServer();
+    }
+
+    public static boolean isClient() {
+        return FMLCommonHandler.instance()
+            .getEffectiveSide()
+            .isClient();
     }
 }

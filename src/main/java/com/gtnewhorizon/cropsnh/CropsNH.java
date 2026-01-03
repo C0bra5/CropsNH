@@ -14,6 +14,7 @@ import com.gtnewhorizon.cropsnh.loaders.CropLoader;
 import com.gtnewhorizon.cropsnh.loaders.FertilizerLoader;
 import com.gtnewhorizon.cropsnh.loaders.GTRecipeLoader;
 import com.gtnewhorizon.cropsnh.loaders.MTELoader;
+import com.gtnewhorizon.cropsnh.loaders.MigrationsLoader;
 import com.gtnewhorizon.cropsnh.loaders.MutationLoader;
 import com.gtnewhorizon.cropsnh.loaders.OreDictLoader;
 import com.gtnewhorizon.cropsnh.loaders.SoilLoader;
@@ -28,6 +29,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
+import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -56,7 +58,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 public class CropsNH {
 
     @Mod.Instance(Reference.MOD_ID)
-    public static CropsNH instance;
+    public static CropsNH INSTANCE;
 
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static IProxy proxy;
@@ -94,6 +96,7 @@ public class CropsNH {
     @SuppressWarnings("unused")
     public static void postInit(FMLPostInitializationEvent event) {
         LogHelper.debug("Starting Post-Initialization");
+        MigrationsLoader.postInit();
         FertilizerLoader.postInit();
         SoilLoader.postInit();
         BlockUnderRequirementLoader.postInit();
@@ -120,4 +123,8 @@ public class CropsNH {
         MutationRegistry.instance.pruneMutationPools();
     }
 
+    @Mod.EventHandler
+    public void onMissingMappings(FMLMissingMappingsEvent event) {
+        MigrationsLoader.onMissingMigration(event);
+    }
 }

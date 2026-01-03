@@ -9,9 +9,9 @@ import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.IMaterialLeafVariant;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
 import com.gtnewhorizon.cropsnh.items.produce.ItemMaterialLeaf;
+import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
 import gregtech.api.enums.Materials;
-import gregtech.api.enums.Mods;
 import gregtech.api.enums.TCAspects;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
@@ -20,7 +20,7 @@ import thaumcraft.api.aspects.AspectList;
 public class AspectLoader {
 
     public static void postInit() {
-        if (!Mods.Thaumcraft.isModLoaded()) return;
+        if (!ModUtils.Thaumcraft.isModLoaded()) return;
         loadItemAspects();
         loadCropAspects();
         loadAlchoolAspects();
@@ -47,7 +47,7 @@ public class AspectLoader {
         AspectList aspects = new AspectList().add(Aspect.CROP, 1)
             .add(Aspect.PLANT, 1)
             .add(Aspect.HUNGER, 1);
-        if (Mods.ForbiddenMagic.isModLoaded()) {
+        if (ModUtils.ForbiddenMagic.isModLoaded()) {
             aspects.add(Aspect.getAspect("gula"), 1);
         }
         List<ItemStack> stacks = new LinkedList<>();
@@ -278,7 +278,7 @@ public class AspectLoader {
                 .add(Aspect.MAGIC, 1)
                 .add(Aspect.ORDER, 1)
                 .add(Aspect.LIGHT, 1);
-            if (Mods.ForbiddenMagic.isModLoaded()) {
+            if (ModUtils.ForbiddenMagic.isModLoaded()) {
                 starWartAspects
                     .add(Aspect.getAspect("infernus"), 1)
                     .add(Aspect.getAspect("superbia"), 1);

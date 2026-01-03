@@ -3,8 +3,9 @@ package com.gtnewhorizon.cropsnh.fluids;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
+import com.gtnewhorizon.cropsnh.utility.ModUtils;
+
 import gregtech.api.GregTechAPI;
-import gregtech.api.enums.Mods;
 
 public class AlcoholImpure extends Fluid implements Runnable {
 
@@ -30,7 +31,7 @@ public class AlcoholImpure extends Fluid implements Runnable {
 
     @Override
     public void run() {
-        String ResourcePath = Mods.GregTech.getResourceLocation("fluids/fluid." + texture)
+        String ResourcePath = ModUtils.GregTech.getResourceLocation("fluids/fluid." + texture)
             .toString();
         setIcons(GregTechAPI.sBlockIcons.registerIcon(ResourcePath));
     }

@@ -11,8 +11,8 @@ import com.gtnewhorizon.cropsnh.api.PlantRenderShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.requirements.growth.MachineOnlyGrowthRequirement;
+import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
-import gregtech.api.enums.Mods;
 import gregtech.api.enums.VoltageIndex;
 
 public class CropSpaceFlower extends NHCropCard {
@@ -22,7 +22,7 @@ public class CropSpaceFlower extends NHCropCard {
 
         this.addDrop(CropsNHItemList.spaceFlower.get(1), 100_00);
 
-        if (Mods.GalacticraftCore.isModLoaded()) {
+        if (ModUtils.GalacticraftCore.isModLoaded()) {
             this.addBlockUnderRequirement("moon");
         }
 

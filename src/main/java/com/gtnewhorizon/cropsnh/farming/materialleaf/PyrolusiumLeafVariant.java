@@ -8,10 +8,10 @@ import net.minecraft.util.StatCollector;
 
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
 import com.gtnewhorizon.cropsnh.reference.Reference;
+import com.gtnewhorizon.cropsnh.utility.XSTR;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gregtech.api.objects.XSTR;
 
 public class PyrolusiumLeafVariant extends MaterialLeafVariant {
 

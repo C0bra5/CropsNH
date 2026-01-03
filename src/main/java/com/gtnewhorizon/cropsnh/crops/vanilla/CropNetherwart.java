@@ -21,8 +21,7 @@ import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.SeedData;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 import com.gtnewhorizon.cropsnh.reference.Data;
-
-import gregtech.api.objects.XSTR;
+import com.gtnewhorizon.cropsnh.utility.XSTR;
 
 public class CropNetherwart extends NHCropCard {
 
@@ -103,7 +102,7 @@ public class CropNetherwart extends NHCropCard {
         if (heldItem == null || heldItem.getItem() == null) return false;
         // if right click with snow blocks netherwart may turn into gaia wart.
         if (heldItem.getItem() == Item.getItemFromBlock(Blocks.snow)) {
-            if (data.getChance() > XSTR.XSTR_INSTANCE.nextInt(10000)) {
+            if (data.getChance() > XSTR.XSTR_INSTANCE.nextInt(10_000)) {
                 ISeedStats stats = te.getSeed()
                     .getStats();
                 te.clear();

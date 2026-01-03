@@ -4,8 +4,8 @@ import net.minecraft.init.Blocks;
 
 import com.gtnewhorizon.cropsnh.api.BlockWithMeta;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
+import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
-import gregtech.api.enums.Mods;
 import tconstruct.tools.TinkerTools;
 import thaumcraft.common.config.ConfigBlocks;
 
@@ -45,7 +45,7 @@ public class SoilLoader {
         registry.register("brick", brick);
 
         // thaumcraft soils
-        if (Mods.Thaumcraft.isModLoaded()) {
+        if (ModUtils.Thaumcraft.isModLoaded()) {
             BlockWithMeta greatwoodLog1 = new BlockWithMeta(ConfigBlocks.blockMagicalLog, 0);
             BlockWithMeta greatwoodLog2 = new BlockWithMeta(ConfigBlocks.blockMagicalLog, 4);
             BlockWithMeta greatwoodLog3 = new BlockWithMeta(ConfigBlocks.blockMagicalLog, 8);
@@ -64,7 +64,7 @@ public class SoilLoader {
             registry.register("silverwoodLog", silverwoodLog1, silverwoodLog2, silverwoodLog3);
         }
 
-        if (Mods.TinkerConstruct.isModLoaded()) {
+        if (ModUtils.TinkerConstruct.isModLoaded()) {
             // TiC blocks
             BlockWithMeta graveyardSoil = new BlockWithMeta(TinkerTools.craftedSoil, 3);
             registry.register("graveyard", graveyardSoil);

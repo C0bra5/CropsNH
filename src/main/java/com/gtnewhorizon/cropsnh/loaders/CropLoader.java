@@ -181,9 +181,9 @@ import com.gtnewhorizon.cropsnh.crops.witchery.CropSpanishMoss;
 import com.gtnewhorizon.cropsnh.crops.witchery.CropWaterArtichoke;
 import com.gtnewhorizon.cropsnh.crops.witchery.CropWolfsbane;
 import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
+import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
 import gregtech.api.enums.ItemList;
-import gregtech.api.enums.Mods;
 import gregtech.api.util.GTModHandler;
 import tconstruct.world.TinkerWorld;
 
@@ -289,7 +289,6 @@ public class CropLoader {
             // roofed/dark forest
             .addLikedBiomes(BiomeDictionary.Type.DENSE, BiomeDictionary.Type.SPOOKY, BiomeDictionary.Type.FOREST)
         );
-        // TODO: UPDATE ITEM DEFINITIONS WHEN RUBBER TREE IS MOVED TO GT5U
         CropRegistry.instance.register(CropsNHCrops.BonsaiRubber  =
             new CropBonsai(
                 "bonsaiRubber",
@@ -297,13 +296,13 @@ public class CropLoader {
                 new Color(0x6C815D),
                 "Alblaka",
                 1,
-                GTModHandler.getModItem(Mods.IndustrialCraft2.ID, "blockRubSapling", 1, 0),
-                GTModHandler.getModItem(Mods.IndustrialCraft2.ID, "blockRubWood", 1, 0)
+                GTModHandler.getModItem(ModUtils.IndustrialCraft2.ID, "blockRubSapling", 1, 0),
+                GTModHandler.getModItem(ModUtils.IndustrialCraft2.ID, "blockRubWood", 1, 0)
             )
             .addDrop(ItemList.IC2_Resin.get(2), 5_00)
             .addLikedBiomes(BiomeDictionary.Type.CONIFEROUS, BiomeDictionary.Type.FOREST)
         );
-        if (Mods.TinkerConstruct.isModLoaded()) {
+        if (ModUtils.TinkerConstruct.isModLoaded()) {
             CropRegistry.instance.register(
                 CropsNHCrops.BonsaiSlimy = new CropBonsai(
                     "bonsaiSlimy",
@@ -322,7 +321,7 @@ public class CropLoader {
     }
 
     private static void registerBoPCrops() {
-        if (!Mods.BiomesOPlenty.isModLoaded()) return;
+        if (!ModUtils.BiomesOPlenty.isModLoaded()) return;
         CropRegistry.instance.register(CropsNHCrops.Bamboo = new CropBamboo());
         CropRegistry.instance.register(CropsNHCrops.BoPBerry = new CropBoPBerry());
         CropRegistry.instance.register(CropsNHCrops.Eyebulb = new CropEyebulb());
@@ -333,13 +332,13 @@ public class CropLoader {
         CropRegistry.instance.register(CropsNHCrops.Ivy = new CropIvy());
         CropRegistry.instance.register(CropsNHCrops.Turnip = new CropTurnip());
         CropRegistry.instance.register(CropsNHCrops.WildCarrot = new CropWildCarrot());
-        if (Mods.TwilightForest.isModLoaded()) {
+        if (ModUtils.TwilightForest.isModLoaded()) {
             CropRegistry.instance.register(CropsNHCrops.Moss = new CropMoss());
         }
     }
 
     private static void registerNaturaCrops() {
-        if (!Mods.Natura.isModLoaded()) return;
+        if (!ModUtils.Natura.isModLoaded()) return;
         CropRegistry.instance.register(CropsNHCrops.Blightberry = new CropBlightberry());
         CropRegistry.instance.register(CropsNHCrops.BlueGlowshroom = new CropBlueGlowshroom());
         CropRegistry.instance.register(CropsNHCrops.Duskberry = new CropDuskberry());
@@ -431,7 +430,7 @@ public class CropLoader {
     }
 
     private static void registerOreBerries() {
-        if (Mods.TinkerConstruct.isModLoaded()) {
+        if (ModUtils.TinkerConstruct.isModLoaded()) {
             CropRegistry.instance.register(CropsNHCrops.AluminiumOreBerry = new CropAluminiumOreBerry());
             CropRegistry.instance.register(CropsNHCrops.CopperOreBerry = new CropCopperOreBerry());
             CropRegistry.instance.register(CropsNHCrops.EssenceOreBerry = new CropEssenceOreBerry());
@@ -441,20 +440,20 @@ public class CropLoader {
             CropRegistry.instance.register(CropsNHCrops.ArditeOreBerry = new CropArditeOreBerry());
             CropRegistry.instance.register(CropsNHCrops.CobaltOreBerry = new CropCobaltOreBerry());
         }
-        if (Mods.Thaumcraft.isModLoaded()) {
+        if (ModUtils.Thaumcraft.isModLoaded()) {
             CropRegistry.instance.register(CropsNHCrops.ThaumiumOreBerry = new CropThaumiumOreBerry());
             CropRegistry.instance.register(CropsNHCrops.VoidOreBerry = new CropVoidOreBerry());
         }
-        if (Mods.ThaumicBases.isModLoaded()) {
+        if (ModUtils.ThaumicBases.isModLoaded()) {
             CropRegistry.instance.register(CropsNHCrops.ThauminiteOreBerry = new CropThauminiteOreBerry());
         }
-        if (Mods.TwilightForest.isModLoaded()) {
+        if (ModUtils.TwilightForest.isModLoaded()) {
             CropRegistry.instance.register(CropsNHCrops.KnightmetalBerry = new CropKnightmetalBerry());
         }
     }
 
     private static void registerThaumcraftCrops() {
-        if (!Mods.Thaumcraft.isModLoaded()) return;
+        if (!ModUtils.Thaumcraft.isModLoaded()) return;
         CropRegistry.instance.register(CropsNHCrops.Cinderpearl = new CropCinderpearl());
         CropRegistry.instance.register(CropsNHCrops.Shimmerleaf = new CropShimmerleaf());
         CropRegistry.instance.register(CropsNHCrops.ManaBean = new CropManaBean());
@@ -462,7 +461,7 @@ public class CropLoader {
     }
 
     private static void registerTwilightForestCrops() {
-        if (!Mods.TwilightForest.isModLoaded()) return;
+        if (!ModUtils.TwilightForest.isModLoaded()) return;
         CropRegistry.instance.register(CropsNHCrops.Torchberry = new CropTorchberry());
     }
 
@@ -482,12 +481,12 @@ public class CropLoader {
     }
 
     private static void registerStoneLilies() {
-        if (Mods.Botania.isModLoaded()) {
+        if (ModUtils.Botania.isModLoaded()) {
             CropRegistry.instance.register(CropsNHCrops.AndesiteLily = new CropAndesiteLily());
             CropRegistry.instance.register(CropsNHCrops.DioriteLily = new CropDioriteLily());
             CropRegistry.instance.register(CropsNHCrops.GraniteLily = new CropGraniteLily());
         }
-        if (Mods.EtFuturumRequiem.isModLoaded()) {
+        if (ModUtils.EtFuturumRequiem.isModLoaded()) {
             CropRegistry.instance.register(CropsNHCrops.DeepslateLily = new CropDeepslateLily());
             CropRegistry.instance.register(CropsNHCrops.TuffLily = new CropTuffLily());
         }
@@ -537,7 +536,7 @@ public class CropLoader {
     }
 
     private static void registerWitcheryCrops() {
-        if (!Mods.Witchery.isModLoaded()) return;
+        if (!ModUtils.Witchery.isModLoaded()) return;
         CropRegistry.instance.register(CropsNHCrops.Belladonna = new CropBelladonna());
         CropRegistry.instance.register(CropsNHCrops.EmberMoss = new CropEmberMoss());
         CropRegistry.instance.register(CropsNHCrops.Garlic = new CropGarlic());

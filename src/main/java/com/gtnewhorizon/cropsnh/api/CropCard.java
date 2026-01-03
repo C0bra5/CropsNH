@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Set;
 
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -23,12 +22,9 @@ import com.gtnewhorizon.cropsnh.reference.Constants;
 import com.gtnewhorizon.cropsnh.renderers.PlantRenderer;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
-import com.gtnewhorizon.cropsnh.utility.ModUtils;
-import com.gtnewhorizons.angelica.api.TextureServices;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gregtech.api.enums.Mods;
 import gregtech.api.util.GTUtility;
 
 public abstract class CropCard implements ICropCard {
@@ -213,16 +209,6 @@ public abstract class CropCard implements ICropCard {
     public void render(IBlockAccess world, int x, int y, int z, ICropStickTile te, RenderBlocks renderer) {
         IIcon icon = this.getSprite(te);
         if (icon == null) icon = CropsNHUtils.getMissingTexture();
-        // only angelica and hodgepodge to do the thing right if the icon is actually animated
-        if (icon instanceof TextureAtlasSprite && (((TextureAtlasSprite) icon).hasAnimationMetadata())
-            && ((TextureAtlasSprite) icon).getFrameCount() > 1) {
-            if (Mods.HodgePodge.isModLoaded()
-                && icon instanceof com.mitchej123.hodgepodge.textures.IPatchedTextureAtlasSprite) {
-                ((com.mitchej123.hodgepodge.textures.IPatchedTextureAtlasSprite) icon).markNeedsAnimationUpdate();
-            } else if (ModUtils.Angelica.isLoaded()) {
-                TextureServices.updateBlockTextureAnimation(icon, renderer);
-            }
-        }
         PlantRenderer.renderPlantLayer(world, x, y, z, this.getRenderShape(), icon, te.isSick());
     }
 

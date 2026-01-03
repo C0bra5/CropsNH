@@ -1,7 +1,5 @@
 package com.gtnewhorizon.cropsnh.loaders.gtrecipes;
 
-import static gregtech.api.enums.Mods.BiomesOPlenty;
-import static gregtech.api.enums.Mods.Natura;
 import static gregtech.api.recipe.RecipeMaps.brewingRecipes;
 import static gregtech.api.recipe.RecipeMaps.centrifugeRecipes;
 import static gregtech.api.recipe.RecipeMaps.chemicalReactorRecipes;
@@ -24,12 +22,12 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.init.CropsNHFluids;
+import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
-import gregtech.api.enums.Mods;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
@@ -85,7 +83,7 @@ public abstract class CropsPlusPlusRecipes extends BaseGTRecipeLoader {
     }
 
     private static void addHoneyConversionRecipes() {
-        if (!Mods.BiomesOPlenty.isModLoaded()) return;
+        if (!ModUtils.BiomesOPlenty.isModLoaded()) return;
         // bop honey to sugar
         lvRecipe(12, 75).itemInputs(GTUtility.getIntegratedCircuit(9))
             .fluidInputs(new FluidStack(FluidRegistry.getFluid("honey"), 1000))
@@ -93,7 +91,7 @@ public abstract class CropsPlusPlusRecipes extends BaseGTRecipeLoader {
             .addTo(centrifugeRecipes);
 
         // bop honey to forestry honey
-        if (Mods.Forestry.isModLoaded()) {
+        if (ModUtils.Forestry.isModLoaded()) {
             lvRecipe(12, 75).itemInputs(GTUtility.getIntegratedCircuit(1))
                 .fluidInputs(new FluidStack(FluidRegistry.getFluid("honey"), 1000))
                 .fluidOutputs(new FluidStack(FluidRegistry.getFluid("for.honey"), 1000))
@@ -462,7 +460,7 @@ public abstract class CropsPlusPlusRecipes extends BaseGTRecipeLoader {
             .eut(8)
             .addTo(mixerRecipes);
 
-        if (Mods.PamsHarvestCraft.isModLoaded()) {
+        if (ModUtils.PamsHarvestCraft.isModLoaded()) {
             GTValues.RA.stdBuilder()
                 .itemInputs(
                     new ItemStack(Items.sugar, 8, 0),
@@ -573,26 +571,26 @@ public abstract class CropsPlusPlusRecipes extends BaseGTRecipeLoader {
             addDyeConversionRecipe(itemStack.splitStack(16), dyered);
         }
 
-        if (BiomesOPlenty.isModLoaded()) {
+        if (ModUtils.BiomesOPlenty.isModLoaded()) {
             // bop berry
-            addDyeConversionRecipe(getModItem(Mods.BiomesOPlenty.ID, "food", 16, 0), dyered);
+            addDyeConversionRecipe(getModItem(ModUtils.BiomesOPlenty.ID, "food", 16, 0), dyered);
         }
 
         // huckleberry
         addDyeConversionRecipe(CropsNHItemList.huckleBerry.get(16), dyepurple);
 
-        if (Natura.isModLoaded()) {
+        if (ModUtils.Natura.isModLoaded()) {
             // blight berry
-            addDyeConversionRecipe(getModItem(Natura.ID, "berry.nether", 16, 0), dyelime);
+            addDyeConversionRecipe(getModItem(ModUtils.Natura.ID, "berry.nether", 16, 0), dyelime);
 
             // dusk berry
-            addDyeConversionRecipe(getModItem(Natura.ID, "berry.nether", 16, 1), dyelightgray);
+            addDyeConversionRecipe(getModItem(ModUtils.Natura.ID, "berry.nether", 16, 1), dyelightgray);
 
             // sky berry
-            addDyeConversionRecipe(getModItem(Natura.ID, "berry.nether", 16, 2), dyelightblue);
+            addDyeConversionRecipe(getModItem(ModUtils.Natura.ID, "berry.nether", 16, 2), dyelightblue);
 
             // sting berry
-            addDyeConversionRecipe(getModItem(Natura.ID, "berry.nether", 16, 3), dyelime);
+            addDyeConversionRecipe(getModItem(ModUtils.Natura.ID, "berry.nether", 16, 3), dyelime);
         }
     }
 

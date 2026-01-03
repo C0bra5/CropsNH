@@ -15,8 +15,7 @@ import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
-
-import gregtech.api.objects.XSTR;
+import com.gtnewhorizon.cropsnh.utility.XSTR;
 
 public class CropNecrobloom extends NHCropCard {
 

@@ -36,4 +36,8 @@ public final class Constants {
      */
     public static final int WEEDEX_CAPACITY = 750;
 
+    /**
+     * The amount of fertilizer liquid 1 fertilizer item should turn into.
+     */
+    public static final int FERTILIZER_ITEM_FLUID_VALUE = 144;
 }

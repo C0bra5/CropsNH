@@ -11,10 +11,10 @@ import com.gtnewhorizon.cropsnh.farming.registries.WeedEXRegistry;
 import com.gtnewhorizon.cropsnh.init.CropsNHFluids;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
+import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
 import forestry.plugins.PluginCore;
 import gregtech.api.enums.Materials;
-import gregtech.api.enums.Mods;
 import gregtech.api.util.GTModHandler;
 import kubatech.tileentity.gregtech.multiblock.MTEExtremeIndustrialGreenhouse;
 
@@ -58,7 +58,7 @@ public class FertilizerLoader {
             .register(CropsNHItems.fertilizer, OreDictionary.WILDCARD_VALUE, FERTILIZER_ITEM_POTENCY);
 
         // forestry fertilizer
-        if (Mods.Forestry.isModLoaded()) {
+        if (ModUtils.Forestry.isModLoaded()) {
             FertilizerRegistry.instance.register(PluginCore.items.fertilizerCompound, OreDictionary.WILDCARD_VALUE, 25);
             FertilizerRegistry.instance.register(PluginCore.items.fertilizerBio, OreDictionary.WILDCARD_VALUE, 50);
         }

@@ -328,8 +328,7 @@ import net.minecraft.item.ItemStack;
 import com.gtnewhorizon.cropsnh.farming.mutation.CropMutation;
 import com.gtnewhorizon.cropsnh.farming.registries.MutationRegistry;
 import com.gtnewhorizon.cropsnh.farming.requirements.breeding.MachineBreedingCatalystRequirement;
-
-import gregtech.api.enums.Mods;
+import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
 public class MutationLoader {
 
@@ -371,7 +370,7 @@ public class MutationLoader {
         // endregion bonsais
 
         // region biomes o plenty
-        if (Mods.BiomesOPlenty.isModLoaded()) {
+        if (ModUtils.BiomesOPlenty.isModLoaded()) {
             new CropMutation(Bamboo, BonsaiJungle, Vine)
                 .addToMutationPools(aGreen, aPointed, aEdgy)
                 .register();
@@ -387,7 +386,7 @@ public class MutationLoader {
             new CropMutation(GlowingCoral, Glowflower, Waterlily)
                 .addToMutationPools(aWater, aLight, aShiny)
                 .register();
-            if (Mods.Natura.isModLoaded()) {
+            if (ModUtils.Natura.isModLoaded()) {
                 new CropMutation(Glowshroom, BlueGlowshroom, GreenGlowshroom, PurpleGlowshroom)
                     .addToMutationPools(aFood, aMushroom, aIngredient, aNether)
                     .register();
@@ -416,7 +415,7 @@ public class MutationLoader {
         // endregion cropsnh
 
         // region food
-        if (Mods.BiomesOPlenty.isModLoaded()) {
+        if (ModUtils.BiomesOPlenty.isModLoaded()) {
             new CropMutation(BoPBerry, Poppy, Blackberry)
                 .addToMutationPools(aBerry, aFood, aRed, aIngredient)
                 .register();
@@ -427,7 +426,7 @@ public class MutationLoader {
                 .addToMutationPools(aFood, aWhite, aCarrots)
                 .register();
         }
-        if (Mods.Natura.isModLoaded()) {
+        if (ModUtils.Natura.isModLoaded()) {
             new CropMutation(Barley, Bamboo, Wheat)
                 .addToMutationPools(aGreen, aFood, aWheat)
                 .register();
@@ -447,7 +446,7 @@ public class MutationLoader {
                 .addToMutationPools(aGreen, aFood, aCactus)
                 .register();
         }
-        if (Mods.PamsHarvestCraft.isModLoaded()) {
+        if (ModUtils.PamsHarvestCraft.isModLoaded()) {
             new CropMutation(Strawberry, Wheat, Raspberry)
                 .addToMutationPools(aBerry, aFood, aRed)
                 .register();
@@ -553,7 +552,7 @@ public class MutationLoader {
             .addToMutationPools(aShiny, aCrystal, aRed, aYellow, aMetal)
             .machineOnly()
             .register();
-        if (Mods.BiomesOPlenty.isModLoaded()) {
+        if (ModUtils.BiomesOPlenty.isModLoaded()) {
             new CropMutation(Glowheat, Glowflower, Wheat)
                 .addToMutationPools(aLight, aShiny, aCrystal)
                 .register();
@@ -574,12 +573,12 @@ public class MutationLoader {
             .register();
         // using dark oak because it's a tree that used to have roots that were used to break the nether ceiling
         // just like how the twilight tree does the same.
-        if (Mods.TwilightForest.isModLoaded()) {
+        if (ModUtils.TwilightForest.isModLoaded()) {
             new CropMutation(Liveroot, Torchberry, BonsaiDarkOak)
                 .addToMutationPools(aWood, aTendrilly)
                 .register();
         }
-        if (Mods.Thaumcraft.isModLoaded() && Mods.ThaumicTinkerer.isModLoaded()) {
+        if (ModUtils.Thaumcraft.isModLoaded() && ModUtils.ThaumicTinkerer.isModLoaded()) {
             new CropMutation(MagicalNightshade, PrimordialBerry, ManaBean, Cinderpearl, Shimmerleaf)
                 .addToMutationPools(aBerry, aPrimordial, aMagic, aUnique)
                 .machineOnly()
@@ -655,7 +654,7 @@ public class MutationLoader {
             .addToMutationPools(aWither, aNether, aUndead, aNetherstar)
             .machineOnly()
             .register();
-        if (Mods.TwilightForest.isModLoaded()) {
+        if (ModUtils.TwilightForest.isModLoaded()) {
             new CropMutation(Steeleafranks, Torchberry, KnightmetalBerry)
                 .addToMutationPools(aMetal, aTendrilly, aIron)
                 .register();
@@ -688,12 +687,12 @@ public class MutationLoader {
         // endregion material crops
 
         // region mobs
-        if (Mods.Natura.isModLoaded()) {
+        if (ModUtils.Natura.isModLoaded()) {
             new CropMutation(InkBloom, Blackberry, Goldfish)
                 .addToMutationPools(aBlack, aFlower, aRose)
                 .register();
         }
-        if (Mods.Thaumcraft.isModLoaded()) {
+        if (ModUtils.Thaumcraft.isModLoaded()) {
             new CropMutation(Blazereed, SugarCane, Cinderpearl)
                 .addToMutationPools(aFire, aBlaze, aReed, aSulfur)
                 .register();
@@ -701,7 +700,7 @@ public class MutationLoader {
         new CropMutation(Corium, Wheat, Cocoa)
             .addToMutationPools(aCow, aSilk, aTendrilly)
             .register();
-        if (Mods.BiomesOPlenty.isModLoaded()) {
+        if (ModUtils.BiomesOPlenty.isModLoaded()) {
             new CropMutation(Corpseplant, Zomplant, Eyebulb)
                 .addToMutationPools(aToxic, aUndead, aTendrilly, aFood, aRotten)
                 .register();
@@ -716,7 +715,7 @@ public class MutationLoader {
         new CropMutation(Enderbloom, EndStoneLily, Creeperweed)
             .addToMutationPools(aEnder, aFlower, aShiny)
             .register();
-        if (Mods.Witchery.isModLoaded()) {
+        if (ModUtils.Witchery.isModLoaded()) {
             new CropMutation(Goldfish, Waterlily, WaterArtichoke, Mandrake)
                 .addToMutationPools(aNether, aFish, aFood, aBad, aWater)
                 .register();
@@ -733,7 +732,7 @@ public class MutationLoader {
         new CropMutation(Tearstalks, Goldfish, SoulSandLily, NetherStoneLily)
             .addToMutationPools(aHealing, aNether, aIngredient, aReed, aGhast)
             .register();
-        if (Mods.BiomesOPlenty.isModLoaded()) {
+        if (ModUtils.BiomesOPlenty.isModLoaded()) {
             new CropMutation(Zomplant, Withereed, Eyebulb)
                 .addToMutationPools(aZombie, aRotten, aUndead)
                 .register();
@@ -741,7 +740,7 @@ public class MutationLoader {
         // endregion mobs
 
         // region natura
-        if (Mods.Natura.isModLoaded()) {
+        if (ModUtils.Natura.isModLoaded()) {
             new CropMutation(Blightberry, Maloberry, Raspberry)
                 .addToMutationPools(aBerry, aToxic, aBad, aGreen, aNether, aAddictive)
                 .register();
@@ -760,7 +759,7 @@ public class MutationLoader {
             new CropMutation(Thornvine, Vine, Cactus)
                 .addToMutationPools(aNether, aClimbable, aBad)
                 .register();
-            if (Mods.BiomesOPlenty.isModLoaded()) {
+            if (ModUtils.BiomesOPlenty.isModLoaded()) {
                 new CropMutation(BlueGlowshroom, BlueOrchid, Glowflower)
                     .addToMutationPools(aFood, aMushroom, aIngredient, aNether)
                     .register();
@@ -775,7 +774,7 @@ public class MutationLoader {
         // endregion natura
 
         // region ore berries
-        if (Mods.TinkerConstruct.isModLoaded()) {
+        if (ModUtils.TinkerConstruct.isModLoaded()) {
             new CropMutation(AluminiumOreBerry, GoldOreBerry, EssenceOreBerry)
                 .addToMutationPools(aOreBerry, aAluminium, aMetal, aAluminum)
                 .register();
@@ -785,7 +784,7 @@ public class MutationLoader {
             new CropMutation(CobaltOreBerry, NetherStoneLily, ArditeOreBerry, Lazulia, GoldOreBerry)
                 .addToMutationPools(aOreBerry, aCobalt, aMetal, aBlue)
                 .register();
-            if (Mods.BiomesOPlenty.isModLoaded()) {
+            if (ModUtils.BiomesOPlenty.isModLoaded()) {
                 new CropMutation(CopperOreBerry, Malaxia, BoPBerry, StoneLily)
                     .addToMutationPools(aOreBerry, aCopper, aMetal, aShiny)
                     .register();
@@ -799,17 +798,17 @@ public class MutationLoader {
             new CropMutation(IronOreBerry, TinOreBerry, StoneLily)
                 .addToMutationPools(aOreBerry, aGray, aMetal)
                 .register();
-            if (Mods.BiomesOPlenty.isModLoaded()) {
+            if (ModUtils.BiomesOPlenty.isModLoaded()) {
                 new CropMutation(TinOreBerry, Cassitine, BoPBerry, StoneLily)
                     .addToMutationPools(aOreBerry, aTin, aMetal, aShiny)
                     .register();
             }
-            if (Mods.TwilightForest.isModLoaded()) {
+            if (ModUtils.TwilightForest.isModLoaded()) {
                 new CropMutation(KnightmetalBerry, IronOreBerry, Torchberry, BonsaiDarkOak)
                     .addToMutationPools(aOreBerry, aKnightly, aMetal)
                     .register();
             }
-            if (Mods.Thaumcraft.isModLoaded()) {
+            if (ModUtils.Thaumcraft.isModLoaded()) {
                 // TODO: ADD GREATWOOD AND SILVER WOOD BONSAIS AND ADD DETERMINISTIC RECIPE FOR THAUMIUM ORE BERRY
                 new CropMutation(ThaumiumOreBerry, StoneLily, GoldOreBerry)
                     .addToMutationPools(aOreBerry, aMagic, aMetal, aThaumium, aVoid)
@@ -817,7 +816,7 @@ public class MutationLoader {
                 new CropMutation(VoidOreBerry, ThaumiumOreBerry, GoldOreBerry)
                     .addToMutationPools(aOreBerry, aMagic, aMetal, aVoid)
                     .register();
-                if (Mods.ThaumicBases.isModLoaded()) {
+                if (ModUtils.ThaumicBases.isModLoaded()) {
                     new CropMutation(ThauminiteOreBerry, ThaumiumOreBerry, ManaBean)
                         .addToMutationPools(aOreBerry, aMagic, aMetal, aThauminite, aVoid)
                         .register();
@@ -827,7 +826,7 @@ public class MutationLoader {
         // endregion ore berries
 
         // region stone lilies
-        if (Mods.Botania.isModLoaded()) {
+        if (ModUtils.Botania.isModLoaded()) {
             new CropMutation(AndesiteLily, StoneLily, ClayLily)
                 .addToMutationPools(aGray, aStone, aMetal)
                 .register();
@@ -838,7 +837,7 @@ public class MutationLoader {
                 .addToMutationPools(aRed, aStone, aFire)
                 .register();
         }
-        if (Mods.EtFuturumRequiem.isModLoaded()) {
+        if (ModUtils.EtFuturumRequiem.isModLoaded()) {
             new CropMutation(TuffLily, BlackGraniteLily, StoneLily)
                 .addToMutationPools(aGray, aStone, aDark)
                 .register();
@@ -879,8 +878,8 @@ public class MutationLoader {
         // endregion stone lilies
 
         // region thaumcraft
-        if (Mods.Thaumcraft.isModLoaded()) {
-            if (Mods.Witchery.isModLoaded()) {
+        if (ModUtils.Thaumcraft.isModLoaded()) {
+            if (ModUtils.Witchery.isModLoaded()) {
                 new CropMutation(Cinderpearl, EmberMoss, GlintWeed)
                     .addToMutationPools(aMagic, aBlaze, aNether)
                     .register();
@@ -897,7 +896,7 @@ public class MutationLoader {
         // endregion thaumcraft
 
         // region twilight forest
-        if (Mods.TwilightForest.isModLoaded() && Mods.BiomesOPlenty.isModLoaded()) {
+        if (ModUtils.TwilightForest.isModLoaded() && ModUtils.BiomesOPlenty.isModLoaded()) {
             new CropMutation(Torchberry, Glowflower, BoPBerry)
                 .addToMutationPools(aBerry, aGlow, aShimmer)
                 .register();
@@ -967,11 +966,11 @@ public class MutationLoader {
         // endregion vanilla
 
         // region witchery
-        if (Mods.Witchery.isModLoaded()) {
+        if (ModUtils.Witchery.isModLoaded()) {
             new CropMutation(Belladonna, PurpleTulip, PinkTulip)
                 .addToMutationPools(aPurple, aFlower, aToxic, aIngredient)
                 .register();
-            if (Mods.BiomesOPlenty.isModLoaded()) {
+            if (ModUtils.BiomesOPlenty.isModLoaded()) {
                 new CropMutation(EmberMoss, RedTulip, Moss)
                     .addToMutationPools(aFire, aIngredient, aBad, aClimbable)
                     .register();

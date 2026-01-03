@@ -33,7 +33,6 @@ import com.gtnewhorizon.cropsnh.utility.ModUtils;
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
-import gregtech.api.enums.Mods;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.VoltageIndex;
 import gregtech.api.metatileentity.implementations.MTEBasicMachineWithRecipe;
@@ -176,7 +175,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                     'H', getHull(tier),
                     'B', getCable(tier),
                     // maybe consider replacing this with a tired seedbed later on.
-                    'D', new ItemStack(Mods.RandomThings.isModLoaded() ? Block.getBlockFromName("RandomThings:fertilizedDirt") : Blocks.dirt, 1)
+                    'D', new ItemStack(ModUtils.RandomThings.isModLoaded() ? Block.getBlockFromName(ModUtils.RandomThings.ID + ":fertilizedDirt") : Blocks.dirt, 1)
                     // spotless:on
                 },
                 tier);
@@ -201,7 +200,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                     'H', getHull(tier),
                     'W', getCable(tier),
                     // maybe consider replacing this with a tired seedbed later on.
-                    'D', new ItemStack(Mods.RandomThings.isModLoaded() ? Block.getBlockFromName("RandomThings:fertilizedDirt") : Blocks.dirt, 1)
+                    'D', new ItemStack(ModUtils.RandomThings.isModLoaded() ? Block.getBlockFromName(ModUtils.RandomThings.ID + ":fertilizedDirt") : Blocks.dirt, 1)
                     // spotless:on
                 },
                 tier);
@@ -220,9 +219,9 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                 new Object[] {
                     // spotless:off
                     // TODO: remove this anti-collision stuff when crops++ gets the boot
-                    Mods.CropsPlusPlus.isModLoaded() ? bottomLine : topLine,
+                    ModUtils.CropsPlusPlus.isModLoaded() ? bottomLine : topLine,
                     "WHW",
-                    Mods.CropsPlusPlus.isModLoaded() ? topLine : bottomLine,
+                    ModUtils.CropsPlusPlus.isModLoaded() ? topLine : bottomLine,
                     'S', MTEBasicMachineWithRecipe.X.SENSOR,
                     'E', MTEBasicMachineWithRecipe.X.EMITTER,
                     'W', getCable(tier),
@@ -246,9 +245,9 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
                 new Object[] {
                     // spotless:off
                     // TODO: remove this anti-collision stuff when crops++ gets the boot
-                    Mods.CropsPlusPlus.isModLoaded() ? bottomLine : topLine,
+                    ModUtils.CropsPlusPlus.isModLoaded() ? bottomLine : topLine,
                     "CHC",
-                    Mods.CropsPlusPlus.isModLoaded() ? topLine : bottomLine,
+                    ModUtils.CropsPlusPlus.isModLoaded() ? topLine : bottomLine,
                     'E', MTEBasicMachineWithRecipe.X.EMITTER,
                     'C', getBetterCircuit(tier),
                     'H', getHull(tier),
@@ -280,7 +279,8 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
     private static void addSeedBedRecipes() {
         int tier = BlockSeedBed.MIN_TIER;
         ItemStack dirt = new ItemStack(
-            Mods.RandomThings.isModLoaded() ? Block.getBlockFromName("RandomThings:fertilizedDirt") : Blocks.dirt,
+            ModUtils.RandomThings.isModLoaded() ? Block.getBlockFromName(ModUtils.RandomThings.ID + ":fertilizedDirt")
+                : Blocks.dirt,
             1);
         for (CropsNHItemList output : SEED_BEDS) {
             GTModHandler.addMachineCraftingRecipe(
@@ -432,7 +432,7 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
             .itemOutputs(CropsNHItemList.environmentalModule_MUSHROOM.get(1))
             .addTo(RecipeMaps.assemblerRecipes);
 
-        ItemStack greatWood = Mods.Thaumcraft.isModLoaded() ? thaumcraft.api.ItemApi.getBlock("blockCustomPlant", 0)
+        ItemStack greatWood = ModUtils.Thaumcraft.isModLoaded() ? thaumcraft.api.ItemApi.getBlock("blockCustomPlant", 0)
             : new ItemStack(Items.ender_eye, 1, 0);
         greatWood.stackSize = 8;
         mvRecipe(duractionSecs, durationFrac).itemInputs(CropsNHItemList.environmentalModule_base.get(1), greatWood)
@@ -601,12 +601,12 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
 
     public static ItemStack getWateringCan() {
         ItemStack wateringCan = null;
-        if (ModUtils.UtilitiesInExcess.isLoaded()) {
-            Item item = GameRegistry.findItem(ModUtils.UtilitiesInExcess.modId, "watering_can_basic");
+        if (ModUtils.UtilitiesInExcess.isModLoaded()) {
+            Item item = GameRegistry.findItem(ModUtils.UtilitiesInExcess.ID, "watering_can_basic");
             if (item != null) wateringCan = new ItemStack(item, 1, OreDictionary.WILDCARD_VALUE);
         }
-        if (wateringCan == null && Mods.ExtraUtilities.isModLoaded()) {
-            Item item = GameRegistry.findItem(Mods.ExtraUtilities.getID(), "watering_can");
+        if (wateringCan == null && ModUtils.ExtraUtilities.isModLoaded()) {
+            Item item = GameRegistry.findItem(ModUtils.ExtraUtilities.getID(), "watering_can");
             if (item != null) wateringCan = new ItemStack(item, 1, OreDictionary.WILDCARD_VALUE);
         }
         if (wateringCan == null) {

@@ -14,8 +14,7 @@ import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.tileentity.TileEntityCrop;
-
-import gregtech.api.objects.XSTR;
+import com.gtnewhorizon.cropsnh.utility.XSTR;
 
 public class CropGoldfish extends NHCropCard {
 

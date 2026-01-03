@@ -52,11 +52,10 @@ import com.gtnewhorizon.cropsnh.reference.Names;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizon.cropsnh.utility.WorldUtils;
+import com.gtnewhorizon.cropsnh.utility.XSTR;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gregtech.api.objects.XSTR;
-import gregtech.api.util.GTUtility;
 
 public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile {
 
@@ -1011,7 +1010,7 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
             this.seed.getCrop()
                 .onGrowthTick(this);
             // increase growth progress
-            this.growthProgress += GTUtility.safeInt((long) (growthRate * ConfigurationHandler.growthMultiplier));
+            this.growthProgress += growthRate * ConfigurationHandler.growthMultiplier;
             if (this.growthProgress > this.seed.getCrop()
                 .getGrowthDuration()) {
                 this.growthProgress = this.seed.getCrop()
@@ -1178,7 +1177,7 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
         if (!(target instanceof EntityLivingBase entity)) {
             return;
         }
-        if (GTUtility.isServer() && (entity.isSprinting() || hasFallen(entity))
+        if (CropsNHUtils.isServer() && (entity.isSprinting() || hasFallen(entity))
             && shouldTrample(hasFallen(entity) ? entity.fallDistance : 0.0f)) {
             // drop seed
             ItemStack seedDrop = getSeedDrop();

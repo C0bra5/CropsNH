@@ -25,6 +25,8 @@ import com.gtnewhorizon.cropsnh.reference.Constants;
 import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizon.cropsnh.utility.LogHelper;
 
+import gregtech.api.enums.ItemList;
+
 public class CropsNHItems {
 
     public static Item plantLens;
@@ -55,8 +57,10 @@ public class CropsNHItems {
 
         CropsNHItemList.weedEX.set(new ItemStack(weedEX = new ItemWeedEX(), 1));
         FluidContainerRegistry.registerFluidContainer(
-            CropsNHUtils.getWeedEXFluid(Constants.WEEDEX_CAPACITY),
-            CropsNHItemList.weedEX.get(1));
+            new FluidContainerRegistry.FluidContainerData(
+                CropsNHUtils.getWeedEXFluid(Constants.WEEDEX_CAPACITY),
+                CropsNHItemList.weedEX.get(1),
+                ItemList.Spray_Empty.get(1)));
 
         berry = new ItemBerry();
         CropsNHItemList.huckleBerry.set(new ItemStack(berry, 1, 0));
