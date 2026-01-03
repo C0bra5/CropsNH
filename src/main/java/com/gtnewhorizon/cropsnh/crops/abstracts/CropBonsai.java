@@ -19,12 +19,17 @@ public class CropBonsai extends NHCropCard {
 
     public CropBonsai(String id, Color color1, Color color2, String creator, int tier, ItemStack sapling,
         ItemStack log) {
+        this(id, color1, color2, creator, tier, sapling, log, 10);
+    }
+
+    public CropBonsai(String id, Color color1, Color color2, String creator, int tier, ItemStack sapling, ItemStack log,
+        int logCount) {
         super(id, color1, color2);
         this.creator = creator;
         this.tier = tier;
         // drops
         ItemStack logDrop = log.copy();
-        logDrop.stackSize = 10;
+        logDrop.stackSize = logCount;
         ItemStack sapplingDrop = sapling.copy();
         sapplingDrop.stackSize = 2;
         this.addDrop(sapling, 30_00);

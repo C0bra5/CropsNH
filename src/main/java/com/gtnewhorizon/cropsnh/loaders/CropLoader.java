@@ -184,7 +184,7 @@ import com.gtnewhorizon.cropsnh.farming.registries.CropRegistry;
 
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Mods;
-import ic2.core.Ic2Items;
+import gregtech.api.util.GTModHandler;
 import tconstruct.world.TinkerWorld;
 
 public class CropLoader {
@@ -297,13 +297,12 @@ public class CropLoader {
                 new Color(0x6C815D),
                 "Alblaka",
                 1,
-                Ic2Items.rubberSapling.copy(),
-                Ic2Items.rubberWood.copy()
+                GTModHandler.getModItem(Mods.IndustrialCraft2.ID, "blockRubSapling", 1, 0),
+                GTModHandler.getModItem(Mods.IndustrialCraft2.ID, "blockRubWood", 1, 0)
             )
             .addDrop(ItemList.IC2_Resin.get(2), 5_00)
             .addLikedBiomes(BiomeDictionary.Type.CONIFEROUS, BiomeDictionary.Type.FOREST)
         );
-        // spotless:on
         if (Mods.TinkerConstruct.isModLoaded()) {
             CropRegistry.instance.register(
                 CropsNHCrops.BonsaiSlimy = new CropBonsai(
@@ -313,9 +312,13 @@ public class CropLoader {
                     "C0bra5",
                     1,
                     new ItemStack(TinkerWorld.slimeSapling, 1, 0),
-                    new ItemStack(TinkerWorld.slimeGel, 1, 0)).addDuplicationCatalyst("slimeball", 1)
-                        .addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.SWAMP));
+                    new ItemStack(TinkerWorld.slimeGel, 1, 0),
+                    4
+                )
+                .addDuplicationCatalyst("slimeball", 1)
+                .addLikedBiomes(BiomeDictionary.Type.WET, BiomeDictionary.Type.SWAMP));
         }
+        // spotless:on
     }
 
     private static void registerBoPCrops() {
