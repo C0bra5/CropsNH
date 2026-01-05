@@ -587,7 +587,7 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         if (tag.hasKey(Names.NBT.crossCrop, Data.NBTType._boolean) && tag.getBoolean(Names.NBT.crossCrop)) {
-            this.setCrossCrop(true);
+            this.isCrossCrop = true;
         } else {
             this.isCrossCrop = false;
             // load crop data if it's not a cross crop
@@ -858,18 +858,22 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
     private ICropCard getBreedingResult(List<ICropStickTile> neighbours) {
         // 50% chance it will attempt to cross instead of breeding
         if (XSTR.XSTR_INSTANCE.nextBoolean()) {
+            // filter out crops that can't cross
             ArrayList<ICropCard> crossingParents = neighbours.stream()
                 .filter(ICropStickTile::canCross)
                 .map(
                     t -> t.getSeed()
                         .getCrop())
                 .collect(Collectors.toCollection(ArrayList::new));
-            ICropCard chosen = crossingParents.get(XSTR.XSTR_INSTANCE.nextInt(crossingParents.size()));
-            // Ensure only crops that participated in the mutation contrinute to the new baseline stats
-            neighbours.removeIf(
-                s -> s.getSeed()
-                    .getCrop() != chosen);
-            return chosen;
+            // check if we got enough parents that can cross.
+            if (!crossingParents.isEmpty()) {
+                ICropCard chosen = crossingParents.get(XSTR.XSTR_INSTANCE.nextInt(crossingParents.size()));
+                // Ensure only crops that participated in the mutation contrinute to the new baseline stats
+                neighbours.removeIf(
+                    s -> s.getSeed()
+                        .getCrop() != chosen);
+                return chosen;
+            }
         }
 
         // then attempt to breed deterministically.
@@ -879,6 +883,8 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
                 t -> t.getSeed()
                     .getCrop())
             .collect(Collectors.toCollection(ArrayList::new));
+        // check if we got enough parents that can breed.
+        if (breedingParents.size() < 2) return null;
         // find all matching mutations
         List<ICropMutation> deterministicMutations = MutationRegistry.instance
             .getPossibleDeterministicMutations(breedingParents);

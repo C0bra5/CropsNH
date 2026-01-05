@@ -127,7 +127,8 @@ public class BlockCropSticks extends BlockContainerCropsNH {
         final TileEntity te = world.getTileEntity(x, y, z);
         boolean shouldRemove = !this.canBlockStay(world, x, y, z);
         if (!shouldRemove && te instanceof ICropStickTile cropTE) {
-            if (cropTE.getSeed() != null) {
+            // weeds can just vibe on anything
+            if (cropTE.hasCrop() && !cropTE.hasWeed()) {
                 Block b = world.getBlock(x, y - 1, z);
                 int meta = world.getBlockMetadata(x, y - 1, z);
                 shouldRemove = !cropTE.getSeed()

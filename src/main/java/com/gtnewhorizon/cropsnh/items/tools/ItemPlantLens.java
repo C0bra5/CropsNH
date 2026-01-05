@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 import com.gtnewhorizon.cropsnh.api.ICropRightClickHandler;
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
-import com.gtnewhorizon.cropsnh.api.ISeedStats;
+import com.gtnewhorizon.cropsnh.api.ISeedData;
 import com.gtnewhorizon.cropsnh.items.ItemCropsNH;
 import com.gtnewhorizon.cropsnh.reference.Names;
 import com.gtnewhorizon.cropsnh.reference.Reference;
@@ -60,10 +60,9 @@ public class ItemPlantLens extends ItemCropsNH implements ICropRightClickHandler
     @Override
     public boolean onRightClick(World world, ICropStickTile te, EntityPlayer player, ItemStack heldItem) {
         // analyze the crop if there is a crop
-        ISeedStats stats = te.getSeed()
-            .getStats();
-        if (te.hasCrop() && stats != null) {
-            stats.setAnalyzed(true);
+        if (te.hasCrop()) {
+            ISeedData seedData = te.getSeed();
+            seedData.setAnalyzed(true);
         }
 
         if (!world.isRemote) {

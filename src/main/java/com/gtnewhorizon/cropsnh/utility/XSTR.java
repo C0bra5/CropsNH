@@ -34,7 +34,7 @@ public class XSTR extends Random {
     private static final double DOUBLE_UNIT = 0x1.0p-53; // 1.0 / (1L << 53)
     private static final float FLOAT_UNIT = 0x1.0p-24f; // 1.0f / (1 << 24)
     private static final AtomicLong seedUniquifier = new AtomicLong(8682522807148012L);
-    public static final gregtech.api.objects.XSTR XSTR_INSTANCE = new gregtech.api.objects.XSTR() {
+    public static final XSTR XSTR_INSTANCE = new XSTR() {
 
         @Override
         public synchronized void setSeed(long seed) {
@@ -112,8 +112,8 @@ public class XSTR extends Random {
      * @return Returns an XSRandom object with the same state as the original
      */
     @Override
-    public gregtech.api.objects.XSTR clone() {
-        return new gregtech.api.objects.XSTR(getSeed());
+    public XSTR clone() {
+        return new XSTR(getSeed());
     }
 
     /**
