@@ -9,7 +9,7 @@ import com.gtnewhorizon.cropsnh.utility.XSTR;
 public class ItemReinforcedSpade extends ItemSpadeNH {
 
     public ItemReinforcedSpade() {
-        super();
+        super(1.0F, ToolMaterial.IRON);
     }
 
     @Override

@@ -169,6 +169,10 @@ public abstract class CropsNHUtils {
         return new FluidStack(getFertilizerFluid(), amount);
     }
 
+    public static ItemStack getWeedDrop(int amount) {
+        return new ItemStack(Blocks.tallgrass, amount, 1);
+    }
+
     public static boolean isServer() {
         return FMLCommonHandler.instance()
             .getEffectiveSide()

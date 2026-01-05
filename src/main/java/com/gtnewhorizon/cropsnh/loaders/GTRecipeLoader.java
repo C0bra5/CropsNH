@@ -73,9 +73,6 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
     }
 
     private static void addPlantLensRecipe() {
-        if (ModUtils.CropsPlusPlus.isModLoaded()) {
-            GTModHandler.removeRecipeByOutput(GTModHandler.getModItem(ModUtils.CropsPlusPlus.getID(), "itemLens", 1));
-        }
         GTModHandler.addCraftingRecipe(
             CropsNHItemList.plantLens.get(1),
             GTModHandler.RecipeBits.BITSD,
@@ -83,9 +80,6 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
     }
 
     private static void addSpadeRecipes() {
-        if (ModUtils.CropsPlusPlus.isModLoaded()) {
-            GTModHandler.removeRecipeByOutput(GTModHandler.getModItem(ModUtils.CropsPlusPlus.getID(), "itemSpade", 1));
-        }
         // steel locked
         GTModHandler.addCraftingRecipe(
             CropsNHItemList.spade.get(1),

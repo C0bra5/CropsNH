@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 
 import tconstruct.api.harvesting.CropHarvestHandler;
 
@@ -17,6 +18,13 @@ public class CropsNHTiCHarvestHandler implements CropHarvestHandler {
 
     @Override
     public boolean tryHarvest(ItemStack stack, EntityPlayer player, World world, int x, int y, int z) {
-        return world.getTileEntity(x, y, z) instanceof ICropStickTile crop && crop.doPlayerHarvest();
+        if (!(world.getTileEntity(x, y, z) instanceof ICropStickTile crop)) return false;
+        if (crop.hasWeed()) {
+            if (crop.isMature()) {
+                crop.dropItem(CropsNHUtils.getWeedDrop(1));
+            }
+            return true;
+        }
+        return crop.doPlayerHarvest();
     }
 }

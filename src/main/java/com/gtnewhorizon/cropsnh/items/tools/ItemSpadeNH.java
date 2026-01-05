@@ -1,21 +1,29 @@
 package com.gtnewhorizon.cropsnh.items.tools;
 
 import java.util.List;
+import java.util.Set;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.UseHoeEvent;
 
+import com.google.common.collect.Sets;
 import com.gtnewhorizon.cropsnh.api.ICropLeftClickHandler;
 import com.gtnewhorizon.cropsnh.api.ICropRightClickHandler;
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
-import com.gtnewhorizon.cropsnh.items.ItemCropsNH;
+import com.gtnewhorizon.cropsnh.creativetab.CropsNHTab;
 import com.gtnewhorizon.cropsnh.reference.Reference;
-import com.gtnewhorizon.cropsnh.utility.LogHelper;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
+import com.gtnewhorizon.cropsnh.utility.RegisterHelper;
 
+import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -23,13 +31,21 @@ import cpw.mods.fml.relauncher.SideOnly;
  * Tool to uproot weeds.
  * Comes in a wooden and iron variant.
  */
-public abstract class ItemSpadeNH extends ItemCropsNH implements ICropLeftClickHandler, ICropRightClickHandler {
+public abstract class ItemSpadeNH extends ItemTool implements ICropLeftClickHandler, ICropRightClickHandler {
 
-    public ItemSpadeNH() {
-        super();
+    private static final Set<Block> BLOCKS_AFFECTED = Sets
+        .newHashSet(Blocks.grass, Blocks.dirt, Blocks.snow_layer, Blocks.farmland, Blocks.mycelium);
+
+    public ItemSpadeNH(float damage, ToolMaterial mat) {
+        super(damage, mat, BLOCKS_AFFECTED);
         this.setMaxStackSize(1);
-        this.setHasSubtypes(true);
+        this.setTextureName(Reference.MOD_ID_LOWER + ":" + getInternalName());
+        this.setCreativeTab(CropsNHTab.cropsNHTab);
+        this.setMaxDamage(0);
+        RegisterHelper.registerItem(this, getInternalName());
     }
+
+    protected abstract String getInternalName();
 
     @SideOnly(Side.CLIENT)
     @SuppressWarnings("unchecked")
@@ -38,14 +54,46 @@ public abstract class ItemSpadeNH extends ItemCropsNH implements ICropLeftClickH
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister reg) {
-        LogHelper.debug("registering icon for: " + this.getInternalName());
-        this.itemIcon = reg.registerIcon(
-            this.getUnlocalizedName()
-                .substring(
-                    this.getUnlocalizedName()
-                        .indexOf('.') + 1));
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
+        float hitX, float hitY, float hitZ) {
+        if (!player.canPlayerEdit(x, y, z, side, stack)) {
+            return super.onItemUse(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
+        }
+
+        var event = new UseHoeEvent(player, stack, world, x, y, z);
+        if (MinecraftForge.EVENT_BUS.post(event)) {
+            return super.onItemUse(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
+        }
+
+        if (event.getResult() == Event.Result.ALLOW) {
+            return true;
+        }
+
+        if (side != 0 && world.getBlock(x, y + 1, z)
+            .getMaterial() == Material.air) {
+            if (world.getBlock(x, y, z) == Blocks.grass || world.getBlock(x, y, z) == Blocks.dirt
+                || world.getBlock(x, y, z) == Blocks.mycelium
+                || world.getBlock(x, y, z) == Blocks.farmland) {
+                var spadeBlock = Blocks.farmland;
+                world.playSoundEffect(
+                    x + 0.5f,
+                    y + 0.5f,
+                    z + 0.5f,
+                    spadeBlock.stepSound.getStepResourcePath(),
+                    (spadeBlock.stepSound.getVolume() + 1f) / 2f,
+                    spadeBlock.stepSound.getPitch() * 0.8f);
+                if (!world.isRemote) {
+                    world.setBlock(
+                        x,
+                        y,
+                        z,
+                        (world.getBlock(x, y, z) == Blocks.farmland) ? Blocks.dirt : Blocks.farmland);
+                }
+                return true;
+            }
+        }
+
+        return super.onItemUse(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
     }
 
     @Override
@@ -70,7 +118,7 @@ public abstract class ItemSpadeNH extends ItemCropsNH implements ICropLeftClickH
         if (te.hasWeed()) {
             // drop tall grass if it's mature
             if (te.isMature()) {
-                te.dropItem(new ItemStack(Blocks.tallgrass, 1, 1));
+                te.dropItem(CropsNHUtils.getWeedDrop(1));
             }
             te.clear();
             return true;
