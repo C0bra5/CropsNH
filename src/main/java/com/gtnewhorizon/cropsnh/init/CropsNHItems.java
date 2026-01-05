@@ -18,6 +18,7 @@ import com.gtnewhorizon.cropsnh.items.produce.ItemGoldfish;
 import com.gtnewhorizon.cropsnh.items.produce.ItemMaterialLeaf;
 import com.gtnewhorizon.cropsnh.items.tools.ItemPlantCure;
 import com.gtnewhorizon.cropsnh.items.tools.ItemPlantLens;
+import com.gtnewhorizon.cropsnh.items.tools.ItemReinforcedSpade;
 import com.gtnewhorizon.cropsnh.items.tools.ItemSpade;
 import com.gtnewhorizon.cropsnh.items.tools.ItemWeedEX;
 import com.gtnewhorizon.cropsnh.loaders.MaterialLeafLoader;
@@ -33,6 +34,7 @@ public class CropsNHItems {
     public static Item genericSeed;
     public static Item gaiaWart;
     public static Item spade;
+    public static Item reinforcedSpade;
     public static Item plantCure;
     public static Item weedEX;
     public static Item goldfish;
@@ -49,6 +51,7 @@ public class CropsNHItems {
         CropsNHItemList.plantLens.set(new ItemStack(plantLens = new ItemPlantLens(), 1, 0));
         CropsNHItemList.gaiaWart.set(new ItemStack(gaiaWart = new ItemGaiaWart(), 1, 0));
         CropsNHItemList.spade.set(new ItemStack(spade = new ItemSpade(), 1, 0));
+        CropsNHItemList.reinforcedSpade.set(new ItemStack(reinforcedSpade = new ItemReinforcedSpade(), 1, 0));
         CropsNHItemList.plantCure.set(new ItemStack(plantCure = new ItemPlantCure(), 1));
         CropsNHItemList.goldfish.set(new ItemStack(goldfish = new ItemGoldfish(), 1, 0));
         CropsNHItemList.fertilizer.set(new ItemStack(fertilizer = new ItemFertilizer(), 1, 0));

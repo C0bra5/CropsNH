@@ -23,6 +23,7 @@ public enum CropsNHItemList implements IItemContainer {
     // TOOLS
     plantLens,
     spade,
+    reinforcedSpade,
     cropSticks,
 
     fertilizer,

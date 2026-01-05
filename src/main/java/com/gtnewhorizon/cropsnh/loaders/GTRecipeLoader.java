@@ -73,6 +73,9 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
     }
 
     private static void addPlantLensRecipe() {
+        if (ModUtils.CropsPlusPlus.isModLoaded()) {
+            GTModHandler.removeRecipeByOutput(GTModHandler.getModItem(ModUtils.CropsPlusPlus.getID(), "itemLens", 1));
+        }
         GTModHandler.addCraftingRecipe(
             CropsNHItemList.plantLens.get(1),
             GTModHandler.RecipeBits.BITSD,
@@ -80,11 +83,38 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
     }
 
     private static void addSpadeRecipes() {
+        if (ModUtils.CropsPlusPlus.isModLoaded()) {
+            GTModHandler.removeRecipeByOutput(GTModHandler.getModItem(ModUtils.CropsPlusPlus.getID(), "itemSpade", 1));
+        }
+        // steel locked
         GTModHandler.addCraftingRecipe(
             CropsNHItemList.spade.get(1),
             GTModHandler.RecipeBits.BITSD,
-            new Object[] { "fPh", "PHP", "RSR", 'P', OrePrefixes.plateDense.get(Materials.Steel), 'H', "iron_shovel",
-                'S', OrePrefixes.stickLong.get(Materials.Wood), 'R', "plateAnyRubber" });
+            new Object[] {
+                // spotless:off
+                "fPh",
+                "PSP",
+                " T ",
+                'P', GTOreDictUnificator.get(OrePrefixes.plateTriple, Materials.Steel, 1),
+                'S', new ItemStack(Items.iron_shovel, 1, 0),
+                'T', GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.Wood, 1)
+                // spotless:on
+            });
+        // mv-bender locked
+        GTModHandler.addCraftingRecipe(
+            CropsNHItemList.reinforcedSpade.get(1),
+            GTModHandler.RecipeBits.BITSD,
+            new Object[] {
+                // spotless:off
+                "fPh",
+                "PHP",
+                "RSR",
+                'P', GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.Steel, 1),
+                'H', CropsNHItemList.spade.get(1),
+                'S', GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.Wood, 1),
+                'R', "plateAnyRubber"
+                // spotless:on
+            });
     }
 
     private static void addPlantCureRecipe() {
