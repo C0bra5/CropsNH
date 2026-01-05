@@ -73,6 +73,7 @@ tile.cropsnh:cropSticks.name=Crop Sticks
 
 # Fluids
 fluid.cropsnh:EnrichedFertilizer=Enriched Fertilizer
+fluid.cropsnh:fertilizer=Enriched Fertilizer
 fluid.cropsnh:DKorn=Doppelkorn
 fluid.cropsnh:Korn=Korn
 fluid.cropsnh:FWheat=Fermented Wheat

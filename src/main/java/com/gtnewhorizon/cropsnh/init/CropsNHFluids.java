@@ -14,6 +14,7 @@ import gtPlusPlus.core.util.minecraft.FluidUtils;
 
 public class CropsNHFluids {
 
+    public static Fluid fertilizer;
     public static Fluid enrichedFertilizer;
 
     // alchool
@@ -59,10 +60,30 @@ public class CropsNHFluids {
             1000,
             true);
 
+        CropsNHFluids.fertilizer = FluidUtils.addGTFluidNonMolten(
+            Reference.MOD_ID_LOWER + ":fertilizer",
+            "Fertilizer",
+            new short[] { 45, 170, 45, 100 },
+            4,
+            32,
+            null,
+            ItemList.Cell_Empty.get(1),
+            1000,
+            true);
+
         CropsNHItemList.enrichedFertilizerCell.set(
             FluidContainerRegistry.fillFluidContainer(
                 new FluidStack(CropsNHFluids.enrichedFertilizer, 1000),
                 ItemList.Cell_Empty.get(1)));
+        CropsNHItemList.fertilizerCell.set(
+            FluidContainerRegistry.fillFluidContainer(
+                new FluidStack(CropsNHFluids.fertilizer, 1000),
+                ItemList.Cell_Empty.get(1)));
+        try {
+            CropsNHItemList.fertilizer.get(1);
+        } catch (NullPointerException npe) {
+            throw new LoaderException(npe);
+        }
         try {
             CropsNHItemList.enrichedFertilizerCell.get(1);
         } catch (NullPointerException npe) {

@@ -1,5 +1,7 @@
 package com.gtnewhorizon.cropsnh.loaders.gtrecipes;
 
+import gregtech.api.enums.GTValues;
+import gtPlusPlus.core.fluids.GTPPFluids;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -25,6 +27,16 @@ import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 import mods.natura.common.NContent;
 
+import static gregtech.api.enums.Mods.Forestry;
+import static gregtech.api.enums.Mods.RandomThings;
+import static gregtech.api.recipe.RecipeMaps.fluidExtractionRecipes;
+import static gregtech.api.recipe.RecipeMaps.mixerRecipes;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
+import static gregtech.api.util.GTRecipeBuilder.TICKS;
+import static gregtech.api.util.GTRecipeConstants.CHEMPLANT_CASING_TIER;
+import static gregtech.api.util.GTRecipeConstants.UniversalChemical;
+import static gtPlusPlus.api.recipe.GTPPRecipeMaps.chemicalPlantRecipes;
+
 public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
 
     public static void postInit() {
@@ -33,7 +45,9 @@ public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
         addChemicalDehydratorRecipes();
         addRecyclingRecipes();
         addFluidConversionRecipes();
+        addForestrySoilRecipes();
         addNaturaExtractorRecipes();
+        addChemplantRecipes();
         addBeeCompat();
     }
 
@@ -67,6 +81,13 @@ public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
             .fluidOutputs(CropsNHUtils.getFertilizerFluid(Constants.FERTILIZER_ITEM_FLUID_VALUE))
             .addTo(RecipeMaps.fluidExtractionRecipes);
 
+        if (Forestry.isModLoaded()) {
+            recipe(16, 0, 25)
+                .itemInputs(ItemList.FR_Fertilizer.get(1))
+                .fluidOutputs(CropsNHUtils.getFertilizerFluid(36))
+                .addTo(fluidExtractionRecipes);
+        }
+
         // liquid to fert
         recipe(16, 2, 0).circuit(1)
             .fluidInputs(CropsNHUtils.getFertilizerFluid(Constants.FERTILIZER_ITEM_FLUID_VALUE))
@@ -94,6 +115,75 @@ public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
             .addTo(GTPPRecipeMaps.chemicalDehydratorRecipes);
     }
 
+    private static void addForestrySoilRecipes() {
+        if (!ModUtils.Forestry.isModLoaded()) return;
+
+        recipe(16, 3, 20)
+            .itemInputs(CropsNHItemList.fertilizer.get(1), new ItemStack(Blocks.dirt, 8, 32767))
+            .circuit(1)
+            .itemOutputs(getModItem(Forestry.ID, "soil", 8, 0))
+            .fluidInputs(Materials.Water.getFluid(1_000))
+            .addTo(mixerRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(ItemList.FR_Fertilizer.get(1), new ItemStack(Blocks.dirt, 8, 32767))
+            .circuit(1)
+            .itemOutputs(getModItem(Forestry.ID, "soil", 8, 0))
+            .fluidInputs(Materials.Water.getFluid(1_000))
+            .duration(3 * SECONDS + 4 * TICKS)
+            .eut(16)
+            .addTo(mixerRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(ItemList.FR_Compost.get(1), new ItemStack(Blocks.dirt, 8, 32767))
+            .circuit(1)
+            .itemOutputs(getModItem(Forestry.ID, "soil", 8, 0))
+            .fluidInputs(Materials.Water.getFluid(1_000))
+            .duration(3 * SECONDS + 4 * TICKS)
+            .eut(16)
+            .addTo(mixerRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(ItemList.FR_Mulch.get(8), new ItemStack(Blocks.dirt, 8, 32767))
+            .circuit(1)
+            .itemOutputs(getModItem(Forestry.ID, "soil", 8, 0))
+            .fluidInputs(Materials.Water.getFluid(1_000))
+            .duration(3 * SECONDS + 4 * TICKS)
+            .eut(16)
+            .addTo(mixerRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(new ItemStack(Blocks.sand, 1, 32767), new ItemStack(Blocks.dirt, 1, 32767))
+            .circuit(1)
+            .itemOutputs(getModItem(Forestry.ID, "soil", 2, 1))
+            .fluidInputs(Materials.Water.getFluid(250))
+            .duration(16 * TICKS)
+            .eut(16)
+            .addTo(mixerRecipes);
+    }
+
+    private static void addChemplantRecipes() {
+        if (Forestry.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                .itemInputs(GregtechItemList.GreenAlgaeBiomass.get(16), GregtechItemList.Compost.get(8))
+                .circuit(11)
+                .itemOutputs(ItemList.FR_Fertilizer.get(32))
+                .fluidInputs(new FluidStack(GTPPFluids.Urea, 200))
+                .duration(30 * SECONDS)
+                .eut(60)
+                .metadata(CHEMPLANT_CASING_TIER, 1)
+                .addTo(chemicalPlantRecipes);
+        }
+
+        recipe(60, 30 ,0)
+            .itemInputs(GregtechItemList.GreenAlgaeBiomass.get(16), GregtechItemList.Compost.get(8))
+            .circuit(12)
+            .itemOutputs(CropsNHItemList.fertilizer.get(32))
+            .fluidInputs(new FluidStack(GTPPFluids.Urea, 200))
+            .metadata(CHEMPLANT_CASING_TIER, 1)
+            .addTo(chemicalPlantRecipes);
+    }
+
     private static void addChemicalReactorRecipes() {
         // TODO: REMOVE RECIPES FROM NH CORE MOD
         lvRecipe(5, 0)
@@ -104,6 +194,17 @@ public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
             .itemOutputs(CropsNHItemList.fertilizer.get(4))
             .fluidInputs(new FluidStack(FluidRegistry.WATER, 1000))
             .addTo(RecipeMaps.mixerRecipes);
+
+        // fertilized dirt
+        if (ModUtils.RandomThings.isModLoaded()) {
+            lvRecipe(5,0)
+                .itemInputs(
+                    new ItemStack(Blocks.dirt, 1, 0),
+                    CropsNHItemList.fertilizer.get(2))
+                .itemOutputs(getModItem(RandomThings.ID, "fertilizedDirt", 1, 0))
+                .fluidInputs(FluidRegistry.getFluidStack("water", 1000))
+                .addTo(UniversalChemical);
+        }
 
         // TODO: REMOVE EXISTING RECIPES FROM GT5U
         for (Fluid tFluid : new Fluid[] { FluidRegistry.WATER, GTModHandler.getDistilledWater(1L)

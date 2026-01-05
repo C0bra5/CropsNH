@@ -30,6 +30,7 @@ public enum CropsNHItemList implements IItemContainer {
     poisonPowder,
     hempHurd,
     enrichedFertilizerCell,
+    fertilizerCell,
     plantCure,
     weedEX,
 

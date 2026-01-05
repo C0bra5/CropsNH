@@ -1,7 +1,7 @@
 [
   {
-    "modid": "cropsnh",
-    "name": "GTNHCrops",
+    "modid": "CropsNH",
+    "name": "Crops NH",
     "description": "Crops - GTNH flavor",
     "version": "${modVersion}",
     "mcversion": "${minecraftVersion}",
