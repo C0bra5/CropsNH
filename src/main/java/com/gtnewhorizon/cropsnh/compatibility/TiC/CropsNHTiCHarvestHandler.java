@@ -23,6 +23,7 @@ public class CropsNHTiCHarvestHandler implements CropHarvestHandler {
             if (crop.isMature()) {
                 crop.dropItem(CropsNHUtils.getWeedDrop(1));
             }
+            crop.clear();
             return true;
         }
         return crop.doPlayerHarvest();
