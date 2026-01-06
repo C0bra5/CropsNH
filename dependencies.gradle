@@ -10,7 +10,6 @@ dependencies {
         transitive = false
     }
     devOnlyNonPublishable(rfg.deobf("curse.maven:biomes-o-plenty-220318:2499612"))
-    devOnlyNonPublishable("com.github.GTNewHorizons:CodeChickenCore:1.4.10:dev")
     devOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.8.44-GTNH:dev")
     devOnlyNonPublishable("com.github.GTNewHorizons:waila:1.9.15:dev")
     devOnlyNonPublishable("com.github.GTNewHorizons:Botania:1.13.6-GTNH:dev")
