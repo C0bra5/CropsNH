@@ -822,8 +822,7 @@ public class TileEntityCrop extends TileEntityCropsNH implements ICropStickTile 
                 if (!neighbourTE.hasWeed() && !neighbourTE.isSick()) {
                     neighbourTE.transferDisease();
                 }
-            }
-            else if (!neighbourTE.hasWeed()) {
+            } else if (!neighbourTE.hasWeed()) {
                 // it will handle the weed-ex drain on its own.
                 neighbourTE.spawnWeed();
             }
