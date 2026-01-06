@@ -144,8 +144,8 @@ public class ConfigurationHandler {
             "The highest bound of the stat variation while breeding.");
 
         breedingChance = config.getInt(
-            "Weed Spread Chance",
-            Categories.CATEGORY_WEEDS,
+            "Breeding Chance",
+            Categories.CATEGORY_CROPS,
             3,
             1,
             Integer.MAX_VALUE,

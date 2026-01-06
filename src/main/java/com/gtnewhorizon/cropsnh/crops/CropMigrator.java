@@ -39,6 +39,12 @@ public class CropMigrator extends NHCropCard {
     }
 
     @Override
+    public int getTier() {
+        // should allow it to grow no matter the env.
+        return 1;
+    }
+
+    @Override
     public int getGrowthDuration() {
         return 1;
     }
