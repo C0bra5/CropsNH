@@ -323,6 +323,7 @@ cropsnh_genericSeeds.format=%1$s Seeds
 
 # Crop Names
 cropsnh_crops.weed=Weed
+cropsnh_crops.migrated=Migrated Crop
 # BoP Crop Names
 cropsnh_crops.bamboo=Bamboo
 cropsnh_crops.eyebulb=Eyebulb
@@ -501,6 +502,7 @@ cropsnh_breedingReq.lockout.machineOnly=Requires the crop breeder
 cropsnh_breedingReq.lockout.worldOnly=Must use crop sticks
 # Lockout Growth Requirements
 cropsnh_growthReq.lockout.machineOnly=Can only be harvested in the Industrial Farm.
+cropsnh_growthReq.lockout.migrated=Invalid Soil! Break to get seed!
 # Light Growth Requirements
 cropsnh_growthReq.minLight.format=Needs a light Level of %1$d or higher.
 cropsnh_growthReq.maxLight.format=Needs a light Level of %1$d or lower.

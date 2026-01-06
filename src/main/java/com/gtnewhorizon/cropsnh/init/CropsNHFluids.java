@@ -76,9 +76,8 @@ public class CropsNHFluids {
                 new FluidStack(CropsNHFluids.enrichedFertilizer, 1000),
                 ItemList.Cell_Empty.get(1)));
         CropsNHItemList.fertilizerCell.set(
-            FluidContainerRegistry.fillFluidContainer(
-                new FluidStack(CropsNHFluids.fertilizer, 1000),
-                ItemList.Cell_Empty.get(1)));
+            FluidContainerRegistry
+                .fillFluidContainer(new FluidStack(CropsNHFluids.fertilizer, 1000), ItemList.Cell_Empty.get(1)));
         try {
             CropsNHItemList.fertilizer.get(1);
         } catch (NullPointerException npe) {

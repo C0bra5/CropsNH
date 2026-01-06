@@ -17,7 +17,6 @@ import com.gtnewhorizon.cropsnh.blocks.BlockGrowthAccelerationUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockOverclockedGrowthAccelerationUnit;
 import com.gtnewhorizon.cropsnh.blocks.BlockSeedBed;
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
-import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.BaseGTRecipeLoader;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropBreederFakeRecipeLoader;
 import com.gtnewhorizon.cropsnh.loaders.gtrecipes.CropGeneExtractorFakeRecipeLoader;
@@ -144,16 +143,15 @@ public abstract class GTRecipeLoader extends BaseGTRecipeLoader {
         // TODO: REMOVE OLD CROP STICK RECIPES FROM GT5U
 
         GTModHandler.addCraftingRecipe(
-            new ItemStack(CropsNHBlocks.blockCrop, ConfigurationHandler.cropsPerCraft),
+            CropsNHItemList.cropSticks.get(ConfigurationHandler.cropsPerCraft),
             GTModHandler.RecipeBits.BITS,
-            new Object[] { "S S", "S S", 'S', "stickWood" });
+            new Object[] { "S S", "S S", 'S', "stickLongWood" });
 
         ulvRecipe(2, 0)
             .itemInputs(
                 GTUtility.getIntegratedCircuit(2),
                 GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.Wood, 8))
-            .itemOutputs(
-                GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.Wood, ConfigurationHandler.cropsPerCraft * 4L))
+            .itemOutputs(CropsNHItemList.cropSticks.get(ConfigurationHandler.cropsPerCraft * 4L))
             .addTo(RecipeMaps.assemblerRecipes);
     }
 

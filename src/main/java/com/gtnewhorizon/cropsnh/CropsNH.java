@@ -5,6 +5,7 @@ import com.gtnewhorizon.cropsnh.compatibility.waila.WailaRegistry;
 import com.gtnewhorizon.cropsnh.farming.registries.MutationRegistry;
 import com.gtnewhorizon.cropsnh.farming.requirements.BlockUnderRequirement;
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
+import com.gtnewhorizon.cropsnh.handler.MigrationHandler;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
 import com.gtnewhorizon.cropsnh.init.CropsNHFluids;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
@@ -14,7 +15,6 @@ import com.gtnewhorizon.cropsnh.loaders.CropLoader;
 import com.gtnewhorizon.cropsnh.loaders.FertilizerLoader;
 import com.gtnewhorizon.cropsnh.loaders.GTRecipeLoader;
 import com.gtnewhorizon.cropsnh.loaders.MTELoader;
-import com.gtnewhorizon.cropsnh.loaders.MigrationsLoader;
 import com.gtnewhorizon.cropsnh.loaders.MutationLoader;
 import com.gtnewhorizon.cropsnh.loaders.OreDictLoader;
 import com.gtnewhorizon.cropsnh.loaders.SoilLoader;
@@ -96,7 +96,6 @@ public class CropsNH {
     @SuppressWarnings("unused")
     public static void postInit(FMLPostInitializationEvent event) {
         LogHelper.debug("Starting Post-Initialization");
-        MigrationsLoader.postInit();
         FertilizerLoader.postInit();
         SoilLoader.postInit();
         BlockUnderRequirementLoader.postInit();
@@ -105,6 +104,7 @@ public class CropsNH {
         MutationLoader.postInit();
         AspectLoader.postInit();
         GTRecipeLoader.PostInit();
+        MigrationHandler.postInit();
 
         LogHelper.debug("Post-Initialization Complete");
     }
@@ -114,6 +114,7 @@ public class CropsNH {
     public void onLoadComplete(FMLLoadCompleteEvent event) {
         LogHelper.debug("Starting Load-Complete");
         CropLoader.loadComplete();
+        MigrationHandler.postLoadComplete();
         LogHelper.debug("Load-Complete Complete");
     }
 
@@ -125,6 +126,6 @@ public class CropsNH {
 
     @Mod.EventHandler
     public void onMissingMappings(FMLMissingMappingsEvent event) {
-        MigrationsLoader.onMissingMigration(event);
+        MigrationHandler.onMissingMigration(event);
     }
 }

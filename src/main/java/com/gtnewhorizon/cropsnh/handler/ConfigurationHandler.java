@@ -19,6 +19,7 @@ public class ConfigurationHandler {
 
         public static final String CATEGORY_WEEDS = "weeds";
         public static final String CATEGORY_CROPSNH = Reference.MOD_ID_LOWER;
+        public static final String CATEGORY_MIGRATIONS = "migrations";
         public static final String CATEGORY_CROPS = "crops";
         public static final String CATEGORY_RENDERING = "rendering";
     }
@@ -46,7 +47,9 @@ public class ConfigurationHandler {
     public static int weedSpreadChance;
     // rendering
     public static boolean renderCropPlantsAsTESR;
-
+    // migration
+    public static boolean enableMigrations;
+    public static boolean alwaysMigrateUsingMigrationCrop;
     // CLIENT
     // ------
 
@@ -127,7 +130,7 @@ public class ConfigurationHandler {
         breedingLow = config.getInt(
             "Breeding Range Low",
             Categories.CATEGORY_CROPS,
-            -1,
+            -2,
             -31,
             31,
             "The lowest bound of the stat variation while breeding.");
@@ -143,7 +146,7 @@ public class ConfigurationHandler {
         breedingChance = config.getInt(
             "Weed Spread Chance",
             Categories.CATEGORY_WEEDS,
-            10,
+            3,
             1,
             Integer.MAX_VALUE,
             "Lower values increase the speed at which crops attempt to breed themselves. actual chance is measured as 1 / value every growth tick.");
@@ -179,7 +182,7 @@ public class ConfigurationHandler {
 
         // endregion CATEGORY_WEEDS
 
-        // rendering
+        // region rendering
         renderCropPlantsAsTESR = config.getBoolean(
             "Crop rendering setting",
             Categories.CATEGORY_RENDERING,
@@ -193,6 +196,21 @@ public class ConfigurationHandler {
                 + "for large farms as well, but it might result in better FPS compared to the default.\n"
                 + "I recommend leaving this on false, if you have FPS problems, set this to true and see for yourself if it is an improvement or not.\n"
                 + "This config setting must match on server and client, the server should know if it should cause block updates and the client has to know how to render the crops");
+        // endregion rendering
+
+        // region migration
+        enableMigrations = config.getBoolean(
+            "Enable Migrations",
+            Categories.CATEGORY_MIGRATIONS,
+            true,
+            "Enable the automatic conversion of existing IC2 crops into CropsNH's equivalent crops.");
+
+        alwaysMigrateUsingMigrationCrop = config.getBoolean(
+            "Always use migration crop when migrating",
+            Categories.CATEGORY_MIGRATIONS,
+            false,
+            "When migrating IC2 crops, always create a \"migration\" that cannot grow but always returns a seed when harvested.");
+        // endregion migration
 
         if (config.hasChanged()) {
             config.save();

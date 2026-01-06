@@ -283,5 +283,4 @@ public interface ICropCard {
      * @return Returns a generic seed for this crop card.
      */
     ItemStack getSeedItem(ISeedStats stats);
-
 }

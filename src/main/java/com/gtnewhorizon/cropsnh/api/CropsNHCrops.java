@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.api;
 public class CropsNHCrops {
 
     public static ICropCard Weed;
+    public static ICropCard Migrator;
 
     // Bonsais
     public static ICropCard BonsaiOak;

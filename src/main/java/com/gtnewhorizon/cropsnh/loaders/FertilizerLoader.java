@@ -45,7 +45,7 @@ public class FertilizerLoader {
     }
 
     private static void registerLiquidFertilizers() {
-        FertilizerRegistry.instance.register(CropsNHUtils.getFertilizerFluid(), 1);
+        FertilizerRegistry.instance.register(CropsNHFluids.fertilizer, 1);
         FertilizerRegistry.instance.register(CropsNHFluids.enrichedFertilizer, 10);
     }
 

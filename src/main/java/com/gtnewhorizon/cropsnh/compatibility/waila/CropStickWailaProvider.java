@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import com.gtnewhorizon.cropsnh.api.IGrowthRequirement;
 import com.gtnewhorizon.cropsnh.api.ISeedData;
 import com.gtnewhorizon.cropsnh.api.ISeedStats;
+import com.gtnewhorizon.cropsnh.crops.CropMigrator;
 import com.gtnewhorizon.cropsnh.farming.SeedData;
 import com.gtnewhorizon.cropsnh.reference.Data;
 import com.gtnewhorizon.cropsnh.reference.Names;
@@ -40,6 +41,9 @@ public class CropStickWailaProvider implements IWailaDataProvider {
                 ? new SeedData(nbt.getCompoundTag(Names.NBT.crop))
                 : teCrop.getSeed();
             if (seedData != null) {
+                if (seedData.getCrop() instanceof CropMigrator && nbt.hasKey(Names.NBT.extra, Data.NBTType._object)) {
+                    return new CropMigrator.AdditionalData(nbt.getCompoundTag(Names.NBT.extra)).seed.getStack();
+                }
                 return seedData.getStack();
             }
         }
@@ -66,6 +70,10 @@ public class CropStickWailaProvider implements IWailaDataProvider {
                     ISeedData seedData = nbt.hasKey(Names.NBT.crop, Data.NBTType._object)
                         ? new SeedData(nbt.getCompoundTag(Names.NBT.crop))
                         : teCrop.getSeed();
+                    if (seedData.getCrop() instanceof CropMigrator
+                        && nbt.hasKey(Names.NBT.extra, Data.NBTType._object)) {
+                        seedData = new CropMigrator.AdditionalData(nbt.getCompoundTag(Names.NBT.extra)).seed;
+                    }
                     if (seedData.getStats()
                         .isAnalyzed()) {
                         // Add the seed name

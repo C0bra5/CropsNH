@@ -161,14 +161,6 @@ public abstract class CropsNHUtils {
         return new FluidStack(getWeedEXFluid(), amount);
     }
 
-    public static Fluid getFertilizerFluid() {
-        return FluidRegistry.getFluid("fluid.fertiliser");
-    }
-
-    public static FluidStack getFertilizerFluid(int amount) {
-        return new FluidStack(getFertilizerFluid(), amount);
-    }
-
     public static ItemStack getWeedDrop(int amount) {
         return new ItemStack(Blocks.tallgrass, amount, 1);
     }

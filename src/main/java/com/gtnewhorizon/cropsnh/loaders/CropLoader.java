@@ -9,6 +9,7 @@ import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHCrops;
 import com.gtnewhorizon.cropsnh.api.ICropCard;
+import com.gtnewhorizon.cropsnh.crops.CropMigrator;
 import com.gtnewhorizon.cropsnh.crops.CropWeed;
 import com.gtnewhorizon.cropsnh.crops.abstracts.CropBonsai;
 import com.gtnewhorizon.cropsnh.crops.biomesoplenty.CropBamboo;
@@ -192,6 +193,7 @@ public class CropLoader {
     public static void postInit() {
         // weeds
         CropRegistry.instance.register(CropsNHCrops.Weed = new CropWeed());
+        CropRegistry.instance.register(CropsNHCrops.Migrator = new CropMigrator());
 
         registerBonsais();
         registerBoPCrops();

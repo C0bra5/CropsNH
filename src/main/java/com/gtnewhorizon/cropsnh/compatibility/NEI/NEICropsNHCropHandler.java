@@ -170,6 +170,7 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
             for (ICropCard cc : CropRegistry.instance.getAllInRegistrationOrder()) {
                 // no reason to display weeds
                 if (cc == CropsNHCrops.Weed) continue;
+                if (cc == CropsNHCrops.Migrator) continue;
                 arecipes.add(new CachedCropRecipe(null, cc));
             }
         } else if (pId.equalsIgnoreCase("item")) {

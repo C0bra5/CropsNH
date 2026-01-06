@@ -1,7 +1,11 @@
 package com.gtnewhorizon.cropsnh.loaders.gtrecipes;
 
-import gregtech.api.enums.GTValues;
-import gtPlusPlus.core.fluids.GTPPFluids;
+import static gregtech.api.recipe.RecipeMaps.fluidExtractionRecipes;
+import static gregtech.api.recipe.RecipeMaps.mixerRecipes;
+import static gregtech.api.util.GTRecipeConstants.CHEMPLANT_CASING_TIER;
+import static gregtech.api.util.GTRecipeConstants.UniversalChemical;
+import static gtPlusPlus.api.recipe.GTPPRecipeMaps.chemicalPlantRecipes;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -12,7 +16,6 @@ import net.minecraftforge.fluids.FluidStack;
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.init.CropsNHFluids;
 import com.gtnewhorizon.cropsnh.reference.Constants;
-import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
 import gregtech.api.enums.ItemList;
@@ -24,18 +27,9 @@ import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipeConstants;
 import gregtech.loaders.misc.GTBeeDefinition;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
+import gtPlusPlus.core.fluids.GTPPFluids;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 import mods.natura.common.NContent;
-
-import static gregtech.api.enums.Mods.Forestry;
-import static gregtech.api.enums.Mods.RandomThings;
-import static gregtech.api.recipe.RecipeMaps.fluidExtractionRecipes;
-import static gregtech.api.recipe.RecipeMaps.mixerRecipes;
-import static gregtech.api.util.GTRecipeBuilder.SECONDS;
-import static gregtech.api.util.GTRecipeBuilder.TICKS;
-import static gregtech.api.util.GTRecipeConstants.CHEMPLANT_CASING_TIER;
-import static gregtech.api.util.GTRecipeConstants.UniversalChemical;
-import static gtPlusPlus.api.recipe.GTPPRecipeMaps.chemicalPlantRecipes;
 
 public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
 
@@ -61,7 +55,7 @@ public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
         // ez logistics puzzle where you either flood both with fertilizer items or use a solution with system like
         // function like item conduits
         lvRecipe(5, 0).itemInputs(CropsNHItemList.fertilizer.get(4))
-            .fluidInputs(CropsNHUtils.getFertilizerFluid(1000))
+            .fluidInputs(new FluidStack(CropsNHFluids.fertilizer, 1000))
             .fluidOutputs(new FluidStack(CropsNHFluids.enrichedFertilizer, 1000))
             .addTo(GTRecipeConstants.UniversalChemical);
 
@@ -70,7 +64,7 @@ public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
             .itemInputs(
                 CropsNHItemList.fertilizer.get(4),
                 FluidContainerRegistry
-                    .fillFluidContainer(CropsNHUtils.getFertilizerFluid(1000), ItemList.Cell_Empty.get(1)))
+                    .fillFluidContainer(new FluidStack(CropsNHFluids.fertilizer, 1000), ItemList.Cell_Empty.get(1)))
             .itemOutputs(CropsNHItemList.enrichedFertilizerCell.get(1))
             .addTo(RecipeMaps.chemicalReactorRecipes);
     }
@@ -78,19 +72,18 @@ public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
     private static void addFluidConversionRecipes() {
         // fert to liquid
         recipe(16, 1, 0).itemInputs(CropsNHItemList.fertilizer.get(1))
-            .fluidOutputs(CropsNHUtils.getFertilizerFluid(Constants.FERTILIZER_ITEM_FLUID_VALUE))
+            .fluidOutputs(new FluidStack(CropsNHFluids.fertilizer, Constants.FERTILIZER_ITEM_FLUID_VALUE))
             .addTo(RecipeMaps.fluidExtractionRecipes);
 
-        if (Forestry.isModLoaded()) {
-            recipe(16, 0, 25)
-                .itemInputs(ItemList.FR_Fertilizer.get(1))
-                .fluidOutputs(CropsNHUtils.getFertilizerFluid(36))
+        if (ModUtils.Forestry.isModLoaded()) {
+            recipe(16, 0, 25).itemInputs(ItemList.FR_Fertilizer.get(1))
+                .fluidOutputs(new FluidStack(CropsNHFluids.fertilizer, 36))
                 .addTo(fluidExtractionRecipes);
         }
 
         // liquid to fert
         recipe(16, 2, 0).circuit(1)
-            .fluidInputs(CropsNHUtils.getFertilizerFluid(Constants.FERTILIZER_ITEM_FLUID_VALUE))
+            .fluidInputs(new FluidStack(CropsNHFluids.fertilizer, Constants.FERTILIZER_ITEM_FLUID_VALUE))
             .itemOutputs(CropsNHItemList.fertilizer.get(1))
             .addTo(RecipeMaps.centrifugeRecipes);
     }
@@ -118,65 +111,48 @@ public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
     private static void addForestrySoilRecipes() {
         if (!ModUtils.Forestry.isModLoaded()) return;
 
-        recipe(16, 3, 20)
-            .itemInputs(CropsNHItemList.fertilizer.get(1), new ItemStack(Blocks.dirt, 8, 32767))
+        recipe(16, 3, 20).itemInputs(CropsNHItemList.fertilizer.get(1), new ItemStack(Blocks.dirt, 8, 32767))
             .circuit(1)
-            .itemOutputs(getModItem(Forestry.ID, "soil", 8, 0))
+            .itemOutputs(getModItem(ModUtils.Forestry.ID, "soil", 8, 0))
             .fluidInputs(Materials.Water.getFluid(1_000))
             .addTo(mixerRecipes);
 
-        GTValues.RA.stdBuilder()
-            .itemInputs(ItemList.FR_Fertilizer.get(1), new ItemStack(Blocks.dirt, 8, 32767))
+        recipe(16, 3, 20).itemInputs(ItemList.FR_Fertilizer.get(1), new ItemStack(Blocks.dirt, 8, 32767))
             .circuit(1)
-            .itemOutputs(getModItem(Forestry.ID, "soil", 8, 0))
+            .itemOutputs(getModItem(ModUtils.Forestry.ID, "soil", 8, 0))
             .fluidInputs(Materials.Water.getFluid(1_000))
-            .duration(3 * SECONDS + 4 * TICKS)
-            .eut(16)
             .addTo(mixerRecipes);
 
-        GTValues.RA.stdBuilder()
-            .itemInputs(ItemList.FR_Compost.get(1), new ItemStack(Blocks.dirt, 8, 32767))
+        recipe(16, 3, 20).itemInputs(ItemList.FR_Compost.get(1), new ItemStack(Blocks.dirt, 8, 32767))
             .circuit(1)
-            .itemOutputs(getModItem(Forestry.ID, "soil", 8, 0))
+            .itemOutputs(getModItem(ModUtils.Forestry.ID, "soil", 8, 0))
             .fluidInputs(Materials.Water.getFluid(1_000))
-            .duration(3 * SECONDS + 4 * TICKS)
-            .eut(16)
             .addTo(mixerRecipes);
 
-        GTValues.RA.stdBuilder()
-            .itemInputs(ItemList.FR_Mulch.get(8), new ItemStack(Blocks.dirt, 8, 32767))
+        recipe(16, 3, 20).itemInputs(ItemList.FR_Mulch.get(8), new ItemStack(Blocks.dirt, 8, 32767))
             .circuit(1)
-            .itemOutputs(getModItem(Forestry.ID, "soil", 8, 0))
+            .itemOutputs(getModItem(ModUtils.Forestry.ID, "soil", 8, 0))
             .fluidInputs(Materials.Water.getFluid(1_000))
-            .duration(3 * SECONDS + 4 * TICKS)
-            .eut(16)
             .addTo(mixerRecipes);
 
-        GTValues.RA.stdBuilder()
-            .itemInputs(new ItemStack(Blocks.sand, 1, 32767), new ItemStack(Blocks.dirt, 1, 32767))
+        recipe(16, 0, 80).itemInputs(new ItemStack(Blocks.sand, 1, 32767), new ItemStack(Blocks.dirt, 1, 32767))
             .circuit(1)
-            .itemOutputs(getModItem(Forestry.ID, "soil", 2, 1))
+            .itemOutputs(getModItem(ModUtils.Forestry.ID, "soil", 2, 1))
             .fluidInputs(Materials.Water.getFluid(250))
-            .duration(16 * TICKS)
-            .eut(16)
             .addTo(mixerRecipes);
     }
 
     private static void addChemplantRecipes() {
-        if (Forestry.isModLoaded()) {
-            GTValues.RA.stdBuilder()
-                .itemInputs(GregtechItemList.GreenAlgaeBiomass.get(16), GregtechItemList.Compost.get(8))
+        if (ModUtils.Forestry.isModLoaded()) {
+            recipe(60, 30, 0).itemInputs(GregtechItemList.GreenAlgaeBiomass.get(16), GregtechItemList.Compost.get(8))
                 .circuit(11)
                 .itemOutputs(ItemList.FR_Fertilizer.get(32))
                 .fluidInputs(new FluidStack(GTPPFluids.Urea, 200))
-                .duration(30 * SECONDS)
-                .eut(60)
                 .metadata(CHEMPLANT_CASING_TIER, 1)
                 .addTo(chemicalPlantRecipes);
         }
 
-        recipe(60, 30 ,0)
-            .itemInputs(GregtechItemList.GreenAlgaeBiomass.get(16), GregtechItemList.Compost.get(8))
+        recipe(60, 30, 0).itemInputs(GregtechItemList.GreenAlgaeBiomass.get(16), GregtechItemList.Compost.get(8))
             .circuit(12)
             .itemOutputs(CropsNHItemList.fertilizer.get(32))
             .fluidInputs(new FluidStack(GTPPFluids.Urea, 200))
@@ -197,11 +173,8 @@ public abstract class FertilizerRecipes extends BaseGTRecipeLoader {
 
         // fertilized dirt
         if (ModUtils.RandomThings.isModLoaded()) {
-            lvRecipe(5,0)
-                .itemInputs(
-                    new ItemStack(Blocks.dirt, 1, 0),
-                    CropsNHItemList.fertilizer.get(2))
-                .itemOutputs(getModItem(RandomThings.ID, "fertilizedDirt", 1, 0))
+            lvRecipe(5, 0).itemInputs(new ItemStack(Blocks.dirt, 1, 0), CropsNHItemList.fertilizer.get(2))
+                .itemOutputs(getModItem(ModUtils.RandomThings.ID, "fertilizedDirt", 1, 0))
                 .fluidInputs(FluidRegistry.getFluidStack("water", 1000))
                 .addTo(UniversalChemical);
         }

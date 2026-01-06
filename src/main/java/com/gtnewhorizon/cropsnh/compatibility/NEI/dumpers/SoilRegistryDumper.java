@@ -6,8 +6,11 @@ import java.io.PrintWriter;
 
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 import com.gtnewhorizon.cropsnh.reference.Reference;
+import com.gtnewhorizon.cropsnh.utility.DebugHelper;
 
 import codechicken.nei.config.DataDumper;
+import ic2.api.crops.CropCard;
+import ic2.core.crop.IC2Crops;
 
 public class SoilRegistryDumper extends DataDumper {
 
@@ -44,6 +47,11 @@ public class SoilRegistryDumper extends DataDumper {
     public void dumpTo(File file) throws IOException {
         PrintWriter w = new PrintWriter(file);
         w.print(SoilRegistry.instance.dump());
+        w.println("");
+        w.println(DebugHelper.makeCSVLine("owner", "name"));
+        for (CropCard cc : IC2Crops.instance.getCrops()) {
+            w.println("case \"" + cc.owner() + ":" + cc.name() + "\" -> null;");
+        }
         w.flush();
         w.close();
     }

@@ -11,6 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 
 import com.gtnewhorizon.cropsnh.api.CropCard;
+import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.api.IGrowthRequirement;
 import com.gtnewhorizon.cropsnh.api.ISeedStats;
@@ -75,16 +76,19 @@ public abstract class NHCropCard extends CropCard {
 
     @Override
     public ItemStack getSeedItem(ISeedStats stats) {
-        // save crop info
+        // create seed with tags
+        ItemStack seed = new ItemStack(CropsNHItems.genericSeed, 1);
+        seed.setTagCompound(writeNBT(this, stats));
+        return seed;
+    }
+
+    public static NBTTagCompound writeNBT(ICropCard cc, ISeedStats stats) {
         NBTTagCompound tag = new NBTTagCompound();
-        tag.setString(Names.NBT.crop, this.getId());
+        tag.setString(Names.NBT.crop, cc.getId());
         if (stats != null) {
             stats.writeToNBT(tag);
         }
-        // create seed with tags
-        ItemStack seed = new ItemStack(CropsNHItems.genericSeed, 1);
-        seed.setTagCompound(tag);
-        return seed;
+        return tag;
     }
 
     // region texturing
