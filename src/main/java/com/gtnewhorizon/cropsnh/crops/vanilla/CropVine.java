@@ -17,6 +17,8 @@ public class CropVine extends NHCropCard {
 
         this.addDrop(new ItemStack(Blocks.vine, 2), 100_00);
 
+        this.addAlternateSeed(new ItemStack(Blocks.vine, 1, 0));
+
         this.addLikedBiomes(BiomeDictionary.Type.LUSH, BiomeDictionary.Type.JUNGLE, BiomeDictionary.Type.WET);
     }
 
