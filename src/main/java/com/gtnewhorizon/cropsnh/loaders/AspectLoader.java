@@ -62,11 +62,16 @@ public class AspectLoader {
         if (ModUtils.ForbiddenMagic.isModLoaded()) {
             aspects.add(Aspect.getAspect("gula"), 1);
         }
-        List<ItemStack> stacks = new LinkedList<>();
-        CropsNHItems.bottledAlcohol.getSubItems(CropsNHItems.bottledAlcohol, null, stacks);
-        for (ItemStack stack : stacks) {
-            ThaumcraftApi.registerObjectTag(stack, aspects);
-        }
+        ThaumcraftApi.registerObjectTag(CropsNHItemList.fermentedWheatBottle.get(1), aspects);
+        ThaumcraftApi.registerObjectTag(CropsNHItemList.kornBottle.get(1), aspects);
+        ThaumcraftApi.registerObjectTag(CropsNHItemList.doppelkornBottle.get(1), aspects);
+        ThaumcraftApi.registerObjectTag(CropsNHItemList.fermentedReedwaterBottle.get(1), aspects);
+        ThaumcraftApi.registerObjectTag(CropsNHItemList.sugarWhineBottle.get(1), aspects);
+        ThaumcraftApi.registerObjectTag(CropsNHItemList.mashBottle.get(1), aspects);
+        ThaumcraftApi.registerObjectTag(CropsNHItemList.washBottle.get(1), aspects);
+        ThaumcraftApi.registerObjectTag(CropsNHItemList.highProofBottle.get(1), aspects);
+        ThaumcraftApi.registerObjectTag(CropsNHItemList.realJagermeisterBottle.get(1), aspects);
+        ThaumcraftApi.registerObjectTag(CropsNHItemList.fakeJagermeisterBottle.get(1), aspects);
     }
 
     private static void loadCropAspects() {
