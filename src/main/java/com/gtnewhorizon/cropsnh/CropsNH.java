@@ -54,7 +54,9 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
         + "after:BiomesOPlenty; "
         + "after:Thaumcraft; "
         + "after:witchery; "
-        + "after:TwilightForest; ")
+        + "after:TwilightForest; "
+        + "after:harvestthenether; "
+        + "after:harvestcraft; ")
 public class CropsNH {
 
     @Mod.Instance(Reference.MOD_ID)
