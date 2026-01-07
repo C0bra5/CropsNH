@@ -159,7 +159,7 @@ public class ConfigurationHandler {
             .getBoolean("Enable weeds", Categories.CATEGORY_WEEDS, true, "set to false if you wish to disable weeds");
 
         weedSpawnChance = config.getInt(
-            "Weed Spread Chance",
+            "Weed Spawn Chance",
             Categories.CATEGORY_WEEDS,
             100,
             1,
