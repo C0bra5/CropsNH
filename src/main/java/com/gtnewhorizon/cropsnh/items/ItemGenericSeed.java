@@ -43,6 +43,7 @@ public class ItemGenericSeed extends ItemCropsNH {
         // add registered seeds
         SeedStats stats = new SeedStats((byte) 1, (byte) 1, (byte) 1, true);
         for (ICropCard cc : CropRegistry.instance.getAllInRegistrationOrder()) {
+            if (cc.hideFromNEI()) continue;
             NBTTagCompound tag = new NBTTagCompound();
             tag.setString(Names.NBT.crop, cc.getId());
             stats.writeToNBT(tag);

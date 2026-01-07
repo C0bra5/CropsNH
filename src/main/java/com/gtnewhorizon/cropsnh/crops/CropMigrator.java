@@ -45,6 +45,11 @@ public class CropMigrator extends NHCropCard {
     }
 
     @Override
+    public boolean hideFromNEI() {
+        return true;
+    }
+
+    @Override
     public int getGrowthDuration() {
         return 1;
     }

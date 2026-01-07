@@ -155,7 +155,7 @@ public class NEICropsNHMutationPoolHandler extends CropsNHNEIHandler {
         // this also catches alternate seeds
         ICropCard cc = CropRegistry.instance.get(item);
         // back out if it's not something that turns into a crop;
-        if (cc == null) return;
+        if (cc == null || cc.hideFromNEI()) return;
         for (IMutationPool pool : MutationRegistry.instance.getMutationPools()) {
             if (pool.contains(cc)) {
                 this.arecipes.add(new CachedMutationPoolRecipe(pool, item, cc));

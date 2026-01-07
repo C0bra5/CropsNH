@@ -173,6 +173,11 @@ public abstract class CropCard implements ICropCard {
     }
 
     @Override
+    public boolean hideFromNEI() {
+        return false;
+    }
+
+    @Override
     public float getCrossingThreshold() {
         return 0.8f;
     }

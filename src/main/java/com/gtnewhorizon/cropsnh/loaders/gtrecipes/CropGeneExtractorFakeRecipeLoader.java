@@ -55,6 +55,7 @@ public abstract class CropGeneExtractorFakeRecipeLoader extends BaseGTRecipeLoad
         }
 
         for (ICropCard cc : CropRegistry.instance.getAllInRegistrationOrder()) {
+            if (cc.hideFromNEI()) continue;
             ItemStack seedStack = cc.getSeedItem(SeedStats.DEFAULT_ANALYZED);
 
             GTRecipeBuilder template = GTValues.RA.stdBuilder()

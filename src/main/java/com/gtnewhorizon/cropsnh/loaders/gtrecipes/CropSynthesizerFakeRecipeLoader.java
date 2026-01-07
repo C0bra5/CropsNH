@@ -27,6 +27,7 @@ public abstract class CropSynthesizerFakeRecipeLoader extends BaseGTRecipeLoader
         BehaviourDataOrb.setDataTitle(resistanceOrb, Names.DataOrb.resistance);
 
         for (ICropCard cc : CropRegistry.instance.getAllInRegistrationOrder()) {
+            if (cc.hideFromNEI()) continue;
             ItemStack specimenOrb = ItemList.Tool_DataOrb.get(0L);
             BehaviourDataOrb.setDataTitle(specimenOrb, Names.DataOrb.resistance);
             BehaviourDataOrb.setDataName(specimenOrb, cc.getId());

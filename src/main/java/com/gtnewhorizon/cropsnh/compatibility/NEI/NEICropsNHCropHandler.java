@@ -14,7 +14,6 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import com.gtnewhorizon.cropsnh.api.CropsNHCrops;
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.api.ICropCard;
 import com.gtnewhorizon.cropsnh.api.IGrowthRequirement;
@@ -169,8 +168,7 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
         if (pId.equalsIgnoreCase(id)) {
             for (ICropCard cc : CropRegistry.instance.getAllInRegistrationOrder()) {
                 // no reason to display weeds
-                if (cc == CropsNHCrops.Weed) continue;
-                if (cc == CropsNHCrops.Migrator) continue;
+                if (cc.hideFromNEI()) continue;
                 arecipes.add(new CachedCropRecipe(null, cc));
             }
         } else if (pId.equalsIgnoreCase("item")) {
@@ -190,6 +188,7 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
         // filter args
         if (isBadArg(item)) return;
         for (ICropCard cc : CropRegistry.instance.getAllInRegistrationOrder()) {
+            if (cc.hideFromNEI()) continue;
             for (ItemStack drop : cc.getDropTable()
                 .keySet()) {
                 if (drop == null || drop.getItem() == null) {
@@ -213,6 +212,7 @@ public class NEICropsNHCropHandler extends CropsNHNEIHandler {
         // this also catches alternate seeds
         ICropCard cc = CropRegistry.instance.get(item);
         if (cc != null) {
+            if (cc.hideFromNEI()) return;
             arecipes.add(new CachedCropRecipe(item, cc));
             return;
         }

@@ -20,6 +20,11 @@ public class CropWeed extends NHCropCard {
     }
 
     @Override
+    public boolean hideFromNEI() {
+        return true;
+    }
+
+    @Override
     public boolean spreadsWeeds(ICropStickTile te) {
         return te.getGrowthPercent() >= 0.5f;
     }

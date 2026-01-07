@@ -142,6 +142,11 @@ public interface ICropCard {
     Collection<Object> getDuplicationCatalystsForNEI();
 
     /**
+     * @return True will hide the crop from NEI.
+     */
+    boolean hideFromNEI();
+
+    /**
      * @return A multiplier for the number of drops at base.
      */
     float getDropChance();

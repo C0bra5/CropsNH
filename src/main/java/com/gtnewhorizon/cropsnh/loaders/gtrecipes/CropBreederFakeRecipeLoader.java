@@ -25,6 +25,8 @@ public class CropBreederFakeRecipeLoader extends BaseGTRecipeLoader {
 
     public static void postInit() {
         for (ICropMutation mutation : MutationRegistry.instance.getDeterministicMutations()) {
+            if (mutation.getOutput()
+                .hideFromNEI()) continue;
             List<Object> inputs = mutation.getParents()
                 .stream()
                 .map(parent -> {

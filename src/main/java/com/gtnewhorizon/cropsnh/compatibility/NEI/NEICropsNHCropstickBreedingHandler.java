@@ -141,6 +141,8 @@ public class NEICropsNHCropstickBreedingHandler extends CropsNHNEIHandler {
     protected void loadCraftingRecipesDo(String pId, Object... results) {
         if (pId.equalsIgnoreCase(id)) {
             for (ICropMutation mutation : MutationRegistry.instance.getDeterministicMutations()) {
+                if (mutation.getOutput()
+                    .hideFromNEI()) continue;
                 if (mutation.getRequirements()
                     .stream()
                     .anyMatch(x -> x instanceof MachineOnlyBreedingRequirement)) continue;
@@ -163,7 +165,7 @@ public class NEICropsNHCropstickBreedingHandler extends CropsNHNEIHandler {
         if (isBadArg(item)) return;
         ICropCard cc = CropRegistry.instance.get(item);
         // bail if it's not a compatible seed
-        if (cc == null) return;
+        if (cc == null || cc.hideFromNEI()) return;
         // find mutations that create this seed.
         for (ICropMutation mutation : MutationRegistry.instance.getDeterministicMutations()) {
             if (mutation.getOutput() != cc) continue;
@@ -182,7 +184,10 @@ public class NEICropsNHCropstickBreedingHandler extends CropsNHNEIHandler {
         // this also catches alternate seeds
         ICropCard cc = CropRegistry.instance.get(item);
         if (cc != null) {
+            if (cc.hideFromNEI()) return;
             for (ICropMutation mutation : MutationRegistry.instance.getDeterministicMutations()) {
+                if (mutation.getOutput()
+                    .hideFromNEI()) continue;
                 if (mutation.getRequirements()
                     .stream()
                     .anyMatch(x -> x instanceof MachineOnlyBreedingRequirement)) continue;
