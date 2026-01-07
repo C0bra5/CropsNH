@@ -11,8 +11,10 @@ import net.minecraft.util.IIcon;
 import com.gtnewhorizon.cropsnh.api.IAdditionalCropData;
 import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.api.ISeedData;
+import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.SeedData;
+import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 import com.gtnewhorizon.cropsnh.farming.requirements.growth.MigratedCropGrowthRequirement;
 import com.gtnewhorizon.cropsnh.reference.Constants;
 
@@ -32,6 +34,11 @@ public class CropMigrator extends NHCropCard {
     @Override
     public String getCreator() {
         return "C0bra5";
+    }
+
+    @Override
+    public ISoilList getSoilTypes() {
+        return SoilRegistry.instance.allSoils;
     }
 
     public int getMaxGrowthStage() {

@@ -25,7 +25,7 @@ public class SoilRegistry implements ISoilRegistry {
     /**
      * A list of all soils registered in the registry.
      */
-    private final ISoilList allSoils;
+    public final ISoilList allSoils;
 
     public SoilRegistry() {
         // register the global soil list.
