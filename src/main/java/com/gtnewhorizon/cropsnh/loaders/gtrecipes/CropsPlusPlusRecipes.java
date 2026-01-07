@@ -1,7 +1,6 @@
 package com.gtnewhorizon.cropsnh.loaders.gtrecipes;
 
 import static bartworks.API.recipe.BartWorksRecipeMaps.bacterialVatRecipes;
-import static gregtech.api.enums.Mods.CropsNH;
 import static gregtech.api.recipe.RecipeMaps.brewingRecipes;
 import static gregtech.api.recipe.RecipeMaps.centrifugeRecipes;
 import static gregtech.api.recipe.RecipeMaps.chemicalReactorRecipes;
@@ -15,9 +14,6 @@ import static gregtech.api.util.GTRecipeBuilder.TICKS;
 import static gregtech.api.util.GTRecipeConstants.GLASS;
 import static gregtech.api.util.GTRecipeConstants.UniversalChemical;
 
-import bartworks.common.loaders.BioCultureLoader;
-import bartworks.common.loaders.BioItemList;
-import gregtech.api.enums.TierEU;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -30,6 +26,8 @@ import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
 import com.gtnewhorizon.cropsnh.init.CropsNHFluids;
 import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
+import bartworks.common.loaders.BioCultureLoader;
+import bartworks.common.loaders.BioItemList;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
@@ -137,9 +135,9 @@ public abstract class CropsPlusPlusRecipes extends BaseGTRecipeLoader {
         addAlcoholBottlingRecipes(CropsNHFluids.GHP, CropsNHItemList.highProofBottle.get(1));
         addAlcoholBottlingRecipes(CropsNHFluids.jagi, CropsNHItemList.realJagermeisterBottle.get(1));
         addAlcoholBottlingRecipes(CropsNHFluids.njagi, CropsNHItemList.fakeJagermeisterBottle.get(1));
-        for (CropRecipes.TierAcid water : new CropRecipes.TierAcid[] {CropRecipes.TierAcid.regWater, CropRecipes.TierAcid.distilWater}) {
-            evRecipe(17,50)
-                .itemInputs(new ItemStack(Items.sugar, 64))
+        for (CropRecipes.TierAcid water : new CropRecipes.TierAcid[] { CropRecipes.TierAcid.regWater,
+            CropRecipes.TierAcid.distilWater }) {
+            evRecipe(17, 50).itemInputs(new ItemStack(Items.sugar, 64))
                 .circuit(2)
                 .special(BioItemList.getPetriDish(BioCultureLoader.CommonYeast))
                 .fluidInputs(water.get(100))
@@ -147,7 +145,6 @@ public abstract class CropsPlusPlusRecipes extends BaseGTRecipeLoader {
                 .metadata(GLASS, 3)
                 .addTo(bacterialVatRecipes);
         }
-
 
         GTValues.RA.stdBuilder()
             .fluidInputs(new FluidStack(CropsNHFluids.Mash, 10))

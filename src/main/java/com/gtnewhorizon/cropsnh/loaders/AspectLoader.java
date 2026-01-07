@@ -17,9 +17,6 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 
-import static gregtech.api.enums.Mods.IndustrialCraft2;
-import static gregtech.api.util.GTModHandler.getModItem;
-
 public class AspectLoader {
 
     public static void postInit() {

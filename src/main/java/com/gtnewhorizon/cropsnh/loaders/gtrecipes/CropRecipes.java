@@ -23,8 +23,6 @@ import static gregtech.api.util.GTRecipeConstants.UniversalChemical;
 import static gregtech.common.items.ItemComb.Voltage;
 import static net.minecraftforge.fluids.FluidRegistry.getFluidStack;
 
-import bartworks.common.loaders.BioCultureLoader;
-import bartworks.common.loaders.BioItemList;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -38,6 +36,8 @@ import com.gtnewhorizon.cropsnh.items.produce.ItemMaterialLeaf;
 import com.gtnewhorizon.cropsnh.loaders.MaterialLeafLoader;
 import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
+import bartworks.common.loaders.BioCultureLoader;
+import bartworks.common.loaders.BioItemList;
 import bartworks.system.material.Werkstoff;
 import bartworks.system.material.WerkstoffLoader;
 import biomesoplenty.api.content.BOPCBlocks;
@@ -148,20 +148,18 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
     }
 
     private static void addHopsRecipes() {
-        recipe(4,6,40)
-            .itemInputs(CropsNHItemList.hops.get(1L))
+        recipe(4, 6, 40).itemInputs(CropsNHItemList.hops.get(1L))
             .fluidInputs(getFluidStack("potion.wheatyjuice", 750))
             .fluidOutputs(getFluidStack("potion.wheatyhopsjuice", 750))
             .addTo(brewingRecipes);
 
-        for (TierAcid water : new TierAcid[] {TierAcid.regWater, TierAcid.distilWater}) {
-            recipe(4, 6, 40)
-                .itemInputs(CropsNHItemList.hops.get(1L))
+        for (TierAcid water : new TierAcid[] { TierAcid.regWater, TierAcid.distilWater }) {
+            recipe(4, 6, 40).itemInputs(CropsNHItemList.hops.get(1L))
                 .fluidInputs(water.get(750))
                 .fluidOutputs(getFluidStack("potion.hopsjuice", 750))
                 .addTo(brewingRecipes);
 
-            lvRecipe(30,0)
+            lvRecipe(30, 0)
                 .itemInputs(
                     new ItemStack(Items.sugar, 4),
                     CropsNHItemList.hops.get(16L),
@@ -173,7 +171,9 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
                 .addTo(bacterialVatRecipes);
 
             GTValues.RA.stdBuilder()
-                .itemInputs(CropsNHItemList.hops.get(32L), GTOreDictUnificator.get(OrePrefixes.dust, Materials.Wheat, 16L))
+                .itemInputs(
+                    CropsNHItemList.hops.get(32L),
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Wheat, 16L))
                 .special(BioItemList.getPetriDish(BioCultureLoader.BeerYeast))
                 .fluidInputs(water.get(100))
                 .fluidOutputs(FluidRegistry.getFluidStack("potion.darkbeer", 10))
