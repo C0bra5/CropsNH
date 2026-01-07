@@ -15,6 +15,7 @@ public class CropCucumber extends CropFood {
         // TODO: MOVE ITEM DROP TO CROPS NH OR SOMETHING
         this.addDrop(ItemList.Crop_Drop_Cucumber.get(1L), 100_00);
         this.addAlternateSeed("seedCucumber");
+        this.addAlternateSeed("cropCucumber");
         // likes warm soils mostly
         this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.LUSH);
     }

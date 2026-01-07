@@ -9,8 +9,10 @@ import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.api.PlantRenderShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
+import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
 import gregtech.api.enums.ItemList;
+import gregtech.api.util.GTModHandler;
 
 public class CropLemon extends NHCropCard {
 
@@ -22,6 +24,9 @@ public class CropLemon extends NHCropCard {
         this.addDrop(ItemList.Crop_Drop_Lemon.get(1), 100_00);
         this.addAlternateSeed("seedLemon");
         this.addAlternateSeed("cropLemon");
+        if (ModUtils.PamsHarvestCraft.isModLoaded()) {
+            this.addAlternateSeed(GTModHandler.getModItem(ModUtils.PamsHarvestCraft.ID, "pamlemonSappling", 1, 0));
+        }
         // hates cold with a passion
         this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.PLAINS);
     }

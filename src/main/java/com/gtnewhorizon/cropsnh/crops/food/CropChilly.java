@@ -14,6 +14,9 @@ public class CropChilly extends CropFood {
         super("chilly", new Color(0x83090B), new Color(0xC8462A));
         // TODO: MOVE ITEM DROP TO CROPS NH OR SOMETHING
         this.addDrop(ItemList.Crop_Drop_Chilly.get(1L), 100_00);
+        this.addAlternateSeed("cropChilli");
+        this.addAlternateSeed("cropChilipepper");
+        this.addAlternateSeed("seedChilipepper");
         // likes warm temperatures
         this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.LUSH);
     }

@@ -15,7 +15,11 @@ public class CropSugarBeet extends NHCropCard {
 
     public CropSugarBeet() {
         super("sugarBeet", new Color(0xB3B3B3), new Color(0xFEFEFE));
+
         this.addDrop(new ItemStack(CropsNHItems.berry, 1, 1), 100_00);
+
+        this.addAlternateSeed(new ItemStack(CropsNHItems.berry, 1, 1));
+
         this.addDuplicationCatalyst("dustSugar", 1);
         // tends to prefer cold and wet environments like most of europe.
         this.addLikedBiomes(BiomeDictionary.Type.COLD, BiomeDictionary.Type.WET);
