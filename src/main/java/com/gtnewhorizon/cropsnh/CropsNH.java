@@ -74,6 +74,7 @@ public class CropsNH {
         CropsNHBlocks.preInit();
         CropsNHItems.preInit();
         CropsNHFluids.preInit();
+        OreDictLoader.preInit();
         LogHelper.debug("Pre-Initialization Complete");
     }
 
@@ -88,7 +89,6 @@ public class CropsNH {
         MTELoader.init();
         MTESeedGenerator.init();
         MTECropBreeder.init();
-        OreDictLoader.init();
         LogHelper.debug("Initialization Complete");
     }
 
