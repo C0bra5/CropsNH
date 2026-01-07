@@ -1,8 +1,5 @@
 package com.gtnewhorizon.cropsnh.loaders;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import net.minecraft.item.ItemStack;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHItemList;
