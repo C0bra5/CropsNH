@@ -6,6 +6,7 @@ import static gregtech.api.enums.Mods.Natura;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.autoclaveRecipes;
 import static gregtech.api.recipe.RecipeMaps.brewingRecipes;
+import static gregtech.api.recipe.RecipeMaps.centrifugeRecipes;
 import static gregtech.api.recipe.RecipeMaps.chemicalBathRecipes;
 import static gregtech.api.recipe.RecipeMaps.chemicalReactorRecipes;
 import static gregtech.api.recipe.RecipeMaps.compressorRecipes;
@@ -137,6 +138,14 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
         addSugarBeetRecipes();
         addGoldfishRecipes();
         addHempStemRecipes();
+        addGaiaWartRecipes();
+    }
+
+    private static void addGaiaWartRecipes() {
+        recipe(5, 14, 40).itemInputs(CropsNHItemList.gaiaWart.get(1))
+            .circuit(1)
+            .fluidOutputs(Materials.Methane.getGas(36))
+            .addTo(centrifugeRecipes);
     }
 
     private static void addPlantBallRecipes() {
