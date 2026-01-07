@@ -1,5 +1,6 @@
 package com.gtnewhorizon.cropsnh.loaders.gtrecipes;
 
+import static bartworks.API.recipe.BartWorksRecipeMaps.bacterialVatRecipes;
 import static gregtech.api.enums.Mods.Avaritia;
 import static gregtech.api.enums.Mods.BiomesOPlenty;
 import static gregtech.api.enums.Mods.Natura;
@@ -17,9 +18,13 @@ import static gregtech.api.recipe.RecipeMaps.maceratorRecipes;
 import static gregtech.api.recipe.RecipeMaps.multiblockChemicalReactorRecipes;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 import static gregtech.api.util.GTRecipeBuilder.TICKS;
+import static gregtech.api.util.GTRecipeConstants.GLASS;
 import static gregtech.api.util.GTRecipeConstants.UniversalChemical;
 import static gregtech.common.items.ItemComb.Voltage;
+import static net.minecraftforge.fluids.FluidRegistry.getFluidStack;
 
+import bartworks.common.loaders.BioCultureLoader;
+import bartworks.common.loaders.BioItemList;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -139,6 +144,45 @@ public abstract class CropRecipes extends BaseGTRecipeLoader {
         addGoldfishRecipes();
         addHempStemRecipes();
         addGaiaWartRecipes();
+        addHopsRecipes();
+    }
+
+    private static void addHopsRecipes() {
+        recipe(4,6,40)
+            .itemInputs(CropsNHItemList.hops.get(1L))
+            .fluidInputs(getFluidStack("potion.wheatyjuice", 750))
+            .fluidOutputs(getFluidStack("potion.wheatyhopsjuice", 750))
+            .addTo(brewingRecipes);
+
+        for (TierAcid water : new TierAcid[] {TierAcid.regWater, TierAcid.distilWater}) {
+            recipe(4, 6, 40)
+                .itemInputs(CropsNHItemList.hops.get(1L))
+                .fluidInputs(water.get(750))
+                .fluidOutputs(getFluidStack("potion.hopsjuice", 750))
+                .addTo(brewingRecipes);
+
+            lvRecipe(30,0)
+                .itemInputs(
+                    new ItemStack(Items.sugar, 4),
+                    CropsNHItemList.hops.get(16L),
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Wheat, 8L))
+                .special(BioItemList.getPetriDish(BioCultureLoader.BeerYeast))
+                .fluidInputs(water.get(100))
+                .fluidOutputs(FluidRegistry.getFluidStack("potion.beer", 5))
+                .metadata(GLASS, 3)
+                .addTo(bacterialVatRecipes);
+
+            GTValues.RA.stdBuilder()
+                .itemInputs(CropsNHItemList.hops.get(32L), GTOreDictUnificator.get(OrePrefixes.dust, Materials.Wheat, 16L))
+                .special(BioItemList.getPetriDish(BioCultureLoader.BeerYeast))
+                .fluidInputs(water.get(100))
+                .fluidOutputs(FluidRegistry.getFluidStack("potion.darkbeer", 10))
+                .metadata(GLASS, 3)
+                .duration(30 * SECONDS)
+                .eut(TierEU.RECIPE_LV)
+                .addTo(bacterialVatRecipes);
+        }
+
     }
 
     private static void addGaiaWartRecipes() {

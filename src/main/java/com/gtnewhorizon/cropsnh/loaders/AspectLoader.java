@@ -17,6 +17,9 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 
+import static gregtech.api.enums.Mods.IndustrialCraft2;
+import static gregtech.api.util.GTModHandler.getModItem;
+
 public class AspectLoader {
 
     public static void postInit() {
@@ -41,6 +44,18 @@ public class AspectLoader {
             new AspectList().add(Aspect.FIRE, 3)
                 .add(Aspect.HEAL, 2)
                 .add(Aspect.PLANT, 1));
+        ThaumcraftApi.registerObjectTag(
+            CropsNHItemList.poisonPowder.get(1),
+            new AspectList().add(Aspect.POISON, 3)
+                .add(Aspect.CROP, 2));
+        ThaumcraftApi.registerObjectTag(
+            CropsNHItemList.weedEX.get(1),
+            new AspectList().add(Aspect.POISON, 8)
+                .add(Aspect.MIND, 2));
+        ThaumcraftApi.registerObjectTag(
+            CropsNHItemList.weedEX.get(1),
+            new AspectList().add(Aspect.HEAL, 8)
+                .add(Aspect.MIND, 2));
     }
 
     private static void loadAlchoolAspects() {
