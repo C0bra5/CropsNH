@@ -25,7 +25,7 @@ public class CropLemon extends NHCropCard {
         this.addAlternateSeed("seedLemon");
         this.addAlternateSeed("cropLemon");
         if (ModUtils.PamsHarvestCraft.isModLoaded()) {
-            this.addAlternateSeed(GTModHandler.getModItem(ModUtils.PamsHarvestCraft.ID, "pamlemonSappling", 1, 0));
+            this.addAlternateSeed(GTModHandler.getModItem(ModUtils.PamsHarvestCraft.ID, "pamlemonSapling", 1, 0));
         }
         // hates cold with a passion
         this.addLikedBiomes(BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.PLAINS);
