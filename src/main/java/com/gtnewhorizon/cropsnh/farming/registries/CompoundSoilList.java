@@ -3,6 +3,7 @@ package com.gtnewhorizon.cropsnh.farming.registries;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import net.minecraft.block.Block;
@@ -29,6 +30,13 @@ public class CompoundSoilList implements ISoilList {
 
     public void add(ISoilList soilList) {
         this.soils.add(soilList);
+    }
+
+    @Override
+    public String getId() {
+        return soils.stream()
+            .map(s -> s.getId())
+            .collect(Collectors.joining("+"));
     }
 
     @Override

@@ -52,6 +52,11 @@ public class SoilList implements ISoilList {
         }
     }
 
+    @Override
+    public String getId() {
+        return this.name;
+    }
+
     public void dump(StringBuilder sb) {
         // note that it's empty if it is empty
         if (this.validSoils.isEmpty()) {

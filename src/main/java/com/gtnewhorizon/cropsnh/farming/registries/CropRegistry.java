@@ -168,6 +168,7 @@ public class CropRegistry implements ICropRegistry {
                 "Seed Shape",
                 "Render Shape",
                 // growth related things
+                "Soil Type",
                 "Tier",
                 "Min Seed Bed Tier",
                 "Liked Biomes",
@@ -209,6 +210,7 @@ public class CropRegistry implements ICropRegistry {
                             cc.getSeedShape().getName(),
                             cc.getRenderShape().getName(),
                             // growth related things
+                            cc.getSoilTypes().getId(),
                             cc.getTier(),
                             cc.getMinSeedBedTier(),
                             cc.getLikedBiomeTags().stream().map(BiomeDictionary.Type::name).collect(Collectors.joining(", ")),

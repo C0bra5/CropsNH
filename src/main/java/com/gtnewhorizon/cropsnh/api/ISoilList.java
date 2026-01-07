@@ -7,6 +7,8 @@ import net.minecraft.item.ItemStack;
 
 public interface ISoilList {
 
+    String getId();
+
     /**
      * Checks if the block has been registered in this soil list.
      *
