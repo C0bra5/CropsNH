@@ -2,6 +2,8 @@ package com.gtnewhorizon.cropsnh.crops.biomesoplenty;
 
 import java.awt.Color;
 
+import com.gtnewhorizon.cropsnh.api.ISoilList;
+import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
 
@@ -12,6 +14,8 @@ import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
 import biomesoplenty.api.content.BOPCBlocks;
 
 public class CropBamboo extends NHCropCard {
+
+    private static final ISoilList soil = SoilRegistry.instance.get("dirt");
 
     public CropBamboo() {
         super("bamboo", new Color(0x83A81A), new Color(0xC7DB72));
@@ -36,6 +40,11 @@ public class CropBamboo extends NHCropCard {
     @Override
     public int getGrowthDuration() {
         return 250;
+    }
+
+    @Override
+    public ISoilList getSoilTypes() {
+        return soil;
     }
 
     @Override
