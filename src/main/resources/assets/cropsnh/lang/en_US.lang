@@ -325,7 +325,7 @@ cropsnh_genericSeeds.format=%1$s Seeds
 cropsnh_crops.weed=Weed
 cropsnh_crops.migrated=Migrated Crop
 # BoP Crop Names
-cropsnh_crops.bamboo=Bamboo
+cropsnh_crops.bamboo=Bamboo Chutes
 cropsnh_crops.eyebulb=Eyebulb
 cropsnh_crops.floweringVine=Flowering Vine
 cropsnh_crops.glowflower=Glowflower
@@ -453,18 +453,18 @@ cropsnh_crops.purpleGlowshroom=Purple Glowshroom
 # Natura Nether Crop Names
 cropsnh_crops.thornvine=Thronvine
 # Ore Berries
-cropsnh_crops.aluminiumOreBerry=Aluminium Ore Berry
-cropsnh_crops.arditeOreBerry=Ardite Ore Berry
-cropsnh_crops.cobaltOreBerry=Cobalt Ore Berry
-cropsnh_crops.copperOreBerry=Copper Ore Berry
+cropsnh_crops.aluminiumOreBerry=Aluminium Oreberry
+cropsnh_crops.arditeOreBerry=Ardite Oreberry
+cropsnh_crops.cobaltOreBerry=Cobalt Oreberry
+cropsnh_crops.copperOreBerry=Copper Oreberry
 cropsnh_crops.essenceOreBerry=Essence Berry
-cropsnh_crops.goldOreBerry=Gold Ore Berry
-cropsnh_crops.ironOreBerry=Iron Ore Berry
-cropsnh_crops.knightmetalOreBerry=Knightly Ore Berry
-cropsnh_crops.thauminiteOreBerry=Thauminite Ore Berry
-cropsnh_crops.thaumiumOreBerry=Thaumium Ore Berry
-cropsnh_crops.tinOreBerry=Tin Ore Berry
-cropsnh_crops.voidOreBerry=Void Metal Ore Berry
+cropsnh_crops.goldOreBerry=Gold Oreberry
+cropsnh_crops.ironOreBerry=Iron Oreberry
+cropsnh_crops.knightmetalOreBerry=Knightly Oreberry
+cropsnh_crops.thauminiteOreBerry=Thauminite Oreberry
+cropsnh_crops.thaumiumOreBerry=Thaumium Oreberry
+cropsnh_crops.tinOreBerry=Tin Oreberry
+cropsnh_crops.voidOreBerry=Void Metal Oreberry
 # Stone Lily Crop Names (Botania)
 cropsnh_crops.andesiteLily=Andesite Lily
 cropsnh_crops.dioriteLily=Diorite Lily
@@ -664,7 +664,7 @@ cropsnh_mutationPool.netherstar=Netherstar
 cropsnh_mutationPool.oil=Oil
 cropsnh_mutationPool.olivine=Olivine
 cropsnh_mutationPool.orange=Orange
-cropsnh_mutationPool.oreBerry=Ore Berry
+cropsnh_mutationPool.oreBerry=Oreberry
 cropsnh_mutationPool.osmium=Osmium
 cropsnh_mutationPool.paper=Paper
 cropsnh_mutationPool.pig=Pig
