@@ -17,7 +17,7 @@ import biomesoplenty.api.content.BOPCBlocks;
 
 public class CropGlowshroom extends NHCropCard {
 
-    private final static ISoilList soilTypes = SoilRegistry.instance.getCompound("dirt", "netherrack");
+    private final static ISoilList soilTypes = SoilRegistry.instance.getCompound("mushroom", "netherrack");
 
     public CropGlowshroom() {
         super("glowshroom", new Color(0x45AD32), new Color(0x63FA48));
