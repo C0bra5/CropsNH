@@ -3,7 +3,9 @@ package com.gtnewhorizon.cropsnh.proxy;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
+import com.gtnewhorizon.cropsnh.compatibility.UiE.UtilitiesInExcessCompatHandler;
 import com.gtnewhorizon.cropsnh.handler.ConfigurationHandler;
+import com.gtnewhorizon.cropsnh.utility.ModUtils;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
@@ -21,7 +23,9 @@ public abstract class CommonProxy implements IProxy {
     }
 
     @Override
-    public void registerEventHandlers() {}
+    public void registerEventHandlers() {
+        if (ModUtils.UtilitiesInExcess.isModLoaded()) UtilitiesInExcessCompatHandler.onRegeisteEventHandlers();
+    }
 
     @Override
     public void initConfiguration(FMLPreInitializationEvent event) {
