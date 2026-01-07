@@ -2,14 +2,14 @@ package com.gtnewhorizon.cropsnh.crops.biomesoplenty;
 
 import java.awt.Color;
 
-import com.gtnewhorizon.cropsnh.api.ISoilList;
-import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
 
 import com.gtnewhorizon.cropsnh.api.ISeedShape;
+import com.gtnewhorizon.cropsnh.api.ISoilList;
 import com.gtnewhorizon.cropsnh.api.SeedShape;
 import com.gtnewhorizon.cropsnh.crops.abstracts.NHCropCard;
+import com.gtnewhorizon.cropsnh.farming.registries.SoilRegistry;
 
 import biomesoplenty.api.content.BOPCBlocks;
 
