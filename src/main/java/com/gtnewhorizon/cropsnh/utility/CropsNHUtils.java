@@ -16,7 +16,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSkull;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -175,5 +177,12 @@ public abstract class CropsNHUtils {
         return FMLCommonHandler.instance()
             .getEffectiveSide()
             .isClient();
+    }
+
+    public static String getMachineTypeText(String machineType) {
+        return StatCollector.translateToLocal("GT5U.MBTT.MachineType") + ": "
+            + EnumChatFormatting.YELLOW
+            + StatCollector.translateToLocal("cropsnh.recipes." + machineType)
+            + EnumChatFormatting.RESET;
     }
 }

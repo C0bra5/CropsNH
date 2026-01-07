@@ -26,6 +26,7 @@ import com.gtnewhorizon.cropsnh.init.CropsNHBlockTextures;
 import com.gtnewhorizon.cropsnh.init.CropsNHUITextures;
 import com.gtnewhorizon.cropsnh.reference.Data;
 import com.gtnewhorizon.cropsnh.reference.Reference;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizon.cropsnh.utility.NBTHelper;
 import com.gtnewhorizon.gtnhlib.util.map.ItemStackMap;
 import com.gtnewhorizons.modularui.api.drawable.UITexture;
@@ -857,6 +858,7 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
     public String[] getDescription() {
         return ArrayUtils.addAll(
             this.mDescriptionArray,
+            CropsNHUtils.getMachineTypeText("cropManager"),
             "Secondary mode can Hydrate/Fertilize/Weed-EX",
             "Consumes " + powerUsage() + " EU per harvest",
             "Consumes " + powerUsageSecondary() + " EU per secondary operation",

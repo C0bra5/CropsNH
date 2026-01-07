@@ -63,7 +63,8 @@ public class MTESeedGenerator extends MTEBasicMachine {
             aNameRegional,
             aTier,
             AMPERAGE,
-            new String[] { "It can duplicate seeds!", "Uses 100L of Enriched Fertiliser per stat point on the seed." },
+            new String[] { CropsNHUtils.getMachineTypeText("seedGenerator"), "It can duplicate seeds!",
+                "Uses 100L of Enriched Fertiliser per stat point on the seed." },
             INPUT_SLOT_COUNT,
             OUTPUT_SLOT_COUNT,
             TextureFactory.of(

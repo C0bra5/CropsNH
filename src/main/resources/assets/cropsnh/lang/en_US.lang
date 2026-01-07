@@ -218,6 +218,7 @@ cropsnh_tooltip.cropManager.harvest.1=Disable Harvest
 cropsnh_tooltip.cropManager.water=Water: %1$dL / %2$dL
 cropsnh_tooltip.cropManager.weedEX=Weed-EX: %1$dL / %2$dL
 cropsnh_tooltip.cropManager.liquidFertilizer=Liquid Fertilizer: %1$dL / %2$dL
+# MTE Machine Type Flavour Text
 # multi tooltips
 cropsnh_tooltip.MBTT.multiAmpsWithUpgrade=Supports TecTech Multi-Amp Hatches when using an Overclocked Growth Accelerator Upgrade!
 # Crop Produce Flavour Text
@@ -302,6 +303,7 @@ cropsnh_nei.cropGeneExtractor.tooltip.scanGrowth=Scanned Growth Data
 cropsnh_nei.cropGeneExtractor.tooltip.scanGain=Scanned Gain Data
 cropsnh_nei.cropGeneExtractor.tooltip.scanResistance=Scanned Resistance Data
 cropsnh.recipes.cropSynthesizer=Crop Synthesizer
+cropsnh.recipes.cropManager=Crop Manager
 cropsnh_nei.cropSynthesizer.tooltip.fluidCost=cost = CropTier * 750L * (growth + gain + resistance) * 100L
 cropsnh_nei.cropSynthesizer.tooltip.output=Stat depends on the values from the data orbs.
 nei.options.tools.dump.cropsnh=Crops NH

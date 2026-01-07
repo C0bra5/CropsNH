@@ -30,6 +30,7 @@ import com.gtnewhorizon.cropsnh.init.CropsNHFluids;
 import com.gtnewhorizon.cropsnh.init.CropsNHUITextures;
 import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
 import com.gtnewhorizon.cropsnh.reference.Names;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizons.modularui.api.drawable.IDrawable;
 import com.gtnewhorizons.modularui.api.math.Pos2d;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
@@ -69,7 +70,7 @@ public class MTECropSynthesizer extends MTEBasicMachine {
             aNameRegional,
             aTier,
             AMPERAGE,
-            new String[] { "It can make Crops from Data Orbs",
+            new String[] { CropsNHUtils.getMachineTypeText("cropSynthesizer"), "It can make Crops from Data Orbs",
                 "It needs the crop's " + ChatFormatting.LIGHT_PURPLE
                     + "tier * 750L + (growth + gain + resistance) * 100L"
                     + ChatFormatting.RESET

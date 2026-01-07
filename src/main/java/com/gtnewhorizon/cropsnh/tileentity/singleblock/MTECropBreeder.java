@@ -38,6 +38,7 @@ import com.gtnewhorizon.cropsnh.init.CropsNHFluids;
 import com.gtnewhorizon.cropsnh.init.CropsNHUITextures;
 import com.gtnewhorizon.cropsnh.items.ItemGenericSeed;
 import com.gtnewhorizon.cropsnh.recipes.CropsNHGTRecipeMaps;
+import com.gtnewhorizon.cropsnh.utility.CropsNHUtils;
 import com.gtnewhorizons.modularui.api.drawable.IDrawable;
 import com.gtnewhorizons.modularui.api.math.Pos2d;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
@@ -82,7 +83,8 @@ public class MTECropBreeder extends MTEBasicMachine {
             aNameRegional,
             aTier,
             AMPERAGE,
-            new String[] { "It can duplicate seeds!", "Needs 1000L of Enriched Fertilizer per tier of the output seed.",
+            new String[] { CropsNHUtils.getMachineTypeText("cropBreeder"), "It can duplicate seeds!",
+                "Needs 1000L of Enriched Fertilizer per tier of the output seed.",
                 "Needs 500L of Enriched Fertilizer per stat point of the output seed.",
                 "The stats of the output seed will be the average of the parents.",
                 String.format("%d%% success chance.", getOutputChance(aTier)) },
