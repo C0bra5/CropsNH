@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 
 import com.gtnewhorizon.cropsnh.api.CropsNHCrops;
 import com.gtnewhorizon.cropsnh.api.IAdditionalCropData;
@@ -24,6 +25,7 @@ import com.gtnewhorizon.cropsnh.farming.SeedStats;
 import com.gtnewhorizon.cropsnh.farming.requirements.BlockUnderRequirement;
 import com.gtnewhorizon.cropsnh.init.CropsNHBlocks;
 import com.gtnewhorizon.cropsnh.init.CropsNHItems;
+import com.gtnewhorizon.cropsnh.loaders.MTELoader;
 import com.gtnewhorizon.cropsnh.loaders.MaterialLeafLoader;
 import com.gtnewhorizon.cropsnh.reference.Constants;
 import com.gtnewhorizon.cropsnh.reference.Data;
@@ -40,6 +42,7 @@ import com.gtnewhorizons.postea.utility.BlockInfo;
 
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import gregtech.api.GregTechAPI;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTRecipe;
@@ -54,6 +57,46 @@ public class MigrationHandler {
         if (!ConfigurationHandler.enableMigrations) return;
         addCropsPlusPlusPosteaMigrations();
         addIC2PosteaMigrations();
+        addMTEMigrations();
+    }
+
+    private static void addMTEMigrations() {
+        TileEntityReplacementManager
+            .tileEntityTransformer("BaseMetaTileEntity", (oldNBT, world, chunk) -> switch (oldNBT.getInteger("mID")) {
+            case 31111 -> migrateCropManager(MTELoader.CROP_MANAGER_LV_MTE_ID);
+            case 31112 -> migrateCropManager(MTELoader.CROP_MANAGER_MV_MTE_ID);
+            case 31113 -> migrateCropManager(MTELoader.CROP_MANAGER_HV_MTE_ID);
+            case 31114 -> migrateCropManager(MTELoader.CROP_MANAGER_EV_MTE_ID);
+            case 31115 -> migrateCropManager(MTELoader.CROP_MANAGER_IV_MTE_ID);
+            case 31116 -> migrateCropManager(MTELoader.CROP_MANAGER_LuV_MTE_ID);
+            case 31117 -> migrateCropManager(MTELoader.CROP_MANAGER_ZPM_MTE_ID);
+            case 31118 -> migrateCropManager(MTELoader.CROP_MANAGER_UV_MTE_ID);
+            default -> null;
+            });
+    }
+
+    private static BlockInfo migrateCropManager(int newMetaID) {
+        return new BlockInfo(GregTechAPI.sBlockMachines, 1, oldNBT -> {
+            NBTTagCompound newNBT = (NBTTagCompound) oldNBT.copy();
+            newNBT.setInteger("mID", newMetaID);
+            if (newNBT.hasKey("mFluid", Data.NBTType._object)) {
+                FluidStack stack = FluidStack.loadFluidStackFromNBT(newNBT.getCompoundTag("mFluid"));
+                if (stack.getFluid() == CropsNHUtils.getWeedEXFluid()) {
+                    newNBT.setInteger("mWeedEx", stack.amount);
+                } else {
+                    newNBT.setInteger("mWater", stack.amount);
+                }
+                newNBT.removeTag("mFluid");
+            }
+            if (newNBT.hasKey("mModeAlternative")) {
+                boolean altsEnabled = NBTHelper.getBoolean(newNBT, "mModeAlternative", false);
+                newNBT.setBoolean("mFertilizerEnabled", altsEnabled);
+                newNBT.setBoolean("mWaterEnabled", altsEnabled);
+                newNBT.setBoolean("mWeedExEnabled", altsEnabled);
+                newNBT.removeTag("mModeAlternative");
+            }
+            return newNBT;
+        });
     }
 
     /**

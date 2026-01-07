@@ -7,4 +7,8 @@ public class CropsNHUITextures {
 
     public static final UITexture OVERLAY_SLOT_SEED = UITexture
         .fullImage(Reference.MOD_ID_LOWER, "gui/overlay_slot/seed");
+    public static final UITexture OVERLAY_SLOT_WEED_EX = UITexture
+        .fullImage(Reference.MOD_ID_LOWER, "gui/overlay_slot/weed_ex");
+    public static final UITexture OVERLAY_SLOT_FERTILIZER = UITexture
+        .fullImage(Reference.MOD_ID_LOWER, "gui/overlay_slot/fertilizer");
 }

@@ -22,6 +22,8 @@ import com.gtnewhorizon.cropsnh.api.ICropStickTile;
 import com.gtnewhorizon.cropsnh.farming.registries.FertilizerRegistry;
 import com.gtnewhorizon.cropsnh.farming.registries.HydrationRegistry;
 import com.gtnewhorizon.cropsnh.farming.registries.WeedEXRegistry;
+import com.gtnewhorizon.cropsnh.init.CropsNHBlockTextures;
+import com.gtnewhorizon.cropsnh.init.CropsNHUITextures;
 import com.gtnewhorizon.cropsnh.reference.Data;
 import com.gtnewhorizon.cropsnh.reference.Reference;
 import com.gtnewhorizon.cropsnh.utility.NBTHelper;
@@ -48,7 +50,6 @@ import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.util.math.MathUtils;
 import gtPlusPlus.xmod.gregtech.api.gui.GTPPUITextures;
-import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
 
 public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidgets {
 
@@ -778,27 +779,27 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
 
     public ITexture[] getFront(final byte aColor) {
         return new ITexture[] { Textures.BlockIcons.MACHINE_CASINGS[this.mTier][aColor + 1],
-            TextureFactory.of(TexturesGtBlock.Casing_CropHarvester_Cutter) };
+            TextureFactory.of(CropsNHBlockTextures.Casing_CropHarvester_Cutter) };
     }
 
     public ITexture[] getBack(final byte aColor) {
         return new ITexture[] { Textures.BlockIcons.MACHINE_CASINGS[this.mTier][aColor + 1],
-            TextureFactory.of(TexturesGtBlock.Casing_CropHarvester_Cutter) };
+            TextureFactory.of(CropsNHBlockTextures.Casing_CropHarvester_Cutter) };
     }
 
     public ITexture[] getBottom(final byte aColor) {
         return new ITexture[] { Textures.BlockIcons.MACHINE_CASINGS[this.mTier][aColor + 1],
-            TextureFactory.of(TexturesGtBlock.Casing_CropHarvester_Boxes) };
+            TextureFactory.of(CropsNHBlockTextures.Casing_CropHarvester_Boxes) };
     }
 
     public ITexture[] getTop(final byte aColor) {
         return new ITexture[] { Textures.BlockIcons.MACHINE_CASINGS[this.mTier][aColor + 1],
-            TextureFactory.of(TexturesGtBlock.Casing_CropHarvester_Boxes) };
+            TextureFactory.of(CropsNHBlockTextures.Casing_CropHarvester_Boxes) };
     }
 
     public ITexture[] getSides(final byte aColor) {
         return new ITexture[] { Textures.BlockIcons.MACHINE_CASINGS[this.mTier][aColor + 1],
-            TextureFactory.of(TexturesGtBlock.Casing_CropHarvester_Cutter) };
+            TextureFactory.of(CropsNHBlockTextures.Casing_CropHarvester_Cutter) };
     }
 
     // endregion rendering
@@ -972,7 +973,7 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
                 .endAtSlot(SLOT_WEEDEX_END)
                 .applyForWidget(
                     widget -> widget.setFilter(MTECropManager::isWeedEXCan)
-                        .setBackground(getGUITextureSet().getItemSlot(), GTPPUITextures.OVERLAY_SLOT_WEED_EX))
+                        .setBackground(getGUITextureSet().getItemSlot(), CropsNHUITextures.OVERLAY_SLOT_WEED_EX))
                 .build()
                 .setPos(7, 7));
 
@@ -983,7 +984,7 @@ public class MTECropManager extends MTETieredMachineBlock implements IAddUIWidge
                 .endAtSlot(SLOT_FERT_END)
                 .applyForWidget(
                     widget -> widget.setFilter(FertilizerRegistry.instance::isRegistered)
-                        .setBackground(getGUITextureSet().getItemSlot(), GTPPUITextures.OVERLAY_SLOT_FERTILIZER))
+                        .setBackground(getGUITextureSet().getItemSlot(), CropsNHUITextures.OVERLAY_SLOT_FERTILIZER))
                 .build()
                 .setPos(7, 25));
 
